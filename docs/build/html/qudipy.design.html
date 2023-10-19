@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qudipy.design package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="qudipy.evolution package" href="qudipy.evolution.html" />
+    <link rel="prev" title="qudipy.circuit package" href="qudipy.circuit.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuDiPy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qudipy.html">Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qudipy.chargestability.html">qudipy.chargestability package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html">qudipy.circuit package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.design package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.design.designer">qudipy.design.designer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.design.effective">qudipy.design.effective module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.design.shapes">qudipy.design.shapes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.design.voltage_pulses">qudipy.design.voltage_pulses module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.design">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html">qudipy.evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html">qudipy.exchange package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html">qudipy.potential package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html">qudipy.qutils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.shuttling.html">qudipy.shuttling package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuDiPy</a></li>
+          <li class="breadcrumb-item"><a href="qudipy.html">Modules</a></li>
+      <li class="breadcrumb-item active">qudipy.design package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/qudipy.design.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qudipy-design-package">
+<h1>qudipy.design package<a class="headerlink" href="#qudipy-design-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-qudipy.design.designer">
+<span id="qudipy-design-designer-module"></span><h2>qudipy.design.designer module<a class="headerlink" href="#module-qudipy.design.designer" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>Designer class definition. Its child classes include:
+DesignerEffective, DesingerCSP, DesingerGRAPE, ColoredNoise, etc.
+Each of them contains data and methods to design control pulses.</p>
+</div></blockquote>
+<p>&#64;author: Bohdan Khromets</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.design.designer.Designer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.design.designer.</span></span><span class="sig-name descname"><span class="pre">Designer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_qubits:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_idle:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B_zeeman:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">tesla&gt;</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_rf:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">Hz&gt;</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">seconds&gt;</span> <span class="pre">=</span> <span class="pre">'optimize'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandwidth:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">Hz&gt;</span> <span class="pre">=</span> <span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_esr_amp:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">tesla&gt;</span> <span class="pre">=</span> <span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_esr_energy:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">joules&gt;</span> <span class="pre">=</span> <span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.designer.Designer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.design.effective">
+<span id="qudipy-design-effective-module"></span><h2>qudipy.design.effective module<a class="headerlink" href="#module-qudipy.design.effective" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>Module for designing effective spin (and maybe Hubbard  in the future)
+pulses for basic quantum gates.</p>
+</div></blockquote>
+<p>&#64;author: Bohdan Khromets</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.design.effective.DesignerEffective">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.design.effective.</span></span><span class="sig-name descname"><span class="pre">DesignerEffective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_qubits:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_idle:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B_zeeman:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">tesla&gt;</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_rf:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">Hz&gt;</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape:</span> <span class="pre">str</span> <span class="pre">or</span> <span class="pre">function</span> <span class="pre">on</span> <span class="pre">𝜏∈[0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">1]</span> <span class="pre">=</span> <span class="pre">'gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">seconds&gt;</span> <span class="pre">=</span> <span class="pre">'optimize'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandwidth:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">Hz&gt;</span> <span class="pre">=</span> <span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_esr_amp:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">tesla&gt;</span> <span class="pre">=</span> <span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_esr_energy:</span> <span class="pre">float</span> <span class="pre">&lt;in</span> <span class="pre">joules&gt;</span> <span class="pre">=</span> <span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**params:</span> <span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.effective.DesignerEffective" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qudipy.design.designer.Designer" title="qudipy.design.designer.Designer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Designer</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.design.effective.DesignerEffective.build_shape">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.effective.DesignerEffective.build_shape" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Static method that creates a shape function based on the</dt><dd><p>desired parameters. See qudipy.design.shapes module for
+more details.</p>
+</dd>
+</dl>
+<section id="required-parameters">
+<h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the shape</p>
+</dd>
+<dt>t_start<span class="classifier">float, optional</span></dt><dd><p>Value for which S(t &lt; t_start) = offset</p>
+</dd>
+<dt>t_end<span class="classifier">float, optional</span></dt><dd><p>Value for which S(t &gt; t_end) = offset</p>
+</dd>
+<dt>amp<span class="classifier">float or str, optional</span></dt><dd><p>Amplitude (max value) of shape, or ‘auto’/’automatic’ keyword
+to determine it automatically from normalization condition ⟨S⟩=1
+By default, ‘auto’.</p>
+</dd>
+<dt>offset<span class="classifier">float, optional</span></dt><dd><p>Shape offset at the beginning and end of pulse, by default 0</p>
+</dd>
+<dt>sigma<span class="classifier">float, optional</span></dt><dd><p>(for a Gaussian shape only) relative half-width, by default 0.1</p>
+</dd>
+<dt>params<span class="classifier">float, optional</span></dt><dd><p>Other shape parameters</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Shape function (t</strong></p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array) -&gt; np.array</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.design.effective.DesignerEffective.compose">
+<span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">design_params</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse" title="qudipy.circuit.control_pulse.ControlPulse"><span class="pre">ControlPulse</span></a></span></span><a class="headerlink" href="#qudipy.design.effective.DesignerEffective.compose" title="Link to this definition"></a></dt>
+<dd><p>Method for composing an effective pulse</p>
+<section id="id1">
+<h3>Required Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>num_steps<span class="classifier">int</span></dt><dd><p>Number of discrete time steps for a pulse</p>
+</dd>
+<dt>design_params<span class="classifier">dict, optional</span></dt><dd><p>Parameters to add/update in the Designer object.
+In case of overlap, these parameters have priority over the ones
+stored as Designer object’s attributes, and the attributes are left
+intact.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>eff_pulse</strong> – Control pulse object with all pulse parameters</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>ControlPulse object</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.effective.chpase">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.effective.</span></span><span class="sig-name descname"><span class="pre">chpase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">N:</span> <span class="pre">int,</span> <span class="pre">qubit_pairs:</span> <span class="pre">pair</span> <span class="pre">of</span> <span class="pre">ints,</span> <span class="pre">or</span> <span class="pre">iterable[pairs</span> <span class="pre">of</span> <span class="pre">ints],</span> <span class="pre">angle:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">3.141592653589793,</span> <span class="pre">**designer_params:</span> <span class="pre">dict</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#qudipy.design.effective.DesignerEffective" title="qudipy.design.effective.DesignerEffective"><span class="pre">DesignerEffective</span></a></span></span><a class="headerlink" href="#qudipy.design.effective.chpase" title="Link to this definition"></a></dt>
+<dd><p>Cphase(angle) gate</p>
+<section id="id2">
+<h3>Required parameters<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl>
+<dt>N<span class="classifier">int</span></dt><dd><p>Total number of qubits in the system</p>
+</dd>
+<dt>qubit_pairs<span class="classifier">pair of ints, or iterable of <strong>pairs of ints</strong></span></dt><dd><p>Positions of qubits on which the gate is applied (counting starts from 1).</p>
+</dd>
+</dl>
+</section>
+<section id="optional-parameters">
+<h3>Optional parameters<a class="headerlink" href="#optional-parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>angle<span class="classifier">float, optional</span></dt><dd><p>Controlled phase. Default is π (Control-Z gate)</p>
+</dd>
+<dt>designer_params<span class="classifier">dict, optional</span></dt><dd><p>Other parameters that may be needed for the creation of a
+DesignerEffective object, including idling g-factor value,
+Zeeman field and central ESR frequency.
+See class definition for more details.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cphase_designer</strong> – DesignerEffective object with a string of coefficients A, ß, C
+that corresponds to a CPHASE of specified qubit pairs in an N-qubit system</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>DesignerEffective</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.effective.hadamard">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.effective.</span></span><span class="sig-name descname"><span class="pre">hadamard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubits:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">or</span> <span class="pre">list/tuple/str</span> <span class="pre">of</span> <span class="pre">ints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**designer_params:</span> <span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#qudipy.design.effective.DesignerEffective" title="qudipy.design.effective.DesignerEffective"><span class="pre">DesignerEffective</span></a></span></span><a class="headerlink" href="#qudipy.design.effective.hadamard" title="Link to this definition"></a></dt>
+<dd><p>Special case of rotation around vector (1,0,1) by π</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.effective.rot">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.effective.</span></span><span class="sig-name descname"><span class="pre">rot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubits:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">or</span> <span class="pre">list/tuple/str</span> <span class="pre">of</span> <span class="pre">ints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis:</span> <span class="pre">3-element</span> <span class="pre">iterable</span> <span class="pre">of</span> <span class="pre">floats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">or</span> <span class="pre">'X'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'Y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'Z'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**designer_params:</span> <span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#qudipy.design.effective.DesignerEffective" title="qudipy.design.effective.DesignerEffective"><span class="pre">DesignerEffective</span></a></span></span><a class="headerlink" href="#qudipy.design.effective.rot" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<em>int</em>) – Total number of qubits in the system</p></li>
+<li><p><strong>qubits</strong> (<em>int</em><em> or </em><em>iterable</em><em> of </em><em>ints</em>) – Positions of qubits on which the gate is applied (counting starts from 1)</p></li>
+<li><p><strong>axis</strong> (<em>iterable</em><em> of </em><em>floats</em><em> or </em><em>str</em>) – iterable of floats of length 3, or string ‘X’,’Y’,’Z’ specifying the axis
+of rotation.</p></li>
+<li><p><strong>angle</strong> (<em>float</em>) – Angle of rotation [in radians! ]</p></li>
+<li><p><strong>designer_params</strong> (<em>dict</em>) – Other parameters needed for the creation of a DesignerEffective object,
+including idling g-factor value, Zeeman field and central ESR frequency.
+See class definition for more details.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>rot_designer</strong> – DesignerEffective object with a string of coefficients A, ß, C
+that corresponds to a rotation of specified qubits in an N-qubit system</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qudipy.design.effective.DesignerEffective" title="qudipy.design.effective.DesignerEffective">DesignerEffective</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.effective.swapk">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.effective.</span></span><span class="sig-name descname"><span class="pre">swapk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">N:</span> <span class="pre">int,</span> <span class="pre">qubit_pairs:</span> <span class="pre">pair</span> <span class="pre">of</span> <span class="pre">ints,</span> <span class="pre">or</span> <span class="pre">iterable[pairs</span> <span class="pre">of</span> <span class="pre">ints],</span> <span class="pre">k:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">**designer_params:</span> <span class="pre">dict</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#qudipy.design.effective.DesignerEffective" title="qudipy.design.effective.DesignerEffective"><span class="pre">DesignerEffective</span></a></span></span><a class="headerlink" href="#qudipy.design.effective.swapk" title="Link to this definition"></a></dt>
+<dd><p>SWAP^k gate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<em>int</em>) – Total number of qubits in the system</p></li>
+<li><p><strong>qubit_pairs</strong> (pair of ints, or iterable of <strong>pairs of ints</strong>) – Positions of qubits on which the gate is applied (counting starts from 1).</p></li>
+<li><p><strong>k</strong> (<em>float</em>) – Exponent of Swap gate. Default is 1 (SWAP gate)</p></li>
+<li><p><strong>designer_params</strong> (<em>dict</em>) – Other parameters needed for the creation of a DesignerEffective object,
+including idling g-factor value, Zeeman field and central ESR frequency.
+See class definition for more details.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>swap_designer</strong> – DesignerEffective object with a string of coefficients A, ß, C
+that corresponds to a SWAP^k of specified qubit pairs in an N-qubit system</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qudipy.design.effective.DesignerEffective" title="qudipy.design.effective.DesignerEffective">DesignerEffective</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.design.shapes">
+<span id="qudipy-design-shapes-module"></span><h2>qudipy.design.shapes module<a class="headerlink" href="#module-qudipy.design.shapes" title="Link to this heading"></a></h2>
+<p>Module with a library of functions that define pulse shapes.
+Each of them returns a shape function that gives the pulse value(s)
+when applied on the desired value(s) of time.</p>
+<p>By default, all shapes are defined for normalized time 𝜏∈[0,1], and
+normalized by their average values: ⟨S⟩=1</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.shapes.gaussian">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.shapes.</span></span><span class="sig-name descname"><span class="pre">gaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.shapes.gaussian" title="Link to this definition"></a></dt>
+<dd><p>Creates a Gaussian pulse of relative width  sigma that lasts from t_start until t_end.
+The pulse is shifted and scaled vertically so that the pulse values at the
+beginning and at the end are equal to the specified offset value.
+If amplitude is not specified explicitly but set to ‘auto’/’automatic’,
+the pulse is normalized so that its average value is equal to 1.</p>
+<p>Convenient for defining pulses in terms of
+normalized time tau = (t-t_start) / (t_end - t_start), as 0&lt;=tau&lt;=1,
+which corresponds to the default values.</p>
+<section id="id3">
+<h3>Optional Parameters<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>t_start: float</dt><dd><p>Time point at which the pulse begins. Default is 0.</p>
+</dd>
+<dt>t_end: float</dt><dd><p>Time point at which the pulse ends. Default is 1.</p>
+</dd>
+<dt>sigma: float</dt><dd><p>Half-width of the pulse relative to its length. Default is 0.1.</p>
+</dd>
+<dt>amp: float or str</dt><dd><p>Amplitude of the pulse. If a keyword ‘auto’/’automatic’ is specified,
+chosen automatically to normalize</p>
+</dd>
+<dt>offset: float</dt><dd><p>Default value of a control variable before and after the pulse.
+Default is 0.</p>
+</dd>
+</dl>
+<dl class="field-list">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gauss_pulse</strong> – Function that defines a shifted Gaussian pulse when applied
+to the desired time value / array of values.</p>
+<p>#TODO handle the custom amplitudes and offsets correctly</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>function</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.shapes.shifted_gauss">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.shapes.</span></span><span class="sig-name descname"><span class="pre">shifted_gauss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.shapes.shifted_gauss" title="Link to this definition"></a></dt>
+<dd><p>Creates a Gaussian pulse of amplitude amp and relative width
+sigma that lasts from t_start until t_end. The pulse is shifted and
+scaled vertically so that the pulse values at the beginning and
+at the end are equal to offset.</p>
+<p>Convenient for defining pulses in terms of
+normalized time tau = (t-t_start) / (t_end - t_start), as 0&lt;=tau&lt;=1,
+which corresponds to the default values.</p>
+<section id="id4">
+<h3>Optional Parameters<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>t_start: float</dt><dd><p>Time point at which the pulse begins. Default is 0.</p>
+</dd>
+<dt>t_send: float</dt><dd><p>Time point at which the pulse ends. Default is 1.</p>
+</dd>
+<dt>amp: float</dt><dd><p>Amplitude of the pulse. Default is 1.</p>
+</dd>
+<dt>offset: float</dt><dd><p>The shift of the Gaussian function vertically; corresponds to the
+value of the pulse at t_start and t_end. Assumed to be constant
+before and after the pulse. Default is 0.</p>
+</dd>
+<dt>sigma: float</dt><dd><p>Half-width of the pulse (in units of time). Default is 0.1.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>shifted_gauss_pulse</strong> – Function that defines a shifted Gaussian pulse when applied
+to the desired time value(s)</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>function</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.shapes.square">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.shapes.</span></span><span class="sig-name descname"><span class="pre">square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.shapes.square" title="Link to this definition"></a></dt>
+<dd><p>Creates a square pulse of amplitude amp and that continues
+from t_start until t_end, and fixed at the specified offset
+value prior and afterwards.
+Convenient for defining pulses in terms of
+normalized time tau = (t-t_start) / (t_end - t_start), as 0&lt;=tau&lt;=1,
+which corresponds to the default values.</p>
+<section id="id5">
+<h3>Optional Parameters<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>t_start: float</dt><dd><p>Time point at which the pulse begins. Default is 0.</p>
+</dd>
+<dt>t_end: float</dt><dd><p>Time point at which the pulse ends. Default is 1.</p>
+</dd>
+<dt>amp: float</dt><dd><p>Amplitude of the pulse. Default is 1.</p>
+</dd>
+<dt>offset: float</dt><dd><p>Default value of a control variable before and after the pulse.
+Default is 0.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>square_pulse</strong> – Function that defines a square pulse when applied to the desired
+time value / array of values.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>function</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.shapes.triangle">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.shapes.</span></span><span class="sig-name descname"><span class="pre">triangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.shapes.triangle" title="Link to this definition"></a></dt>
+<dd><p>Creates a symmetric triangular pulse of amplitude amp and that continues
+from t_start until t_end. The pulse starts and ends at a constant value
+of offset.
+If amplitude is not specified explicitly but set to ‘auto’/’automatic’,
+the pulse is normalized so that its average value is equal to 1.</p>
+<p>Convenient for defining pulses in terms of
+normalized time tau = (t-t_start) / (t_end - t_start), as 0&lt;=tau&lt;=1,
+which corresponds to the default values.</p>
+<section id="id6">
+<h3>Optional Parameters<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>t_start: float</dt><dd><p>Time point at which the pulse begins. Default is 0.</p>
+</dd>
+<dt>t_end: float</dt><dd><p>Time point at which the pulse ends. Default is 1.</p>
+</dd>
+<dt>amp: float</dt><dd><p>Amplitude of the pulse. Default is 1.</p>
+</dd>
+<dt>offset: float</dt><dd><p>Default value of a control variable before and after the pulse.
+Default is 0.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>square_pulse</strong> – Function that defines a triangular pulse when applied to the desired
+time value / array of values.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>function</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.design.voltage_pulses">
+<span id="qudipy-design-voltage-pulses-module"></span><h2>qudipy.design.voltage_pulses module<a class="headerlink" href="#module-qudipy.design.voltage_pulses" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>Module that contains methods that design “simple” one- and two-qubit gates.
+Will return control pulse objects eventually, but now it is used only to
+find pulse duration or amplitude</p>
+</div></blockquote>
+<p>&#64;author: Madi Schuetze</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.voltage_pulses.balance_zeeman">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.voltage_pulses.</span></span><span class="sig-name descname"><span class="pre">balance_zeeman</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta_g_interp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_rf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.voltage_pulses.balance_zeeman" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Find the value of Zeeman field that ensures no qubit rotations at idling.</p>
+<dl class="simple">
+<dt>delta_g_interp: function</dt><dd><p>(ideally, but only one interpolating function for now)
+Iterable of interpolating functions delta g_i(</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>ec{V}) for</dt><dd><blockquote>
+<div><p>all qubits, including inactive ones</p>
+</div></blockquote>
+<dl class="simple">
+<dt>v_offset: Float</dt><dd><p>Voltage offset when no pulse is applied.</p>
+</dd>
+<dt>f_rf: float</dt><dd><p>ESR frequency.</p>
+</dd>
+</dl>
+</dd>
+<dt>s</dt><dd><ul class="simple">
+<li><p>delta_g_interp to take Anyof(Float Int) and return Anyof(Float Int)</p></li>
+<li><p>v_offset to take Anyof(Float Int) and return Anyof(Float Int)</p></li>
+</ul>
+<dl class="simple">
+<dt>B_0: float</dt><dd><p>The value of Zeeman field that ensures
+no rotation occurs on any of the idling qubits</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.voltage_pulses.create_ctlp_file">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.voltage_pulses.</span></span><span class="sig-name descname"><span class="pre">create_ctlp_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CntrlPulse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.voltage_pulses.create_ctlp_file" title="Link to this definition"></a></dt>
+<dd><p>&#64;author: Madi</p>
+<p>Creates a .ctrlp file containing the information about a rotation gate
+from a ControlPulse object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>CntrlPulse</strong> (<a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse" title="qudipy.circuit.control_pulse.ControlPulse"><em>ControlPulse</em></a>) – Control Pulse Object</p></li>
+<li><p><strong>read</strong> (<em>Bool</em>) – If read = True, the function will print out the .ctrlp file,
+if read = False (Default) the funciton will print nothing</p></li>
+<li><p><strong>get_dir</strong> (<em>Bool</em>) – If get_dir = True, the function will return the directory as a
+string, if get_dir = False (Default), the function will return nothing</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Str *conditional*</em> – Returns the directory of the file as a str if get_dir = True, otherwise,
+the function returns None</p></li>
+<li><p><em>None</em></p></li>
+<li><p><em>Effects</em></p></li>
+<li><p><em>————-</em></p></li>
+<li><p><em>Creates a .ctrlp file containing all information to re-create the same ControlPulse</em></p></li>
+<li><p><em>object</em></p></li>
+<li><p><em>Prints to screen *conditional</em> - prints the Control Pulse file to the screen if*</p></li>
+<li><p><em>read = True, otherwise, nothing is printed to the screen</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.voltage_pulses.create_quantum_circuit">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.voltage_pulses.</span></span><span class="sig-name descname"><span class="pre">create_quantum_circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_ctrlp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circuit_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_qcirc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.voltage_pulses.create_quantum_circuit" title="Link to this definition"></a></dt>
+<dd><p>&#64;author: Madi</p>
+<p>Takes directory to a .qcirc file, creates the necessary
+ControlPulses for rotations around an axis, creates a dictionary
+of these specified ControlPulse objects and returns a QuantumCircuit Object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list_ctrlp</strong> (<em>Listof</em><em>(</em><em>Str</em><em>(</em><em>.ctrlp</em><em>)</em><em>)</em>) – A list that contains .ctrlp files where these files are specified by strings</p></li>
+<li><p><strong>circuit_name</strong> (<em>str</em>) – The name that the user wishes to call the circuit</p></li>
+<li><p><strong>write_qcirc</strong> (<em>Bool</em>) – If write_qcirc = True the function will write a qcirc file of the quantum circuit
+with the name “circuit_name”.qcirc, else the function does nothing</p></li>
+<li><p><strong>print_dir</strong> (<em>Bool</em>) – If write_qcirc = True and print_dir = True the function will print the directory
+of the newly made .qcirc file, else the function does nothing</p></li>
+<li><p><strong>Requires</strong> – </p></li>
+<li><p><strong>----------</strong> – </p></li>
+<li><p><strong>qubits</strong> (<em>* All ControlPulse objects act on the same number of</em>) – </p></li>
+<li><p><strong>directory</strong> (<em>* All .ctrlp files in list_ctrlp will path to the correct</em>) – -&gt; user must ensure that all directory satisfactions are met</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>QuantumCircuit object</p>
+</dd>
+</dl>
+<section id="effects">
+<h3>Effects<a class="headerlink" href="#effects" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Writes File <em>conditional</em></dt><dd><p>writes a .qcirc file with the name “circuit_name”.qcirc is write_qcirc = True</p>
+</dd>
+<dt>Prints to Screen</dt><dd><p>prints the directory of the newly made .qcirc file if print_dir = True and
+write_qcirc = True</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.voltage_pulses.kswap">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.voltage_pulses.</span></span><span class="sig-name descname"><span class="pre">kswap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">active_qubit_pairs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dot_interps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulse_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_rf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.voltage_pulses.kswap" title="Link to this definition"></a></dt>
+<dd><p>Generate a k-swap exchange pulses for the desired qubit pairs and leave the
+others unaffected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qubits</strong> (<em>list</em><em> of </em><em>tuples?</em>) – </p></li>
+<li><p><strong>N</strong> (<em>number</em><em> of </em><em>qubits</em>) – number of qubits</p></li>
+<li><p><strong>dot_interps</strong> – dictionary of interpolation objects for all effective parameters</p></li>
+<li><p><strong>pulse_shape</strong> – shape function chosen</p></li>
+<li><p><strong>v_offset</strong> – starting voltage configuration for the gates</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>-----------------</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>control pulse object with effective parameter pulses</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.design.voltage_pulses.rot">
+<span class="sig-prename descclassname"><span class="pre">qudipy.design.voltage_pulses.</span></span><span class="sig-name descname"><span class="pre">rot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dot_interps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulse_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_rf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.design.voltage_pulses.rot" title="Link to this definition"></a></dt>
+<dd><p>Generate a rotation pulses for the desired qubits and leave the
+others idling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qubits</strong> (<em>list</em><em> of </em><em>tuples?</em>) – </p></li>
+<li><p><strong>N</strong> (<em>number</em><em> of </em><em>qubits</em>) – number of qubits</p></li>
+<li><p><strong>dot_interps</strong> – dictionary of interpolation objects for all effective parameters</p></li>
+<li><p><strong>pulse_shape</strong> – shape function chosen</p></li>
+<li><p><strong>v_offset</strong> – starting voltage configuration for the gates</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>-----------------</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>control pulse object with effective parameter pulses</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.design">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.design" title="Link to this heading"></a></h2>
+<p>Optimal control modules for both definite pulses and GRAPE</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qudipy.circuit.html" class="btn btn-neutral float-left" title="qudipy.circuit package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qudipy.evolution.html" class="btn btn-neutral float-right" title="qudipy.evolution package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zach D. Merino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

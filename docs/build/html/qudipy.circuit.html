@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qudipy.circuit package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="qudipy.design package" href="qudipy.design.html" />
+    <link rel="prev" title="qudipy.chargestability package" href="qudipy.chargestability.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuDiPy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qudipy.html">Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qudipy.chargestability.html">qudipy.chargestability package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.circuit.control_pulse">qudipy.circuit.control_pulse module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.circuit.file_parsers">qudipy.circuit.file_parsers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.circuit.quantum_circuit">qudipy.circuit.quantum_circuit module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.circuit.write_files">qudipy.circuit.write_files module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.circuit">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html">qudipy.design package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html">qudipy.evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html">qudipy.exchange package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html">qudipy.potential package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html">qudipy.qutils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.shuttling.html">qudipy.shuttling package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuDiPy</a></li>
+          <li class="breadcrumb-item"><a href="qudipy.html">Modules</a></li>
+      <li class="breadcrumb-item active">qudipy.circuit package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/qudipy.circuit.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qudipy-circuit-package">
+<h1>qudipy.circuit package<a class="headerlink" href="#qudipy-circuit-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-qudipy.circuit.control_pulse">
+<span id="qudipy-circuit-control-pulse-module"></span><h2>qudipy.circuit.control_pulse module<a class="headerlink" href="#module-qudipy.circuit.control_pulse" title="Link to this heading"></a></h2>
+<p>Class for a control pulse</p>
+<p>&#64;author: simba</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.circuit.control_pulse.ControlPulse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.circuit.control_pulse.</span></span><span class="sig-name descname"><span class="pre">ControlPulse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulse_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulse_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulse_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_qubits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ideal_gate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.control_pulse.ControlPulse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.control_pulse.ControlPulse.add_control_variable">
+<span class="sig-name descname"><span class="pre">add_control_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_pulse</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.control_pulse.ControlPulse.add_control_variable" title="Link to this definition"></a></dt>
+<dd><p>Adds a control variable to the pulse. If the variable name is
+time, then it will store the time points in the ctrl_time
+variable.</p>
+<section id="required-parameters">
+<h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>var_name<span class="classifier">string</span></dt><dd><p>Name of new control variable being added.</p>
+</dd>
+<dt>var_pulse<span class="classifier">1D array</span></dt><dd><p>DESCRIPTION.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.control_pulse.ControlPulse.add_mult_gates">
+<span class="sig-name descname"><span class="pre">add_mult_gates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.control_pulse.ControlPulse.add_mult_gates" title="Link to this definition"></a></dt>
+<dd><p>Changes gates attribute to be a QuantumCircuit of
+the correct format for the gates specified in
+the parameter add_gates.</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>add_gates: List/Tuple/Arrayof(String)</dt><dd><p>A list of pulse names that we wish to have run
+simultaneously</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+<section id="note">
+<h3>Note:<a class="headerlink" href="#note" title="Link to this heading"></a></h3>
+<p>This function does not create the pulses necessary
+for these gates, it just flags that the ControlPulse
+contains a pulse with more than one type of gate acting
+on multiple qubits simultaneously.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.control_pulse.ControlPulse.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.control_pulse.ControlPulse.copy" title="Link to this definition"></a></dt>
+<dd><p>This method will do a deep copy of the current class object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Deep copy of current ControlPulse object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#qudipy.circuit.control_pulse.ControlPulse" title="qudipy.circuit.control_pulse.ControlPulse">ControlPulse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.control_pulse.ControlPulse.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_ctrls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.control_pulse.ControlPulse.plot" title="Link to this definition"></a></dt>
+<dd><p>Plot the control pulse. Can plot a subset of the control
+variables and within some time interval.</p>
+<section id="optional-parameters">
+<h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>plot_ctrls<span class="classifier">list of strings, optional</span></dt><dd><p>Specify the name of each control variable pulse you wish
+to plot or plot ‘all’. The default is ‘all’.</p>
+</dd>
+<dt>time_int<span class="classifier">list of floats</span></dt><dd><p>Specify the time interval over which to plot the pulse.
+Cannot be less than 0 or greater than the current pulse
+length. The default is the full time interval.</p>
+</dd>
+<dt>n<span class="classifier">int, optional</span></dt><dd><p>Number of points to use in the pulse when plotting. The
+default is 250.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.control_pulse.ControlPulse.print_pulse">
+<span class="sig-name descname"><span class="pre">print_pulse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.control_pulse.ControlPulse.print_pulse" title="Link to this definition"></a></dt>
+<dd><p>Prints a circuit diagram of the pulse</p>
+<section id="effects">
+<h3>Effects<a class="headerlink" href="#effects" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prints to screen</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.control_pulse.ControlPulse.set_pulse_length">
+<span class="sig-name descname"><span class="pre">set_pulse_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulse_length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.control_pulse.ControlPulse.set_pulse_length" title="Link to this definition"></a></dt>
+<dd><p>Change the pulse length by scaling the time axis of the pulse with
+respect to the previously specified pulse.</p>
+<section id="id1">
+<h3>Required Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>pulse_length<span class="classifier">int</span></dt><dd><p>Pulse legnth for control pulse in [s].</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-qudipy.circuit.file_parsers">
+<span id="qudipy-circuit-file-parsers-module"></span><h2>qudipy.circuit.file_parsers module<a class="headerlink" href="#module-qudipy.circuit.file_parsers" title="Link to this heading"></a></h2>
+<p>Functions for handling control pulse files .ctrlp</p>
+<p>&#64;author: simba</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.circuit.file_parsers.check_ideal_gate">
+<span class="sig-prename descclassname"><span class="pre">qudipy.circuit.file_parsers.</span></span><span class="sig-name descname"><span class="pre">check_ideal_gate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gate_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.file_parsers.check_ideal_gate" title="Link to this definition"></a></dt>
+<dd><p>This function checks if the supplied gate_name is a valid ideal gate
+keyword used to simulate an ideal quantum circuit.
+Current supported keywords are
+I, RX###, RY###, RZ###, H, CTRLX, CTRLY, CTRLZ, SWAP, RSWAP, R(x,y,z)###,
+and negative rotations are supported by RX-###, RY-###, RZ-###, R(x,y,z)-###
+where ### in the R gates indicates the gate’s rotation angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gate_name</strong> (<em>string</em>) – Gate name to be tested.</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>-----------------</strong> – </p></li>
+<li><p><strong>qubit_idx</strong> (<em>list</em><em> of </em><em>ints</em><em>, </em><em>optional</em>) – Indices of qubits used by gate. Default is [].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.circuit.file_parsers.load_circuit">
+<span class="sig-prename descclassname"><span class="pre">qudipy.circuit.file_parsers.</span></span><span class="sig-name descname"><span class="pre">load_circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gate_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.file_parsers.load_circuit" title="Link to this definition"></a></dt>
+<dd><p>This function takes in a single quantum circuit .qcirc file as input and
+constructs a quantum circuit object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f_name</strong> (<em>string</em>) – Full file path to the circuit file.</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>-----------------</strong> – </p></li>
+<li><p><strong>gate_dict</strong> (<em>dictionary</em><em> of </em><em>controlPulse objects</em><em>, </em><em>optional</em>) – Contains all loaded control pulse objects to be used in the
+quantumCircuit’s circuit sequence. Default is {}.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>q_circ</strong> – Class containing information loaded from the .qcirc file
+required for simulation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QuantumCircuit object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.circuit.file_parsers.load_pulses">
+<span class="sig-prename descclassname"><span class="pre">qudipy.circuit.file_parsers.</span></span><span class="sig-name descname"><span class="pre">load_pulses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.file_parsers.load_pulses" title="Link to this definition"></a></dt>
+<dd><p>This function takes multiple .ctrlp files as inputs and constructs a
+dictionary containing every control pulse’s information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f_names</strong> (<em>list</em><em> of </em><em>strings</em>) – Full file path to the control pulse file to load.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>pulse_dict</strong> – Dictionary containing many control pulse objects</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary of ControlPulse objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.circuit.quantum_circuit">
+<span id="qudipy-circuit-quantum-circuit-module"></span><h2>qudipy.circuit.quantum_circuit module<a class="headerlink" href="#module-qudipy.circuit.quantum_circuit" title="Link to this heading"></a></h2>
+<p>Class for a quantum circuit</p>
+<p>&#64;author: simba</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.circuit.quantum_circuit.QuantumCircuit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.circuit.quantum_circuit.</span></span><span class="sig-name descname"><span class="pre">QuantumCircuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_qubits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulse_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.quantum_circuit.QuantumCircuit" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.quantum_circuit.QuantumCircuit.add_gate">
+<span class="sig-name descname"><span class="pre">add_gate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gate_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ideal_gate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">used_qubits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mult_gates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.quantum_circuit.QuantumCircuit.add_gate" title="Link to this definition"></a></dt>
+<dd><p>This function adds a gate into the quantum circuit sequence.</p>
+<section id="id2">
+<h3>Required Parameters<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>gate_name<span class="classifier">Anyof(string, tuple(string))</span></dt><dd><p>Name of gate being added to sequence. If
+it is a tuple, then it contains the strings
+of the names of the multiple gates
+added simultaneously.</p>
+</dd>
+<dt>ideal_gate: Anyof(string, tupleof(string), None)</dt><dd><p>“IDEAL_GATE” if the gate is ideal, and
+None if it is not an ideal gate.</p>
+</dd>
+<dt>used_qubits<span class="classifier">Anyof(int list, tuple(int list))</span></dt><dd><p>Indices of qubits acted on by the gate(s)
+where a tuple of lists indicates multiple
+gates acting simultaneously.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h3>Optional Parameters:<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>position: Int, None, optional</dt><dd><p>The positive integer greater than 0 that
+specifies where the gate should be added to
+the circuit. If position is None, the gate will
+added onto the end.</p>
+</dd>
+<dt>mult_gates: Bool, optional</dt><dd><p>The predicate that affirms if there are
+multiple gates acting in the circut
+simultaneously. Default is False.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.quantum_circuit.QuantumCircuit.get_next_gate">
+<span class="sig-name descname"><span class="pre">get_next_gate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.quantum_circuit.QuantumCircuit.get_next_gate" title="Link to this definition"></a></dt>
+<dd><p>Get the next gate in the quantum circuit sequence. If no more exist,
+return None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>next_gate</strong> – Returns a list containing the next gate name and the affected
+qubits by the gate.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>[string, int list]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.quantum_circuit.QuantumCircuit.load_more_gates">
+<span class="sig-name descname"><span class="pre">load_more_gates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulse_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.quantum_circuit.QuantumCircuit.load_more_gates" title="Link to this definition"></a></dt>
+<dd><p>Adds more controlPulse objects to the gate dictionary.</p>
+<section id="id4">
+<h3>Required Parameters<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>pulse_dict<span class="classifier">dict of controlPulse objects</span></dt><dd><p>Dictionary containing all the pulse objects to be added.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.quantum_circuit.QuantumCircuit.print_ideal_circuit">
+<span class="sig-name descname"><span class="pre">print_ideal_circuit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.quantum_circuit.QuantumCircuit.print_ideal_circuit" title="Link to this definition"></a></dt>
+<dd><p>Prints out an ascii display of the loaded circuit sequence for the user.</p>
+<section id="id5">
+<h3>Required Parameters<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.circuit.quantum_circuit.QuantumCircuit.reset_circuit_index">
+<span class="sig-name descname"><span class="pre">reset_circuit_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.quantum_circuit.QuantumCircuit.reset_circuit_index" title="Link to this definition"></a></dt>
+<dd><p>Reset the current gate index for the circuit sequence back to the
+begining of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-qudipy.circuit.write_files">
+<span id="qudipy-circuit-write-files-module"></span><h2>qudipy.circuit.write_files module<a class="headerlink" href="#module-qudipy.circuit.write_files" title="Link to this heading"></a></h2>
+<p>Module to write .ctrlp files and .qcirc files
+from the respective ContrsolPulse and QuantumCircuit
+Objects</p>
+<p>&#64;author: Madi</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.circuit.write_files.format_single_gate">
+<span class="sig-prename descclassname"><span class="pre">qudipy.circuit.write_files.</span></span><span class="sig-name descname"><span class="pre">format_single_gate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.write_files.format_single_gate" title="Link to this definition"></a></dt>
+<dd><p>Formats a gate into a writable string</p>
+<section id="id6">
+<h3>Parameters:<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>gate: Listof(Str, Listof(Int))</dt><dd><p>The length 3 list that contains
+one gate inside of a QuantumCircuit
+sequence</p>
+</dd>
+</dl>
+</section>
+<section id="requires">
+<h3>Requires:<a class="headerlink" href="#requires" title="Link to this heading"></a></h3>
+<p>gate is in the following form:
+[‘gate_name’, ‘Ideal Gate’, [effected qubits]]</p>
+</section>
+<section id="id7">
+<h3>Returns:<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>String</dt><dd><p>used to write the gate in the .qcirc file</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.circuit.write_files.write_ctrlp">
+<span class="sig-prename descclassname"><span class="pre">qudipy.circuit.write_files.</span></span><span class="sig-name descname"><span class="pre">write_ctrlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CntrlPulse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_ctrlp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.write_files.write_ctrlp" title="Link to this definition"></a></dt>
+<dd><p>Writes a .ctrlp file from the ControlPulse
+object passed</p>
+<section id="id8">
+<h3>Parameters:<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>CntrlPulse: ControlPulse Object</dt><dd><p>Specifies what information to add into
+the .ctrlp file</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h3>Optional Parameters:<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>print_qcirc: Bool</dt><dd><p>If True, the function will print out the
+.ctrlp file. If False, nothing will be
+printed</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h3>Returns:<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>Returns a .ctrlp file containing the
+information in the ControlPulse object</p>
+</section>
+<section id="id11">
+<h3>Effects:<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Prints to screen:</dt><dd><p>Prints the .ctrlp file to screen</p>
+</dd>
+</dl>
+</section>
+<section id="id12">
+<h3>Requires:<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A valid ControlPulse class object as
+a parameter defined in the directory
+qudipy/circuit/control_pulse.py</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.circuit.write_files.write_qcirc">
+<span class="sig-prename descclassname"><span class="pre">qudipy.circuit.write_files.</span></span><span class="sig-name descname"><span class="pre">write_qcirc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">QntmCirc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_qcirc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.circuit.write_files.write_qcirc" title="Link to this definition"></a></dt>
+<dd><p>Writes a .qcirc object representing the
+Quantum Circuit object passed</p>
+<section id="id13">
+<h3>Parameters:<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>QntmCirc: QuantumCircuit</dt><dd><p>The QuantumCircuit object that is to be
+written into a .qcirc file</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h3>Optional Parameters:<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>print_qcirc: Bool, optional</dt><dd><p>The predicate determining if the user
+wants the .qcirc file to be printed to
+screen. Default is True</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><em>Returns a .qcirc file</em></p></li>
+<li><p><em>Requires</em></p></li>
+<li><p><em>———-</em></p></li>
+<li><p><em>* A valid QuantumCircuit class object is passed</em> – as per the class defined with the directory
+qudipy/circuit/quantum_circuit.py</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.circuit">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.circuit" title="Link to this heading"></a></h2>
+<p>Module for handling pulse generation</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qudipy.chargestability.html" class="btn btn-neutral float-left" title="qudipy.chargestability package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qudipy.design.html" class="btn btn-neutral float-right" title="qudipy.design package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zach D. Merino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qudipy.starkshift package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="qudipy.system package" href="qudipy.system.html" />
+    <link rel="prev" title="qudipy.shuttling package" href="qudipy.shuttling.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuDiPy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qudipy.html">Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qudipy.chargestability.html">qudipy.chargestability package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html">qudipy.circuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html">qudipy.design package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html">qudipy.evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html">qudipy.exchange package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html">qudipy.potential package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html">qudipy.qutils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.shuttling.html">qudipy.shuttling package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.starkshift package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.starkshift.starkshift">qudipy.starkshift.starkshift module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.starkshift">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuDiPy</a></li>
+          <li class="breadcrumb-item"><a href="qudipy.html">Modules</a></li>
+      <li class="breadcrumb-item active">qudipy.starkshift package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/qudipy.starkshift.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qudipy-starkshift-package">
+<h1>qudipy.starkshift package<a class="headerlink" href="#qudipy-starkshift-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-qudipy.starkshift.starkshift">
+<span id="qudipy-starkshift-starkshift-module"></span><h2>qudipy.starkshift.starkshift module<a class="headerlink" href="#module-qudipy.starkshift.starkshift" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.starkshift.starkshift.StarkShift">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.starkshift.starkshift.</span></span><span class="sig-name descname"><span class="pre">StarkShift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gparams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material" title="qudipy.utils.constants.Material"><span class="pre">Material</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.starkshift.starkshift.StarkShift" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize the Stark shift class which can calculate the Stark Shift of an
+electron in a given electric field and/or potential landscape</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.starkshift.starkshift.StarkShift.change_temperature">
+<span class="sig-name descname"><span class="pre">change_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_new</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.starkshift.starkshift.StarkShift.change_temperature" title="Link to this definition"></a></dt>
+<dd><p>Changes the temperature to the new desired temperature in Kelvins</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>T_new: Float</dt><dd><p>Requires - T_new &gt;= 0</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.starkshift.starkshift.StarkShift.delta_g">
+<span class="sig-name descname"><span class="pre">delta_g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e_interp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_val_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavefuncs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.starkshift.starkshift.StarkShift.delta_g" title="Link to this definition"></a></dt>
+<dd><section id="required-parameters">
+<h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>e_interp: PotentialInterpolator object</dt><dd><p>Object which contains the information about the electric field
+experienced by the quantum dot(s)</p>
+</dd>
+<dt>c_vals: list of lists</dt><dd><p>List of list where each inner list of consists of control values
+for the control variables named in c_val_names.</p>
+</dd>
+<dt>c_val_names: list of strings</dt><dd><p>Names for the control variables in c_val. Must have the same length
+as each inner list in c_vals</p>
+</dd>
+</dl>
+</section>
+<section id="optional-parameters">
+<h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>wavefuncs: wavefunction(s) for which the Stark shift should be</dt><dd><p>calculated. If none provided, the potential provided in the gparams
+will be used in the Schrodinger equation solver and the Stark shift
+will be calcualted for the ground state (default None)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – Pandas DataFrame where each column is a control variable or a
+g-factor deviation. Each row contains a combination of control
+voltage values and the associated g-factor deviation for each
+wavefunction.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas DataFrame</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.starkshift.starkshift.StarkShift.temp_g_factor">
+<span class="sig-name descname"><span class="pre">temp_g_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.starkshift.starkshift.StarkShift.temp_g_factor" title="Link to this definition"></a></dt>
+<dd><p>Returns the T dependent deviation g-factor for an electron via linear interpolation</p>
+<section id="id1">
+<h3>Parameters:<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+</section>
+<section id="id2">
+<h3>Optional Parameters:<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>material: Anyof(String, None)</dt><dd><p>The material that the Temperature Dependent g-factor is calculated in. If None Provided
+the temperature dependent g-factor for Si will be calculated
+#TODO add more materials</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Temperature deviation g-factor approximation</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-qudipy.starkshift">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.starkshift" title="Link to this heading"></a></h2>
+<p>Stark shift module</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qudipy.shuttling.html" class="btn btn-neutral float-left" title="qudipy.shuttling package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qudipy.system.html" class="btn btn-neutral float-right" title="qudipy.system package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zach D. Merino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

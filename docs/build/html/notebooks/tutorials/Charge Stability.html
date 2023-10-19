@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using the charge stability module &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Electron Shuttling" href="Electron%20Shuttling.html" />
+    <link rel="prev" title="qudipy.utils package" href="../../qudipy.utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using the charge stability module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Add-the-current-location-to-path">1. Add the current location to path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Import-the-relevant-modules-and-set-plotting-parameters">2. Import the relevant modules and set plotting parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-Specify-the-capacitance-of-the-system-you-wish-to-simulate-and-then-initialize-the-charge-stability-diagram-object">3. Specify the capacitance of the system you wish to simulate and then initialize the charge stability diagram object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-Generate-the-charge-stability-diagram">4. Generate the charge stability diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#5.-Plot-the-resulting-diagram">5. Plot the resulting diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#6.-Find-the-edges-of-the-charge-stability-diagram">6. Find the edges of the charge stability diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#7.-Create-bitmap-from-edge-data">7. Create bitmap from edge data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#8.-Perform-the-Hough-transform">8. Perform the Hough transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#9.-Peak-Finding-&amp;-Clustering">9. Peak Finding &amp; Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#10.-Extracting-Triple-Points">10. Extracting Triple Points</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Using the charge stability module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/notebooks/tutorials/Charge Stability.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Using-the-charge-stability-module">
+<h1>Using the charge stability module<a class="headerlink" href="#Using-the-charge-stability-module" title="Link to this heading"></a></h1>
+<p>This tutorial will show how to use the charge stability module to generate a charge stability diagram using the constant interaction model and then perform the Hough transformation.</p>
+<p>In order for the file to not be too large, the output of the cells has been cleared so you will need to run the cells on your local machine to see the output.</p>
+<section id="1.-Add-the-current-location-to-path">
+<h2>1. Add the current location to path<a class="headerlink" href="#1.-Add-the-current-location-to-path" title="Link to this heading"></a></h2>
+<p>In order for this tutorial to work, you will need to run this from the tutorials folder.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.-Import-the-relevant-modules-and-set-plotting-parameters">
+<h2>2. Import the relevant modules and set plotting parameters<a class="headerlink" href="#2.-Import-the-relevant-modules-and-set-plotting-parameters" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#From module</span>
+<span class="kn">import</span> <span class="nn">qudipy.chargestability.csd_cim</span> <span class="k">as</span> <span class="nn">cim</span>
+<span class="kn">import</span> <span class="nn">qudipy.chargestability.csd_analysis</span> <span class="k">as</span> <span class="nn">an</span>
+<span class="c1">#For data maniupulation</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1">#For plotting</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sb</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#Makes plots bigger (optional)</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="3.-Specify-the-capacitance-of-the-system-you-wish-to-simulate-and-then-initialize-the-charge-stability-diagram-object">
+<h2>3. Specify the capacitance of the system you wish to simulate and then initialize the charge stability diagram object<a class="headerlink" href="#3.-Specify-the-capacitance-of-the-system-you-wish-to-simulate-and-then-initialize-the-charge-stability-diagram-object" title="Link to this heading"></a></h2>
+<p>In this tutorial, we will be simulating a double quantum dot system. The parameters follow the naming convention of <a class="reference external" href="https://doi.org/10.1103/RevModPhys.75.1">https://doi.org/10.1103/RevModPhys.75.1</a>. The first three parameters are the coupling of the first dot to the left resevoir, <span class="math notranslate nohighlight">\(C_l\)</span>, the coupling of the second dot to the right resevoir, <span class="math notranslate nohighlight">\(C_r\)</span> and the coupling between the dots <span class="math notranslate nohighlight">\(C_m\)</span>. The next two parameters are capacitances between gates and dots. <span class="math notranslate nohighlight">\(C_{g1}\)</span> is the coupling between dot 1 the plunger gate
+<span class="math notranslate nohighlight">\(V_1\)</span> and <span class="math notranslate nohighlight">\(C_{g2}\)</span> is the coupling between dot 2 the plunger gate <span class="math notranslate nohighlight">\(V_2\)</span>. These parameters are all that is required to define the system.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dot capacitances</span>
+<span class="n">c_l</span> <span class="o">=</span> <span class="mi">51</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">18</span>
+<span class="n">c_r</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">18</span>
+<span class="n">c_m</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">18</span>
+<span class="c1"># Dot-to-gate capacitances</span>
+<span class="n">c_g1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">18</span>
+<span class="n">c_g2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">18</span>
+<span class="c1"># Initialize Object</span>
+<span class="n">csd</span> <span class="o">=</span> <span class="n">cim</span><span class="o">.</span><span class="n">CIMCSD</span><span class="p">(</span><span class="n">c_l</span><span class="p">,</span> <span class="n">c_r</span><span class="p">,</span> <span class="n">c_m</span><span class="p">,</span> <span class="n">c_g1</span><span class="p">,</span> <span class="n">c_g2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="4.-Generate-the-charge-stability-diagram">
+<h2>4. Generate the charge stability diagram<a class="headerlink" href="#4.-Generate-the-charge-stability-diagram" title="Link to this heading"></a></h2>
+<p>The parameters used to generate the charge stability diagram are as follows: - <code class="docutils literal notranslate"><span class="pre">num</span></code>: Number of points to sweep each plunger voltage by. The resulting charge stability diagram will by <code class="docutils literal notranslate"><span class="pre">num</span></code> by <code class="docutils literal notranslate"><span class="pre">num</span></code> in size; - <code class="docutils literal notranslate"><span class="pre">v1(2)_max</span></code>: Maximum voltage to sweep gate 1(2) to. By default, both voltages start at 0 volts, but this can be changed using a keyword argument.</p>
+<p>This will generate occupations as a function of voltage.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate charge stability diagram</span>
+<span class="n">num</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">v1_max</span> <span class="o">=</span> <span class="mf">0.15</span>
+<span class="n">v2_max</span> <span class="o">=</span> <span class="mf">0.15</span>
+
+<span class="n">csd</span><span class="o">.</span><span class="n">generate_csd</span><span class="p">(</span><span class="n">v1_max</span><span class="p">,</span> <span class="n">v2_max</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">num</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="5.-Plot-the-resulting-diagram">
+<h2>5. Plot the resulting diagram<a class="headerlink" href="#5.-Plot-the-resulting-diagram" title="Link to this heading"></a></h2>
+<p>In order to plot this charge stability diagram, we must then pass this object to the the CSDAnalysis object.</p>
+<p>To simulate real experimental results, we can pass a list of capacitances from each dot to the charge sensor. This list dictates how much a change in the charge of one dot will change the current passing through a charge sensor. The scale of this current is arbitrary (and large in this case since the sensor capacitances are large), but simulates what would be seen in an experiment.</p>
+<p>If you do not pass any capacitance vector, then a colorbar will be created that maps each charge occupation to a unique color. In this case, since the colors are physically meaningless, no derivative of the charge stability diagram will be done and further analysis cannot be completed.</p>
+<p>In addition, in order to simulate real experiments with broadened transmission lines, when generating a charge stability diagram you can add an artificial Gaussian blur by setting the optional blur flag to True and specifying a non-zero <code class="docutils literal notranslate"><span class="pre">blur_sigma</span></code>, which is related to the standard deviation of the Gaussian used in the filter, which large <code class="docutils literal notranslate"><span class="pre">sigma_blur</span></code> means more blur.</p>
+<p>For an explanation of the second plot that is printed, see the next section.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the CSDAnalysis object, specifying capacitances and the blurring on the data to be done</span>
+<span class="n">c_cs_1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">c_cs_2</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">csd_an</span> <span class="o">=</span> <span class="n">an</span><span class="o">.</span><span class="n">CSDAnalysis</span><span class="p">(</span><span class="n">csd</span><span class="p">,</span> <span class="n">capacitances</span><span class="o">=</span><span class="p">[</span><span class="n">c_cs_1</span><span class="p">,</span> <span class="n">c_cs_2</span><span class="p">],</span> <span class="n">blur_sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">csd_an</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">derivative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Charge_Stability_9_0.png" src="../../_images/notebooks_tutorials_Charge_Stability_9_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Charge_Stability_9_1.png" src="../../_images/notebooks_tutorials_Charge_Stability_9_1.png" />
+</div>
+</div>
+</section>
+<section id="6.-Find-the-edges-of-the-charge-stability-diagram">
+<h2>6. Find the edges of the charge stability diagram<a class="headerlink" href="#6.-Find-the-edges-of-the-charge-stability-diagram" title="Link to this heading"></a></h2>
+<p>In order for the Hough transform to be used, we need to have a bitmap of where edges are and aren’t in the image. So, we need to run some pre-processing to first find the edges, and then transform that map of edges into a bitmap.</p>
+<p>In order to find the edges, we can take the derivative of the above charge stability diagram. This is done automatically when csd_an is initialized, if a list of capacitances is provided. This derivative is the second plot in the cell above.</p>
+</section>
+<section id="7.-Create-bitmap-from-edge-data">
+<h2>7. Create bitmap from edge data<a class="headerlink" href="#7.-Create-bitmap-from-edge-data" title="Link to this heading"></a></h2>
+<p>From that derivative image, we can create a bitmap.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate the bitmap</span>
+<span class="n">csd_an</span><span class="o">.</span><span class="n">generate_bitmap</span><span class="p">(</span><span class="mi">98</span><span class="p">,</span> <span class="n">threshold_type</span><span class="o">=</span><span class="s1">&#39;percentile&#39;</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Charge_Stability_11_0.png" src="../../_images/notebooks_tutorials_Charge_Stability_11_0.png" />
+</div>
+</div>
+<p>Note that in an actual experiment, the data won’t be so clean, so there will be some additional noise. Fortunately, the Hough transform is relatively robust to random noise, but a more quantitative assessment is necessary before deployment. In addition, there is a threshold parameter in the bitmap generation function that allows any noise below a certain level to be ignored, which can help clean up some data as well.</p>
+<p>For the purposes of this tutorial, I will be artificially adding noise to this bitmap to demonstrate that the Hough transform still perfroms as intended. However, in practice this would not be required (since the data will already be noisy).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="c1"># Adding artificial noise (Will not be needed in practice)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">469230</span><span class="p">)</span> <span class="c1"># fix seed for reproducibility</span>
+
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">csd_an</span><span class="o">.</span><span class="n">csd_bitmap</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># error rate of 5%</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">ndenumerate</span><span class="p">(</span><span class="n">noise</span><span class="p">):</span>
+    <span class="n">noise</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">error</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="n">noise_df</span> <span class="o">=</span> <span class="n">csd_an</span><span class="o">.</span><span class="n">csd_bitmap</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">noise_df</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">noise</span>
+
+<span class="n">csd_an</span><span class="o">.</span><span class="n">csd_bitmap</span> <span class="o">=</span> <span class="n">csd_an</span><span class="o">.</span><span class="n">csd_bitmap</span> <span class="o">+</span> <span class="n">noise_df</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">csd_an</span><span class="o">.</span><span class="n">csd_bitmap</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">yticklabels</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">r</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;V$_1$&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;V$_2$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Charge_Stability_13_0.png" src="../../_images/notebooks_tutorials_Charge_Stability_13_0.png" />
+</div>
+</div>
+<p>Now all the data points that are 0 are set to be ignored when we perform the Hough transform and all the non-zero ones will be included.</p>
+</section>
+<section id="8.-Perform-the-Hough-transform">
+<h2>8. Perform the Hough transform<a class="headerlink" href="#8.-Perform-the-Hough-transform" title="Link to this heading"></a></h2>
+<p>For some background on the Hough transform, see the wikipedia article (<a class="reference external" href="https://en.wikipedia.org/wiki/Hough_transform">https://en.wikipedia.org/wiki/Hough_transform</a>, Theory and Examples section were most useful for me) and this tutorial that I found particularily useful (<a class="reference external" href="https://alyssaq.github.io/2014/understanding-hough-transform/">https://alyssaq.github.io/2014/understanding-hough-transform/</a>)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function which performs the Hough transform</span>
+<span class="n">accumulator</span><span class="p">,</span> <span class="n">thetas</span><span class="p">,</span> <span class="n">rhos</span> <span class="o">=</span> <span class="n">csd_an</span><span class="o">.</span><span class="n">hough_transform</span><span class="p">(</span><span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">theta_min</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Charge_Stability_15_0.png" src="../../_images/notebooks_tutorials_Charge_Stability_15_0.png" />
+</div>
+</div>
+<p>The spots where the counts in the color bar are the highest places where lines fit the best. We can see that there are 4 peaks. These correspond to the 4 large occupation transitions seen in the earlier charge stability diagram. We can convert from these polar coordinates to the normal slope and intercept using <span class="math notranslate nohighlight">\(m = \frac{-\text{cos}(\theta)}{\text{sin}(\theta)}\)</span> and <span class="math notranslate nohighlight">\(b = \frac{\rho}{\text{sin}(\theta)}\)</span>.</p>
+</section>
+<section id="9.-Peak-Finding-&amp;-Clustering">
+<h2>9. Peak Finding &amp; Clustering<a class="headerlink" href="#9.-Peak-Finding-&-Clustering" title="Link to this heading"></a></h2>
+<p>Next, we need to figure out where the peaks are in order to extract the best fitting lines. In order to do this, we first apply a threshold to function to the Hough transformed result, discarding the pixels in the accumulator with a low amount of votes.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function which does the thresholding</span>
+<span class="n">accumulator_threshold</span> <span class="o">=</span> <span class="n">csd_an</span><span class="o">.</span><span class="n">threshold_hough_accumulator</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">99.85</span><span class="p">,</span> <span class="n">threshold_type</span><span class="o">=</span><span class="s1">&#39;percentile&#39;</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Charge_Stability_17_0.png" src="../../_images/notebooks_tutorials_Charge_Stability_17_0.png" />
+</div>
+</div>
+<p>From the above thresholded accumulator, we can cluster them into groups, determine the centroid of each group and use that location to convert into the slope and intercept then get the lines which correctly fit the charge stability diagram.</p>
+<p>The clustering algorithm is DBSCAN in the scikit module, whose documentation can be found at (<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html">https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html</a>). The two parameters passed to the hough_clusters function, eps and min_samples, are diretly passed to the clustering algorithm and the results of the clustering algorithm are highly dependent on those parameters, so it is important to understand what they are for optimal performance, so I recommend looking at the
+documentation linked above.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters corresponding to scanning radius and minimum number of samples in scanning radius</span>
+<span class="c1"># See link to docs in paragraph above for more information</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">min_samples</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">centroids</span> <span class="o">=</span> <span class="n">csd_an</span><span class="o">.</span><span class="n">hough_cluster</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Charge_Stability_20_0.png" src="../../_images/notebooks_tutorials_Charge_Stability_20_0.png" />
+</div>
+</div>
+<p>Once the clustering is done, we discard the clusters which are simply noise as opposed to a real signal and use those to create the lines we use to demarcate the charge transition regions. This can be done by the function call below.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">csd_an</span><span class="o">.</span><span class="n">plot_csd_with_lines</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Charge_Stability_22_0.png" src="../../_images/notebooks_tutorials_Charge_Stability_22_0.png" />
+</div>
+</div>
+<p>We can see that the fitted lines do a pretty good job of retracing the charge transitions lines.</p>
+</section>
+<section id="10.-Extracting-Triple-Points">
+<h2>10. Extracting Triple Points<a class="headerlink" href="#10.-Extracting-Triple-Points" title="Link to this heading"></a></h2>
+<p>Next we would like to identify not only the lines of charge transitions but also find the location of the triple points. These points are not only useful to know in it of themselves, but they will also allow us to construct the shorter transition (the (1,0)-(0,1) transition in this case) line between them that is hard to identify directly using the Hough transformations since it is short relative to the other lines here. Furthermore, it will allow us to know where the long line transitions in
+the previous figure are meant to end.</p>
+<p>To do this, we do the two function calls in the cell below. Note that these two functions are not general, so this will only work correctly in the case of a charge stability diagram with 4 charge regions similar to the one that was generated for this example.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">triple_points</span> <span class="o">=</span> <span class="n">csd_an</span><span class="o">.</span><span class="n">find_tripletpoints</span><span class="p">()</span>
+<span class="n">csd_an</span><span class="o">.</span><span class="n">plot_triple_points</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Charge_Stability_24_0.png" src="../../_images/notebooks_tutorials_Charge_Stability_24_0.png" />
+</div>
+</div>
+<p>As we can see, the triple points and line transitions are properly characterized in this case.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../qudipy.utils.html" class="btn btn-neutral float-left" title="qudipy.utils package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Electron%20Shuttling.html" class="btn btn-neutral float-right" title="Electron Shuttling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zach D. Merino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

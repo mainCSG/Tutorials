@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qudipy.utils package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using the charge stability module" href="notebooks/tutorials/Charge%20Stability.html" />
+    <link rel="prev" title="qudipy.system package" href="qudipy.system.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuDiPy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qudipy.html">Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qudipy.chargestability.html">qudipy.chargestability package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html">qudipy.circuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html">qudipy.design package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html">qudipy.evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html">qudipy.exchange package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html">qudipy.potential package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html">qudipy.qutils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.shuttling.html">qudipy.shuttling package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.constants">qudipy.utils.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.helpers">qudipy.utils.helpers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.interpolator">qudipy.utils.interpolator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.sim_params">qudipy.utils.sim_params module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.units">qudipy.utils.units module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuDiPy</a></li>
+          <li class="breadcrumb-item"><a href="qudipy.html">Modules</a></li>
+      <li class="breadcrumb-item active">qudipy.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/qudipy.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qudipy-utils-package">
+<h1>qudipy.utils package<a class="headerlink" href="#qudipy-utils-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-qudipy.utils.constants">
+<span id="qudipy-utils-constants-module"></span><h2>qudipy.utils.constants module<a class="headerlink" href="#module-qudipy.utils.constants" title="Link to this heading"></a></h2>
+<p>Module with universal constants,
+and Material dataclass for material-specific parameters and dependencies.</p>
+<p>&#64;author: simba, zach, hromecb</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.utils.constants.</span></span><span class="sig-name descname"><span class="pre">Material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_system</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsR</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">me</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gfactor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starkshift_param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SI'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.constants.Material" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Custom class for material-specific constants and dependencies.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.epsR">
+<span class="sig-name descname"><span class="pre">epsR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.epsR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.gfactor">
+<span class="sig-name descname"><span class="pre">gfactor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.gfactor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.material_system">
+<span class="sig-name descname"><span class="pre">material_system</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.material_system" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.me">
+<span class="sig-name descname"><span class="pre">me</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.me" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.starkshift_param">
+<span class="sig-name descname"><span class="pre">starkshift_param</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.starkshift_param" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.units">
+<span class="sig-name descname"><span class="pre">units</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SI'</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.units" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.utils.constants.select_material">
+<span class="sig-prename descclassname"><span class="pre">qudipy.utils.constants.</span></span><span class="sig-name descname"><span class="pre">select_material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.constants.select_material" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-qudipy.utils.helpers">
+<span id="qudipy-utils-helpers-module"></span><h2>qudipy.utils.helpers module<a class="headerlink" href="#module-qudipy.utils.helpers" title="Link to this heading"></a></h2>
+<p>General helper utilities</p>
+<p>&#64;author: simba</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.utils.helpers.find_nearest">
+<span class="sig-prename descclassname"><span class="pre">qudipy.utils.helpers.</span></span><span class="sig-name descname"><span class="pre">find_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.helpers.find_nearest" title="Link to this definition"></a></dt>
+<dd><p>Function to find the closest value to a number in a given array.
+If array contains duplicate values of the nearest number, then first
+instance in the array will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>ND float array-like object</em>) – An ND array type object of floats.</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Value which we want to find the closest number to in the array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>near_idx</strong> (<em>tuple of ints</em>) – Tuple of indices for the nearest value in array.</p></li>
+<li><p><strong>near_value</strong> (<em>float</em>) – Nearest value in array.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.utils.interpolator">
+<span id="qudipy-utils-interpolator-module"></span><h2>qudipy.utils.interpolator module<a class="headerlink" href="#module-qudipy.utils.interpolator" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.utils.interpolator.NDInterpolator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.utils.interpolator.</span></span><span class="sig-name descname"><span class="pre">NDInterpolator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.interpolator.NDInterpolator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearNDInterpolator</span></code></p>
+<p>Class is a wrapper for the LinearNDInterpolator class which
+performs linear interpolation in a linear or log space. This wrapper
+class enables the interpolation object computed and pickled
+for later use.</p>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.utils.sim_params">
+<span id="qudipy-utils-sim-params-module"></span><h2>qudipy.utils.sim_params module<a class="headerlink" href="#module-qudipy.utils.sim_params" title="Link to this heading"></a></h2>
+<p>SimulationParameters class</p>
+<p>&#64;author: simba</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.utils.sim_params.SimulationParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.utils.sim_params.</span></span><span class="sig-name descname"><span class="pre">SimulationParameters</span></span><a class="headerlink" href="#qudipy.utils.sim_params.SimulationParameters" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.utils.units">
+<span id="qudipy-utils-units-module"></span><h2>qudipy.utils.units module<a class="headerlink" href="#module-qudipy.utils.units" title="Link to this heading"></a></h2>
+<p>Custom types for units. Used throughout the code</p>
+</section>
+<section id="module-qudipy.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.utils" title="Link to this heading"></a></h2>
+<p>Code for utility functions, classes and core functions for code</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qudipy.system.html" class="btn btn-neutral float-left" title="qudipy.system package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="notebooks/tutorials/Charge%20Stability.html" class="btn btn-neutral float-right" title="Using the charge stability module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zach D. Merino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

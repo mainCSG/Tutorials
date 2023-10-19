@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qudipy.qutils package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="qudipy.shuttling package" href="qudipy.shuttling.html" />
+    <link rel="prev" title="qudipy.potential package" href="qudipy.potential.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuDiPy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qudipy.html">Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qudipy.chargestability.html">qudipy.chargestability package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html">qudipy.circuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html">qudipy.design package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html">qudipy.evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html">qudipy.exchange package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html">qudipy.potential package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.qutils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.qutils.math">qudipy.qutils.math module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.qutils.matrices">qudipy.qutils.matrices module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.qutils.solvers">qudipy.qutils.solvers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.qutils">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.shuttling.html">qudipy.shuttling package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuDiPy</a></li>
+          <li class="breadcrumb-item"><a href="qudipy.html">Modules</a></li>
+      <li class="breadcrumb-item active">qudipy.qutils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/qudipy.qutils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qudipy-qutils-package">
+<h1>qudipy.qutils package<a class="headerlink" href="#qudipy-qutils-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-qudipy.qutils.math">
+<span id="qudipy-qutils-math-module"></span><h2>qudipy.qutils.math module<a class="headerlink" href="#module-qudipy.qutils.math" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.qutils.math.inner_prod">
+<span class="sig-prename descclassname"><span class="pre">qudipy.qutils.math.</span></span><span class="sig-name descname"><span class="pre">inner_prod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gparams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.math.inner_prod" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the inner product between two complex wavefunctions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gparams</strong> (<em>GridParameters class</em>) – Contains grid and potential information.</p></li>
+<li><p><strong>wf1</strong> (<em>complex array</em>) – ‘Bra’ wavefunction for the inner product. If grid is 2D, then the
+array should be in meshgrid format.</p></li>
+<li><p><strong>wf2</strong> (<em>complex array</em>) – ‘Ket’ wavefunction for the inner product. If grid is 2D, then the
+array should be in meshgrid format.</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>----------------</strong> – </p></li>
+<li><p><strong>None.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>inn_prod</strong> – The inner product between the two inputted wavefunctions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>complex float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.qutils.math.matrix_sqrt">
+<span class="sig-prename descclassname"><span class="pre">qudipy.qutils.math.</span></span><span class="sig-name descname"><span class="pre">matrix_sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.math.matrix_sqrt" title="Link to this definition"></a></dt>
+<dd><p>Calculates a square root of the specified matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>A</strong> (<em>numpy array</em>) – matrix to calculate the square root of</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>sqrt_A</strong> – square root of the matrix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.qutils.math.partial_trace">
+<span class="sig-prename descclassname"><span class="pre">qudipy.qutils.math.</span></span><span class="sig-name descname"><span class="pre">partial_trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.math.partial_trace" title="Link to this definition"></a></dt>
+<dd><p>Finds partial trace with respect to the specified qubit(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>2D array</em>) – matrix of the dimensions 2**N x 2**N (density matrix in our case)</p></li>
+<li><p><strong>elem</strong> (<em>int / iterable</em><em> of </em><em>ints</em>) – number(s) of the electron(s) whose state(s) is/are averaged out</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>traced_rho</strong> – new density matrix of the dimensions 2**m x 2**m, m = N - dim(elem)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.qutils.math.partial_trace_general">
+<span class="sig-prename descclassname"><span class="pre">qudipy.qutils.math.</span></span><span class="sig-name descname"><span class="pre">partial_trace_general</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traced_subsystem</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.math.partial_trace_general" title="Link to this definition"></a></dt>
+<dd><p>This code takes the partial trace of a density matrix.  It is adapted from
+the open-source TrX file written by Toby Cubitt for MATLAB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>complex 2D array</em>) – A 2D array describing a density matrix.</p></li>
+<li><p><strong>dim</strong> (<em>1D integer array</em>) – An array of the dimensions of each subsystem for the whole system for
+psi. [2,4,2] corresponds to a system of size 2x4x2 with 3 subsystems.</p></li>
+<li><p><strong>traced_subsystem</strong> (<em>1D array</em>) – An array of the subsystems to trace out. For dim=[2,4,2], sys=[1,3]
+would trace out the first and third subsystems leaving only a subspace
+with size 4.</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>-----------------</strong> – </p></li>
+<li><p><strong>None.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>traced_rho</strong> – The resulting rho after taking the partial trace.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.qutils.math.project_down">
+<span class="sig-prename descclassname"><span class="pre">qudipy.qutils.math.</span></span><span class="sig-name descname"><span class="pre">project_down</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.math.project_down" title="Link to this definition"></a></dt>
+<dd><p>Projects the system density matrix onto the spin-down state
+of the specified electron(s) (without renormalizing it).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>2D array</em>) – Matrix of the dimensions 2**N x 2**N (density matrix in our case).</p></li>
+<li><p><strong>elem</strong> (<em>int / iterable</em><em> of </em><em>ints</em>) – Number(s) of the electron(s) whose state(s) is to project the system
+density matrix on.</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>----------------</strong> – </p></li>
+<li><p><strong>None.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>projected_rho</strong> – new density matrix (non-renormalized) of the dimensions
+2**m x 2**m, where m = N - dim(elem)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.qutils.math.project_up">
+<span class="sig-prename descclassname"><span class="pre">qudipy.qutils.math.</span></span><span class="sig-name descname"><span class="pre">project_up</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.math.project_up" title="Link to this definition"></a></dt>
+<dd><p>Projects the system density matrix onto the spin-up state of
+the specified electron(s) (without renormalizing it)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>2D complex array</em>) – Matrix of the dimensions 2**N x 2**N (density matrix in our case).</p></li>
+<li><p><strong>elem</strong> (<em>int / iterable</em><em> of </em><em>ints</em>) – Number(s) of the electron(s) whose state(s) is to project the system
+density matrix on.</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>----------------</strong> – </p></li>
+<li><p><strong>None.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>projected_rho</strong> – new density matrix (non-renormalized) of the dimensions
+2**m x 2**m, where m = N - dim(elem)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.qutils.matrices">
+<span id="qudipy-qutils-matrices-module"></span><h2>qudipy.qutils.matrices module<a class="headerlink" href="#module-qudipy.qutils.matrices" title="Link to this heading"></a></h2>
+<p>Constant matrices used to define quantum gates
+&#64;author: hromecB, zmerino</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.qutils.matrices.</span></span><span class="sig-name descname"><span class="pre">Operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize Operator class. Handles all things realted to
+creating/loading/modifying operator object files which contain various
+operators in dictionary format. The Operator class also contains hard
+coded operators.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.CNOT">
+<span class="sig-name descname"><span class="pre">CNOT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trgt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.CNOT" title="Link to this definition"></a></dt>
+<dd><p>Defines a matrix for CNOT gate.</p>
+<section id="required-parameters">
+<h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>N<span class="classifier">int</span></dt><dd><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</dd>
+<dt>ctrl: int</dt><dd><p>Index of the control qubit.</p>
+</dd>
+<dt>trgt: int</dt><dd><p>Index of the target qubit.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+</section>
+<section id="optional-parameters">
+<h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Link to this heading"></a></h3>
+<p>None.
+:returns: Matrix for CNOT gate
+:rtype: 2D complex array</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.E_DOWN">
+<span class="sig-name descname"><span class="pre">E_DOWN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.E_DOWN" title="Link to this definition"></a></dt>
+<dd><p>Defines matrix that projects k-th qubit on the state <a href="#id1"><span class="problematic" id="id2">|</span></a>↓〉≡ <a href="#id3"><span class="problematic" id="id4">|</span></a>1〉</p>
+<section id="id5">
+<h3>Required Parameters<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>N<span class="classifier">int</span></dt><dd><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</dd>
+<dt>k<span class="classifier">int</span></dt><dd><p>Position of the projection matrix in the tensor product.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>Optional Parameters<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Matrix <a href="#id7"><span class="problematic" id="id8">|</span></a>1〉〈1|_k of dimensions 2**N x 2**N</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D complex array</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.E_UP">
+<span class="sig-name descname"><span class="pre">E_UP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.E_UP" title="Link to this definition"></a></dt>
+<dd><p>Defines matrix that projects k-th qubit on the state <a href="#id9"><span class="problematic" id="id10">|</span></a>↑〉≡ <a href="#id11"><span class="problematic" id="id12">|</span></a>0〉</p>
+<section id="id13">
+<h3>Required Parameters<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>N<span class="classifier">int</span></dt><dd><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</dd>
+<dt>k<span class="classifier">int</span></dt><dd><p>Position of the projection matrix in the tensor product.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h3>Optional Parameters<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<p>None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Matrix <a href="#id15"><span class="problematic" id="id16">|</span></a>0〉〈0|_k of dimensions 2**N x 2**N</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D complex array</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.PAULI_X">
+<span class="sig-name descname"><span class="pre">PAULI_X</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.PAULI_X" title="Link to this definition"></a></dt>
+<dd><p>Defines a raising operator of the k-th qubit
+Required Parameters
+———-
+N : int</p>
+<blockquote>
+<div><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>k<span class="classifier">int</span></dt><dd><p>Position of the raising operators in the tensor product.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.PAULI_Y">
+<span class="sig-name descname"><span class="pre">PAULI_Y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.PAULI_Y" title="Link to this definition"></a></dt>
+<dd><p>Defines a raising operator of the k-th qubit
+Required Parameters
+———-
+N : int</p>
+<blockquote>
+<div><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>k<span class="classifier">int</span></dt><dd><p>Position of the raising operators in the tensor product.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.PAULI_Z">
+<span class="sig-name descname"><span class="pre">PAULI_Z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.PAULI_Z" title="Link to this definition"></a></dt>
+<dd><p>Defines a raising operator of the k-th qubit
+Required Parameters
+———-
+N : int</p>
+<blockquote>
+<div><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>k<span class="classifier">int</span></dt><dd><p>Position of the raising operators in the tensor product.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.RSWAP">
+<span class="sig-name descname"><span class="pre">RSWAP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.RSWAP" title="Link to this definition"></a></dt>
+<dd><p>Defines sqrt(SWAP) gate matrix for the qubits with the indices k1, k2.</p>
+<section id="id17">
+<h3>Required Parameters<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>N<span class="classifier">int</span></dt><dd><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</dd>
+<dt>k1, k2: int</dt><dd><p>Indices of the qubits.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h3>Optional Parameters<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<p>None.
+:returns: Matrix for SWAP gate
+:rtype: 2D complex array</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.SIGMA_MINUS">
+<span class="sig-name descname"><span class="pre">SIGMA_MINUS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.SIGMA_MINUS" title="Link to this definition"></a></dt>
+<dd><p>Defines a lowering operator of the k-th qubit
+Required Parameters
+———-
+N : int</p>
+<blockquote>
+<div><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>k<span class="classifier">int</span></dt><dd><p>Position of the raising operators in the tensor product.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The lowering operators X_k - i Y_k</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.SIGMA_PLUS">
+<span class="sig-name descname"><span class="pre">SIGMA_PLUS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.SIGMA_PLUS" title="Link to this definition"></a></dt>
+<dd><p>Defines a raising operator of the k-th qubit
+Required Parameters
+———-
+N : int</p>
+<blockquote>
+<div><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>k<span class="classifier">int</span></dt><dd><p>Position of the raising operators in the tensor product.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The raising operators X_k + i Y_k</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.SIGMA_PRODUCT">
+<span class="sig-name descname"><span class="pre">SIGMA_PRODUCT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.SIGMA_PRODUCT" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Defines the dot product of two Pauli vectors.</p>
+<dl class="simple">
+<dt>N<span class="classifier">int</span></dt><dd><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</dd>
+<dt>k1, k2: int</dt><dd><p>Indices of the qubits.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+<p>None.
+Returns
+——-
+: 2D complex array</p>
+<blockquote>
+<div><p>The inner product</p>
+</div></blockquote>
+</div></blockquote>
+<p>ec{sigma_k1} cdot
+ec{sigma_k2}</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.SWAP">
+<span class="sig-name descname"><span class="pre">SWAP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.SWAP" title="Link to this definition"></a></dt>
+<dd><p>Defines SWAP gate matrix for the qubits with the indices k1, k2.</p>
+<section id="id19">
+<h3>Required Parameters<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>N<span class="classifier">int</span></dt><dd><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</dd>
+<dt>k1, k2: int</dt><dd><p>Indices of the qubits.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h3>Optional Parameters<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<p>None.
+:returns: Matrix for sqt(SWAP) gate
+:rtype: 2D complex array</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.UNIT">
+<span class="sig-name descname"><span class="pre">UNIT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.UNIT" title="Link to this definition"></a></dt>
+<dd><p>Defines UNIT matrix of dimensions 2**N x 2**N</p>
+<section id="id21">
+<h3>Required Parameters<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>N<span class="classifier">int</span></dt><dd><p>Number of 1-qubit degrees of freedom in the operators.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h3>Optional Parameters<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<p>None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><em>2D complex array</em></p></li>
+<li><p><em>Unit matrix of dimensions 2**N x 2**N</em></p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.add_operators">
+<span class="sig-name descname"><span class="pre">add_operators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_ops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.add_operators" title="Link to this definition"></a></dt>
+<dd><p>Add operator dictionary to an existing operator dictionary.</p>
+<section id="id23">
+<h3>Required Parameters<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>new_ops<span class="classifier">dict</span></dt><dd><p>Dictionary of operators to add to exisiting dictionary.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.check_name">
+<span class="sig-name descname"><span class="pre">check_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.check_name" title="Link to this definition"></a></dt>
+<dd><p>Check that a file name for an object file has the correct extension,
+and if not, try to correct it or raise an error.</p>
+<section id="id24">
+<h3>Optional Parameters<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>filename: string</dt><dd><p>String that indicates the name of the existing object file which
+contains a library of operators.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String with ‘.npz’ appended if no other file extension existed</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.check_ops">
+<span class="sig-name descname"><span class="pre">check_ops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.check_ops" title="Link to this definition"></a></dt>
+<dd><p>Checks that a dictionary’s operator items are valid data structure
+types.</p>
+<section id="id25">
+<h3>Required Parameters<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>dict<span class="classifier">Dictionary</span></dt><dd><p>Operator dictionary</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.check_unitary">
+<span class="sig-name descname"><span class="pre">check_unitary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.check_unitary" title="Link to this definition"></a></dt>
+<dd><p>Checks if a dictionary’s operator items are all unitary.</p>
+<section id="id26">
+<h3>Required Parameters<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>dict<span class="classifier">Dictionary</span></dt><dd><p>Operator dictionary</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.coded_op">
+<span class="sig-name descname"><span class="pre">coded_op</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.coded_op" title="Link to this definition"></a></dt>
+<dd><p>Manages arbitrarily defined operators that were hard coded i.e. saves
+the operator to the operator library if specified in the operator
+function call and only computes the operator if it does not exist in
+the operator library.
+———-
+func : function</p>
+<blockquote>
+<div><p>An arbitrary function is sent.</p>
+</div></blockquote>
+<dl>
+<dt>op_key<span class="classifier">str</span></dt><dd><p>Operator key name.</p>
+</dd>
+<dt>save<span class="classifier">bool</span></dt><dd><p>boolean indicator from original function call to save the operator
+to the library if true.</p>
+</dd>
+<dt><a href="#id27"><span class="problematic" id="id28">**</span></a>kwargs<span class="classifier">dictionary</span></dt><dd><dl class="simple">
+<dt>General structure: {‘var1’: val1, …, ‘varN’: valN,</dt><dd><p>‘struct’: stuct, ‘func’, func}</p>
+</dd>
+</dl>
+<p>Contains variable names and values used to construct the operator,
+as well as, functions to help constuct the operator and operator
+library name.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The computed or loaded operator</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>complex 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.construct" title="Link to this definition"></a></dt>
+<dd><p>Creates matrix U_k of dimensions 2**N x 2**N for specified operator O</p>
+<section id="id29">
+<h3>Required Parameters<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>N: int</dt><dd><p>Number of 1-qubit degrees of freedom in the operator.</p>
+</dd>
+<dt>k: int</dt><dd><p>Position of the Pauli matrix in the tensor product.</p>
+</dd>
+</dl>
+<p>O: 2D complex array
+key_prefix: string</p>
+<blockquote>
+<div><p>optional key prefix name argument. Key structure is key_prefix_N#K#.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>u_k</strong> – Matrix U_k of dimensions 2**N x 2**N</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D complex array</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.keys" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.load_ops">
+<span class="sig-name descname"><span class="pre">load_ops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.load_ops" title="Link to this definition"></a></dt>
+<dd><p>Load the operator object file for later use.</p>
+<section id="id30">
+<h3>Required Parameters<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>filename<span class="classifier">String</span></dt><dd><p>Name of the file with extension .npz for the operator object.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lib</strong> – Dictionary containing operators.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.remove_operators">
+<span class="sig-name descname"><span class="pre">remove_operators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.remove_operators" title="Link to this definition"></a></dt>
+<dd><p>Remove operator items from existing operator dictionary.</p>
+<section id="id31">
+<h3>Required Parameters<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>op_names<span class="classifier">List</span></dt><dd><p>List of dictionary key strings that are to be removed from the
+existing dictionary.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.qutils.matrices.Operator.save_ops">
+<span class="sig-name descname"><span class="pre">save_ops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.matrices.Operator.save_ops" title="Link to this definition"></a></dt>
+<dd><p>Save the operator dictionary in the current working directory as an
+object file for later use.</p>
+<section id="id32">
+<h3>Required Parameters<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>filename<span class="classifier">String</span></dt><dd><p>Name of operator dictionary file. If the file type suffix is not
+included in the filename, it will be appended on to the filename
+string.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-qudipy.qutils.solvers">
+<span id="qudipy-qutils-solvers-module"></span><h2>qudipy.qutils.solvers module<a class="headerlink" href="#module-qudipy.qutils.solvers" title="Link to this heading"></a></h2>
+<p>Quantum utility solver functions</p>
+<p>&#64;author: simba</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.qutils.solvers.build_1DSE_hamiltonian">
+<span class="sig-prename descclassname"><span class="pre">qudipy.qutils.solvers.</span></span><span class="sig-name descname"><span class="pre">build_1DSE_hamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gparams</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.solvers.build_1DSE_hamiltonian" title="Link to this definition"></a></dt>
+<dd><p>Build a single electron Hamilonian for the 1-dimensional potential
+specified in the gparams class. The laplacian operator is approximated by
+using a 1D 3-point stencil. The Hamilonian assumes a natural ordering
+format along the main diagonal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>material_system</strong> (<em>Material class</em>) – Object that contains material parameters and dependencies.</p></li>
+<li><p><strong>gparams</strong> (<em>GridParameters class</em>) – Contains grid and potential information</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ham_1D</strong> – 1-dimensional Hamtilonian. The diagonal elements are in natural
+ordering format</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sparse 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.qutils.solvers.build_2DSE_hamiltonian">
+<span class="sig-prename descclassname"><span class="pre">qudipy.qutils.solvers.</span></span><span class="sig-name descname"><span class="pre">build_2DSE_hamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gparams</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.solvers.build_2DSE_hamiltonian" title="Link to this definition"></a></dt>
+<dd><p>Build a single electron Hamilonian for the 2-dimensional potential
+specified in the gparams class. The laplacian operator is approximated by
+using a 2D 5-point stencil. The Hamiltonian assumes a natural ordering
+format along the main diagonal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>material_system</strong> (<em>Material class</em>) – Object that contains material parameters and dependencies.</p></li>
+<li><p><strong>gparams</strong> (<em>GridParameters class</em>) – Contains grid and potential information</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ham_2D</strong> – 2-dimensional Hamtilonian. The diagonal elements are in natural
+ordering format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sparse 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.qutils.solvers.solve_schrodinger_eq">
+<span class="sig-prename descclassname"><span class="pre">qudipy.qutils.solvers.</span></span><span class="sig-name descname"><span class="pre">solve_schrodinger_eq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gparams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.qutils.solvers.solve_schrodinger_eq" title="Link to this definition"></a></dt>
+<dd><p>Solve the time-independent Schrodinger-Equation H|Y&gt; = E|Y&gt; where H is
+the single-electron 1 (or 2)-dimensional Hamiltonian.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>material_system</strong> (<em>Material class</em>) – Object that contains material parameters and dependencies.</p></li>
+<li><p><strong>gparams</strong> (<em>GridParameters class</em>) – Contains grid and potential information.</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>-----------------</strong> – </p></li>
+<li><p><strong>n_sols</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of eigenvectors and eigenenergies to return. The default is 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>eig_ens</strong> (<em>complex 1D array</em>) – Lowest eigenenergies sorted in ascending order.</p></li>
+<li><p><strong>eig_vecs</strong> (<em>complex 2D array</em>) – Corresponding eigenvectors in natural order format. eig_vecs[:,i] is
+the eigenvector for eigenvalue eig_ens[i].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.qutils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.qutils" title="Link to this heading"></a></h2>
+<p>Quantum utility helper module</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qudipy.potential.html" class="btn btn-neutral float-left" title="qudipy.potential package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qudipy.shuttling.html" class="btn btn-neutral float-right" title="qudipy.shuttling package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zach D. Merino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

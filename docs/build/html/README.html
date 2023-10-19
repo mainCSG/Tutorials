@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuDiPy (Quantum Dots in Python) &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QuDiPy" href="modules.html" />
+    <link rel="prev" title="Welcome to QuDiPy’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">QuDiPy (Quantum Dots in Python)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qudipy-quantum-dots-in-python">
+<h1>QuDiPy (Quantum Dots in Python)<a class="headerlink" href="#qudipy-quantum-dots-in-python" title="Link to this heading"></a></h1>
+<p>This respository aims to be a general purpose tool for simulating electron dynamics in quantum dots with an emphasis on quantum information processing. We adopt an effective mass formalism which enables simulations across a variety of material systems and heterostructures. The code base is under construction by the <a class="reference external" href="https://research.iqc.uwaterloo.ca/csg/">Coherent Spintronics Group</a> (CSG) at the University of Waterloo. The two codebase maintainers are Bohdan Khromets (&#64;hromecB) and Zach D. Merino (&#64;zmerino). Reach out to either of us if you have questions regarding this project.</p>
+<p>Version 1.0 is currently under development. When completed, we aim to have the following capabilities:</p>
+<ul class="simple">
+<li><p>Integration with <a class="reference external" href="https://www.nextnano.de/">nextnano</a> for the simulation of realistic nanoscale devices</p></li>
+<li><p>Real space (orbital) simulations:</p>
+<ul>
+<li><p>Determination of electric potentials and fields in realistic quantum-dot based devices</p></li>
+<li><p>Time evolution simulations of electron transfers</p></li>
+</ul>
+</li>
+<li><p>Estimation of the Stark shift in silicon heterostructures</p></li>
+<li><p>Calculation of the many-electron spectra of general quantum dot networks using a <a class="reference external" href="https://arxiv.org/pdf/2012.10512.pdf">modified LCHO-CI approach</a>. These energy spectra can be mapped onto:</p>
+<ul>
+<li><p>Heisenberg Hamiltonian to determine the pairwise exchange interactions of electrons in the dot network, <em>or</em></p></li>
+<li><p>Hubbard Hamiltonian to determine charge configuration and charge stability regions</p></li>
+</ul>
+</li>
+<li><p>General <em>n</em>-spin system simulation (unitary <em>or</em> non-unitary within Lindblad formalism) under time-varying ESR field, <em>g</em>-factors and exchange couplings in an effective spin Hamiltonian</p></li>
+<li><p>Simulation of charge stability diagrams using either a constant interaction model or a Hubbard Hamiltonian model. In addition, this module can fit charge stability data to extract capacitances for the constant interaciton model</p></li>
+<li><p>Tools for finding optimal control voltage pulses to realize desired quantum algorithms:</p>
+<ul>
+<li><p>constrained <a class="reference external" href="https://uwspace.uwaterloo.ca/handle/10012/17823">effective shape engineering</a> with 1-to-1 mapping between effective and voltage parameters</p></li>
+<li><p>GRAPE</p></li>
+<li><p>constant-adiabaticity pulses <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.102.125406">for electron shuttling</a></p></li>
+</ul>
+</li>
+</ul>
+<p>You can see the general progress in the module by going to the tutorials folder and following along the Jupyter notebooks.  Currently, some of the data for the tutorials are hosted elsewhere.  If you would like these available to you, please email either bohdan.khromets&#64;uwaterloo.ca or zmerino&#64;uwaterloo.ca (subject line: QuDiPy).  We emphasize that this is work in progress.</p>
+<p>For <a class="reference external" href="https://github.com/mainCSG/QuDiPy/blob/master/Development%20Guidelines.md">development guidelines</a>.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to QuDiPy’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="QuDiPy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zach D. Merino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

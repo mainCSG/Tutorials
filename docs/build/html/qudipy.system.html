@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qudipy.system package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="qudipy.utils package" href="qudipy.utils.html" />
+    <link rel="prev" title="qudipy.starkshift package" href="qudipy.starkshift.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuDiPy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qudipy.html">Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qudipy.chargestability.html">qudipy.chargestability package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html">qudipy.circuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html">qudipy.design package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html">qudipy.evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html">qudipy.exchange package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html">qudipy.potential package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html">qudipy.qutils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.shuttling.html">qudipy.shuttling package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.system package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.system.dot_array">qudipy.system.dot_array module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.system.state">qudipy.system.state module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.system">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuDiPy</a></li>
+          <li class="breadcrumb-item"><a href="qudipy.html">Modules</a></li>
+      <li class="breadcrumb-item active">qudipy.system package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/qudipy.system.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qudipy-system-package">
+<h1>qudipy.system package<a class="headerlink" href="#qudipy-system-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-qudipy.system.dot_array">
+<span id="qudipy-system-dot-array-module"></span><h2>qudipy.system.dot_array module<a class="headerlink" href="#module-qudipy.system.dot_array" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.system.dot_array.DotArray">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.system.dot_array.</span></span><span class="sig-name descname"><span class="pre">DotArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">precalculated_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocessed_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_dots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Si/SiO2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dots_data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exchange_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'HM'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'harsh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6,</span> <span class="pre">6,</span> <span class="pre">6]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.system.dot_array.DotArray" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class is designed to process the potential landscape data set for a
+given device dot geometry to exctract various meta data or effective
+parameters.</p>
+<p>Example: find the the number of dots for the potential lanscape dataset and
+then calculate the g-factor deviation for each dot and exchange for all
+pars of adjacent dots.</p>
+<section id="atributes">
+<h3>Atributes<a class="headerlink" href="#atributes" title="Link to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.system.dot_array.DotArray.exchanges">
+<span class="sig-name descname"><span class="pre">exchanges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctrl_vecs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'HM'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.system.dot_array.DotArray.exchanges" title="Link to this definition"></a></dt>
+<dd><p>Determines exchange couplings between adjacent pairs of dots.</p>
+<section id="required-parameters">
+<h4>Required Parameters<a class="headerlink" href="#required-parameters" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>ctrl_vals: list of lists</dt><dd><p>Configuration of control voltages for various voltage vectors in
+the voltage state space</p>
+</dd>
+</dl>
+</section>
+<section id="optional-parameters">
+<h4>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>method: string</dt><dd><p>Choice of ‘HL’, ‘HM’, or ‘LCHO’ method for exchange calculations
+(strings are case insensitive)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ex_path</strong> – Array of the exchange couplings between each adjacent pair of dots
+for various voltage vectors in the voltage state space</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D float array</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.system.dot_array.DotArray.g_factors">
+<span class="sig-name descname"><span class="pre">g_factors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctrl_vecs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.system.dot_array.DotArray.g_factors" title="Link to this definition"></a></dt>
+<dd><p>Determines g-factors for each dot in the Dots object.
+Required Parameters
+——-
+ctrl_vals: list of lists</p>
+<blockquote>
+<div><p>Configuration of control voltages for various voltage vectors in
+the voltage state space</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>g_factor_path</strong> – Array of the g-factors of each dot for various voltage vectors in
+the voltage state space</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D float array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.system.dot_array.DotArray.nosingleton">
+<span class="sig-name descname"><span class="pre">nosingleton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctrl_vals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.system.dot_array.DotArray.nosingleton" title="Link to this definition"></a></dt>
+<dd><p>Remove single dimensional data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.system.dot_array.DotArray.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctrl_vecs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'g-factor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ex_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'J'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.system.dot_array.DotArray.plot" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.system.dot_array.DotArray.singleton">
+<span class="sig-name descname"><span class="pre">singleton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctrl_vals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.system.dot_array.DotArray.singleton" title="Link to this definition"></a></dt>
+<dd><p>Identify singleton dimensions and return boolean mask</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.system.dot_array.DotArray.split">
+<span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.system.dot_array.DotArray.split" title="Link to this definition"></a></dt>
+<dd><p>Method that defines new Dots objects where potentials of quantum dots
+are separated either individually or as pairs.</p>
+<p>Each of the new Dots object inherits the potential and
+electric field data from the parent object,
+but the interpolating function changes: when called, the potential
+landscape appears to have only one dot (or one pair)</p>
+<section id="id1">
+<h4>Optional Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>group: string</dt><dd><p>Whether to get a list of individual dots (‘single’/’singles’),
+or a list of adjacent dot pairs (‘pair’/’pairs’)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>split_dots</strong> – list of Dots objects corresponding to individual dots or their pairs</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.system.state">
+<span id="qudipy-system-state-module"></span><h2>qudipy.system.state module<a class="headerlink" href="#module-qudipy.system.state" title="Link to this heading"></a></h2>
+<p>State class:
+handles spin, orbital, valley and Hubbard state information</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.system.state.State">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.system.state.</span></span><span class="sig-name descname"><span class="pre">State</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.system.state.State" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The class describes the spin state of the qubit system.
+Will be extended to orbital, Hubbard, valley, etc. states in the future.</p>
+<p>Attributes comprise the system
+density matrix and spin environment parameters (temperature, T1, T2).</p>
+<p>Methods construct Hamiltonian, and time-evolve the Lindblad equation
+with pulses.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.system.state.State.rho">
+<span class="sig-name descname"><span class="pre">rho</span></span><a class="headerlink" href="#qudipy.system.state.State.rho" title="Link to this definition"></a></dt>
+<dd><p>Density matrix. Initialized with the value before pulse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2D complex array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.system.state.State.N_0">
+<span class="sig-name descname"><span class="pre">N_0</span></span><a class="headerlink" href="#qudipy.system.state.State.N_0" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Maximal possible number of electrons in the system (could be bigger</dt><dd><p>than the dimensions of rho; useful in case we load new electrons.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.system.state.State.time">
+<span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#qudipy.system.state.State.time" title="Link to this definition"></a></dt>
+<dd><p>Point in time [s] at which the system is defined.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.system.state.State.T_1">
+<span class="sig-name descname"><span class="pre">T_1</span></span><a class="headerlink" href="#qudipy.system.state.State.T_1" title="Link to this definition"></a></dt>
+<dd><p>Spin relaxation time [s].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.system.state.State.T_2">
+<span class="sig-name descname"><span class="pre">T_2</span></span><a class="headerlink" href="#qudipy.system.state.State.T_2" title="Link to this definition"></a></dt>
+<dd><p>Spin dephasing time [s].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.system.state.State.T">
+<span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#qudipy.system.state.State.T" title="Link to this definition"></a></dt>
+<dd><p>Temperature [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.system.state.State.cdict">
+<span class="sig-name descname"><span class="pre">cdict</span></span><a class="headerlink" href="#qudipy.system.state.State.cdict" title="Link to this definition"></a></dt>
+<dd><p>Collection of costant matrices used to speed up the simulation. Have
+all the dimensinons from 2 x 2 up to 2**N_0 x 2**N_0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary of 2D complex arrays</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">evolve(pulse,</span> <span class="pre">rho_reference=None,</span> <span class="pre">eval_fidelity=False,</span> <span class="pre">eval_purity=False,</span></span></dt>
+<dd><dl class="simple">
+<dt>track_qubits=None, eval_Bloch_vectors=False,</dt><dd><p>track_points_per_pulse=100):</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Performs</span> <span class="pre">system</span> <span class="pre">evolution</span> <span class="pre">under</span> <span class="pre">given</span> <span class="pre">pulse(s).</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Outputs</span> <span class="pre">a</span> <span class="pre">dictionary</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">specified</span> <span class="pre">tracking</span> <span class="pre">parameters</span></span></dt>
+<dd><p>#TODO make it EvolutionData object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.system.state.State.evolve">
+<span class="sig-name descname"><span class="pre">evolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse" title="qudipy.circuit.control_pulse.ControlPulse"><span class="pre">ControlPulse</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_reference</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_fidelity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_purity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_Bloch_vectors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_points_per_pulse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#qudipy.system.state.State.evolve" title="Link to this definition"></a></dt>
+<dd><p>Function that performs spin system evolution under the external pulse,
+i.e. updates the system density matrix.
+Required Parameters
+———-
+pulses : ControlPulse object, or tuple/list of such objects</p>
+<blockquote>
+<div><p>Contains pulse parameters at different points of time. The tuple/
+list of pulses could be specified as an irregular array like
+[pulse1, pulse2, [pulse3, (pulse4, pulse5)], pulse6], which is
+convenient for dealing with compound pulses.</p>
+</div></blockquote>
+<section id="id2">
+<h3>Optional Parameters<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>rho_reference: 2D complex array, optional</dt><dd><p>The density matrix (initial, anticipated final, etc.) to compare
+with the density matrix during the simulation. If specified, the
+fidelity of system density matrix with respect to it can be
+calculated. The default is None.</p>
+</dd>
+<dt>eval_fidelity<span class="classifier">bool, optional</span></dt><dd><p>Indicates whether to track the fidelity of the density matrix with
+respect to the specified rho_reference (if it is specified).
+The default is False.</p>
+</dd>
+<dt>eval_purity<span class="classifier">bool, optional</span></dt><dd><p>Indicates whether to track the purity
+of the density matrix.
+The default is False.</p>
+</dd>
+<dt>track_qubits<span class="classifier">int / iterable of ints, optional</span></dt><dd><p>Index (indices) of qubit(s) to track during the pulse(s)
+(i. e. evaluate 1-qubit density submatrices for them).
+The default is None.</p>
+</dd>
+<dt>eval_Bloch_vectors: bool, optional</dt><dd><p>Indicates whether to calculate Bloch vectors for the tracked
+qubits along with their density submatrices.
+The default is False.</p>
+</dd>
+<dt>track_points_per_pulse: int, optional</dt><dd><p>Number of points of time during the simulation to save
+the tracked parameters specified above and then output them.
+The default is 1000.</p>
+</dd>
+</dl>
+<dl class="field-list">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ret_dict</strong> – Includes some of the following pairs key-value (the length of each
+array is given by track_points_per_pulse variable):
+- “time”: 1D float array</p>
+<blockquote>
+<div><p>Points of time that correspond to the values contained in
+the other arrays defined below.</p>
+</div></blockquote>
+<ul>
+<li><dl class="simple">
+<dt>“purity”: 1D float array</dt><dd><p>Purity of the system density matrix (if eval_purity is True).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“fidelity”: 1D float array</dt><dd><p>Fidelity of the system density matrix with respect to
+rho_reference (if it is defined, and if eval_fidelity is True).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“submatrix_{i}”: 1D array of complex 2D arrays</dt><dd><p>Density submatrix of the i-th electron, if i is in
+track_qubits iterable.</p>
+</dd>
+</dl>
+</li>
+<li><p>“sigma_x_{i}” : 1D float array
+“sigma_y_{i}” : 1D float array
+“sigma_z_{i}” : 1D float array</p>
+<blockquote>
+<div><p>Bloch vector components of the i-th electron, if i
+is in track_qubits iterable, and eval_Bloch_vectors is True.</p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of numpy arrays</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-qudipy.system">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.system" title="Link to this heading"></a></h2>
+<p>Code for dot array module containing various classes and functions.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qudipy.starkshift.html" class="btn btn-neutral float-left" title="qudipy.starkshift package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qudipy.utils.html" class="btn btn-neutral float-right" title="qudipy.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zach D. Merino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

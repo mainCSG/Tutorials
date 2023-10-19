@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electron Shuttling &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Solving Single Electron Schrödinger Equation" href="Schrodinger%20Equation.html" />
+    <link rel="prev" title="Using the charge stability module" href="Charge%20Stability.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Electron Shuttling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Load-relevant-modules-and-add-the-current-location-to-path">1. Load relevant modules and add the current location to path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Load-potential-files">2. Load potential files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-Building-the-shuttling-control-pulse">3. Building the shuttling control pulse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-Evolving-over-time">4. Evolving over time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#5.-Sweeping-pulse-lengths">5. Sweeping pulse lengths</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Electron Shuttling</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/notebooks/tutorials/Electron Shuttling.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Electron-Shuttling">
+<h1>Electron Shuttling<a class="headerlink" href="#Electron-Shuttling" title="Link to this heading"></a></h1>
+<p>This tutorial will show how to simulate electron shuttling using QuDiPy. We will show you can build an example shuttling pulse and subsequently simulate electron shuttling through a triple quantum dot chain.</p>
+<section id="1.-Load-relevant-modules-and-add-the-current-location-to-path">
+<h2>1. Load relevant modules and add the current location to path<a class="headerlink" href="#1.-Load-relevant-modules-and-add-the-current-location-to-path" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="c1"># update base working directory to Tutorials</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;Tutorials&#39;</span><span class="p">:</span>
+    <span class="c1"># print(path.parents[0])</span>
+
+    <span class="c1"># move 2-directories up</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import os, sys</span>
+<span class="c1"># sys.path.append(os.path.dirname(os.getcwd()))</span>
+<span class="c1"># print(os.path.dirname(os.getcwd()))</span>
+<span class="kn">import</span> <span class="nn">qudipy</span> <span class="k">as</span> <span class="nn">qd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qudipy.potential</span> <span class="k">as</span> <span class="nn">pot</span>
+<span class="kn">import</span> <span class="nn">qudipy.shuttling</span> <span class="k">as</span> <span class="nn">shut</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.-Load-potential-files">
+<h2>2. Load potential files<a class="headerlink" href="#2.-Load-potential-files" title="Link to this heading"></a></h2>
+<p>We need to first construct a <code class="docutils literal notranslate"><span class="pre">PotentialInterpolator</span></code> object from some pre-processed potential files (i.e. potentials that have already been exported fron nextnano into a csv file containing a 2D potential slice). The potentials we are loading correspond to a 5-quantum dot linear chain system where each dot in the chain is formed by a single plunger gate labelled <em>V#</em>. The gap between plunger gates forms a tunnel barrier between neighboring quantum dots. For our simulations, the outer-most
+plunger gate voltages remain fixed, and we will only shuttle an electron through the middle three dots using plunger gates <em>V2</em>, <em>V3</em>, and <em>V4</em>.</p>
+<p>Please refer to the Loading Potentials tutorial for more information on loading potentials.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load preprocessed potential files from the potentail folder</span>
+<span class="n">nav_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;QuDiPy data&#39;</span><span class="p">,</span> <span class="s1">&#39;tutorials&#39;</span><span class="p">)</span>
+<span class="n">preprocessed_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                            <span class="s1">&#39;Pre-processed potentials&#39;</span><span class="p">,</span><span class="s1">&#39;Unkown_slice&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="c1"># Specify the control voltage names (C#NAME as mentioned above)</span>
+<span class="n">ctrl_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span><span class="s1">&#39;V2&#39;</span><span class="p">,</span><span class="s1">&#39;V3&#39;</span><span class="p">,</span><span class="s1">&#39;V4&#39;</span><span class="p">,</span><span class="s1">&#39;V5&#39;</span><span class="p">]</span>
+
+<span class="c1"># Specify the control voltage values you wish to load.</span>
+<span class="c1"># The cartesian product of all these supplied voltages will be loaded and MUST exist in the directory.</span>
+<span class="n">V1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
+<span class="n">V2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">]</span>
+<span class="n">V3</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">]</span>
+<span class="n">V4</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">]</span>
+<span class="n">V5</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
+<span class="c1"># Add all voltage values to a list</span>
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">V1</span><span class="p">,</span> <span class="n">V2</span><span class="p">,</span> <span class="n">V3</span><span class="p">,</span> <span class="n">V4</span><span class="p">,</span> <span class="n">V5</span><span class="p">]</span>
+
+<span class="c1"># Now load the potentials.</span>
+<span class="c1"># load_files returns a dictionary of all the information loaded</span>
+<span class="n">loaded_data</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">load_potentials</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">f_type</span><span class="o">=</span><span class="s1">&#39;pot&#39;</span><span class="p">,</span>
+                                  <span class="n">f_dir</span><span class="o">=</span><span class="n">preprocessed_dir</span><span class="p">,</span> <span class="n">f_pot_units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span>
+                                  <span class="n">f_dis_units</span><span class="o">=</span><span class="s2">&quot;nm&quot;</span><span class="p">,</span> <span class="n">trim_x</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">120E-9</span><span class="p">,</span><span class="mf">120E-9</span><span class="p">])</span>
+
+<span class="c1"># Now building the interpolator object is trivial</span>
+<span class="c1"># Note the use of y-slice here which builds a 1D potential</span>
+<span class="c1"># interpolator at y=0 for all potentials.</span>
+<span class="n">pot_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">loaded_data</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s2">&quot;Si/SiO2&quot;</span><span class="p">,</span>   <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="3.-Building-the-shuttling-control-pulse">
+<h2>3. Building the shuttling control pulse<a class="headerlink" href="#3.-Building-the-shuttling-control-pulse" title="Link to this heading"></a></h2>
+<p>Now, we need to actually construct a control pulse to shuttle an electron across our triple quantum dot chain. We will initialize the electron in the leftmost dot underneath <em>V2</em> and subsequently shuttle the electron to be underneath <em>V3</em> and finally <em>V4</em>. For simplicity, we will only vary a single plunger gate voltage at a time.</p>
+<p>To start then, we will define the initial voltage configuration of the pulse.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define some min and max voltage values</span>
+<span class="n">min_v</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">max_v</span> <span class="o">=</span> <span class="mf">0.278</span>
+
+<span class="c1"># Specify the first point.</span>
+<span class="n">pt1</span> <span class="o">=</span> <span class="p">[</span><span class="n">max_v</span><span class="p">,</span> <span class="n">min_v</span><span class="p">,</span> <span class="n">min_v</span><span class="p">]</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pt1</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Electron_Shuttling_7_0.png" src="../../_images/notebooks_tutorials_Electron_Shuttling_7_0.png" />
+</div>
+</div>
+<p>We can see that at the start of the pulse the electron is localized in the 2nd quantum dot in the chain, underneath <em>V2</em>. The next step in constructing the pulse is to sweep <em>V3</em> to the resonant tunnel coupling point between dots 2 and 3. This can be done using the <code class="docutils literal notranslate"><span class="pre">.find_resonant_tc()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">potentialInterpolator</span></code> object <code class="docutils literal notranslate"><span class="pre">pot_interp</span></code>. This method varies a specified control variable (in this case, we will vary <em>V3</em>) until it finds the point where the electron wavefunciton is
+equally localized between the two dots.</p>
+<p>In order to remain adiabatic (in the ground state) as we apply our control pulse, <em>V3</em> must be swept slowly enough as to not excite out simulated wavefunction into higher orbital states. Near the resonant tunnel coupling point, this is a greater concern as the energy spectrum of the system Hamiltonian at that time is the smallest. However, further away from the resonant tunnel coupling point, we can sweep <em>V3</em> much faster. So we will slightly ‘shape’ our pulse a bit by quickly ramping <em>V3</em> until
+we get close to the resonant tunnel coupling point at which we will sweep slower.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First use find_resonant_tc to find the resonant tunnel coupling point.</span>
+<span class="c1"># We pass in a voltage vector specifying the voltage values for the</span>
+<span class="c1"># rest of the control variables and then specify which control variable</span>
+<span class="c1"># we wish to vary when searching for a resonant tunnel coupling point.</span>
+<span class="n">res_vv</span> <span class="o">=</span> <span class="n">pot_interp</span><span class="o">.</span><span class="n">find_resonant_tc</span><span class="p">(</span><span class="n">pt1</span><span class="p">,</span> <span class="s1">&#39;V3&#39;</span><span class="p">)</span>
+
+<span class="c1"># Find the voltage configuration close to the resonant tunnel coupling point.</span>
+<span class="n">almost_res_vv</span> <span class="o">=</span> <span class="n">res_vv</span> <span class="o">-</span> <span class="mf">0.035</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_v</span> <span class="o">-</span> <span class="n">min_v</span><span class="p">)</span>
+<span class="n">pt2</span> <span class="o">=</span> <span class="n">pt1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pt2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">almost_res_vv</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pt2</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Find the voltage configuration right at the resonant tunnel coupling point</span>
+<span class="n">pt3</span> <span class="o">=</span> <span class="n">pt2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pt3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_vv</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pt3</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Electron_Shuttling_9_0.png" src="../../_images/notebooks_tutorials_Electron_Shuttling_9_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Electron_Shuttling_9_1.png" src="../../_images/notebooks_tutorials_Electron_Shuttling_9_1.png" />
+</div>
+</div>
+<p>Now we can start to get a better feel for how the electron should evolve according to the pulse. Notice that at the second voltage configuration <code class="docutils literal notranslate"><span class="pre">pt2</span></code>, there is a very very small hump starting to form underneath <em>V3</em> indicating we are nearing the resonant tunnel coupling point. At the resonant tunnel coupling point <code class="docutils literal notranslate"><span class="pre">pt3</span></code>, the electron is equally split between the second and third dots in the chain.</p>
+<p>From here, we will repeat the same procedure, but in reverse with <em>V2</em> in order to fully localize the electron underneath <em>V3</em>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sweep V1 to the close to resonant tunnel coupling voltage configuration</span>
+<span class="n">pt4</span> <span class="o">=</span> <span class="n">pt3</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pt4</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">almost_res_vv</span><span class="o">*</span><span class="mf">1.01</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pt4</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Sweep V1 to the minimum voltage to full localize the dot underneath V3.</span>
+<span class="n">pt5</span> <span class="o">=</span> <span class="n">pt4</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pt5</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_v</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pt5</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Electron_Shuttling_11_0.png" src="../../_images/notebooks_tutorials_Electron_Shuttling_11_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Electron_Shuttling_11_1.png" src="../../_images/notebooks_tutorials_Electron_Shuttling_11_1.png" />
+</div>
+</div>
+<p>Now that we have done one dot-to-dot transfer the next one follows the same procedure. We omit plotting the wavefunciton at each voltage configuration except for the final one.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find resonant tunnel coupling point w.r.t. V4</span>
+<span class="n">res_vv</span> <span class="o">=</span> <span class="n">pot_interp</span><span class="o">.</span><span class="n">find_resonant_tc</span><span class="p">(</span><span class="n">pt5</span><span class="p">,</span> <span class="s1">&#39;V4&#39;</span><span class="p">)</span>
+
+<span class="c1"># Sweep V4 to almost the resonant tunnel coupling point</span>
+<span class="n">pt6</span> <span class="o">=</span> <span class="n">pt5</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pt6</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">almost_res_vv</span><span class="o">*</span><span class="mf">1.01</span>
+
+<span class="c1"># Sweep V4 to the resonant tunnel coupling point</span>
+<span class="n">pt7</span> <span class="o">=</span> <span class="n">pt6</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pt7</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_vv</span>
+
+<span class="c1"># Sweep V3 to almost the resonant tunnel coupling point</span>
+<span class="n">pt8</span> <span class="o">=</span> <span class="n">pt7</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pt8</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">almost_res_vv</span>
+
+<span class="c1"># Sweep V3 to the minimum voltage and fully localize</span>
+<span class="c1"># the electron underneath V4</span>
+<span class="n">pt9</span> <span class="o">=</span> <span class="n">pt8</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pt9</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_v</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pt9</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Electron_Shuttling_13_0.png" src="../../_images/notebooks_tutorials_Electron_Shuttling_13_0.png" />
+</div>
+</div>
+<p>Now we have 9 voltage configurations that roughly outline our control pulse. However, the next step of the process is to actuall build a <code class="docutils literal notranslate"><span class="pre">ControlPulse</span></code> object with these voltage configurations. To do so, we will first compile all of the configurations into a single 2D array and also construct a time array to indicate at what time point each voltage configuration should occur.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assemble all the voltage configurations into a 2D array</span>
+<span class="n">shuttle_pulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pt1</span><span class="p">,</span> <span class="n">pt2</span><span class="p">,</span> <span class="n">pt3</span><span class="p">,</span> <span class="n">pt4</span><span class="p">,</span> <span class="n">pt5</span><span class="p">,</span> <span class="n">pt6</span><span class="p">,</span> <span class="n">pt7</span><span class="p">,</span> <span class="n">pt8</span><span class="p">,</span> <span class="n">pt9</span><span class="p">])</span>
+
+<span class="c1"># Specify the total overall length of the control pulse in seconds</span>
+<span class="n">pulse_length</span> <span class="o">=</span> <span class="mf">10E-12</span> <span class="c1"># 10 ps</span>
+<span class="c1"># Initialize a ControlPulse with name &#39;shuttle_exp&#39; and</span>
+<span class="c1"># &#39;experimental&#39; control variables.</span>
+<span class="n">shut_pulse</span> <span class="o">=</span> <span class="n">qd</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">ControlPulse</span><span class="p">(</span><span class="s1">&#39;shuttle_exp&#39;</span><span class="p">,</span> <span class="s1">&#39;experimental&#39;</span><span class="p">,</span>
+                                    <span class="n">pulse_length</span><span class="o">=</span><span class="n">pulse_length</span><span class="p">)</span>
+
+<span class="c1"># Add each voltage control variable now to the ControlPulse object</span>
+<span class="n">shut_pulse</span><span class="o">.</span><span class="n">add_control_variable</span><span class="p">(</span><span class="s1">&#39;V2&#39;</span><span class="p">,</span><span class="n">shuttle_pulse</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">shut_pulse</span><span class="o">.</span><span class="n">add_control_variable</span><span class="p">(</span><span class="s1">&#39;V3&#39;</span><span class="p">,</span><span class="n">shuttle_pulse</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">shut_pulse</span><span class="o">.</span><span class="n">add_control_variable</span><span class="p">(</span><span class="s1">&#39;V4&#39;</span><span class="p">,</span><span class="n">shuttle_pulse</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+<span class="c1"># Specify a time array to correspond to each voltage configuration in the pulse</span>
+<span class="n">ctrl_time</span> <span class="o">=</span> <span class="n">pulse_length</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">shut_pulse</span><span class="o">.</span><span class="n">add_control_variable</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span><span class="n">ctrl_time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>You can visualize the shuttling control pulse using <code class="docutils literal notranslate"><span class="pre">ControlPulse</span></code>’s <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> method.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shut_pulse</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Electron_Shuttling_17_0.png" src="../../_images/notebooks_tutorials_Electron_Shuttling_17_0.png" />
+</div>
+</div>
+<p>You can see how we quickly sweep the voltages when we are far away from the resonant tunnel coupling points where we can do so without affecting the adiabaticity of the shuttling process.</p>
+<p>Before moving along to the next step which involves us actually simulating using this pulse, you can easily change the length of the control pulse by using the <code class="docutils literal notranslate"><span class="pre">set_pulse_length</span></code> method of <code class="docutils literal notranslate"><span class="pre">ControlPulse</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change total pulse length to 1 ns</span>
+<span class="n">shut_pulse</span><span class="o">.</span><span class="n">set_pulse_length</span><span class="p">(</span><span class="mf">1E-9</span><span class="p">)</span>
+<span class="n">shut_pulse</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="c1"># Change it back to 10 ps for our first actual simulation</span>
+<span class="n">shut_pulse</span><span class="o">.</span><span class="n">set_pulse_length</span><span class="p">(</span><span class="mf">10E-12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Electron_Shuttling_19_0.png" src="../../_images/notebooks_tutorials_Electron_Shuttling_19_0.png" />
+</div>
+</div>
+</section>
+<section id="4.-Evolving-over-time">
+<h2>4. Evolving over time<a class="headerlink" href="#4.-Evolving-over-time" title="Link to this heading"></a></h2>
+<p>We will now go ahead and do a simulation using the shuttling pulse. The shuttling module has the <code class="docutils literal notranslate"><span class="pre">RSP_time_evolution_1D</span></code> method which is real space (RSP) time evolution of a 1D coordinate system. It uses the split-operator method to calculate the evolution. The default time step for each simulation frame is <span class="math notranslate nohighlight">\(5*10^{-16}\)</span> seconds but can be changed using the <code class="docutils literal notranslate"><span class="pre">dt</span></code> keyword argument.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">show_animation</span></code> keyword argument, we can visualize the wave function evolution during the simulation. In addition, by specifying the <code class="docutils literal notranslate"><span class="pre">save_data</span></code> keyword argument, you can save the adiabaticity data of the evolution for later analysis in a .csv file. Unfortunately, the animation does not currently work in a jupyter notebook and must be ran from terminal.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %matplotlib notebook</span>
+<span class="n">shut</span><span class="o">.</span><span class="n">RSP_time_evolution_1D</span><span class="p">(</span><span class="n">pot_interp</span><span class="p">,</span> <span class="n">shut_pulse</span><span class="p">,</span> <span class="n">show_animation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_data</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running RSPTE1D simulation (1/1) with control pulse: shuttle_exp.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 20000/20000 [00:01&lt;00:00, 18861.48it/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+All simulations complete! Elapsed time is 2.077E+00 seconds.
+</pre></div></div>
+</div>
+</section>
+<section id="5.-Sweeping-pulse-lengths">
+<h2>5. Sweeping pulse lengths<a class="headerlink" href="#5.-Sweeping-pulse-lengths" title="Link to this heading"></a></h2>
+<p>Now we will show how you can do sweeps of various pulses and plot the fidelity of the shuttling processes. When <code class="docutils literal notranslate"><span class="pre">save_data=True</span></code> the fidelity of the shuttling process is calculated and saved to a .csv file. You can specify the file name and directory to save at using the <code class="docutils literal notranslate"><span class="pre">save_name</span></code> and <code class="docutils literal notranslate"><span class="pre">save_dir</span></code> Optional Parameters. The <code class="docutils literal notranslate"><span class="pre">save_overwrite</span></code> keyword argument will overwrite the save file if it already exists in the save location. If <code class="docutils literal notranslate"><span class="pre">save_overwrite=False</span></code>, then the old file will be moved
+to <code class="docutils literal notranslate"><span class="pre">save_name</span> <span class="pre">+</span> <span class="pre">'_ow'</span></code> to avoid being overwritten by the new data.</p>
+<p>In order to sweep over several control pulses, we must compile an iterable of ControlPulse objects and then pass that into the evolution function.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Sweep over many different pulse lengths</span>
+<span class="n">pulse_lengths</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10E-12</span><span class="p">,</span> <span class="mf">30E-12</span><span class="p">,</span> <span class="mf">50E-12</span><span class="p">,</span> <span class="mf">100E-12</span><span class="p">,</span> <span class="mf">300E-12</span><span class="p">,</span> <span class="mf">500E-12</span><span class="p">]</span>
+
+<span class="c1"># Make list of all control pulses we want to simulate</span>
+<span class="n">shut_pulses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">pulse_len</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pulse_lengths</span><span class="p">):</span>
+    <span class="n">curr_shut_pulse</span> <span class="o">=</span> <span class="n">shut_pulse</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">curr_shut_pulse</span><span class="o">.</span><span class="n">set_pulse_length</span><span class="p">(</span><span class="n">pulse_len</span><span class="p">)</span>
+    <span class="n">shut_pulses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr_shut_pulse</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<p>Pass all control pulses to simulator and save the simulation data, however, in this tutorial we are going to load “adiab_data.csv” from the QuDiPy tutorial data directory</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shut</span><span class="o">.</span><span class="n">RSP_time_evolution_1D</span><span class="p">(</span><span class="n">pot_interp</span><span class="p">,</span> <span class="n">shut_pulses</span><span class="p">,</span> <span class="n">show_animation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="n">save_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_name</span><span class="o">=</span><span class="s1">&#39;adiab_data.csv&#39;</span><span class="p">,</span> <span class="n">save_overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="n">nav_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running RSPTE1D simulation (1/6) with control pulse: shuttle_exp.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 20000/20000 [00:01&lt;00:00, 10265.55it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Current simulation complete. Elapsed time is 2.958E+00 seconds.
+Running RSPTE1D simulation (2/6) with control pulse: shuttle_exp.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 60000/60000 [00:04&lt;00:00, 13537.11it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Current simulation complete. Elapsed time is 5.442E+00 seconds.
+Running RSPTE1D simulation (3/6) with control pulse: shuttle_exp.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 100000/100000 [00:06&lt;00:00, 14737.32it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Current simulation complete. Elapsed time is 7.795E+00 seconds.
+Running RSPTE1D simulation (4/6) with control pulse: shuttle_exp.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 200000/200000 [00:12&lt;00:00, 15476.53it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Current simulation complete. Elapsed time is 1.393E+01 seconds.
+Running RSPTE1D simulation (5/6) with control pulse: shuttle_exp.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 600000/600000 [00:37&lt;00:00, 15963.70it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Current simulation complete. Elapsed time is 3.860E+01 seconds.
+Running RSPTE1D simulation (6/6) with control pulse: shuttle_exp.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 1000000/1000000 [01:02&lt;00:00, 15919.95it/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Current simulation complete. Elapsed time is 6.383E+01 seconds.
+
+All simulations complete! Elapsed time is 1.326E+02 seconds.
+</pre></div></div>
+</div>
+<p>Now we will plot the fidelity of the shuttled state with respect to the ground state. The x-axis is the normalized time axis. We can see that as the pulses get slower, the fidelity improves due to the process being more adiabatic.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nav_dir</span><span class="p">,</span><span class="s1">&#39;adiab_data.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+<span class="n">grpd</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Pulse length&#39;</span><span class="p">])[</span><span class="s1">&#39;Fidelity-0&#39;</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p_length</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">grpd</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">size</span><span class="p">),</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">p_length</span><span class="o">/</span><span class="mf">1E-12</span><span class="p">,</span><span class="n">decimals</span><span class="o">=</span><span class="mi">11</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;t/T&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Fidelity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Pulse length [ps]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x7f4b94a44fd0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Electron_Shuttling_27_1.png" src="../../_images/notebooks_tutorials_Electron_Shuttling_27_1.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Charge%20Stability.html" class="btn btn-neutral float-left" title="Using the charge stability module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Schrodinger%20Equation.html" class="btn btn-neutral float-right" title="Solving Single Electron Schrödinger Equation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zach D. Merino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
