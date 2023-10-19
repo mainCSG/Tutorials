@@ -54,7 +54,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'QuDiPy Simulator'
-copyright = '2023, Zach D. Merino'
+copyright = '2023, Coherent Spintronics Group'
 author = 'Zach D. Merino'
 
 # The full version, including alpha/beta/rc tags
