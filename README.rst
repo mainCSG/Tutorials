@@ -1,9 +1,4 @@
-Template for the Read the Docs tutorial
+Repository For Packaging Simulator Code Into A Webpage
 =======================================
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
-
-Read the tutorial here:
-
-https://docs.readthedocs.io/en/stable/tutorial/
+Once Jupyter notebooks are run on a User's local machine, copy the tutorials folder with the notebooks into the source directory. 
