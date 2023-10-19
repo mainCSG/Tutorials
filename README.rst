@@ -7,10 +7,15 @@ Once Jupyter notebooks are run on a user's local machine, copy the tutorials fol
 Then run the following from:
 
 `docs/` directory: 
-1) `make clean'
-2) `make html'
+
+1) `make clean`
+
+2) `make html`
 
 `maincsg.github.io/` directory
+
 1) `git add .`
+
 2) `git commit -m"<some message>"`
+
 3) `git push`
