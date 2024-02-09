@@ -60,14 +60,14 @@
 <li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html">qudipy.qutils package</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.shuttling package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.shuttling.real_space">qudipy.shuttling.real_space module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.shuttling">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#qudipy-shuttling-real-space-module">qudipy.shuttling.real_space module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -120,55 +120,11 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
-<section id="module-qudipy.shuttling.real_space">
-<span id="qudipy-shuttling-real-space-module"></span><h2>qudipy.shuttling.real_space module<a class="headerlink" href="#module-qudipy.shuttling.real_space" title="Link to this heading"></a></h2>
-<p>Real space pulse evolution module</p>
-<p>&#64;author: Kewei</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="qudipy.shuttling.real_space.RSP_time_evolution_1D">
-<span class="sig-prename descclassname"><span class="pre">qudipy.shuttling.real_space.</span></span><span class="sig-name descname"><span class="pre">RSP_time_evolution_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pot_interp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl_pulse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5e-16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_animation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_ani_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.shuttling.real_space.RSP_time_evolution_1D" title="Link to this definition"></a></dt>
-<dd><p>Perform a time evolution of a 1D real space Hamiltonian (i.e. one that has
-the form H = K + V(x)) according to an arbitrary control pulse. Simulation
-is done using the split-operator method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pot_interp</strong> (<em>PotentialInterpolator object</em>) – A 1D potential interpolator object for the quantum dot system.</p></li>
-<li><p><strong>ctrl_pulse</strong> (<em>ControlPulse object</em><em> or </em><em>iterable</em><em> of </em><em>ControlPulse objects</em>) – An arbitrary control pulse or iterable of ControlPulse objects to
-sweep over.</p></li>
-<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
-<li><p><strong>-----------------</strong> – </p></li>
-<li><p><strong>dt</strong> (<em>float</em>) – Specify the time step in [s] between simulation frames. Lower values
-produce more accurate simulations at the expense of longer runtime.
-The default is 5E-16 s.</p></li>
-<li><p><strong>show_animation</strong> (<em>boolean</em>) – Specifies whether the animation is displayed. The default is True.</p></li>
-<li><p><strong>save_data</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Specifies whether the adiabaticity data is saved. The default is True.</p></li>
-<li><p><strong>update_ani_frames</strong> (<em>int</em><em>, </em><em>optional</em>) – How many simulated times steps between new animation frames. The
-default is 2000.</p></li>
-<li><p><strong>save_points</strong> (<em>int</em><em>, </em><em>optional</em>) – How many total data points are saved during the simulation. The
-default is 500.</p></li>
-<li><p><strong>save_dir</strong> (<em>string</em><em>, </em><em>optional</em>) – Path to location of where to save data (if applicable). The default is
-the current working directory.</p></li>
-<li><p><strong>save_name</strong> (<em>string</em><em>, </em><em>optional</em>) – Filename for the saved data (if applicable). If name is already used,
-saving will follow behavior as specified in save_overwrite keyword
-argument description. The default is the current time in
-YYYY-MM-DD_HH-MM-SS.csv.</p></li>
-<li><p><strong>save_overwrite</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True and a file of the same name exists in the save directory,
-overwrite it. If False, then the file to be overwritten will be moved
-to save_name+’_ow’ and the current simulation will be written to
-save_name. The default is False.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None.</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="qudipy-shuttling-real-space-module">
+<h2>qudipy.shuttling.real_space module<a class="headerlink" href="#qudipy-shuttling-real-space-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-qudipy.shuttling">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.shuttling" title="Link to this heading"></a></h2>
-<p>Shuttling simulation module</p>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 </section>
 </section>
 
