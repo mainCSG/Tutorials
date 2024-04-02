@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>qudipy.utils package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Using the charge stability module" href="notebooks/tutorials/Charge%20Stability.html" />
+    <link rel="next" title="Voltage pulse design with CSP: 2 dots" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html" />
     <link rel="prev" title="qudipy.system package" href="qudipy.system.html" /> 
 </head>
 
@@ -63,15 +65,15 @@
 <li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.utils package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-utils-constants-module">qudipy.utils.constants module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-utils-helpers-module">qudipy.utils.helpers module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-utils-interpolator-module">qudipy.utils.interpolator module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-utils-sim-params-module">qudipy.utils.sim_params module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-utils-units-module">qudipy.utils.units module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.constants">qudipy.utils.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.helpers">qudipy.utils.helpers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.interpolator">qudipy.utils.interpolator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.sim_params">qudipy.utils.sim_params module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils.units">qudipy.utils.units module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.utils">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -79,8 +81,15 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/GIFs.html">GIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Operator%20Creation.html">Operator Creation Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
 </ul>
@@ -120,27 +129,243 @@
            <div itemprop="articleBody">
              
   <section id="qudipy-utils-package">
-<h1>qudipy.utils package<a class="headerlink" href="#qudipy-utils-package" title="Link to this heading"></a></h1>
+<h1>qudipy.utils package<a class="headerlink" href="#qudipy-utils-package" title="Permalink to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
-<section id="qudipy-utils-constants-module">
-<h2>qudipy.utils.constants module<a class="headerlink" href="#qudipy-utils-constants-module" title="Link to this heading"></a></h2>
+<section id="module-qudipy.utils.constants">
+<span id="qudipy-utils-constants-module"></span><h2>qudipy.utils.constants module<a class="headerlink" href="#module-qudipy.utils.constants" title="Permalink to this heading"></a></h2>
+<p>Module with universal constants,
+and Material dataclass for material-specific parameters and dependencies.</p>
+<p>&#64;author: simba, zach, hromecb</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.utils.constants.</span></span><span class="sig-name descname"><span class="pre">Material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_system</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsR</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">me</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starkshift_param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SI'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.constants.Material" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Custom class for material-specific constants and dependencies.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.epsR">
+<span class="sig-name descname"><span class="pre">epsR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.epsR" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.g_factor">
+<span class="sig-name descname"><span class="pre">g_factor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.g_factor" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.material_system">
+<span class="sig-name descname"><span class="pre">material_system</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.material_system" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.me">
+<span class="sig-name descname"><span class="pre">me</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.me" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.starkshift_param">
+<span class="sig-name descname"><span class="pre">starkshift_param</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.starkshift_param" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qudipy.utils.constants.Material.units">
+<span class="sig-name descname"><span class="pre">units</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SI'</span></em><a class="headerlink" href="#qudipy.utils.constants.Material.units" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.utils.constants.select_material">
+<span class="sig-prename descclassname"><span class="pre">qudipy.utils.constants.</span></span><span class="sig-name descname"><span class="pre">select_material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.constants.select_material" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
-<section id="qudipy-utils-helpers-module">
-<h2>qudipy.utils.helpers module<a class="headerlink" href="#qudipy-utils-helpers-module" title="Link to this heading"></a></h2>
+<section id="module-qudipy.utils.helpers">
+<span id="qudipy-utils-helpers-module"></span><h2>qudipy.utils.helpers module<a class="headerlink" href="#module-qudipy.utils.helpers" title="Permalink to this heading"></a></h2>
+<p>General helper utilities</p>
+<p>&#64;author: simba</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.utils.helpers.ProgressBar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.utils.helpers.</span></span><span class="sig-name descname"><span class="pre">ProgressBar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.helpers.ProgressBar" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class is designed to display a progress bar in terminal or a jupyter
+notebook which is condionally updated.</p>
+<section id="atributes">
+<h3>Atributes<a class="headerlink" href="#atributes" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>max_value: int</dt><dd><p>provide the maximum number of iterations that the progress bar must
+display</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">pbar:</span></span></dt>
+<dd><p>design progress bar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">update:</span></span></dt>
+<dd><p>update porgress bar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">close:</span></span></dt>
+<dd><p>close progress bar once sub-routine is finished</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.utils.helpers.ProgressBar.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.helpers.ProgressBar.close" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.utils.helpers.ProgressBar.pbar">
+<span class="sig-name descname"><span class="pre">pbar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.helpers.ProgressBar.pbar" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.utils.helpers.ProgressBar.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.helpers.ProgressBar.update" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
-<section id="qudipy-utils-interpolator-module">
-<h2>qudipy.utils.interpolator module<a class="headerlink" href="#qudipy-utils-interpolator-module" title="Link to this heading"></a></h2>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.utils.helpers.find_nearest">
+<span class="sig-prename descclassname"><span class="pre">qudipy.utils.helpers.</span></span><span class="sig-name descname"><span class="pre">find_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.helpers.find_nearest" title="Permalink to this definition"></a></dt>
+<dd><p>Function to find the closest value to a number in a given array.
+If array contains duplicate values of the nearest number, then first
+instance in the array will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>ND float array-like object</em>) – An ND array type object of floats.</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Value which we want to find the closest number to in the array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>near_idx</strong> (<em>tuple of ints</em>) – Tuple of indices for the nearest value in array.</p></li>
+<li><p><strong>near_value</strong> (<em>float</em>) – Nearest value in array.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.utils.helpers.nchoosek">
+<span class="sig-prename descclassname"><span class="pre">qudipy.utils.helpers.</span></span><span class="sig-name descname"><span class="pre">nchoosek</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.helpers.nchoosek" title="Permalink to this definition"></a></dt>
+<dd><p>Had a lot of trouble getting scipy comb to work, so just copied one from
+stack exchange. This function calculates the number of combinations of k
+elements from a set of n items.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – Total number of items in set.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – Size of subset to make out of the full set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of possible combinations.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nCr</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
-<section id="qudipy-utils-sim-params-module">
-<h2>qudipy.utils.sim_params module<a class="headerlink" href="#qudipy-utils-sim-params-module" title="Link to this heading"></a></h2>
+<section id="module-qudipy.utils.interpolator">
+<span id="qudipy-utils-interpolator-module"></span><h2>qudipy.utils.interpolator module<a class="headerlink" href="#module-qudipy.utils.interpolator" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.utils.interpolator.NDInterpolator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.utils.interpolator.</span></span><span class="sig-name descname"><span class="pre">NDInterpolator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.interpolator.NDInterpolator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearNDInterpolator</span></code></p>
+<p>Class is a wrapper for the LinearNDInterpolator class which
+performs linear interpolation in a linear or log space. This wrapper
+class enables the interpolation object computed and pickled
+for later use.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.utils.interpolator.RegularInterpolator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.utils.interpolator.</span></span><span class="sig-name descname"><span class="pre">RegularInterpolator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logspace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.interpolator.RegularInterpolator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RegularGridInterpolator</span></code></p>
+<p>Class is a wrapper for the RegularGridInterpolator class which
+performs linear interpolation in a linear or log space
+over a rectilinear array of data (coordinate spacing could be uneven
+as long as the grid is rectangular).
+This wrapper class enables the interpolation object computed and pickled
+for later use.</p>
+<p>For data that exponentially depends on the coordinates, it is recommended
+to interpolate over the logarithms of data, and return the exponential
+of the interpolated values (logspace=True keyword)</p>
+<dl>
+<dt>Attributes:</dt><dd><p>grid:    tuple of ndarrays
+The points defining the regular grid in n dimensions.
+This tuple defines the full grid via</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="o">*</span><span class="n">grid</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>values:  ndarray
+Data values at the grid.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
-<section id="qudipy-utils-units-module">
-<h2>qudipy.utils.units module<a class="headerlink" href="#qudipy-utils-units-module" title="Link to this heading"></a></h2>
+<section id="module-qudipy.utils.sim_params">
+<span id="qudipy-utils-sim-params-module"></span><h2>qudipy.utils.sim_params module<a class="headerlink" href="#module-qudipy.utils.sim_params" title="Permalink to this heading"></a></h2>
+<p>SimulationParameters class</p>
+<p>&#64;author: simba</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.utils.sim_params.SimulationParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.utils.sim_params.</span></span><span class="sig-name descname"><span class="pre">SimulationParameters</span></span><a class="headerlink" href="#qudipy.utils.sim_params.SimulationParameters" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="module-qudipy.utils.units">
+<span id="qudipy-utils-units-module"></span><h2>qudipy.utils.units module<a class="headerlink" href="#module-qudipy.utils.units" title="Permalink to this heading"></a></h2>
+<p>Custom types for units. Used throughout the code</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.utils.units.units">
+<span class="sig-prename descclassname"><span class="pre">qudipy.utils.units.</span></span><span class="sig-name descname"><span class="pre">units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.utils.units.units" title="Permalink to this definition"></a></dt>
+<dd><p>Function used to convert units that assumes starting unit is SI system.
+Input must be a tuple/list of strings.</p>
+<section id="required-parameters">
+<h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>unit: str</dt><dd><p>Select the unit label to use.</p>
+</dd>
+</dl>
+</section>
+<section id="optional-parameters">
+<h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>prefix: str</dt><dd><p>Define the prefix that scales the unit that is choosen.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – scale the original unit to convert to desired unit_label.</p></li>
+<li><p><strong>unit_label</strong> (<em>str</em>) – label of the unit that was converted to from SI unit.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.utils" title="Permalink to this heading"></a></h2>
+<p>Code for utility functions, classes and core functions for code</p>
 </section>
 </section>
 
@@ -149,7 +374,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="qudipy.system.html" class="btn btn-neutral float-left" title="qudipy.system package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="notebooks/tutorials/Charge%20Stability.html" class="btn btn-neutral float-right" title="Using the charge stability module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="notebooks/tutorials/CSP_voltage_design_2_Dots.html" class="btn btn-neutral float-right" title="Voltage pulse design with CSP: 2 dots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

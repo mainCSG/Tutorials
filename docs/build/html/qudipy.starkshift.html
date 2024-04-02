@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>qudipy.starkshift package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -61,13 +63,13 @@
 <li class="toctree-l3"><a class="reference internal" href="qudipy.shuttling.html">qudipy.shuttling package</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.starkshift package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-starkshift-starkshift-module">qudipy.starkshift.starkshift module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.starkshift.starkshift">qudipy.starkshift.starkshift module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.starkshift">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -75,8 +77,15 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/GIFs.html">GIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Operator%20Creation.html">Operator Creation Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
 </ul>
@@ -116,15 +125,99 @@
            <div itemprop="articleBody">
              
   <section id="qudipy-starkshift-package">
-<h1>qudipy.starkshift package<a class="headerlink" href="#qudipy-starkshift-package" title="Link to this heading"></a></h1>
+<h1>qudipy.starkshift package<a class="headerlink" href="#qudipy-starkshift-package" title="Permalink to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
-<section id="qudipy-starkshift-starkshift-module">
-<h2>qudipy.starkshift.starkshift module<a class="headerlink" href="#qudipy-starkshift-starkshift-module" title="Link to this heading"></a></h2>
+<section id="module-qudipy.starkshift.starkshift">
+<span id="qudipy-starkshift-starkshift-module"></span><h2>qudipy.starkshift.starkshift module<a class="headerlink" href="#module-qudipy.starkshift.starkshift" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.starkshift.starkshift.StarkShift">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.starkshift.starkshift.</span></span><span class="sig-name descname"><span class="pre">StarkShift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gparams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material" title="qudipy.utils.constants.Material"><span class="pre">Material</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.starkshift.starkshift.StarkShift" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize the Stark shift class which can calculate the Stark Shift of an
+electron in a given electric field and/or potential landscape</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.starkshift.starkshift.StarkShift.change_temperature">
+<span class="sig-name descname"><span class="pre">change_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_new</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.starkshift.starkshift.StarkShift.change_temperature" title="Permalink to this definition"></a></dt>
+<dd><p>Changes the temperature to the new desired temperature in Kelvins</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>T_new: Float</dt><dd><p>Requires - T_new &gt;= 0</p>
+</dd>
+</dl>
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.starkshift.starkshift.StarkShift.delta_g">
+<span class="sig-name descname"><span class="pre">delta_g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e_interp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_val_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavefuncs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.starkshift.starkshift.StarkShift.delta_g" title="Permalink to this definition"></a></dt>
+<dd><section id="required-parameters">
+<h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>e_interp: PotentialInterpolator object</dt><dd><p>Object which contains the information about the electric field
+experienced by the quantum dot(s)</p>
+</dd>
+<dt>c_vals: list of lists</dt><dd><p>List of list where each inner list of consists of control values
+for the control variables named in c_val_names.</p>
+</dd>
+<dt>c_val_names: list of strings</dt><dd><p>Names for the control variables in c_val. Must have the same length
+as each inner list in c_vals</p>
+</dd>
+</dl>
+</section>
+<section id="optional-parameters">
+<h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>wavefuncs: wavefunction(s) for which the Stark shift should be</dt><dd><p>calculated. If none provided, the potential provided in the gparams
+will be used in the Schrodinger equation solver and the Stark shift
+will be calcualted for the ground state (default None)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – Pandas DataFrame where each column is a control variable or a
+g-factor deviation. Each row contains a combination of control
+voltage values and the associated g-factor deviation for each
+wavefunction.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas DataFrame</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.starkshift.starkshift.StarkShift.temp_g_factor">
+<span class="sig-name descname"><span class="pre">temp_g_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.starkshift.starkshift.StarkShift.temp_g_factor" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the T dependent deviation g-factor for an electron via linear interpolation</p>
+<section id="id1">
+<h3>Parameters:<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id2">
+<h3>Optional Parameters:<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>material: Anyof(String, None)</dt><dd><p>The material that the Temperature Dependent g-factor is calculated in. If None Provided
+the temperature dependent g-factor for Si will be calculated
+#TODO add more materials</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Temperature deviation g-factor approximation</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-qudipy.starkshift">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.starkshift" title="Permalink to this heading"></a></h2>
+<p>Stark shift module</p>
 </section>
 </section>
 

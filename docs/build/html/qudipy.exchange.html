@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>qudipy.exchange package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -57,8 +59,8 @@
 <li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html">qudipy.evolution package</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.exchange package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-exchange-exchange-module">qudipy.exchange.exchange module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.exchange.exchange">qudipy.exchange.exchange module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.exchange">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html">qudipy.potential package</a></li>
@@ -67,7 +69,7 @@
 <li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -75,8 +77,15 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/GIFs.html">GIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Operator%20Creation.html">Operator Creation Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
 </ul>
@@ -116,15 +125,145 @@
            <div itemprop="articleBody">
              
   <section id="qudipy-exchange-package">
-<h1>qudipy.exchange package<a class="headerlink" href="#qudipy-exchange-package" title="Link to this heading"></a></h1>
+<h1>qudipy.exchange package<a class="headerlink" href="#qudipy-exchange-package" title="Permalink to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
-<section id="qudipy-exchange-exchange-module">
-<h2>qudipy.exchange.exchange module<a class="headerlink" href="#qudipy-exchange-exchange-module" title="Link to this heading"></a></h2>
+<section id="module-qudipy.exchange.exchange">
+<span id="qudipy-exchange-exchange-module"></span><h2>qudipy.exchange.exchange module<a class="headerlink" href="#module-qudipy.exchange.exchange" title="Permalink to this heading"></a></h2>
+<p>Exchange calculation for a potential</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.exchange.exchange.hl_func">
+<span class="sig-prename descclassname"><span class="pre">qudipy.exchange.exchange.</span></span><span class="sig-name descname"><span class="pre">hl_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_field_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Si/SiO2'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.exchange.exchange.hl_func" title="Permalink to this definition"></a></dt>
+<dd><p>Function calculates exchange values in Heitler-London approximation
+for an array of dots. Each pair is fitted to a quartic function for the
+calculation.
+y-slice is determined based on the positions of the dot minima.
+Formula borrowed from Burkard &amp; Loss, PRB 89 (3), 1999, pgs. 2073-2074</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>gparams: GridParameters Object</dt><dd><p>Must contain 2D potential, and x and y coordinates as a meshgrid object</p>
+</dd>
+</dl>
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="optional-parameters">
+<h3>Optional Parameters:<a class="headerlink" href="#optional-parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>material: String, optional</dt><dd><p>The string defining the material that the dots are
+in. Default is ‘Si/SiO2’.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>J: float or tuple of floats</dt><dd><p>Exchange value(s) for the array of dots</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.exchange.exchange.hl_quartic">
+<span class="sig-prename descclassname"><span class="pre">qudipy.exchange.exchange.</span></span><span class="sig-name descname"><span class="pre">hl_quartic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gparams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Si/SiO2'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.exchange.exchange.hl_quartic" title="Permalink to this definition"></a></dt>
+<dd><p>Function calculates exchange values in Heitler-London approximation
+for an array of dots. Each pair is fitted to a quartic function for the
+calculation.
+y-slice is determined based on the positions of the dot minima.
+Formula borrowed from Burkard &amp; Loss, PRB 89 (3), 1999, pgs. 2073-2074</p>
+<section id="id1">
+<h3>Parameters:<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>gparams: GridParameters Object</dt><dd><p>Must contain 2D potential, and x and y coordinates as a meshgrid object</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Optional Parameters:<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>material: String, optional</dt><dd><p>The string defining the material that the dots are
+in. Default is ‘Si/SiO2’.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h3>Returns:<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>J: float or tuple of floats</dt><dd><p>Exchange value(s) for the array of dots</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.exchange.exchange.hm_func">
+<span class="sig-prename descclassname"><span class="pre">qudipy.exchange.exchange.</span></span><span class="sig-name descname"><span class="pre">hm_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_field_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Si/SiO2'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.exchange.exchange.hm_func" title="Permalink to this definition"></a></dt>
+<dd><p>Function calculates exchange values in Hund-Mulliken approximation
+for an array of dots. Each pair is fitted to a quartic function for the
+calculation.
+y-slice is determined based on the positions of the dot minima.
+Formulas borrowed from Burkard &amp; Loss, PRB 89 (3), 1999, pgs. 2073-2074</p>
+<section id="id4">
+<h3>Parameters:<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>gparams: GridParameters Object</dt><dd><p>Must contain 2D potential, and x and y coordinates as a meshgrid object</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h3>Optional Parameters:<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>material: String, optional</dt><dd><p>The string defining the material that the dots are
+in. Default is ‘Si/SiO2’.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>Returns:<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>J: float or tuple of floats</dt><dd><p>Exchange value(s) for the array of dots</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.exchange.exchange.hm_quartic">
+<span class="sig-prename descclassname"><span class="pre">qudipy.exchange.exchange.</span></span><span class="sig-name descname"><span class="pre">hm_quartic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gparams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Si/SiO2'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.exchange.exchange.hm_quartic" title="Permalink to this definition"></a></dt>
+<dd><p>Function calculates exchange values in Hund-Mulliken approximation
+for an array of dots. Each pair is fitted to a quartic function for the
+calculation.
+y-slice is determined based on the positions of the dot minima.
+Formulas borrowed from Burkard &amp; Loss, PRB 89 (3), 1999, pgs. 2073-2074</p>
+<section id="id7">
+<h3>Parameters:<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>gparams: GridParameters Object</dt><dd><p>Must contain 2D potential, and x and y coordinates as a meshgrid object</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3>Optional Parameters:<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>material: String, optional</dt><dd><p>The string defining the material that the dots are
+in. Default is ‘Si/SiO2’.</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h3>Returns:<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>J: float or tuple of floats</dt><dd><p>Exchange value(s) for the array of dots</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.exchange">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.exchange" title="Permalink to this heading"></a></h2>
+<p>Exchange calulation modules</p>
 </section>
 </section>
 

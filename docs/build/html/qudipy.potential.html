@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>qudipy.potential package &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -59,12 +61,12 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qudipy.potential package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#qudipy-potential-create-potential-module">qudipy.potential.create_potential module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-potential-grid-params-module">qudipy.potential.grid_params module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-potential-load-data-module">qudipy.potential.load_data module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-potential-manipulate-module">qudipy.potential.manipulate module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-potential-potential-interpolator-module">qudipy.potential.potential_interpolator module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#qudipy-potential-process-nextnano-module">qudipy.potential.process_nextnano module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.potential.grid_params">qudipy.potential.grid_params module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.potential.load_data">qudipy.potential.load_data module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.potential.manipulate">qudipy.potential.manipulate module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.potential.potential_interpolator">qudipy.potential.potential_interpolator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.potential.process_nextnano">qudipy.potential.process_nextnano module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qudipy.potential">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html">qudipy.qutils package</a></li>
@@ -72,7 +74,7 @@
 <li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qudipy.html#module-qudipy">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -80,8 +82,15 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/GIFs.html">GIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Operator%20Creation.html">Operator Creation Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
 </ul>
@@ -121,30 +130,483 @@
            <div itemprop="articleBody">
              
   <section id="qudipy-potential-package">
-<h1>qudipy.potential package<a class="headerlink" href="#qudipy-potential-package" title="Link to this heading"></a></h1>
+<h1>qudipy.potential package<a class="headerlink" href="#qudipy-potential-package" title="Permalink to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="qudipy-potential-create-potential-module">
-<h2>qudipy.potential.create_potential module<a class="headerlink" href="#qudipy-potential-create-potential-module" title="Link to this heading"></a></h2>
+<h2>qudipy.potential.create_potential module<a class="headerlink" href="#qudipy-potential-create-potential-module" title="Permalink to this heading"></a></h2>
 </section>
-<section id="qudipy-potential-grid-params-module">
-<h2>qudipy.potential.grid_params module<a class="headerlink" href="#qudipy-potential-grid-params-module" title="Link to this heading"></a></h2>
+<section id="module-qudipy.potential.grid_params">
+<span id="qudipy-potential-grid-params-module"></span><h2>qudipy.potential.grid_params module<a class="headerlink" href="#module-qudipy.potential.grid_params" title="Permalink to this heading"></a></h2>
+<p>GridParameters class</p>
+<p>&#64;author: simba</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.potential.grid_params.GridParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.potential.grid_params.</span></span><span class="sig-name descname"><span class="pre">GridParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">potential</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([],</span> <span class="pre">dtype=float64)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.grid_params.GridParameters" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize the grid parameter class. Handles all things related to the
+grid settings for the simulations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.potential.grid_params.GridParameters.convert_MG_to_NO">
+<span class="sig-name descname"><span class="pre">convert_MG_to_NO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_MG</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.grid_params.GridParameters.convert_MG_to_NO" title="Permalink to this definition"></a></dt>
+<dd><p>Converts data from meshgrid to natural order format</p>
+<section id="required-parameters">
+<h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>dataMG<span class="classifier">2D array</span></dt><dd><p>Data to convert in meshgrid format.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_NO</strong> – Converted data in natural order format.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>1D array</p>
+</dd>
+</dl>
 </section>
-<section id="qudipy-potential-load-data-module">
-<h2>qudipy.potential.load_data module<a class="headerlink" href="#qudipy-potential-load-data-module" title="Link to this heading"></a></h2>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.potential.grid_params.GridParameters.convert_NO_to_MG">
+<span class="sig-name descname"><span class="pre">convert_NO_to_MG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_NO</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.grid_params.GridParameters.convert_NO_to_MG" title="Permalink to this definition"></a></dt>
+<dd><p>Converts data from natural order to meshgrid format</p>
+<section id="id1">
+<h3>Required Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>data_NO<span class="classifier">1D array</span></dt><dd><p>Data to convert in natural order format</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_MG</strong> – Converted data in meshgrid order format.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D array</p>
+</dd>
+</dl>
 </section>
-<section id="qudipy-potential-manipulate-module">
-<h2>qudipy.potential.manipulate module<a class="headerlink" href="#qudipy-potential-manipulate-module" title="Link to this heading"></a></h2>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.potential.grid_params.GridParameters.update_potential">
+<span class="sig-name descname"><span class="pre">update_potential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_pot</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.grid_params.GridParameters.update_potential" title="Permalink to this definition"></a></dt>
+<dd><p>Assign a new potential to the class</p>
+<section id="id2">
+<h3>Required Parameters<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>new_pot<span class="classifier">2D array in meshgrid format</span></dt><dd><p>New potential to assign.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None..</p>
+</dd>
+</dl>
 </section>
-<section id="qudipy-potential-potential-interpolator-module">
-<h2>qudipy.potential.potential_interpolator module<a class="headerlink" href="#qudipy-potential-potential-interpolator-module" title="Link to this heading"></a></h2>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="qudipy-potential-process-nextnano-module">
-<h2>qudipy.potential.process_nextnano module<a class="headerlink" href="#qudipy-potential-process-nextnano-module" title="Link to this heading"></a></h2>
+<section id="module-qudipy.potential.load_data">
+<span id="qudipy-potential-load-data-module"></span><h2>qudipy.potential.load_data module<a class="headerlink" href="#module-qudipy.potential.load_data" title="Permalink to this heading"></a></h2>
+<p>Functions for loading data, either from files or analytically defining
+them.</p>
+<p>&#64;author: Bohdan, Zach, Simba</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.potential.load_data.analytical_potential">
+<span class="sig-prename descclassname"><span class="pre">qudipy.potential.load_data.</span></span><span class="sig-name descname"><span class="pre">analytical_potential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctrl_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.load_data.analytical_potential" title="Permalink to this definition"></a></dt>
+<dd><p>Allows one to create an analytical potential in the xy-plane from a
+function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctrl_vals</strong> (<em>list</em><em> of </em><em>list</em><em> of </em><em>floats</em>) – List of relevant control values used to define the potential.
+The first list index corresponds to the ith control variable
+and the second list index correspond to the ith value for that
+control variable.</p></li>
+<li><p><strong>ctrl_names</strong> (<em>list</em><em> of </em><em>strings</em>) – List of each ctrl variable name. Must be the same length as
+ctrl_vals first dimension.</p></li>
+<li><p><strong>function</strong> (<em>callable</em>) – Function which defines the 2D potential you wish to map out.
+Function must take the list ctrl_vals as the first argument
+and a GridParameters object as the second argument. Refer to
+tutorial for an explicit example</p></li>
+<li><p><strong>x_range</strong> (<em>1D List</em><em> or </em><em>Numpy array</em>) – grid points along x where you want to potential to be calculated</p></li>
+<li><p><strong>y_range</strong> (<em>1D List</em><em> or </em><em>Numpy array</em>) – grid points along y where you want to potential to be calculated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>analytical_potential</strong> – Dictionary containing the x and y coordinates, the potential at
+each coordinate point, and the control variable vector and control
+variable name.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.potential.load_data.build_interpolator">
+<span class="sig-prename descclassname"><span class="pre">qudipy.potential.load_data.</span></span><span class="sig-name descname"><span class="pre">build_interpolator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Si/SiO2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.load_data.build_interpolator" title="Permalink to this definition"></a></dt>
+<dd><p>This function constructs an interpolator object for either a group
+of potential or electric field files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>load_data_dict</strong> (<em>dict</em>) – Dictionary containing the x and y coordinates for the loaded
+files, the potential data for each loaded file, and the
+corresponding votlage vector for each file.
+Fields = [‘coords’, ‘potentials’, ‘ctrl_vals’]</p>
+</dd>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>material</strong> (<em>str</em><em>, </em><em>optional</em>) – Material system specification: ‘Si/SiO2’, ‘Si/SiGe’, ‘GaAs’, ‘air’, or ‘vacuum’</p></li>
+<li><p><strong>y_slice</strong> (<em>float</em><em>, </em><em>optional</em>) – Used to create a interpolator of only 1D poetentials. Specify a
+slice along the y-axis at which to take the 1D potential when
+constructing the interpolator. Units should be specified in [m].
+The default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>interp_obj</strong> – Interpolant object for the data inputted into the function.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mod_RegularGridInterpolator class</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.potential.load_data.load_potentials">
+<span class="sig-prename descclassname"><span class="pre">qudipy.potential.load_data.</span></span><span class="sig-name descname"><span class="pre">load_potentials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctrl_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pot'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pot_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'J'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_dis_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'m'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trim_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trim_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.load_data.load_potentials" title="Permalink to this definition"></a></dt>
+<dd><p>This function loads many potential files specified by all
+combinations of  the control values given in ctrl_vals and the
+control names given in ctrl_names. The potential files MUST be 2D
+potential slices (if you have 3D nextnano simulations, you must
+preprocess them first). Potential files are assumed to follow the
+syntax:
+‘<a href="#id7"><span class="problematic" id="id8">TYPE_C1NAME_C1VAL_C2NAME_C2VAL_</span></a>…_CNNAME_CNVAL.txt’
+where TYPE = ‘Uxy’ or ‘Ez’.
+Refer to tutorial for a more explicit example.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctrl_vals</strong> (<em>list</em><em> of </em><em>list</em><em> of </em><em>floats</em>) – List of relevant control values for the files to load.  The
+first list index corresponds to the ith control variable and the
+second list index correspond to the ith value for that control
+variable.</p></li>
+<li><p><strong>ctrl_names</strong> (<em>list</em><em> of </em><em>strings</em>) – List of each ctrl variable name. Must be the same length as
+ctrl_vals first dimension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>f_type</strong> (<em>string</em><em>, </em><em>optional</em>) – Type of file to load (either potential or electric field). Acceptable
+case insensitive arguments include the strings
+[‘pot’,’potential’,’uxy’,’electric’,’field’,’ez’].The default
+is ‘pot’ (potential).’</p></li>
+<li><p><strong>f_dir</strong> (<em>string</em><em>, </em><em>optional</em>) – Path to find files specified by ctrl_vals and ctrl_names. The
+default is the current working directory.</p></li>
+<li><p><strong>f_pot_units</strong> (<em>string</em><em>, </em><em>optional</em>) – Units of the potential in the files to load. Units from file
+will be converted to J. Supported inputs are ‘J’ and ‘eV’.</p></li>
+<li><p><strong>f_dis_units</strong> (<em>string</em><em>, </em><em>optional</em>) – Units of the x and y coordinates in the files to load. Units
+from file will be converted to m.
+Supported inputs are ‘m’ and ‘nm’.</p></li>
+<li><p><strong>trim_x</strong> (<em>list</em><em> of </em><em>floats</em><em>, </em><em>optional</em>) – Specify min and max bounds of x-axis in [m] to save when
+loading the files. Data points outside this window will be
+trimmed and not saved in the loaded files. The default is
+None.</p></li>
+<li><p><strong>trim_y</strong> (<em>list</em><em> of </em><em>floats</em><em>, </em><em>optional</em>) – Specify min and max bounds of y-axis in [m] to save when
+loading the files. Data points outside this window will be
+trimmed and not saved in the loaded files. The default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>all_files</strong> – Dictionary containing the x and y coordinates for the loaded
+files, the potential data for each loaded file, and the
+corresponding votlage vector for each file.
+Fields = [‘coords’, ‘potentials’, ‘ctrl_vals’]</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="module-qudipy.potential.manipulate">
+<span id="qudipy-potential-manipulate-module"></span><h2>qudipy.potential.manipulate module<a class="headerlink" href="#module-qudipy.potential.manipulate" title="Permalink to this heading"></a></h2>
+<p>Functions for the manipulation of potential data</p>
+<p>&#64;authors: Madi Schuetze, Bohdan Khromets</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.potential.manipulate.fit_quartic">
+<span class="sig-prename descclassname"><span class="pre">qudipy.potential.manipulate.</span></span><span class="sig-name descname"><span class="pre">fit_quartic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gparams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Si/SiO2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.manipulate.fit_quartic" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the potential data of best fit to a quartic potential.
+The data will be a two dot system  fitted
+to a quartic well based on the positions of local maxima/minima and the
+potential energy values there.</p>
+<p>Note: RMS fitting of the potential landscape to a quartic function potential
+was used previously but was deprecated as it introduces very large fitting
+error. Code can be found in qudipy/archive/rms_fit_quartic.py</p>
+<p>#TODO #64 update to the case of many dots</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>gparams: GridParameters Object</dt><dd><p>Must contain 2D potential, and x and y coordinates as a meshgrid object</p>
+</dd>
+<dt>material: str, optional</dt><dd><dl class="simple">
+<dt>Material system specification: ‘Si/SiO2’, ‘Si/SiGe’, ‘GaAs’, ‘air’,</dt><dd><p>or ‘Si/SiO2’.</p>
+</dd>
+</dl>
+</dd>
+<dt>return_params: Bool</dt><dd><p>The option to return all of the fitting parameters
+as a dictionary with keys:
+* U_fit
+* dot_sep
+* e_field_x
+* omega_0
+* x_centre
+* U_0
+If False, only the potential landscape U_fit of best fit is returned</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Permalink to this heading"></a></h3>
+<p>U_fit: 2D Arrayof(Float)
+<em>or</em> result_dict: dictionary</p>
+<blockquote>
+<div><p>Contains Float values that map out the 1-D potential energy quartic fit
+of a two dot system.</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.potential.potential_interpolator">
+<span id="qudipy-potential-potential-interpolator-module"></span><h2>qudipy.potential.potential_interpolator module<a class="headerlink" href="#module-qudipy.potential.potential_interpolator" title="Permalink to this heading"></a></h2>
+<p>PotentialInterpolator class</p>
+<p>&#64;author: Bohdan, Zach, Simba</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qudipy.potential.potential_interpolator.PotentialInterpolator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qudipy.potential.potential_interpolator.</span></span><span class="sig-name descname"><span class="pre">PotentialInterpolator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctrl_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">single_dim_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material" title="qudipy.utils.constants.Material"><span class="pre">Material</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Si/SiO2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.potential_interpolator.PotentialInterpolator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.potential.potential_interpolator.PotentialInterpolator.call_method">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">call_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volt_vec_input</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.potential_interpolator.PotentialInterpolator.call_method" title="Permalink to this definition"></a></dt>
+<dd><p>Call method for class</p>
+<section id="id3">
+<h3>Required Parameters<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>volt_vec_input<span class="classifier">2D float array</span></dt><dd><p>Array of control variable value vectors at which we wish to find
+the interpolated 2D potential. Each row corresponds to a new
+control variable vector.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> – Interpolated 2D potential at the supplied control variable value
+vectors.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D float array</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.potential.potential_interpolator.PotentialInterpolator.find_resonant_tc">
+<span class="sig-name descname"><span class="pre">find_resonant_tc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volt_vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">swept_ctrl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bnds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peak_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slice_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slice_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.potential_interpolator.PotentialInterpolator.find_resonant_tc" title="Permalink to this definition"></a></dt>
+<dd><p>Find the resonant tunnel coupling point for a individual control
+variable in a given control vector.</p>
+<section id="id4">
+<h3>Required Parameters<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>volt_vec<span class="classifier">float array</span></dt><dd><p>Control variable vector. Aside from the swept control, the other
+supplied control variable values will remain fixed during the
+search for the resonant tunnel coupling point.</p>
+</dd>
+<dt>swept_ctrl<span class="classifier">int or string</span></dt><dd><p>Index of the control variable to sweep in the supplied volt_vec
+argument OR the corresponding control variable name of the variable
+to sweep.</p>
+</dd>
+</dl>
+</section>
+<section id="optional-parameters">
+<h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>bnds<span class="classifier">float array, optional</span></dt><dd><p>An array specifying the min and max bounds of the swept control
+variable. The default is the full min and max bounds of the
+corresponding control variable as defined in the
+potentialInterpolator object.</p>
+</dd>
+<dt>peak_threshold<span class="classifier">float, optional</span></dt><dd><p>The minimum amplitude in peak height to be considered a peak.
+The default is 1E5.</p>
+</dd>
+<dt>slice_axis<span class="classifier">string, optional</span></dt><dd><p>Specify which axis along ‘x’ or ‘y’ to find the wavefunction peaks
+along. The default is ‘y’.</p>
+</dd>
+<dt>slice_val<span class="classifier">float, optional</span></dt><dd><p>Specify the location along the slice_axis at which to find the
+wavefunction peaks along. Units must be in [m].
+The default is 0 [m].</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res_ctrl</strong> – The value of the control variable which gives the resonant tunnel
+coupling point.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qudipy.potential.potential_interpolator.PotentialInterpolator.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volt_vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2D'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_wf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['eV',</span> <span class="pre">'m']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['m',</span> <span class="pre">'n']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_amp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar_pot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar_wf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay_ontop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(7,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">150</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.potential_interpolator.PotentialInterpolator.plot" title="Permalink to this definition"></a></dt>
+<dd><p>Method for plotting the potential landscape at an arbitrary voltage
+configuration.</p>
+<section id="id5">
+<h3>Required Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>volt_vec<span class="classifier">1D float array</span></dt><dd><p>Array of voltage vectors at which we wish to find the interpolated
+1D or 2D potential.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>Optional Parameters<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>plot_type<span class="classifier">string, optional</span></dt><dd><p>Type of plot to show of the potential. Accepted arguments are:
+- ‘2D’: show a 2D plot of the potential landscape.
+- ‘1D’: show 1D slices of the potential landscape along x- and y-axes.
+If the potentialInterpolator is for 1D potentials, then this
+keyword argument will do nothing.
+The default is ‘2D’.</p>
+</dd>
+<dt>y_slice<span class="classifier">float, optional</span></dt><dd><p>Location in [m] along y-axis of where to take a 1D slice of the
+potential along the x-axis to plot. Only applies if plot_type=’1D’.
+The default is 0.</p>
+</dd>
+<dt>x_slice<span class="classifier">float, optional</span></dt><dd><p>Location in [m] along x-axis of where to take a 1D slice of the
+potential along the y-axis to plot. Only applies if plot_type=’1D’.
+If not specified, then only a plot along the x-axis will be shown.
+If the potentialInterpolator is for 1D potentials, then this
+keyword argument will do nothing.
+The default is None.</p>
+</dd>
+<dt>show_wf<span class="classifier">bool, optional</span></dt><dd><p>If True, the wavefunction probability will be overlaid on the
+potential for 1D plots, and for 2D plots, there will be a subplot
+added showing the wavefunction probability, or the wavefunction will
+be overlayed on the two plot.
+The default is False.</p>
+</dd>
+<dt>cbar_pot/cbar_wf: list of floats</dt><dd><p>List of min/max boundaries for the color bar of the potential and/or
+wavefunction plot.</p>
+</dd>
+<dt>pot_unit: string</dt><dd><p>Units to display potential plot.</p>
+</dd>
+<dt>rel_amp: bool</dt><dd><p>Subtract the reference potential to show potential changes relative
+to reference.</p>
+</dd>
+<dt>overlay_ontop: bool</dt><dd><p>Overlay the 2D wavefunction on the potential plot, or plot in a
+separate subplot.
+Default is False.</p>
+</dd>
+<dt>figsize: tuple</dt><dd><p>2-element list/tuple defining figure size (rescales fonts accordingly)</p>
+</dd>
+<dt>dpi: int</dt><dd><p>Integer specify the number of DPI required for plotting.</p>
+</dd>
+<dt>wf_n<span class="classifier">int, optional</span></dt><dd><p>Will plot the nth energy wavefunction. Indexing starts at 0
+which indicates the ground state wavefunction.
+The default is 0.</p>
+</dd>
+<dt>axes: matplotlib.pyplot ax object, optional</dt><dd><p>User can define this variable to be an ‘ax’ object to plot. The
+plot will not be printed to screen is axes!=None.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">rtype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None..</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-qudipy.potential.process_nextnano">
+<span id="qudipy-potential-process-nextnano-module"></span><h2>qudipy.potential.process_nextnano module<a class="headerlink" href="#module-qudipy.potential.process_nextnano" title="Permalink to this heading"></a></h2>
+<p>&#64;author : Zach</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.potential.process_nextnano.get_raw_ctrls">
+<span class="sig-prename descclassname"><span class="pre">qudipy.potential.process_nextnano.</span></span><span class="sig-name descname"><span class="pre">get_raw_ctrls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.process_nextnano.get_raw_ctrls" title="Permalink to this definition"></a></dt>
+<dd><p>This function checks if a pickle binary file exists containing the
+control voltage information for the nextnano simulation data. Otherwise,
+the nextnano data is processed and a binary file is created for future use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>String</em>) – Name of the data_dir where nextnano files are stored.</p></li>
+<li><p><strong>write_dir</strong> (<em>string</em>) – Directory path to write the electric field and potential data.</p></li>
+<li><p><strong>filename</strong> (<em>string</em>) – File name for pickle file containing dictionary of control voltage
+values from the nextnano simulation data subdirectories.</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>-----------------</strong> – </p></li>
+<li><p><strong>z_slice</strong> (<em>float</em>) – slice along z-coordinate to extract xy-plane data for.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qudipy.potential.process_nextnano.process">
+<span class="sig-prename descclassname"><span class="pre">qudipy.potential.process_nextnano.</span></span><span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qudipy.potential.process_nextnano.process" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>String</em>) – Name of the directory where nextnano files are stored.</p></li>
+<li><p><strong>write_dir</strong> (<em>string</em>) – Directory path to write the electric field and potential data.</p></li>
+<li><p><strong>Parameters</strong> (<em>Optional</em>) – </p></li>
+<li><p><strong>-----------------</strong> – </p></li>
+<li><p><strong>z_slice</strong> (<em>float</em>) – slice along z-coordinate to extract xy-plane data for.</p></li>
+<li><p><strong>show_files</strong> (<em>bool</em>) – Display command line output of the files being imported.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul>
+<li><p><strong>data</strong> (<em>dictionary</em>) – Where each key/value pair is a key label for the type of data stored in
+value i.e  ctrl_names for a list of voltage labels, ctrl_values for a
+list of potentials, and coord for a dictionary containing coordinate
+data.</p></li>
+<li><p><em>nextnano file structure</em></p></li>
+<li><p><em>/simulation_runs</em> –</p>
+<dl>
+<dt>/simulation_run_#_with_gate_voltages</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">/output <var>directory</var></span></kbd></dt>
+<dd><p>/data files</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qudipy.potential">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy.potential" title="Permalink to this heading"></a></h2>
+<p>Code for handling processing of potential files (generated from nextnano++
+software)</p>
 </section>
 </section>
 

@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unit test tutorial: Introduction &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -56,8 +58,15 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">Using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/GIFs.html">GIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Operator%20Creation.html">Operator Creation Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
 </ul>
@@ -103,10 +112,10 @@
            <div itemprop="articleBody">
              
   <section id="Unit-test-tutorial:-Introduction">
-<h1>Unit test tutorial: Introduction<a class="headerlink" href="#Unit-test-tutorial:-Introduction" title="Link to this heading"></a></h1>
+<h1>Unit test tutorial: Introduction<a class="headerlink" href="#Unit-test-tutorial:-Introduction" title="Permalink to this heading"></a></h1>
 <p>This tutorial will introduce you to what unit test are, when/why are they needed, and discuss some common best practices.</p>
 <section id="What-are-unit-test?">
-<h2>What are unit test?<a class="headerlink" href="#What-are-unit-test?" title="Link to this heading"></a></h2>
+<h2>What are unit test?<a class="headerlink" href="#What-are-unit-test?" title="Permalink to this heading"></a></h2>
 <p>To quote from: <a class="reference external" href="https://docs.pytest.org/en/6.2.x/fixture.html#what-fixtures-are">https://docs.pytest.org/en/6.2.x/fixture.html#what-fixtures-are</a></p>
 <p>You can think of a test as being broken down into four steps:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1) Arrange
@@ -125,7 +134,7 @@
 <p>At it’s core, the test is ultimately the act and assert steps, with the arrange step only providing the context. Behavior exists between act and assert.</p>
 </section>
 <section id="Fixtures">
-<h2>Fixtures<a class="headerlink" href="#Fixtures" title="Link to this heading"></a></h2>
+<h2>Fixtures<a class="headerlink" href="#Fixtures" title="Permalink to this heading"></a></h2>
 <p>Fixtures are a fundamental feature used to perform unit tests and should the pytest documentation should be reviewed here <a class="reference external" href="https://docs.pytest.org/en/6.2.x/contents.html#toc">https://docs.pytest.org/en/6.2.x/contents.html#toc</a> for specific unit tests.</p>
 <p>A non-exhaustive overview list of fixture features: - Fixtures are used largely for arrange and act steps - Fixures can be requested by test functions - Test functions can be paramiterized by requesting multiple fixtures at a time - Fixtures can be shared among many tests functions simutaneously - Fixtures can request other fixtures, but the set of fixtures for the pytest must form a Directed Acyclic Graph (DAG) - Fixtures can be automatically accessible to all test functions - Fixtures are
 created when first requested by a test, and are destroyed based on their scope</p>
@@ -172,7 +181,7 @@ def &lt;fuction name&gt;(&lt;function argument 1&gt;,&lt;function argument 2&gt;
 </div>
 </section>
 <section id="Marks">
-<h2>Marks<a class="headerlink" href="#Marks" title="Link to this heading"></a></h2>
+<h2>Marks<a class="headerlink" href="#Marks" title="Permalink to this heading"></a></h2>
 <p>Marks are used apply meta data to test functions (but not fixtures), which can then be accessed by fixtures or plugins. There are built in markers, yet custom markers can be created in a configuration file called pytest.ini using the following structure,</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -191,11 +200,11 @@ markers =
 </div>
 </section>
 <section id="What-is-the-conftest.py-file?">
-<h2>What is the conftest.py file?<a class="headerlink" href="#What-is-the-conftest.py-file?" title="Link to this heading"></a></h2>
+<h2>What is the conftest.py file?<a class="headerlink" href="#What-is-the-conftest.py-file?" title="Permalink to this heading"></a></h2>
 <p>conftest.py configurations files can exist in the root directory and/or in subdirectories which can contain fixtures to be used across multiple tests in the root directory and/or subdirectories.</p>
 </section>
 <section id="Some-things-to-keep-in-mind">
-<h2>Some things to keep in mind<a class="headerlink" href="#Some-things-to-keep-in-mind" title="Link to this heading"></a></h2>
+<h2>Some things to keep in mind<a class="headerlink" href="#Some-things-to-keep-in-mind" title="Permalink to this heading"></a></h2>
 <p>Tests are guardrails to help developers add value over time, not straight-jackets to contain them.</p>
 <p>Time invested in writing tests is also time not invested on something else; like feature code, every line of test code you write needs to be maintained by another engineer. I always ask myself these questions before writing a test:</p>
 <ul class="simple">
@@ -206,7 +215,7 @@ markers =
 <p>Most times, you’ll still go ahead and write that test because testing is the right decision in most cases. In some cases though, you might just decide that writing a test – even with all the best-practices you’ve learned – is not the right decision.</p>
 </section>
 <section id="Executing-tests">
-<h2>Executing tests<a class="headerlink" href="#Executing-tests" title="Link to this heading"></a></h2>
+<h2>Executing tests<a class="headerlink" href="#Executing-tests" title="Permalink to this heading"></a></h2>
 <p>Make sure all python files containing tests ends with **_test.py**</p>
 <p>Some usefull commands to use at the command promt to execute tests:</p>
 <div class="nbinput nblast docutils container">
