@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DotArray Object for a Quadruple Quantum Dot Array &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="DotArray: Alternative Class Construction" href="DotArray%20Class%20Constructors.html" />
+    <link rel="prev" title="How to Construct Dot Array System from HPC Generated Interpolation Objects" href="Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            QuDiPy Simulator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/GIFs.html">GIFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DotArray Object for a Quadruple Quantum Dot Array</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Generate-Dots-object-instance">1. Generate Dots object instance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#1.1-Dot-Masking">1.1 Dot Masking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#2-Evaluate-effective-parameters">2 Evaluate effective parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">DotArray Object for a Quadruple Quantum Dot Array</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/notebooks/res/Dot Array Class Usage 4 Dots.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="DotArray-Object-for-a-Quadruple-Quantum-Dot-Array">
+<h1>DotArray Object for a Quadruple Quantum Dot Array<a class="headerlink" href="#DotArray-Object-for-a-Quadruple-Quantum-Dot-Array" title="Permalink to this heading"></a></h1>
+<p>This tutorial tests the dot maksing and effective parameter calculation on a 4-qubit system.</p>
+<p>See 2-qubit tutorial for more detailed explanations.</p>
+<p>Necessary imports and default plotting parameters:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="c1"># update base working directory to QuDiPy</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+C:\mainCSG.github.io\docs\source
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qudipy.system</span> <span class="kn">import</span> <span class="n">DotArray</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[2], line 2</span>
+<span class="ansi-green-fg">      1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> <span class="ansi-bold" style="color: rgb(0,0,255)">numpy</span> <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> <span class="ansi-bold" style="color: rgb(0,0,255)">np</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">qudipy</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">system</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> DotArray
+
+<span class="ansi-red-intense-fg ansi-bold">ModuleNotFoundError</span>: No module named &#39;qudipy&#39;
+</pre></div></div>
+</div>
+<section id="1.-Generate-Dots-object-instance">
+<h2>1. Generate Dots object instance<a class="headerlink" href="#1.-Generate-Dots-object-instance" title="Permalink to this heading"></a></h2>
+<p>Define variables to initialize Dots object instance</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nav_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;QuDiPy data&#39;</span><span class="p">,</span> <span class="s1">&#39;tutorials&#39;</span><span class="p">)</span>
+<span class="n">processed_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                            <span class="s1">&#39;processed&#39;</span><span class="p">,</span><span class="s1">&#39;4QD_processed&#39;</span><span class="p">)</span>
+<span class="n">nextnano_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                                    <span class="s1">&#39;nextnano&#39;</span><span class="p">,</span><span class="s1">&#39;4QD&#39;</span><span class="p">)</span>
+<span class="n">file_prefix</span> <span class="o">=</span> <span class="s1">&#39;tutorial&#39;</span>
+<span class="n">n_dots</span> <span class="o">=</span> <span class="mi">4</span>      <span class="c1"># anticipated number of dots</span>
+</pre></div>
+</div>
+</div>
+<p>Define control parameters to use when interpolating the potential data from nextnano: must be a subset of the raw data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="c1"># old effective parameters calculated on hfss</span>
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">6</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+<p>Create DotArray object instance</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Process/Load/Calculate with subset of raw nextnano data and desire file prefix</span>
+<span class="c1"># to add to saved interpolator files.</span>
+<span class="n">dots</span> <span class="o">=</span> <span class="n">DotArray</span><span class="p">(</span><span class="n">n_dots</span><span class="p">,</span> <span class="n">ctrl_ranges</span><span class="o">=</span><span class="n">ctrl_vals</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">,</span> <span class="n">nextnano_dir</span><span class="p">,</span> <span class="n">file_prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[5], line 3</span>
+<span class="ansi-green-fg">      1</span> <span style="color: rgb(95,135,135)">#Process/Load/Calculate with subset of raw nextnano data and desire file prefix</span>
+<span class="ansi-green-fg">      2</span> <span style="color: rgb(95,135,135)"># to add to saved interpolator files.</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 3</span> dots <span style="color: rgb(98,98,98)">=</span> DotArray(n_dots, ctrl_ranges<span style="color: rgb(98,98,98)">=</span>ctrl_vals)
+<span class="ansi-green-fg">      4</span> dots<span style="color: rgb(98,98,98)">.</span>numeric(processed_dir, nextnano_dir, file_prefix)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;DotArray&#39; is not defined
+</pre></div></div>
+</div>
+<section id="1.1-Dot-Masking">
+<h3>1.1 Dot Masking<a class="headerlink" href="#1.1-Dot-Masking" title="Permalink to this heading"></a></h3>
+<p>Checking how individual dots and dot pairs are masked</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose voltage control values</span>
+<span class="n">voltage_config</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dots</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;meV&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[7], line 1</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span> dots<span style="color: rgb(98,98,98)">.</span>potential<span style="color: rgb(98,98,98)">.</span>plot(voltage_config, plot_units<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">meV</span><span style="color: rgb(175,0,0)">&#39;</span>)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;dots&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dot1, dot2, dot3, dot4 = dots.split(group=&#39;single&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dot1.potential.plot(voltage_config, plot_units=[&#39;eV&#39;, &#39;m&#39;])</span>
+<span class="c1"># dot2.potential.plot(voltage_config, plot_units=[&#39;eV&#39;, &#39;m&#39;])</span>
+<span class="c1"># dot3.potential.plot(voltage_config, plot_units=[&#39;eV&#39;, &#39;m&#39;])</span>
+<span class="c1"># dot4.potential.plot(voltage_config, plot_units=[&#39;eV&#39;, &#39;m&#39;])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># voltage configuration for 4 QD array i.e. [V1, W1, ..., W3, V4]</span>
+<span class="n">voltage_config</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.253</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">]</span>
+
+<span class="c1"># exchange calcualted with old dot splitting routine</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">exchanges</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[10], line 5</span>
+<span class="ansi-green-fg">      2</span> voltage_config <span style="color: rgb(98,98,98)">=</span> [<span style="color: rgb(98,98,98)">0.253</span>, <span style="color: rgb(98,98,98)">0.02</span>, <span style="color: rgb(98,98,98)">0.27</span>, <span style="color: rgb(98,98,98)">0.015</span>, <span style="color: rgb(98,98,98)">0.27</span>, <span style="color: rgb(98,98,98)">0.015</span>, <span style="color: rgb(98,98,98)">0.27</span>]
+<span class="ansi-green-fg">      4</span> <span style="color: rgb(95,135,135)"># exchange calcualted with old dot splitting routine</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 5</span> dots<span style="color: rgb(98,98,98)">.</span>exchanges(voltage_config)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;dots&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># newly calculated exchange</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">exchanges</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[11], line 2</span>
+<span class="ansi-green-fg">      1</span> <span style="color: rgb(95,135,135)"># newly calculated exchange</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span> dots<span style="color: rgb(98,98,98)">.</span>exchanges(voltage_config, exact<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">True</span>)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;dots&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # TODO: remove deep copy when splitting, eats up RAM</span>
+<span class="n">dotpair1</span><span class="p">,</span> <span class="n">dotpair2</span><span class="p">,</span> <span class="n">dotpair3</span> <span class="o">=</span> <span class="n">dots</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[12], line 2</span>
+<span class="ansi-green-fg">      1</span> <span style="color: rgb(95,135,135)"># # TODO: remove deep copy when splitting, eats up RAM</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span> dotpair1, dotpair2, dotpair3 <span style="color: rgb(98,98,98)">=</span> dots<span style="color: rgb(98,98,98)">.</span>split(group<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">pair</span><span style="color: rgb(175,0,0)">&#39;</span>)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;dots&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">voltage_config</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.217</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+<span class="n">dotpair1</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;meV&#39;</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[13], line 2</span>
+<span class="ansi-green-fg">      1</span> voltage_config <span style="color: rgb(98,98,98)">=</span> [<span style="color: rgb(98,98,98)">0.217</span>, <span style="color: rgb(98,98,98)">0.15</span>, <span style="color: rgb(98,98,98)">0.2</span>, <span style="color: rgb(98,98,98)">0.0</span>, <span style="color: rgb(98,98,98)">0.2</span>, <span style="color: rgb(98,98,98)">0.0</span>, <span style="color: rgb(98,98,98)">0.3</span>]
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span> dotpair1<span style="color: rgb(98,98,98)">.</span>potential<span style="color: rgb(98,98,98)">.</span>plot(voltage_config, plot_units<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">meV</span><span style="color: rgb(175,0,0)">&#39;</span>, show_wf<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">True</span>)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;dotpair1&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="n">dotpair2</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;meV&#39;</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dotpair2</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;meV&#39;</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">x_slice</span><span class="o">=-</span><span class="mf">46e-9</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+<span class="n">dotpair3</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;meV&#39;</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[14], line 1</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span> dotpair2<span style="color: rgb(98,98,98)">.</span>potential<span style="color: rgb(98,98,98)">.</span>plot(voltage_config, plot_units<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">meV</span><span style="color: rgb(175,0,0)">&#39;</span>, show_wf<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">True</span>)
+<span class="ansi-green-fg">      2</span> dotpair2<span style="color: rgb(98,98,98)">.</span>potential<span style="color: rgb(98,98,98)">.</span>plot(voltage_config, plot_units<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">meV</span><span style="color: rgb(175,0,0)">&#39;</span>, show_wf<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">True</span>, x_slice<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">46e-9</span>, plot_type<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">1D</span><span style="color: rgb(175,0,0)">&#39;</span>)
+<span class="ansi-green-fg">      3</span> dotpair3<span style="color: rgb(98,98,98)">.</span>potential<span style="color: rgb(98,98,98)">.</span>plot(voltage_config, plot_units<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">meV</span><span style="color: rgb(175,0,0)">&#39;</span>, show_wf<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">True</span>)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;dotpair2&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># delete variables from memory if no longer needed</span>
+<span class="k">del</span> <span class="n">dotpair1</span><span class="p">,</span> <span class="n">dotpair2</span><span class="p">,</span> <span class="n">dotpair3</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[15], line 2</span>
+<span class="ansi-green-fg">      1</span> <span style="color: rgb(95,135,135)"># delete variables from memory if no longer needed</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">del</span> dotpair1, dotpair2, dotpair3
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;dotpair1&#39; is not defined
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="2-Evaluate-effective-parameters">
+<h2>2 Evaluate effective parameters<a class="headerlink" href="#2-Evaluate-effective-parameters" title="Permalink to this heading"></a></h2>
+<p>For a specific control voltage configuration, the <span class="math notranslate nohighlight">\(g\)</span>-factor deviations and exchange couplings are determined for each dot or neighboring pair, respectively.</p>
+<p>g-factor deviation for multiple voltage vectors. Evaluated exactly (<code class="docutils literal notranslate"><span class="pre">exact=True</span></code>) or using the interpolation object (<code class="docutils literal notranslate"><span class="pre">exact=False</span></code>)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">voltage_configs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">v3_sweep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">voltage_configs</span> <span class="o">=</span><span class="p">[</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span><span class="n">volt</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span> <span class="k">for</span> <span class="n">volt</span> <span class="ow">in</span> <span class="n">v3_sweep</span><span class="p">]</span>
+
+<span class="n">dots</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_configs</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;gfactor&#39;</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_configs</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;gfactor&#39;</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[16], line 6</span>
+<span class="ansi-green-fg">      2</span> v3_sweep <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>linspace(<span style="color: rgb(98,98,98)">0.2</span>,<span style="color: rgb(98,98,98)">0.3</span>,<span style="color: rgb(98,98,98)">5</span>)
+<span class="ansi-green-fg">      4</span> voltage_configs <span style="color: rgb(98,98,98)">=</span>[ [<span style="color: rgb(98,98,98)">0.25</span>,<span style="color: rgb(98,98,98)">0.0</span>,<span style="color: rgb(98,98,98)">0.25</span>, <span style="color: rgb(98,98,98)">0.0</span>,volt, <span style="color: rgb(98,98,98)">0.0</span>, <span style="color: rgb(98,98,98)">0.25</span>] <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> volt <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> v3_sweep]
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 6</span> dots<span style="color: rgb(98,98,98)">.</span>plot(voltage_configs, param<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">gfactor</span><span style="color: rgb(175,0,0)">&#39;</span>, exact<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">True</span>)
+<span class="ansi-green-fg">      7</span> dots<span style="color: rgb(98,98,98)">.</span>plot(voltage_configs, param<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">gfactor</span><span style="color: rgb(175,0,0)">&#39;</span>, exact<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">False</span>)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;dots&#39; is not defined
+</pre></div></div>
+</div>
+<p>Exchange for multiple tunneling gate voltages: plotting exchange for a path through voltage state space.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">voltage_configs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.07</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">volt</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+    <span class="n">voltage_configs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">volt</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+
+<span class="c1"># dots.plot(voltage_configs, param=&#39;hl&#39;, ex_units=&#39;neV&#39;, yscale=&#39;log&#39;, exact=True)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_configs</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;hm&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;neV&#39;</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_configs</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;hm&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;neV&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[17], line 7</span>
+<span class="ansi-green-fg">      4</span>     voltage_configs<span style="color: rgb(98,98,98)">.</span>append([<span style="color: rgb(98,98,98)">0.2</span>, <span style="color: rgb(98,98,98)">0.0</span>, <span style="color: rgb(98,98,98)">0.2</span>, <span style="color: rgb(98,98,98)">0.0</span>, <span style="color: rgb(98,98,98)">0.2</span>, volt, <span style="color: rgb(98,98,98)">0.2</span>])
+<span class="ansi-green-fg">      6</span> <span style="color: rgb(95,135,135)"># dots.plot(voltage_configs, param=&#39;hl&#39;, ex_units=&#39;neV&#39;, yscale=&#39;log&#39;, exact=True)</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 7</span> dots<span style="color: rgb(98,98,98)">.</span>plot(voltage_configs, param<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">hm</span><span style="color: rgb(175,0,0)">&#39;</span>, yscale<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">log</span><span style="color: rgb(175,0,0)">&#39;</span>, exact<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">True</span>, plot_units<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">neV</span><span style="color: rgb(175,0,0)">&#39;</span>)
+<span class="ansi-green-fg">      8</span> dots<span style="color: rgb(98,98,98)">.</span>plot(voltage_configs, param<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">hm</span><span style="color: rgb(175,0,0)">&#39;</span>, yscale<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">log</span><span style="color: rgb(175,0,0)">&#39;</span>, exact<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">False</span>, plot_units<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">neV</span><span style="color: rgb(175,0,0)">&#39;</span>)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;dots&#39; is not defined
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html" class="btn btn-neutral float-left" title="How to Construct Dot Array System from HPC Generated Interpolation Objects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DotArray%20Class%20Constructors.html" class="btn btn-neutral float-right" title="DotArray: Alternative Class Construction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Coherent Spintronics Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

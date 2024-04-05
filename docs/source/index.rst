@@ -35,17 +35,19 @@ Welcome to QuDiPy's documentation!
    /notebooks/dev/*
 
 .. toctree::
+   :maxdepth: 4
+   :glob:
+   :caption: Resources:
+
+   /notebooks/res/*
+
+.. toctree::
    :maxdepth: 2
    :glob:
    :caption: Webpage Maintenance:
 
    /notebooks/web/*
 
-.. only:: html
-
-   .. figure:: pot_spin_wave.gif
-
-      As Tumblr knows, GIFs are a lot of fun.
 
 Indices and tables
 ==================

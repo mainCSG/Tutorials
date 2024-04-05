@@ -1,0 +1,213 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Calculate Interpolation Objects in Batches with Job Arrays\n",
+    "\n",
+    "In this notebook we will walk through how to create interpolation objects that \n",
+    "are constructed from batches of effective parameter data. This data was generated\n",
+    "by batching voltage control vectors and running each batch in parallel on the HPC cluster.\n",
+    "\n",
+    "**NOTE:** Utilizing job arrays allows for an order of magnitude speed up when \n",
+    "calcualting effective parameters.\n",
+    "\n",
+    "Example: Serial job took 168 hours = 7 days -> Parallel job with 10 CPUs/workers took 16.8 hours!"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "First change base working directory and import relevant modules."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "c:\\QuDiPy\n"
+     ]
+    }
+   ],
+   "source": [
+    "import os\n",
+    "from pathlib import Path\n",
+    "path = Path(os.getcwd())\n",
+    "\n",
+    "# update base working directory to QuDiPy\n",
+    "if path.stem != 'QuDiPy':\n",
+    "    print(path.parents[1])\n",
+    "\n",
+    "    base_dir = path.parents[1]\n",
+    "    os.chdir(base_dir)\n",
+    "else:\n",
+    "    base_dir = path\n",
+    "    \n",
+    "import sys\n",
+    "import numpy as np\n",
+    "\n",
+    "from qudipy.system import DotArray"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Mimic HPC Batch Job Execution\n",
+    "\n",
+    "We can test how the parallel computation would take place on the cluster with multiple CPUs, but \n",
+    "instead perform a local serial calculation using only one CPU. The bash script that is shown later will\n",
+    "define how a python file is called in a job array compared to this toy example."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Toy 4 Batch Example\n",
+    "\n",
+    "We can mimic a HPC job array by calling a python script in a for loop as follows.\n",
+    "The python script requires two inputs:\n",
+    "1) The current batch to evaluate\n",
+    "2) The total number of batches that are to be run (in parallel on the HPC cluster)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "batches = 4"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "------------------ Calculating batch 1/4 now ------------------\n",
+      "\n",
+      "g_factor evaluation: control vector=[0.2 0.1 0.4]:  92%|█████████▏| 11/12 [00:11<00:01,  1.01s/it]                       Warning: number of detected dots is 1 -> different from user-specified value 2. Parameters are not evaluated\n",
+      "Warning: number of detected dots is 1 -> different from user-specified value 2. Parameters are not evaluated\n",
+      "g_factor evaluation: control vector=[0.2 0.1 0.4]: 100%|██████████| 12/12 [00:11<00:00,  1.08it/s]\n",
+      "Exchange HL evaluation: control vector=[0.2 0.1 0.4]:  92%|█████████▏| 11/12 [00:00<00:00, 22.12it/s]                       Warning: number of detected dots is 1 -> different from user-specified value 2. Parameters are not evaluated\n",
+      "Exchange HL evaluation: control vector=[0.2 0.1 0.4]: 100%|██████████| 12/12 [00:00<00:00, 22.11it/s]\n",
+      "Exchange HM evaluation: control vector=[0.2 0.1 0.4]:  75%|███████▌  | 9/12 [00:00<00:00, 23.62it/s]                        Warning: number of detected dots is 1 -> different from user-specified value 2. Parameters are not evaluated\n",
+      "Exchange HM evaluation: control vector=[0.2 0.1 0.4]: 100%|██████████| 12/12 [00:00<00:00, 24.60it/s]\n",
+      "\n",
+      "------------------ Calculating batch 2/4 now ------------------\n",
+      "\n",
+      "g_factor evaluation: control vector=[0.26666667 0.1        0.4       ]: 100%|██████████| 12/12 [00:11<00:00,  1.03it/s]  \n",
+      "Exchange HL evaluation: control vector=[0.26666667 0.1        0.4       ]: 100%|██████████| 12/12 [00:00<00:00, 25.04it/s]  \n",
+      "Exchange HM evaluation: control vector=[0.26666667 0.1        0.4       ]: 100%|██████████| 12/12 [00:00<00:00, 22.79it/s]  \n",
+      "\n",
+      "------------------ Calculating batch 3/4 now ------------------\n",
+      "\n",
+      "g_factor evaluation: control vector=[0.33333333 0.1        0.4       ]: 100%|██████████| 12/12 [00:11<00:00,  1.02it/s]  \n",
+      "Exchange HL evaluation: control vector=[0.33333333 0.1        0.4       ]: 100%|██████████| 12/12 [00:00<00:00, 22.66it/s]  \n",
+      "Exchange HM evaluation: control vector=[0.33333333 0.1        0.4       ]: 100%|██████████| 12/12 [00:00<00:00, 25.43it/s]  \n",
+      "\n",
+      "------------------ Calculating batch 4/4 now ------------------\n",
+      "\n",
+      "g_factor evaluation: control vector=[0.4 0.1 0.2]:  67%|██████▋   | 8/12 [00:07<00:03,  1.07it/s]                        Warning: number of detected dots is 1 -> different from user-specified value 2. Parameters are not evaluated\n",
+      "Warning: number of detected dots is 1 -> different from user-specified value 2. Parameters are not evaluated\n",
+      "g_factor evaluation: control vector=[0.4 0.1 0.4]: 100%|██████████| 12/12 [00:10<00:00,  1.16it/s]                     \n",
+      "Exchange HL evaluation: control vector=[0.4 0.1 0.2]:  50%|█████     | 6/12 [00:00<00:00, 23.45it/s]                        Warning: number of detected dots is 1 -> different from user-specified value 2. Parameters are not evaluated\n",
+      "Exchange HL evaluation: control vector=[0.4 0.1 0.4]: 100%|██████████| 12/12 [00:00<00:00, 22.02it/s]                    \n",
+      "Exchange HM evaluation: control vector=[0.4 0.1 0.2]:  50%|█████     | 6/12 [00:00<00:00, 24.34it/s]                        Warning: number of detected dots is 1 -> different from user-specified value 2. Parameters are not evaluated\n",
+      "Exchange HM evaluation: control vector=[0.4 0.1 0.4]: 100%|██████████| 12/12 [00:00<00:00, 25.36it/s]                    \n"
+     ]
+    }
+   ],
+   "source": [
+    "for idx in range(batches):\n",
+    "    batch = idx + 1 # too mimic hpc\n",
+    "    %run parallel_batch_example_2QD.py {batch} {batches}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Construct Effective Parameter Interpolator From Data Set Batches"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Note: No effective parameter calcualtions specified. Default = \"spin\". \n",
+      "\n",
+      "Loading pre-calculated effective parameters: Batch 4 or 4: 100%|██████████| 4/4 [00:00<00:00, 454.10it/s]\n",
+      "Effective parameter interpolator saved as:\n",
+      "\t example_hpc_spin_data_size_[4 3 4]_from_[ 0.2 -0.1  0.2]_to_[0.4 0.1 0.4].pkl\n"
+     ]
+    }
+   ],
+   "source": [
+    "# define input/output directories\n",
+    "nav_dir = os.path.join('QuDiPy data', 'tutorials')\n",
+    "processed_dir = os.path.join(base_dir, nav_dir,\n",
+    "                        'processed','2QD_processed')\n",
+    "nextnano_dir = os.path.join(base_dir, nav_dir,\n",
+    "                                'nextnano','2QD_dotsep_60nm')\n",
+    "\n",
+    "# anticipated number of dots\n",
+    "n_dots = 2      \n",
+    "\n",
+    "# define subset of control ranges to perform calcuations\n",
+    "eff_interp_dims = [4,3,4]\n",
+    "ctrl_vals = [np.linspace(0.2, 0.4, eff_interp_dims[0]),\n",
+    "    np.linspace(-0.1, 0.1, eff_interp_dims[1]),\n",
+    "    np.linspace(0.2, 0.4, eff_interp_dims[2])]\n",
+    "\n",
+    "# prefix for saved calculated files\n",
+    "file_prefix = 'example_hpc'\n",
+    "\n",
+    "dots = DotArray(n_dots, ctrl_ranges=ctrl_vals, calc=False, hpc=[None, batches,'example_hpc_2QD'])\n",
+    "dots.numeric(processed_dir, nextnano_dir, file_prefix)\n",
+    "\n",
+    "dots.construct_interpolator()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "qudipy",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
