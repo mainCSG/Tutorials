@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. First load the relevant modules and initialize SimulationParameters &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+  <title>Using the single electron Schrödinger equation solver &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
@@ -62,13 +62,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/GIFs.html">GIFs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
 <ul>
@@ -80,24 +76,20 @@
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%204%20Dots.html">DotArray Object for a Quadruple Quantum Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading potentials tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. First load the relevant modules and initialize SimulationParameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#2c.-Check-results">2c. Check results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#3c.-Check-results">3c. Check results</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using the single electron Schrödinger equation solver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-First-load-the-relevant-modules-and-initialize-SimulationParameters">1. First load the relevant modules and initialize SimulationParameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2c.-Check-results">2c. Check results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3c.-Check-results">3c. Check results</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
 </ul>
@@ -120,7 +112,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">1. First load the relevant modules and initialize SimulationParameters</li>
+      <li class="breadcrumb-item active">Using the single electron Schrödinger equation solver</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/notebooks/res/Schrodinger Equation.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -130,10 +122,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p>Using the single electron Schrödinger equation solver</p>
+  <section id="Using-the-single-electron-Schrödinger-equation-solver">
+<h1>Using the single electron Schrödinger equation solver<a class="headerlink" href="#Using-the-single-electron-Schrödinger-equation-solver" title="Permalink to this heading"></a></h1>
 <p>This tutorial will show how to use the qutils to solve the single electron Schrödinger equation for either 1D or 2D potential landscapes. Make sure you are running this tutorial notebook from the tutorials folder in the qudipy repo.</p>
 <section id="1.-First-load-the-relevant-modules-and-initialize-SimulationParameters">
-<h1>1. First load the relevant modules and initialize SimulationParameters<a class="headerlink" href="#1.-First-load-the-relevant-modules-and-initialize-SimulationParameters" title="Permalink to this heading"></a></h1>
+<h2>1. First load the relevant modules and initialize SimulationParameters<a class="headerlink" href="#1.-First-load-the-relevant-modules-and-initialize-SimulationParameters" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -188,7 +181,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">
-<h1>2a. 1D Schrödinger equation: initialize GridParameters class<a class="headerlink" href="#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class" title="Permalink to this heading"></a></h1>
+<h2>2a. 1D Schrödinger equation: initialize GridParameters class<a class="headerlink" href="#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class" title="Permalink to this heading"></a></h2>
 <p>Now we will create a GridParameters object with data for a Harmonic oscillator.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -208,7 +201,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">
-<h1>2b. 1D Schrödinger equation: use qutils to solve schrodinger equation<a class="headerlink" href="#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation" title="Permalink to this heading"></a></h1>
+<h2>2b. 1D Schrödinger equation: use qutils to solve schrodinger equation<a class="headerlink" href="#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation" title="Permalink to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -220,7 +213,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="2c.-Check-results">
-<h1>2c. Check results<a class="headerlink" href="#2c.-Check-results" title="Permalink to this heading"></a></h1>
+<h2>2c. Check results<a class="headerlink" href="#2c.-Check-results" title="Permalink to this heading"></a></h2>
 <p>Our energies should have constant spacing (within some error which can be reduced by increasing the number of x-coordinate points). The energy spacing should be equal to <span class="math notranslate nohighlight">\(\hbar \omega\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -319,7 +312,7 @@ Calculated energy diffs = [0.00329032 0.00328958 0.00328884 0.0032881  0.0032873
 </div>
 </section>
 <section id="3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">
-<h1>3b. 2D Schrödinger equation: use qutils to solve schrodinger equation<a class="headerlink" href="#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation" title="Permalink to this heading"></a></h1>
+<h2>3b. 2D Schrödinger equation: use qutils to solve schrodinger equation<a class="headerlink" href="#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation" title="Permalink to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -332,7 +325,7 @@ Calculated energy diffs = [0.00329032 0.00328958 0.00328884 0.0032881  0.0032873
 </div>
 </section>
 <section id="3c.-Check-results">
-<h1>3c. Check results<a class="headerlink" href="#3c.-Check-results" title="Permalink to this heading"></a></h1>
+<h2>3c. Check results<a class="headerlink" href="#3c.-Check-results" title="Permalink to this heading"></a></h2>
 <p>We expect the 1st and 2nd excited states to be degenerate since they correspond to the (1,0) and (0,1) 2D harmonic orbital modes (n,m).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -390,6 +383,7 @@ Calculated energy diffs = [3.28983763e-03 7.04338431e-18 3.28861491e-03 1.291287
 <div class="math notranslate nohighlight">
 \[\phi_1(x,y) = \alpha\ \phi_{0,1}(x,y) + \sqrt{1+\alpha^2}\ \phi_{0,1}(x,y))\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is some constant. So these 2D eigenfunctions are correct!</p>
+</section>
 </section>
 
 

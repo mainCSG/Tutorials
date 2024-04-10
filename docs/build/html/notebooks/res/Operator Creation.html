@@ -25,7 +25,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1. First load the relevant modules and initialize SimulationParameters" href="Schrodinger%20Equation.html" />
+    <link rel="next" title="Using the single electron Schrödinger equation solver" href="Schrodinger%20Equation.html" />
     <link rel="prev" title="How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array" href="Masking%20Dot%20Array%20Potentials.html" /> 
 </head>
 
@@ -62,13 +62,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/GIFs.html">GIFs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
 <ul>
@@ -80,14 +76,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%204%20Dots.html">DotArray Object for a Quadruple Quantum Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading potentials tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Operator Creation Tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#1.-Add-current-location-path-and-import-packages">1. Add current location path and import packages</a></li>
@@ -104,7 +94,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#3.3-Operators-must-be-complex-valued">3.3 Operators must be complex valued</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#3.4-Operators-must-be-an-array">3.4 Operators must be an array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#3.5-Operators-must-be-square">3.5 Operators <strong>must</strong> be square</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#4.-Hard-coded-operators">4. Hard coded operators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-Hard-coded-operators">4. Hard coded operators</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#4.1-Saving-hard-coded-operators-to-operator-library">4.1 Saving hard coded operators to operator library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#4.2-List-of-hard-coded-operators">4.2 List of hard-coded operators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#4.2-Using-hard-coded-operator">4.2 Using hard coded operator</a></li>
@@ -112,14 +104,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">Using the single electron Schrödinger equation solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
 </ul>
@@ -594,8 +580,9 @@ ValueError: Operator entry contains a non-square array of size [2,3].
 </pre></div></div>
 </div>
 </section>
+</section>
 <section id="4.-Hard-coded-operators">
-<h3>4. Hard coded operators<a class="headerlink" href="#4.-Hard-coded-operators" title="Permalink to this heading"></a></h3>
+<h2>4. Hard coded operators<a class="headerlink" href="#4.-Hard-coded-operators" title="Permalink to this heading"></a></h2>
 <p>In the Operator class, operator methods can be defined to be called when needed. The operator methods are defined with the following functional form:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="o">&lt;</span><span class="n">OPERATOR</span> <span class="n">NAME</span><span class="o">&gt;</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">input1</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">input2</span><span class="o">&gt;</span><span class="p">,</span><span class="o">...</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">inputN</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
@@ -640,7 +627,6 @@ array([[1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
        [0.+0.j, 0.+0.j, 1.+0.j, 0.+0.j]])
 </pre></div></div>
 </div>
-</section>
 <section id="4.1-Saving-hard-coded-operators-to-operator-library">
 <h3>4.1 Saving hard coded operators to operator library<a class="headerlink" href="#4.1-Saving-hard-coded-operators-to-operator-library" title="Permalink to this heading"></a></h3>
 <p>When using the hard coded operators they are only computed if they do not exist in the current operator library, otherwise, they are loaded from the library. For high dimensional operators this will save computational resources. If an operator is not in the existing operator library, the user can specify that the operator should be saved with the <code class="docutils literal notranslate"><span class="pre">save</span></code> flag. The default is <code class="docutils literal notranslate"><span class="pre">save=False</span></code>.</p>
@@ -795,7 +781,7 @@ dict_keys([&#39;PAULI_X&#39;, &#39;PAULI_Y&#39;, &#39;PAULI_Z&#39;, &#39;PAULI_I
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Masking%20Dot%20Array%20Potentials.html" class="btn btn-neutral float-left" title="How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Schrodinger%20Equation.html" class="btn btn-neutral float-right" title="1. First load the relevant modules and initialize SimulationParameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Schrodinger%20Equation.html" class="btn btn-neutral float-right" title="Using the single electron Schrödinger equation solver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

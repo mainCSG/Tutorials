@@ -62,13 +62,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/GIFs.html">GIFs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Schrodinger%20Equation.html">Solving Single Electron Schrödinger Equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Stark%20Shift.html">Using the Stark shift module</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
 <ul>
@@ -80,31 +76,20 @@
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%204%20Dots.html">DotArray Object for a Quadruple Quantum Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Loading potentials tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#1.-Load-the-relevant-modules">1. Load the relevant modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#2.-Define-which-files-to-load-and-load-them">2. Define which files to load and load them</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#3.-Store-x-and-y-coordinates-in-GridParameters-object">3. Store x and y coordinates in GridParameters object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#4.-Build-the-PotentialInterpolator-object">4. Build the PotentialInterpolator object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#5.-Do-some-potential-interpolation-(with-lots-of-plotting-examples)">5. Do some potential interpolation (with lots of plotting examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#6.-Define-Potentials-Function-Using-'Potential'-Class">6. Define Potentials Function Using ‘Potential’ Class</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">Using the single electron Schrödinger equation solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
 </ul>
@@ -612,9 +597,8 @@ c:\QuDiPy\qudipy\potential\field_interpolator.py:466: UserWarning: The figure la
 </div>
 </div>
 </section>
-</section>
-<section id="Define-Potentials-Function-Using-'Potential'-Class">
-<h1>Define Potentials Function Using ‘Potential’ Class<a class="headerlink" href="#Define-Potentials-Function-Using-'Potential'-Class" title="Permalink to this heading"></a></h1>
+<section id="6.-Define-Potentials-Function-Using-'Potential'-Class">
+<h2>6. Define Potentials Function Using ‘Potential’ Class<a class="headerlink" href="#6.-Define-Potentials-Function-Using-'Potential'-Class" title="Permalink to this heading"></a></h2>
 <p>The <strong>Potential</strong> Class allows the user to easily specify a well to use instead of coding their own function. Voltages, dot seperation, and omegas must be specified for these hardcoded functions.</p>
 <p>The Available Potentials Are:</p>
 <div class="line-block">
@@ -921,6 +905,7 @@ c:\QuDiPy\qudipy\potential\field_interpolator.py:466: UserWarning: The figure la
 <img alt="../../_images/notebooks_res_Loading_Potentials_22_15.png" src="../../_images/notebooks_res_Loading_Potentials_22_15.png" />
 </div>
 </div>
+</section>
 </section>
 
 
