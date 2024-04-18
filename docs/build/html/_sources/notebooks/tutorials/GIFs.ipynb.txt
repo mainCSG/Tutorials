@@ -5,7 +5,9 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# GIFs\n"
+    "# Animations\n",
+    "\n",
+    "This notebook is a work in progress\n"
    ]
   },
   {
