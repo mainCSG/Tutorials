@@ -42,7 +42,7 @@ Welcome to QuDiPy's documentation!
    /notebooks/res/*
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :glob:
    :caption: Webpage Maintenance:
 
@@ -53,5 +53,5 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
+* :ref:`modindex`s
 * :ref:`search`
