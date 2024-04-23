@@ -83,6 +83,7 @@ todo_include_todos = True
 napoleon_google_docstring = False
 napoleon_include_special_with_doc = False
 nbsphinx_allow_errors = True
+html_show_sourcelink = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
