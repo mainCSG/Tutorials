@@ -5,7 +5,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Effective spin control: pulse design & state evolution"
+    "# Effective Spin Control: Pulse Design & State Evolution"
    ]
   },
   {
