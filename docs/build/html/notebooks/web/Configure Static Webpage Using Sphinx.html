@@ -96,6 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#2.-GIFs,-Videos-or-Animations-in-Jupyter-Notebook">2. GIFs, Videos or Animations in Jupyter Notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#3.-Storing-Notebooks-to-be-Compiled-by-Sphinx">3. Storing Notebooks to be Compiled by Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#4.-Using-Make-to-Build-HTML">4. Using Make to Build HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#5.-Excluding-Notebooks">5. Excluding Notebooks</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Website%20Acknowledgements.html">Website Acknowledgements</a></li>
@@ -177,6 +178,12 @@
 <li><p>‘make html’</p></li>
 </ul>
 <p>Once this is done running, all saved changes will appear in the browser when the ‘index.html’ file is opened.</p>
+</section>
+<section id="5.-Excluding-Notebooks">
+<h2>5. Excluding Notebooks<a class="headerlink" href="#5.-Excluding-Notebooks" title="Permalink to this heading"></a></h2>
+<p>If there are files included in the website that you would like to be excluded from the Sphinx build, you must simply specify which files to exclude in the config file.</p>
+<p>In ‘conf.py’, which should be found in the source directory, there is a variable called ‘exclude_patterns’. It should be a list of strings that represent the file path of files to exclude from the Sphinx build relative to the source directory.</p>
+<p>For example, to exclude this file from Sphinx build, you would have: <img alt="Image for Example" src="../../_images/FileExclusion.png" /></p>
 </section>
 </section>
 
