@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QuDiPy Tutorial: Using the Stark shift Module &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -123,14 +122,14 @@
            <div itemprop="articleBody">
              
   <section id="QuDiPy-Tutorial:-Using-the-Stark-shift-Module">
-<h1>QuDiPy Tutorial: Using the Stark shift Module<a class="headerlink" href="#QuDiPy-Tutorial:-Using-the-Stark-shift-Module" title="Permalink to this heading"></a></h1>
+<h1>QuDiPy Tutorial: Using the Stark shift Module<a class="headerlink" href="#QuDiPy-Tutorial:-Using-the-Stark-shift-Module" title="Link to this heading"></a></h1>
 <p>This tutorial will show how to use the Stark shift module to determine the deviation in <span class="math notranslate nohighlight">\(g\)</span>-factor arising from an applied electric field in the y-direction, where the plane of a device would be in the xz-plane.</p>
 <p>In this tutorial, we will be defining the potential and the electric field that the dot(s) reside in analytically and therefore the xy-confining potential and the z-direction electric field will be decoupled. However, in practice with NextNano potentials, these two values will not be decoupled. The goal is to make this tutorial with NextNano potentials in due time.</p>
 <p>Additionally, a wavefunction approximating the ground state wavefunction in each dot must be provided. This fixed wavefunction is then used in a varying electric field to calculate the <span class="math notranslate nohighlight">\(g\)</span>-factor deviation. This is an approximation since the ground state wavefunction will be slightly perturbed when gate voltages are changed. In the future, we hope to implement a many-body electron wavefunction which would allow us to bypass this step and give us a more accurate value for the
 <span class="math notranslate nohighlight">\(g\)</span>-factor for each electron.</p>
 <p>In order for the file to not be too large, the output of the cells has been cleared so you will need to run the cells on your local machine to see the output.</p>
 <section id="1.-Add-the-current-location-to-path">
-<h2>1. Add the current location to path<a class="headerlink" href="#1.-Add-the-current-location-to-path" title="Permalink to this heading"></a></h2>
+<h2>1. Add the current location to path<a class="headerlink" href="#1.-Add-the-current-location-to-path" title="Link to this heading"></a></h2>
 <p>In order for this tutorial to work, you will need to run this from the tutorials folder.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -161,7 +160,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="2.-Import-the-relevant-modules">
-<h2>2. Import the relevant modules<a class="headerlink" href="#2.-Import-the-relevant-modules" title="Permalink to this heading"></a></h2>
+<h2>2. Import the relevant modules<a class="headerlink" href="#2.-Import-the-relevant-modules" title="Link to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -180,7 +179,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="3.-Define-the-potential">
-<h2>3. Define the potential<a class="headerlink" href="#3.-Define-the-potential" title="Permalink to this heading"></a></h2>
+<h2>3. Define the potential<a class="headerlink" href="#3.-Define-the-potential" title="Link to this heading"></a></h2>
 <p>Here, we will use a bi-quadratic well as a potential for a double-dot system. The potentials are plotted below for us to confirm that it looks reasonable.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -257,7 +256,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="4.-Define-the-electric-field">
-<h2>4. Define the electric field<a class="headerlink" href="#4.-Define-the-electric-field" title="Permalink to this heading"></a></h2>
+<h2>4. Define the electric field<a class="headerlink" href="#4.-Define-the-electric-field" title="Link to this heading"></a></h2>
 <p>We then do something similar for the electric field that we did for the potential. In this case, we define an analytical electric field that is the combination of two lines of charge above the location of the minima of the potential wells, where each control variable controls the charge denisty along each line. Although this isn’t an entirely accurate model of two plunger gates over a double dot system, it allows us to see whether changing the voltage on one side of the double dot system changes
 the electron <span class="math notranslate nohighlight">\(g\)</span>-factor on the same side more than the other side as we would expect.</p>
 <p>It is necessary that the electric field has the same control parameters as the potential landscape.</p>
@@ -308,7 +307,7 @@ the electron <span class="math notranslate nohighlight">\(g\)</span>-factor on t
 </div>
 </section>
 <section id="5.-Calculate-wavefunctions">
-<h2>5. Calculate wavefunctions<a class="headerlink" href="#5.-Calculate-wavefunctions" title="Permalink to this heading"></a></h2>
+<h2>5. Calculate wavefunctions<a class="headerlink" href="#5.-Calculate-wavefunctions" title="Link to this heading"></a></h2>
 <p>Next, we must determine what the ground state wavefunction of each dot is. As stated in the introduction of this tutorial, the hope is that eventually this process can be done automatically, but for the time being this must be done manually.</p>
 <p>In order to accomplish this, we simply detune the dot system so that the single electron Schrödinger equation solver gives us the correct ground state of each individual dot.</p>
 <div class="nbinput nblast docutils container">
@@ -338,7 +337,7 @@ the electron <span class="math notranslate nohighlight">\(g\)</span>-factor on t
 </div>
 </section>
 <section id="6.-Calculate-Stark-shift">
-<h2>6. Calculate Stark shift<a class="headerlink" href="#6.-Calculate-Stark-shift" title="Permalink to this heading"></a></h2>
+<h2>6. Calculate Stark shift<a class="headerlink" href="#6.-Calculate-Stark-shift" title="Link to this heading"></a></h2>
 <p>Now that we have all of the preliminaries in place, we can calculate the Stark shift of each electron in the system.</p>
 <p>We initialize a <code class="docutils literal notranslate"><span class="pre">StarkShift</span></code> object with the grid parameters and consts we used earlier on and then pass the electric field interpolator, the control parameter values to use, the control names, and the ground state wavefunctions we calculated. The output of the <code class="docutils literal notranslate"><span class="pre">delta_g</span></code> is a pandas DataFrame, with columns for each control variable and each the variation in <span class="math notranslate nohighlight">\(g\)</span> for each electron in question.</p>
 <div class="nbinput docutils container">

@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Operator Creation Tutorial &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -139,10 +138,10 @@
            <div itemprop="articleBody">
              
   <section id="Operator-Creation-Tutorial">
-<h1>Operator Creation Tutorial<a class="headerlink" href="#Operator-Creation-Tutorial" title="Permalink to this heading"></a></h1>
+<h1>Operator Creation Tutorial<a class="headerlink" href="#Operator-Creation-Tutorial" title="Link to this heading"></a></h1>
 <p>This tutorial will teach you how to use Operator class to construct multi-qubit operators, manipulate the data in the library of such operators, load/save data from a numpy-zipped file <code class="docutils literal notranslate"><span class="pre">Operators</span> <span class="pre">Tutorial.npz</span></code>.</p>
 <section id="1.-Add-current-location-path-and-import-packages">
-<h2>1. Add current location path and import packages<a class="headerlink" href="#1.-Add-current-location-path-and-import-packages" title="Permalink to this heading"></a></h2>
+<h2>1. Add current location path and import packages<a class="headerlink" href="#1.-Add-current-location-path-and-import-packages" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -204,7 +203,7 @@ QuDiPy data\tutorials
 </div>
 </section>
 <section id="2.-Initialize-an-operator-object-from-the-Operator-class">
-<h2>2. Initialize an operator object from the Operator class<a class="headerlink" href="#2.-Initialize-an-operator-object-from-the-Operator-class" title="Permalink to this heading"></a></h2>
+<h2>2. Initialize an operator object from the Operator class<a class="headerlink" href="#2.-Initialize-an-operator-object-from-the-Operator-class" title="Link to this heading"></a></h2>
 <p>The Operators Tutorial.npz object contains a dictionary of operators. The key expresses the name of the operator while the value associated with the key is a complex-valued array.</p>
 <p>If no Operators Tutorials.npz file exist an object, called ops, can be initialized with a hard coded operator dictionary or left as an empty dictionary. For the tutorial examples that follow you will use Operators Tutorial.npz object file which you will start by creating.</p>
 <div class="nbinput nblast docutils container">
@@ -227,7 +226,7 @@ QuDiPy data\tutorials
 </div>
 </div>
 <section id="2.1-With-an-existing-dictionary-but-no-object-file">
-<h3>2.1 With an existing dictionary but no object file<a class="headerlink" href="#2.1-With-an-existing-dictionary-but-no-object-file" title="Permalink to this heading"></a></h3>
+<h3>2.1 With an existing dictionary but no object file<a class="headerlink" href="#2.1-With-an-existing-dictionary-but-no-object-file" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -265,7 +264,7 @@ Existing dictionary but no object file: dict_keys([&#39;PAULI_X&#39;, &#39;PAULI
 </div>
 </section>
 <section id="2.2-With-an-existing-dictionary-and-object-file">
-<h3>2.2 With an existing dictionary and object file<a class="headerlink" href="#2.2-With-an-existing-dictionary-and-object-file" title="Permalink to this heading"></a></h3>
+<h3>2.2 With an existing dictionary and object file<a class="headerlink" href="#2.2-With-an-existing-dictionary-and-object-file" title="Link to this heading"></a></h3>
 <p>Now you can define an operator dictionary for operators you wish to add to the existing operator ops object or initialize a new object with an object file and user defined dictionary</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -295,7 +294,7 @@ Existing dictionary and object file: dict_keys([&#39;unitary1&#39;, &#39;unitary
 </div>
 </section>
 <section id="2.3-With-object-file-but-no-user-defined-dictionary">
-<h3>2.3 With object file but no user-defined dictionary<a class="headerlink" href="#2.3-With-object-file-but-no-user-defined-dictionary" title="Permalink to this heading"></a></h3>
+<h3>2.3 With object file but no user-defined dictionary<a class="headerlink" href="#2.3-With-object-file-but-no-user-defined-dictionary" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -316,7 +315,7 @@ Object file but no user defined dictionary: dict_keys([&#39;PAULI_X&#39;, &#39;P
 </div>
 </section>
 <section id="2.4-With-no-initial-input">
-<h3>2.4 With no initial input<a class="headerlink" href="#2.4-With-no-initial-input" title="Permalink to this heading"></a></h3>
+<h3>2.4 With no initial input<a class="headerlink" href="#2.4-With-no-initial-input" title="Link to this heading"></a></h3>
 <p>The following 1-qubit operators are added to each Operator object by default: <code class="docutils literal notranslate"><span class="pre">PAULI_X</span></code>, <code class="docutils literal notranslate"><span class="pre">PAULI_Y</span></code>, <code class="docutils literal notranslate"><span class="pre">PAULI_Z</span></code>, and <code class="docutils literal notranslate"><span class="pre">PAULI_I</span></code> (2x2 identity matrix).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -339,7 +338,7 @@ Empty operators dictionary: dict_keys([&#39;PAULI_X&#39;, &#39;PAULI_Y&#39;, &#3
 </section>
 </section>
 <section id="3.-Load-operator-object-and-Operator-class-usage-examples">
-<h2>3. Load operator object and Operator class usage examples<a class="headerlink" href="#3.-Load-operator-object-and-Operator-class-usage-examples" title="Permalink to this heading"></a></h2>
+<h2>3. Load operator object and Operator class usage examples<a class="headerlink" href="#3.-Load-operator-object-and-Operator-class-usage-examples" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -371,7 +370,7 @@ After removal: dict_keys([&#39;PAULI_X&#39;, &#39;PAULI_Y&#39;, &#39;PAULI_Z&#39
 </pre></div></div>
 </div>
 <section id="3.1-Indexing-operator-object-to-get/set/del-operators">
-<h3>3.1 Indexing operator object to get/set/del operators<a class="headerlink" href="#3.1-Indexing-operator-object-to-get/set/del-operators" title="Permalink to this heading"></a></h3>
+<h3>3.1 Indexing operator object to get/set/del operators<a class="headerlink" href="#3.1-Indexing-operator-object-to-get/set/del-operators" title="Link to this heading"></a></h3>
 <p>Operator objects support a convenient indexing syntax:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -423,7 +422,7 @@ After removal: dict_keys([&#39;PAULI_X&#39;, &#39;PAULI_Y&#39;, &#39;PAULI_Z&#39
 </div>
 </section>
 <section id="3.2-Keeping-track-if-operator-library-contains-only-unitary-operators">
-<h3>3.2 Keeping track if operator library contains only unitary operators<a class="headerlink" href="#3.2-Keeping-track-if-operator-library-contains-only-unitary-operators" title="Permalink to this heading"></a></h3>
+<h3>3.2 Keeping track if operator library contains only unitary operators<a class="headerlink" href="#3.2-Keeping-track-if-operator-library-contains-only-unitary-operators" title="Link to this heading"></a></h3>
 <p>We can check if the operator library contains any non-unitary operators via the object attribute ‘is_unitary’. The attribute returns True if the operator library only contains unitary objecrts and False if any non-unitary object exists.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -490,7 +489,7 @@ True
 </div>
 </section>
 <section id="3.3-Operators-must-be-complex-valued">
-<h3>3.3 Operators must be complex valued<a class="headerlink" href="#3.3-Operators-must-be-complex-valued" title="Permalink to this heading"></a></h3>
+<h3>3.3 Operators must be complex valued<a class="headerlink" href="#3.3-Operators-must-be-complex-valued" title="Link to this heading"></a></h3>
 <p>Converts to complex data type if possible, raises an exception otherwise.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
@@ -515,7 +514,7 @@ Note: Data type of first element for not-complex is not complex, but is: &lt;cla
 </div>
 </section>
 <section id="3.4-Operators-must-be-an-array">
-<h3>3.4 Operators must be an array<a class="headerlink" href="#3.4-Operators-must-be-an-array" title="Permalink to this heading"></a></h3>
+<h3>3.4 Operators must be an array<a class="headerlink" href="#3.4-Operators-must-be-an-array" title="Link to this heading"></a></h3>
 <p>Converts to a numpy array if possible, raises an exception otherwise.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
@@ -553,7 +552,7 @@ numpy.ndarray
 </div>
 </section>
 <section id="3.5-Operators-must-be-square">
-<h3>3.5 Operators <strong>must</strong> be square<a class="headerlink" href="#3.5-Operators-must-be-square" title="Permalink to this heading"></a></h3>
+<h3>3.5 Operators <strong>must</strong> be square<a class="headerlink" href="#3.5-Operators-must-be-square" title="Link to this heading"></a></h3>
 <p>Non-square operator arrays with cause a ValueError to be raised. In this example the output ValueError message will read:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -582,7 +581,7 @@ ValueError: Operator entry contains a non-square array of size [2,3].
 </section>
 </section>
 <section id="4.-Hard-coded-operators">
-<h2>4. Hard coded operators<a class="headerlink" href="#4.-Hard-coded-operators" title="Permalink to this heading"></a></h2>
+<h2>4. Hard coded operators<a class="headerlink" href="#4.-Hard-coded-operators" title="Link to this heading"></a></h2>
 <p>In the Operator class, operator methods can be defined to be called when needed. The operator methods are defined with the following functional form:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="o">&lt;</span><span class="n">OPERATOR</span> <span class="n">NAME</span><span class="o">&gt;</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">input1</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">input2</span><span class="o">&gt;</span><span class="p">,</span><span class="o">...</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">inputN</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
@@ -628,11 +627,11 @@ array([[1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
 </pre></div></div>
 </div>
 <section id="4.1-Saving-hard-coded-operators-to-operator-library">
-<h3>4.1 Saving hard coded operators to operator library<a class="headerlink" href="#4.1-Saving-hard-coded-operators-to-operator-library" title="Permalink to this heading"></a></h3>
+<h3>4.1 Saving hard coded operators to operator library<a class="headerlink" href="#4.1-Saving-hard-coded-operators-to-operator-library" title="Link to this heading"></a></h3>
 <p>When using the hard coded operators they are only computed if they do not exist in the current operator library, otherwise, they are loaded from the library. For high dimensional operators this will save computational resources. If an operator is not in the existing operator library, the user can specify that the operator should be saved with the <code class="docutils literal notranslate"><span class="pre">save</span></code> flag. The default is <code class="docutils literal notranslate"><span class="pre">save=False</span></code>.</p>
 </section>
 <section id="4.2-List-of-hard-coded-operators">
-<h3>4.2 List of hard-coded operators<a class="headerlink" href="#4.2-List-of-hard-coded-operators" title="Permalink to this heading"></a></h3>
+<h3>4.2 List of hard-coded operators<a class="headerlink" href="#4.2-List-of-hard-coded-operators" title="Link to this heading"></a></h3>
 <p>Methods for constructing operators in N-qubit space are:</p>
 <table class="docutils align-default">
 <thead>
@@ -671,7 +670,7 @@ array([[1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
 <p>Optional argument of each method is <code class="docutils literal notranslate"><span class="pre">save</span></code> (True or False)</p>
 </section>
 <section id="4.2-Using-hard-coded-operator">
-<h3>4.2 Using hard coded operator<a class="headerlink" href="#4.2-Using-hard-coded-operator" title="Permalink to this heading"></a></h3>
+<h3>4.2 Using hard coded operator<a class="headerlink" href="#4.2-Using-hard-coded-operator" title="Link to this heading"></a></h3>
 <p>We can call a hard coded operator as follows:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:

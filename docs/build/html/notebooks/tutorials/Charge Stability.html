@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QuDiPy Tutorial: Using the Charge Stability Module &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -127,11 +126,11 @@
            <div itemprop="articleBody">
              
   <section id="QuDiPy-Tutorial:-Using-the-Charge-Stability-Module">
-<h1>QuDiPy Tutorial: Using the Charge Stability Module<a class="headerlink" href="#QuDiPy-Tutorial:-Using-the-Charge-Stability-Module" title="Permalink to this heading"></a></h1>
+<h1>QuDiPy Tutorial: Using the Charge Stability Module<a class="headerlink" href="#QuDiPy-Tutorial:-Using-the-Charge-Stability-Module" title="Link to this heading"></a></h1>
 <p>This tutorial will show how to use the charge stability module to generate a charge stability diagram using the constant interaction model and then perform the Hough transformation.</p>
 <p>In order for the file to not be too large, the output of the cells has been cleared so you will need to run the cells on your local machine to see the output.</p>
 <section id="1.-Add-the-current-location-to-path">
-<h2>1. Add the current location to path<a class="headerlink" href="#1.-Add-the-current-location-to-path" title="Permalink to this heading"></a></h2>
+<h2>1. Add the current location to path<a class="headerlink" href="#1.-Add-the-current-location-to-path" title="Link to this heading"></a></h2>
 <p>In order for this tutorial to work, you will need to run this from the tutorials folder.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -162,7 +161,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="2.-Import-the-relevant-modules-and-set-plotting-parameters">
-<h2>2. Import the relevant modules and set plotting parameters<a class="headerlink" href="#2.-Import-the-relevant-modules-and-set-plotting-parameters" title="Permalink to this heading"></a></h2>
+<h2>2. Import the relevant modules and set plotting parameters<a class="headerlink" href="#2.-Import-the-relevant-modules-and-set-plotting-parameters" title="Link to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -184,7 +183,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="3.-Specify-the-capacitance-of-the-system-you-wish-to-simulate-and-then-initialize-the-charge-stability-diagram-object">
-<h2>3. Specify the capacitance of the system you wish to simulate and then initialize the charge stability diagram object<a class="headerlink" href="#3.-Specify-the-capacitance-of-the-system-you-wish-to-simulate-and-then-initialize-the-charge-stability-diagram-object" title="Permalink to this heading"></a></h2>
+<h2>3. Specify the capacitance of the system you wish to simulate and then initialize the charge stability diagram object<a class="headerlink" href="#3.-Specify-the-capacitance-of-the-system-you-wish-to-simulate-and-then-initialize-the-charge-stability-diagram-object" title="Link to this heading"></a></h2>
 <p>In this tutorial, we will be simulating a double quantum dot system. The parameters follow the naming convention of <a class="reference external" href="https://doi.org/10.1103/RevModPhys.75.1">https://doi.org/10.1103/RevModPhys.75.1</a>. The first three parameters are the coupling of the first dot to the left resevoir, <span class="math notranslate nohighlight">\(C_l\)</span>, the coupling of the second dot to the right resevoir, <span class="math notranslate nohighlight">\(C_r\)</span> and the coupling between the dots <span class="math notranslate nohighlight">\(C_m\)</span>. The next two parameters are capacitances between gates and dots. <span class="math notranslate nohighlight">\(C_{g1}\)</span> is the coupling between dot 1 the plunger gate
 <span class="math notranslate nohighlight">\(V_1\)</span> and <span class="math notranslate nohighlight">\(C_{g2}\)</span> is the coupling between dot 2 the plunger gate <span class="math notranslate nohighlight">\(V_2\)</span>. These parameters are all that is required to define the system.</p>
 <div class="nbinput nblast docutils container">
@@ -205,7 +204,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="4.-Generate-the-charge-stability-diagram">
-<h2>4. Generate the charge stability diagram<a class="headerlink" href="#4.-Generate-the-charge-stability-diagram" title="Permalink to this heading"></a></h2>
+<h2>4. Generate the charge stability diagram<a class="headerlink" href="#4.-Generate-the-charge-stability-diagram" title="Link to this heading"></a></h2>
 <p>The parameters used to generate the charge stability diagram are as follows: - <code class="docutils literal notranslate"><span class="pre">num</span></code>: Number of points to sweep each plunger voltage by. The resulting charge stability diagram will by <code class="docutils literal notranslate"><span class="pre">num</span></code> by <code class="docutils literal notranslate"><span class="pre">num</span></code> in size; - <code class="docutils literal notranslate"><span class="pre">v1(2)_max</span></code>: Maximum voltage to sweep gate 1(2) to. By default, both voltages start at 0 volts, but this can be changed using a keyword argument.</p>
 <p>This will generate occupations as a function of voltage.</p>
 <div class="nbinput nblast docutils container">
@@ -223,7 +222,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="5.-Plot-the-resulting-diagram">
-<h2>5. Plot the resulting diagram<a class="headerlink" href="#5.-Plot-the-resulting-diagram" title="Permalink to this heading"></a></h2>
+<h2>5. Plot the resulting diagram<a class="headerlink" href="#5.-Plot-the-resulting-diagram" title="Link to this heading"></a></h2>
 <p>In order to plot this charge stability diagram, we must then pass this object to the the CSDAnalysis object.</p>
 <p>To simulate real experimental results, we can pass a list of capacitances from each dot to the charge sensor. This list dictates how much a change in the charge of one dot will change the current passing through a charge sensor. The scale of this current is arbitrary (and large in this case since the sensor capacitances are large), but simulates what would be seen in an experiment.</p>
 <p>If you do not pass any capacitance vector, then a colorbar will be created that maps each charge occupation to a unique color. In this case, since the colors are physically meaningless, no derivative of the charge stability diagram will be done and further analysis cannot be completed.</p>
@@ -257,12 +256,12 @@ c:\QuDiPy
 </div>
 </section>
 <section id="6.-Find-the-edges-of-the-charge-stability-diagram">
-<h2>6. Find the edges of the charge stability diagram<a class="headerlink" href="#6.-Find-the-edges-of-the-charge-stability-diagram" title="Permalink to this heading"></a></h2>
+<h2>6. Find the edges of the charge stability diagram<a class="headerlink" href="#6.-Find-the-edges-of-the-charge-stability-diagram" title="Link to this heading"></a></h2>
 <p>In order for the Hough transform to be used, we need to have a bitmap of where edges are and aren’t in the image. So, we need to run some pre-processing to first find the edges, and then transform that map of edges into a bitmap.</p>
 <p>In order to find the edges, we can take the derivative of the above charge stability diagram. This is done automatically when csd_an is initialized, if a list of capacitances is provided. This derivative is the second plot in the cell above.</p>
 </section>
 <section id="7.-Create-bitmap-from-edge-data">
-<h2>7. Create bitmap from edge data<a class="headerlink" href="#7.-Create-bitmap-from-edge-data" title="Permalink to this heading"></a></h2>
+<h2>7. Create bitmap from edge data<a class="headerlink" href="#7.-Create-bitmap-from-edge-data" title="Link to this heading"></a></h2>
 <p>From that derivative image, we can create a bitmap.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -317,7 +316,7 @@ c:\QuDiPy
 <p>Now all the data points that are 0 are set to be ignored when we perform the Hough transform and all the non-zero ones will be included.</p>
 </section>
 <section id="8.-Perform-the-Hough-transform">
-<h2>8. Perform the Hough transform<a class="headerlink" href="#8.-Perform-the-Hough-transform" title="Permalink to this heading"></a></h2>
+<h2>8. Perform the Hough transform<a class="headerlink" href="#8.-Perform-the-Hough-transform" title="Link to this heading"></a></h2>
 <p>For some background on the Hough transform, see the wikipedia article (<a class="reference external" href="https://en.wikipedia.org/wiki/Hough_transform">https://en.wikipedia.org/wiki/Hough_transform</a>, Theory and Examples section were most useful for me) and this tutorial that I found particularily useful (<a class="reference external" href="https://alyssaq.github.io/2014/understanding-hough-transform/">https://alyssaq.github.io/2014/understanding-hough-transform/</a>)</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -338,7 +337,7 @@ c:\QuDiPy
 <p>The spots where the counts in the color bar are the highest places where lines fit the best. We can see that there are 4 peaks. These correspond to the 4 large occupation transitions seen in the earlier charge stability diagram. We can convert from these polar coordinates to the normal slope and intercept using <span class="math notranslate nohighlight">\(m = \frac{-\text{cos}(\theta)}{\text{sin}(\theta)}\)</span> and <span class="math notranslate nohighlight">\(b = \frac{\rho}{\text{sin}(\theta)}\)</span>.</p>
 </section>
 <section id="9.-Peak-Finding-&amp;-Clustering">
-<h2>9. Peak Finding &amp; Clustering<a class="headerlink" href="#9.-Peak-Finding-&-Clustering" title="Permalink to this heading"></a></h2>
+<h2>9. Peak Finding &amp; Clustering<a class="headerlink" href="#9.-Peak-Finding-&-Clustering" title="Link to this heading"></a></h2>
 <p>Next, we need to figure out where the peaks are in order to extract the best fitting lines. In order to do this, we first apply a threshold to function to the Hough transformed result, discarding the pixels in the accumulator with a low amount of votes.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -398,7 +397,7 @@ documentation linked above.</p>
 <p>We can see that the fitted lines do a pretty good job of retracing the charge transitions lines.</p>
 </section>
 <section id="10.-Extracting-Triple-Points">
-<h2>10. Extracting Triple Points<a class="headerlink" href="#10.-Extracting-Triple-Points" title="Permalink to this heading"></a></h2>
+<h2>10. Extracting Triple Points<a class="headerlink" href="#10.-Extracting-Triple-Points" title="Link to this heading"></a></h2>
 <p>Next we would like to identify not only the lines of charge transitions but also find the location of the triple points. These points are not only useful to know in it of themselves, but they will also allow us to construct the shorter transition (the (1,0)-(0,1) transition in this case) line between them that is hard to identify directly using the Hough transformations since it is short relative to the other lines here. Furthermore, it will allow us to know where the long line transitions in
 the previous figure are meant to end.</p>
 <p>To do this, we do the two function calls in the cell below. Note that these two functions are not general, so this will only work correctly in the case of a charge stability diagram with 4 charge regions similar to the one that was generated for this example.</p>

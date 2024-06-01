@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notes on Configuring a Static Webpage Using Sphinx &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -36,8 +34,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -126,26 +125,26 @@
            <div itemprop="articleBody">
              
   <section id="Notes-on-Configuring-a-Static-Webpage-Using-Sphinx">
-<h1>Notes on Configuring a Static Webpage Using Sphinx<a class="headerlink" href="#Notes-on-Configuring-a-Static-Webpage-Using-Sphinx" title="Permalink to this heading"></a></h1>
+<h1>Notes on Configuring a Static Webpage Using Sphinx<a class="headerlink" href="#Notes-on-Configuring-a-Static-Webpage-Using-Sphinx" title="Link to this heading"></a></h1>
 <p>This file will document usefull notes and/or commands for creating/maintaining a static webpage using the opensource software Sphinx which is currently hosted using GitHub personal pages.</p>
 <p>Jupyter notebooks can be hosted with Sphinx on these webpages as implemented in this page. Main headers are shown on the side menu, as well as subheaders in a collapsed list.</p>
 <section id="1.-Header-Syntax">
-<h2>1. Header Syntax<a class="headerlink" href="#1.-Header-Syntax" title="Permalink to this heading"></a></h2>
+<h2>1. Header Syntax<a class="headerlink" href="#1.-Header-Syntax" title="Link to this heading"></a></h2>
 <p>Headers in a Jupyter notebook are dictated by the amount of hashtags ‘#’ placed before the text. One hashtag indicates a main header, which should be only used for the title of the notebook, and decides the header that is placed in the side menu. Each subsequent sub-header in the notebook can have two or more hashtags depending on the structure desired. For example, the more hashtags, the smaller the headers will be.</p>
-<img alt="Image for Example" src="../../_images/MarkdownHeaders.png" />
+<p><img alt="Image for Example" src="../../_images/FileExclusion.png" /></p>
 </section>
 <section id="2.-Level-2-Header-(two-hashtags)">
-<h2>2. Level 2 Header (two hashtags)<a class="headerlink" href="#2.-Level-2-Header-(two-hashtags)" title="Permalink to this heading"></a></h2>
+<h2>2. Level 2 Header (two hashtags)<a class="headerlink" href="#2.-Level-2-Header-(two-hashtags)" title="Link to this heading"></a></h2>
 <section id="2.1-Level-3-Header-(three-hashtags)">
-<h3>2.1 Level 3 Header (three hashtags)<a class="headerlink" href="#2.1-Level-3-Header-(three-hashtags)" title="Permalink to this heading"></a></h3>
+<h3>2.1 Level 3 Header (three hashtags)<a class="headerlink" href="#2.1-Level-3-Header-(three-hashtags)" title="Link to this heading"></a></h3>
 </section>
 <section id="2.1.1-Level-4-Header-(four-hashtags)">
-<h3>2.1.1 Level 4 Header (four hashtags)<a class="headerlink" href="#2.1.1-Level-4-Header-(four-hashtags)" title="Permalink to this heading"></a></h3>
+<h3>2.1.1 Level 4 Header (four hashtags)<a class="headerlink" href="#2.1.1-Level-4-Header-(four-hashtags)" title="Link to this heading"></a></h3>
 <p>Another cool use of the Markdown language in Jupyter notebooks, is the ability to host GIFs and videos within a notebook.</p>
 </section>
 </section>
 <section id="2.-GIFs,-Videos-or-Animations-in-Jupyter-Notebook">
-<h2>2. GIFs, Videos or Animations in Jupyter Notebook<a class="headerlink" href="#2.-GIFs,-Videos-or-Animations-in-Jupyter-Notebook" title="Permalink to this heading"></a></h2>
+<h2>2. GIFs, Videos or Animations in Jupyter Notebook<a class="headerlink" href="#2.-GIFs,-Videos-or-Animations-in-Jupyter-Notebook" title="Link to this heading"></a></h2>
 <p>The syntax to host GIFs, videos or animations in Markdown is as follows:</p>
 <p>..figure:: filepath.gif</p>
 <p>The file, or folder of the figure being displayed must be in the same folder the notebook is stored. In this case, the GIF is stored in a folder called “GIFs”, within the same folder this notebook is stored.</p>
@@ -155,9 +154,9 @@
 </figure>
 </section>
 <section id="3.-Storing-Notebooks-to-be-Compiled-by-Sphinx">
-<h2>3. Storing Notebooks to be Compiled by Sphinx<a class="headerlink" href="#3.-Storing-Notebooks-to-be-Compiled-by-Sphinx" title="Permalink to this heading"></a></h2>
+<h2>3. Storing Notebooks to be Compiled by Sphinx<a class="headerlink" href="#3.-Storing-Notebooks-to-be-Compiled-by-Sphinx" title="Link to this heading"></a></h2>
 <p>Notebooks that you want displayed in the webpage must be stored inside the same folder as the ‘index.rst’ file, and specified within this file. Each section in the side menu has its own folder and is defined in the index file with its title as follows:</p>
-<img alt="Image for Example" src="../../_images/IndexFile.png" />
+<p><img alt="Image for Example" src="../../_images/FileExclusion.png" /></p>
 <ul class="simple">
 <li><p>“.. toctree::” is the mandatory definition, and this is what specifies the file path (as shown at the bottom).</p></li>
 <li><p>“maxdepth” is what dictates which headers are collapsed in the side menu</p></li>
@@ -166,7 +165,7 @@
 </ul>
 </section>
 <section id="4.-Using-Make-to-Build-HTML">
-<h2>4. Using Make to Build HTML<a class="headerlink" href="#4.-Using-Make-to-Build-HTML" title="Permalink to this heading"></a></h2>
+<h2>4. Using Make to Build HTML<a class="headerlink" href="#4.-Using-Make-to-Build-HTML" title="Link to this heading"></a></h2>
 <p>When making changes to notebooks in the website, you are able to build the new website in the ‘index.html’ link.</p>
 <ol class="arabic simple">
 <li><p>Make sure all changes are saved</p></li>
@@ -180,7 +179,7 @@
 <p>Once this is done running, all saved changes will appear in the browser when the ‘index.html’ file is opened.</p>
 </section>
 <section id="5.-Excluding-Notebooks">
-<h2>5. Excluding Notebooks<a class="headerlink" href="#5.-Excluding-Notebooks" title="Permalink to this heading"></a></h2>
+<h2>5. Excluding Notebooks<a class="headerlink" href="#5.-Excluding-Notebooks" title="Link to this heading"></a></h2>
 <p>If there are files included in the website that you would like to be excluded from the Sphinx build, you must simply specify which files to exclude in the config file.</p>
 <p>In ‘conf.py’, which should be found in the source directory, there is a variable called ‘exclude_patterns’. It should be a list of strings that represent the file path of files to exclude from the Sphinx build relative to the source directory.</p>
 <p>For example, to exclude this file from Sphinx build, you would have: <img alt="Image for Example" src="../../_images/FileExclusion.png" /></p>

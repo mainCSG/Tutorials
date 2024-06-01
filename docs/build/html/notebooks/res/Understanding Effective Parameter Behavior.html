@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Understanding Effectvie Parameter Behavior &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -121,7 +120,7 @@
            <div itemprop="articleBody">
              
   <section id="Understanding-Effectvie-Parameter-Behavior">
-<h1>Understanding Effectvie Parameter Behavior<a class="headerlink" href="#Understanding-Effectvie-Parameter-Behavior" title="Permalink to this heading"></a></h1>
+<h1>Understanding Effectvie Parameter Behavior<a class="headerlink" href="#Understanding-Effectvie-Parameter-Behavior" title="Link to this heading"></a></h1>
 <p>In this tutorial we will create a dot array object instances which imports pre-calculated effective parameter interpolators. We will use the interpolators to explore how the effectvice parameters of a quantum dot system change with externally varied control parameters i.e. gate voltage or applied RF field.</p>
 <p>See 2-qubit tutorial for more detailed explanations on dot array class usage.</p>
 <div class="nbinput nblast docutils container">
@@ -212,7 +211,7 @@ c:\QuDiPy\QuDiPy data\tutorials\processed\3QD_processed\tutorial_spin_data_size_
 </pre></div></div>
 </div>
 <section id="Test-dot-splitting">
-<h2>Test dot splitting<a class="headerlink" href="#Test-dot-splitting" title="Permalink to this heading"></a></h2>
+<h2>Test dot splitting<a class="headerlink" href="#Test-dot-splitting" title="Link to this heading"></a></h2>
 <p>The splitting procedure creates a list of new Dots objects. They inherit all properties from the parent object <em>except</em>: 1. potential interpolator <code class="docutils literal notranslate"><span class="pre">dots_object.potential(ctrl_vals)</span></code> now outputs masked potential 2. the positions of visible dots <strong>(counted from 1)</strong> may change.</p>
 <p>Splitting group can be either <code class="docutils literal notranslate"><span class="pre">'single'</span></code>/<code class="docutils literal notranslate"><span class="pre">'singles'</span></code> (default) for individual dots, or <code class="docutils literal notranslate"><span class="pre">'pair'</span></code>/<code class="docutils literal notranslate"><span class="pre">'pairs'</span></code> for adjacent pairs.</p>
 <blockquote>
@@ -309,7 +308,7 @@ c:\QuDiPy\QuDiPy data\tutorials\processed\3QD_processed\tutorial_spin_data_size_
 </div>
 </section>
 <section id="Effective-Parameter-Relationships">
-<h2>Effective Parameter Relationships<a class="headerlink" href="#Effective-Parameter-Relationships" title="Permalink to this heading"></a></h2>
+<h2>Effective Parameter Relationships<a class="headerlink" href="#Effective-Parameter-Relationships" title="Link to this heading"></a></h2>
 <p>First we define a range of control voltage values to plot the effective parameter relationships.</p>
 <p>It is assumed that the order of the control variables is:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>V_range = [V1_range, W1_range, V2_range, ..., Wn_range, Vn_range]
@@ -331,7 +330,7 @@ c:\QuDiPy\QuDiPy data\tutorials\processed\3QD_processed\tutorial_spin_data_size_
 </div>
 </section>
 <section id="Plotting-effective-parameters-vs-voltage">
-<h2>Plotting effective parameters vs voltage<a class="headerlink" href="#Plotting-effective-parameters-vs-voltage" title="Permalink to this heading"></a></h2>
+<h2>Plotting effective parameters vs voltage<a class="headerlink" href="#Plotting-effective-parameters-vs-voltage" title="Link to this heading"></a></h2>
 <p>Exchange Energy</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -384,7 +383,7 @@ c:\QuDiPy\QuDiPy data\tutorials\processed\3QD_processed\tutorial_spin_data_size_
 </div>
 </section>
 <section id="Track-field-information-and-wave-function-for-gate-sweep">
-<h2>Track field information and wave function for gate sweep<a class="headerlink" href="#Track-field-information-and-wave-function-for-gate-sweep" title="Permalink to this heading"></a></h2>
+<h2>Track field information and wave function for gate sweep<a class="headerlink" href="#Track-field-information-and-wave-function-for-gate-sweep" title="Link to this heading"></a></h2>
 <p>Now we plot how the electric and potential field changes with gate voltage along with the change in the ground state wavefunction.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:

@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modules &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -34,8 +32,9 @@
 
           
           
-          <a href="index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="index.html">
+            
+              <img src="_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -64,7 +63,7 @@
 <li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-qudipy">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -130,333 +129,99 @@
            <div itemprop="articleBody">
              
   <section id="modules">
-<h1>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h1>
+<h1>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.chargestability.html">qudipy.chargestability package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.chargestability.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.chargestability.html#module-qudipy.chargestability.csd_analysis">qudipy.chargestability.csd_analysis module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis.find_tripletpoints"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis.find_tripletpoints()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis.generate_bitmap"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis.generate_bitmap()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis.hough_cluster"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis.hough_cluster()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis.hough_transform"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis.hough_transform()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis.plot"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis.plot()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis.plot_AMMCS"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis.plot_AMMCS()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis.plot_csd_with_lines"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis.plot_csd_with_lines()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis.plot_triple_points"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis.plot_triple_points()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_analysis.CSDAnalysis.threshold_hough_accumulator"><code class="docutils literal notranslate"><span class="pre">CSDAnalysis.threshold_hough_accumulator()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.chargestability.html#module-qudipy.chargestability.csd_cim">qudipy.chargestability.csd_cim module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_cim.CIMCSD"><code class="docutils literal notranslate"><span class="pre">CIMCSD</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_cim.CIMCSD.calculate_energy"><code class="docutils literal notranslate"><span class="pre">CIMCSD.calculate_energy()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_cim.CIMCSD.generate_csd"><code class="docutils literal notranslate"><span class="pre">CIMCSD.generate_csd()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.chargestability.html#module-qudipy.chargestability.csd_hubbard">qudipy.chargestability.csd_hubbard module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_hubbard.HubbardCSD"><code class="docutils literal notranslate"><span class="pre">HubbardCSD</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_hubbard.HubbardCSD.generate_csd"><code class="docutils literal notranslate"><span class="pre">HubbardCSD.generate_csd()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.chargestability.html#qudipy.chargestability.csd_hubbard.HubbardCSD.load_potential"><code class="docutils literal notranslate"><span class="pre">HubbardCSD.load_potential()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.chargestability.html#module-qudipy.chargestability">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.chargestability.html#qudipy-chargestability-csd-analysis-module">qudipy.chargestability.csd_analysis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.chargestability.html#qudipy-chargestability-csd-cim-module">qudipy.chargestability.csd_cim module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.chargestability.html#qudipy-chargestability-csd-hubbard-module">qudipy.chargestability.csd_hubbard module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.chargestability.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.circuit.html">qudipy.circuit package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#module-qudipy.circuit.control_pulse">qudipy.circuit.control_pulse module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse"><code class="docutils literal notranslate"><span class="pre">ControlPulse</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse.add_control_variable"><code class="docutils literal notranslate"><span class="pre">ControlPulse.add_control_variable()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse.add_mult_gates"><code class="docutils literal notranslate"><span class="pre">ControlPulse.add_mult_gates()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse.copy"><code class="docutils literal notranslate"><span class="pre">ControlPulse.copy()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse.plot"><code class="docutils literal notranslate"><span class="pre">ControlPulse.plot()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse.print_pulse"><code class="docutils literal notranslate"><span class="pre">ControlPulse.print_pulse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse.scale"><code class="docutils literal notranslate"><span class="pre">ControlPulse.scale()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.control_pulse.ControlPulse.set_pulse_length"><code class="docutils literal notranslate"><span class="pre">ControlPulse.set_pulse_length()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#module-qudipy.circuit.file_parsers">qudipy.circuit.file_parsers module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.file_parsers.check_ideal_gate"><code class="docutils literal notranslate"><span class="pre">check_ideal_gate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.file_parsers.load_circuit"><code class="docutils literal notranslate"><span class="pre">load_circuit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.file_parsers.load_pulses"><code class="docutils literal notranslate"><span class="pre">load_pulses()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#module-qudipy.circuit.quantum_circuit">qudipy.circuit.quantum_circuit module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.quantum_circuit.QuantumCircuit"><code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.quantum_circuit.QuantumCircuit.add_gate"><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.add_gate()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.quantum_circuit.QuantumCircuit.get_next_gate"><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.get_next_gate()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.quantum_circuit.QuantumCircuit.load_more_gates"><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.load_more_gates()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.quantum_circuit.QuantumCircuit.print_ideal_circuit"><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.print_ideal_circuit()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.quantum_circuit.QuantumCircuit.reset_circuit_index"><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.reset_circuit_index()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#module-qudipy.circuit.write_files">qudipy.circuit.write_files module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.write_files.format_single_gate"><code class="docutils literal notranslate"><span class="pre">format_single_gate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.write_files.write_ctrlp"><code class="docutils literal notranslate"><span class="pre">write_ctrlp()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.circuit.html#qudipy.circuit.write_files.write_qcirc"><code class="docutils literal notranslate"><span class="pre">write_qcirc()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#module-qudipy.circuit">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#qudipy-circuit-control-pulse-module">qudipy.circuit.control_pulse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#qudipy-circuit-file-parsers-module">qudipy.circuit.file_parsers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#qudipy-circuit-quantum-circuit-module">qudipy.circuit.quantum_circuit module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#qudipy-circuit-write-files-module">qudipy.circuit.write_files module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.circuit.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.design.html">qudipy.design package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#module-qudipy.design.designer">qudipy.design.designer module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.designer.Designer"><code class="docutils literal notranslate"><span class="pre">Designer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#module-qudipy.design.effective">qudipy.design.effective module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.effective.DesignerEffective"><code class="docutils literal notranslate"><span class="pre">DesignerEffective</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.design.html#qudipy.design.effective.DesignerEffective.compose"><code class="docutils literal notranslate"><span class="pre">DesignerEffective.compose()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.effective.build_shape"><code class="docutils literal notranslate"><span class="pre">build_shape()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.effective.cphase"><code class="docutils literal notranslate"><span class="pre">cphase()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.effective.hadamard"><code class="docutils literal notranslate"><span class="pre">hadamard()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.effective.rot"><code class="docutils literal notranslate"><span class="pre">rot()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.effective.swapk"><code class="docutils literal notranslate"><span class="pre">swapk()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#module-qudipy.design.shapes">qudipy.design.shapes module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.shapes.gaussian"><code class="docutils literal notranslate"><span class="pre">gaussian()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.shapes.shifted_gauss"><code class="docutils literal notranslate"><span class="pre">shifted_gauss()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.shapes.square"><code class="docutils literal notranslate"><span class="pre">square()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.design.html#qudipy.design.shapes.triangle"><code class="docutils literal notranslate"><span class="pre">triangle()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#qudipy-design-designer-module">qudipy.design.designer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#qudipy-design-effective-module">qudipy.design.effective module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#qudipy-design-shapes-module">qudipy.design.shapes module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#qudipy-design-voltage-pulses-module">qudipy.design.voltage_pulses module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#module-qudipy.design">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.design.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.evolution.html">qudipy.evolution package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.evolution.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.evolution.html#module-qudipy.evolution.spin">qudipy.evolution.spin module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.J_sigma_product"><code class="docutils literal notranslate"><span class="pre">J_sigma_product()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.const_dict"><code class="docutils literal notranslate"><span class="pre">const_dict()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.evolve"><code class="docutils literal notranslate"><span class="pre">evolve()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.hamiltonian"><code class="docutils literal notranslate"><span class="pre">hamiltonian()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.lindbladian"><code class="docutils literal notranslate"><span class="pre">lindbladian()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.p"><code class="docutils literal notranslate"><span class="pre">p()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.track_subsystem"><code class="docutils literal notranslate"><span class="pre">track_subsystem()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.x_sum"><code class="docutils literal notranslate"><span class="pre">x_sum()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.y_sum"><code class="docutils literal notranslate"><span class="pre">y_sum()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.evolution.html#qudipy.evolution.spin.z_sum"><code class="docutils literal notranslate"><span class="pre">z_sum()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.evolution.html#module-qudipy.evolution">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.evolution.html#qudipy-evolution-spin-module">qudipy.evolution.spin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.evolution.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.exchange.html">qudipy.exchange package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.exchange.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.exchange.html#module-qudipy.exchange.exchange">qudipy.exchange.exchange module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html#qudipy.exchange.exchange.hl_func"><code class="docutils literal notranslate"><span class="pre">hl_func()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html#qudipy.exchange.exchange.hl_quartic"><code class="docutils literal notranslate"><span class="pre">hl_quartic()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html#qudipy.exchange.exchange.hm_func"><code class="docutils literal notranslate"><span class="pre">hm_func()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.exchange.html#qudipy.exchange.exchange.hm_quartic"><code class="docutils literal notranslate"><span class="pre">hm_quartic()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.exchange.html#module-qudipy.exchange">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.exchange.html#qudipy-exchange-exchange-module">qudipy.exchange.exchange module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.exchange.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.potential.html">qudipy.potential package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#qudipy-potential-create-potential-module">qudipy.potential.create_potential module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#module-qudipy.potential.grid_params">qudipy.potential.grid_params module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.grid_params.GridParameters"><code class="docutils literal notranslate"><span class="pre">GridParameters</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.grid_params.GridParameters.convert_MG_to_NO"><code class="docutils literal notranslate"><span class="pre">GridParameters.convert_MG_to_NO()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.grid_params.GridParameters.convert_NO_to_MG"><code class="docutils literal notranslate"><span class="pre">GridParameters.convert_NO_to_MG()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.grid_params.GridParameters.update_potential"><code class="docutils literal notranslate"><span class="pre">GridParameters.update_potential()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#module-qudipy.potential.load_data">qudipy.potential.load_data module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.load_data.analytical_potential"><code class="docutils literal notranslate"><span class="pre">analytical_potential()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.load_data.build_interpolator"><code class="docutils literal notranslate"><span class="pre">build_interpolator()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.load_data.load_potentials"><code class="docutils literal notranslate"><span class="pre">load_potentials()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#module-qudipy.potential.manipulate">qudipy.potential.manipulate module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.manipulate.fit_quartic"><code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#module-qudipy.potential.potential_interpolator">qudipy.potential.potential_interpolator module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.potential_interpolator.PotentialInterpolator"><code class="docutils literal notranslate"><span class="pre">PotentialInterpolator</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.potential_interpolator.PotentialInterpolator.call_method"><code class="docutils literal notranslate"><span class="pre">PotentialInterpolator.call_method()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.potential_interpolator.PotentialInterpolator.find_resonant_tc"><code class="docutils literal notranslate"><span class="pre">PotentialInterpolator.find_resonant_tc()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.potential_interpolator.PotentialInterpolator.plot"><code class="docutils literal notranslate"><span class="pre">PotentialInterpolator.plot()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#module-qudipy.potential.process_nextnano">qudipy.potential.process_nextnano module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.process_nextnano.get_raw_ctrls"><code class="docutils literal notranslate"><span class="pre">get_raw_ctrls()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.potential.html#qudipy.potential.process_nextnano.process"><code class="docutils literal notranslate"><span class="pre">process()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#module-qudipy.potential">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#qudipy-potential-grid-params-module">qudipy.potential.grid_params module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#qudipy-potential-load-data-module">qudipy.potential.load_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#qudipy-potential-manipulate-module">qudipy.potential.manipulate module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#qudipy-potential-potential-interpolator-module">qudipy.potential.potential_interpolator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#qudipy-potential-process-nextnano-module">qudipy.potential.process_nextnano module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.potential.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.qutils.html">qudipy.qutils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.qutils.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.qutils.html#module-qudipy.qutils.math">qudipy.qutils.math module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.math.inner_prod"><code class="docutils literal notranslate"><span class="pre">inner_prod()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.math.matrix_sqrt"><code class="docutils literal notranslate"><span class="pre">matrix_sqrt()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.math.partial_trace"><code class="docutils literal notranslate"><span class="pre">partial_trace()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.math.partial_trace_general"><code class="docutils literal notranslate"><span class="pre">partial_trace_general()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.math.project_down"><code class="docutils literal notranslate"><span class="pre">project_down()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.math.project_up"><code class="docutils literal notranslate"><span class="pre">project_up()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.qutils.html#module-qudipy.qutils.matrices">qudipy.qutils.matrices module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator"><code class="docutils literal notranslate"><span class="pre">Operator</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.CNOT"><code class="docutils literal notranslate"><span class="pre">Operator.CNOT()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.E_DOWN"><code class="docutils literal notranslate"><span class="pre">Operator.E_DOWN()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.E_UP"><code class="docutils literal notranslate"><span class="pre">Operator.E_UP()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.PAULI_X"><code class="docutils literal notranslate"><span class="pre">Operator.PAULI_X()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.PAULI_Y"><code class="docutils literal notranslate"><span class="pre">Operator.PAULI_Y()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.PAULI_Z"><code class="docutils literal notranslate"><span class="pre">Operator.PAULI_Z()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.RSWAP"><code class="docutils literal notranslate"><span class="pre">Operator.RSWAP()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.SIGMA_MINUS"><code class="docutils literal notranslate"><span class="pre">Operator.SIGMA_MINUS()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.SIGMA_PLUS"><code class="docutils literal notranslate"><span class="pre">Operator.SIGMA_PLUS()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.SIGMA_PRODUCT"><code class="docutils literal notranslate"><span class="pre">Operator.SIGMA_PRODUCT()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.SWAP"><code class="docutils literal notranslate"><span class="pre">Operator.SWAP()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.UNIT"><code class="docutils literal notranslate"><span class="pre">Operator.UNIT()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.add_operators"><code class="docutils literal notranslate"><span class="pre">Operator.add_operators()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.check_name"><code class="docutils literal notranslate"><span class="pre">Operator.check_name()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.check_ops"><code class="docutils literal notranslate"><span class="pre">Operator.check_ops()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.check_unitary"><code class="docutils literal notranslate"><span class="pre">Operator.check_unitary()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.coded_op"><code class="docutils literal notranslate"><span class="pre">Operator.coded_op()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.construct"><code class="docutils literal notranslate"><span class="pre">Operator.construct()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.keys"><code class="docutils literal notranslate"><span class="pre">Operator.keys()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.load_ops"><code class="docutils literal notranslate"><span class="pre">Operator.load_ops()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.remove_operators"><code class="docutils literal notranslate"><span class="pre">Operator.remove_operators()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.matrices.Operator.save_ops"><code class="docutils literal notranslate"><span class="pre">Operator.save_ops()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.qutils.html#module-qudipy.qutils.solvers">qudipy.qutils.solvers module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.solvers.build_1DSE_hamiltonian"><code class="docutils literal notranslate"><span class="pre">build_1DSE_hamiltonian()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.solvers.build_2DSE_hamiltonian"><code class="docutils literal notranslate"><span class="pre">build_2DSE_hamiltonian()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.qutils.html#qudipy.qutils.solvers.solve_schrodinger_eq"><code class="docutils literal notranslate"><span class="pre">solve_schrodinger_eq()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.qutils.html#module-qudipy.qutils">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.qutils.html#qudipy-qutils-math-module">qudipy.qutils.math module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.qutils.html#qudipy-qutils-matrices-module">qudipy.qutils.matrices module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.qutils.html#qudipy-qutils-solvers-module">qudipy.qutils.solvers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.qutils.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.shuttling.html">qudipy.shuttling package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.shuttling.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.shuttling.html#module-qudipy.shuttling.real_space">qudipy.shuttling.real_space module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.shuttling.html#qudipy.shuttling.real_space.RSP_time_evolution_1D"><code class="docutils literal notranslate"><span class="pre">RSP_time_evolution_1D()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.shuttling.html#module-qudipy.shuttling">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.shuttling.html#qudipy-shuttling-real-space-module">qudipy.shuttling.real_space module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.shuttling.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.starkshift.html">qudipy.starkshift package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.starkshift.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.starkshift.html#module-qudipy.starkshift.starkshift">qudipy.starkshift.starkshift module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.starkshift.html#qudipy.starkshift.starkshift.StarkShift"><code class="docutils literal notranslate"><span class="pre">StarkShift</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.starkshift.html#qudipy.starkshift.starkshift.StarkShift.change_temperature"><code class="docutils literal notranslate"><span class="pre">StarkShift.change_temperature()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.starkshift.html#qudipy.starkshift.starkshift.StarkShift.delta_g"><code class="docutils literal notranslate"><span class="pre">StarkShift.delta_g()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.starkshift.html#qudipy.starkshift.starkshift.StarkShift.temp_g_factor"><code class="docutils literal notranslate"><span class="pre">StarkShift.temp_g_factor()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.starkshift.html#module-qudipy.starkshift">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.starkshift.html#qudipy-starkshift-starkshift-module">qudipy.starkshift.starkshift module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.starkshift.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.system.html">qudipy.system package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.system.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.system.html#module-qudipy.system.dot_array">qudipy.system.dot_array module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.system.html#qudipy.system.dot_array.DotArray"><code class="docutils literal notranslate"><span class="pre">DotArray</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.dot_array.DotArray.analytic"><code class="docutils literal notranslate"><span class="pre">DotArray.analytic()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.dot_array.DotArray.numeric"><code class="docutils literal notranslate"><span class="pre">DotArray.numeric()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.dot_array.DotArray.plot"><code class="docutils literal notranslate"><span class="pre">DotArray.plot()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.dot_array.DotArray.plot_sweep"><code class="docutils literal notranslate"><span class="pre">DotArray.plot_sweep()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.dot_array.DotArray.split"><code class="docutils literal notranslate"><span class="pre">DotArray.split()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.system.html#module-qudipy.system.state">qudipy.system.state module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.system.html#qudipy.system.state.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.state.State.rho"><code class="docutils literal notranslate"><span class="pre">State.rho</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.state.State.N_0"><code class="docutils literal notranslate"><span class="pre">State.N_0</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.state.State.time"><code class="docutils literal notranslate"><span class="pre">State.time</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.state.State.T_1"><code class="docutils literal notranslate"><span class="pre">State.T_1</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.state.State.T_2"><code class="docutils literal notranslate"><span class="pre">State.T_2</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.state.State.T"><code class="docutils literal notranslate"><span class="pre">State.T</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.state.State.cdict"><code class="docutils literal notranslate"><span class="pre">State.cdict</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.system.html#qudipy.system.state.State.evolve"><code class="docutils literal notranslate"><span class="pre">State.evolve()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.system.html#module-qudipy.system">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.system.html#qudipy-system-dot-array-module">qudipy.system.dot_array module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.system.html#qudipy-system-state-module">qudipy.system.state module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.system.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qudipy.utils.html">qudipy.utils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#module-qudipy.utils.constants">qudipy.utils.constants module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material"><code class="docutils literal notranslate"><span class="pre">Material</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material.epsR"><code class="docutils literal notranslate"><span class="pre">Material.epsR</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material.g_factor"><code class="docutils literal notranslate"><span class="pre">Material.g_factor</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material.material_system"><code class="docutils literal notranslate"><span class="pre">Material.material_system</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material.me"><code class="docutils literal notranslate"><span class="pre">Material.me</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material.starkshift_param"><code class="docutils literal notranslate"><span class="pre">Material.starkshift_param</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.Material.units"><code class="docutils literal notranslate"><span class="pre">Material.units</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.constants.select_material"><code class="docutils literal notranslate"><span class="pre">select_material()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#module-qudipy.utils.helpers">qudipy.utils.helpers module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.helpers.ProgressBar"><code class="docutils literal notranslate"><span class="pre">ProgressBar</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.helpers.ProgressBar.close"><code class="docutils literal notranslate"><span class="pre">ProgressBar.close()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.helpers.ProgressBar.pbar"><code class="docutils literal notranslate"><span class="pre">ProgressBar.pbar()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.helpers.ProgressBar.update"><code class="docutils literal notranslate"><span class="pre">ProgressBar.update()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.helpers.find_nearest"><code class="docutils literal notranslate"><span class="pre">find_nearest()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.helpers.nchoosek"><code class="docutils literal notranslate"><span class="pre">nchoosek()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#module-qudipy.utils.interpolator">qudipy.utils.interpolator module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.interpolator.NDInterpolator"><code class="docutils literal notranslate"><span class="pre">NDInterpolator</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.interpolator.RegularInterpolator"><code class="docutils literal notranslate"><span class="pre">RegularInterpolator</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#module-qudipy.utils.sim_params">qudipy.utils.sim_params module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.sim_params.SimulationParameters"><code class="docutils literal notranslate"><span class="pre">SimulationParameters</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#module-qudipy.utils.units">qudipy.utils.units module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qudipy.utils.html#qudipy.utils.units.units"><code class="docutils literal notranslate"><span class="pre">units()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#module-qudipy.utils">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#qudipy-utils-constants-module">qudipy.utils.constants module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#qudipy-utils-helpers-module">qudipy.utils.helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#qudipy-utils-interpolator-module">qudipy.utils.interpolator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#qudipy-utils-sim-params-module">qudipy.utils.sim_params module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#qudipy-utils-units-module">qudipy.utils.units module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qudipy.utils.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<section id="module-qudipy">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qudipy" title="Permalink to this heading"></a></h2>
-<p>Created on Mon Jun  1 21:58:04 2020</p>
-<p>&#64;author: simba</p>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 </section>
 </section>
 

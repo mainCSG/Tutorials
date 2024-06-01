@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Effective Spin Control: Pulse Design &amp; State Evolution &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -127,7 +126,7 @@
            <div itemprop="articleBody">
              
   <section id="Effective-Spin-Control:-Pulse-Design-&amp;-State-Evolution">
-<h1>Effective Spin Control: Pulse Design &amp; State Evolution<a class="headerlink" href="#Effective-Spin-Control:-Pulse-Design-&-State-Evolution" title="Permalink to this heading"></a></h1>
+<h1>Effective Spin Control: Pulse Design &amp; State Evolution<a class="headerlink" href="#Effective-Spin-Control:-Pulse-Design-&-State-Evolution" title="Link to this heading"></a></h1>
 <p>This tutorial shows how to construct effective spin parameter pulses (g-factors, exchange, ESR field) for basic quantum gates using Constrained Shape Pulse algorithm (see <a class="reference external" href="https://uwspace.uwaterloo.ca/handle/10012/17823">Chapter 4 of Bohdan’s thesis</a> for theory).</p>
 <p>The outline of each test case is as follows: 1. Creating <strong>spin states</strong>: initial and expected after evolution for comparison</p>
 <ol class="arabic simple" start="2">
@@ -186,13 +185,13 @@ c:\QuDiPy
 </div>
 </div>
 <section id="1.-Addressing-individual-spins-in-the-global-ESR-field">
-<h2>1. Addressing individual spins in the global ESR field<a class="headerlink" href="#1.-Addressing-individual-spins-in-the-global-ESR-field" title="Permalink to this heading"></a></h2>
+<h2>1. Addressing individual spins in the global ESR field<a class="headerlink" href="#1.-Addressing-individual-spins-in-the-global-ESR-field" title="Link to this heading"></a></h2>
 <p>The goal of this section is to demonstrate selective rotation of the 1st qubit of a 2-qubit system:</p>
 <div class="math notranslate nohighlight">
 \[Y_1\left(\frac{\pi}{2}\right)
 |\uparrow -\rangle = |+ -\rangle\]</div>
 <section id="1.1-Defining-spin-states-using-State-class">
-<h3>1.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class<a class="headerlink" href="#1.1-Defining-spin-states-using-State-class" title="Permalink to this heading"></a></h3>
+<h3>1.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class<a class="headerlink" href="#1.1-Defining-spin-states-using-State-class" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">State</span></code> class from <code class="docutils literal notranslate"><span class="pre">qudipy.system.state</span></code> handles many-electron states in different spaces: - spin - orbital - valley - Hubbard (spin + charge)</p>
 <p>Currently, only spin states are handled. Defining some basic 1-qubit spin wavefunctions:</p>
 <div class="nbinput nblast docutils container">
@@ -227,7 +226,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="1.2-Creating-or-selecting-shape-functions">
-<h3>1.2 Creating or selecting shape functions<a class="headerlink" href="#1.2-Creating-or-selecting-shape-functions" title="Permalink to this heading"></a></h3>
+<h3>1.2 Creating or selecting shape functions<a class="headerlink" href="#1.2-Creating-or-selecting-shape-functions" title="Link to this heading"></a></h3>
 <p>The shape function that defines the effective pulses can be any function of normalized time with unit expectation value:</p>
 <div class="math notranslate nohighlight">
 \[S(\tau): [0,1]\rightarrow \mathbb{R}: \qquad  \langle S \rangle = \int_0^1 S(\tau) \mathrm{d}\tau = 1.\]</div>
@@ -277,7 +276,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="1.3-Constructing-DesignerEffective-objects">
-<h3>1.3 Constructing DesignerEffective objects<a class="headerlink" href="#1.3-Constructing-DesignerEffective-objects" title="Permalink to this heading"></a></h3>
+<h3>1.3 Constructing DesignerEffective objects<a class="headerlink" href="#1.3-Constructing-DesignerEffective-objects" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Designer</span></code> class and its child <code class="docutils literal notranslate"><span class="pre">DesignerEffective</span></code> handle control parameters that determine time-dependent pulse sequences. The functions that construct DesignerEffective objects for: - arbitrary qubit rotations (<code class="docutils literal notranslate"><span class="pre">rot</span></code>), - Hadamard gates (<code class="docutils literal notranslate"><span class="pre">hadamard</span></code>), - <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> gates (<code class="docutils literal notranslate"><span class="pre">swapk</span></code>), and - CPHASE gates (<code class="docutils literal notranslate"><span class="pre">cphase</span></code>),</p>
 <p>are defined in <code class="docutils literal notranslate"><span class="pre">qudipy.design.effective</span></code> module.</p>
 <p>All designer-like objects require these parameters in advance to determine the idling state and the rotating frame: 1. g-factor of idling qubits, and 2. <strong>either</strong> Zeeman field [T] <strong>or</strong> ESR central frequency [Hz]</p>
@@ -307,7 +306,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="1.3-Composing-ControlPulse-objects-using-a-designer">
-<h3>1.3 Composing ControlPulse objects using a designer<a class="headerlink" href="#1.3-Composing-ControlPulse-objects-using-a-designer" title="Permalink to this heading"></a></h3>
+<h3>1.3 Composing ControlPulse objects using a designer<a class="headerlink" href="#1.3-Composing-ControlPulse-objects-using-a-designer" title="Link to this heading"></a></h3>
 <p>Objects from <code class="docutils literal notranslate"><span class="pre">Designer</span></code> family can be used to compose time-dependent pulses with different shapes, lengths, and constraints (min/max values of parameters, bandwitdth, etc.)</p>
 <p>In particular, each call of <code class="docutils literal notranslate"><span class="pre">compose</span></code> method requires specification of the following parameters: - chosen shape function/string <code class="docutils literal notranslate"><span class="pre">shape</span></code>, - number of time steps <code class="docutils literal notranslate"><span class="pre">num_steps</span></code>, and - pulse length (in seconds) <code class="docutils literal notranslate"><span class="pre">length</span></code>.</p>
 <p>If the constraints are additionally provided as extra keyword parameters, a key <code class="docutils literal notranslate"><span class="pre">length='optimize'</span></code> will find the shortest possible pulse length automatically <strong>(does not work for now)</strong></p>
@@ -366,7 +365,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="1.4-Evolving-spin-systems">
-<h3>1.4 Evolving spin systems<a class="headerlink" href="#1.4-Evolving-spin-systems" title="Permalink to this heading"></a></h3>
+<h3>1.4 Evolving spin systems<a class="headerlink" href="#1.4-Evolving-spin-systems" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line">The method <code class="docutils literal notranslate"><span class="pre">evolve</span></code> of a <code class="docutils literal notranslate"><span class="pre">State</span></code> object simulates the system evolution under a given pulse or iterable (tuple or list) of pulses. The iterable could be irregular, like, for example, <code class="docutils literal notranslate"><span class="pre">[pulse1,</span> <span class="pre">pulse2,</span> <span class="pre">[pulse3,</span> <span class="pre">(pulse4,</span> <span class="pre">pulse5)],</span> <span class="pre">pulse6]</span></code>. It returns a dictionary of 1D arrays of the user-specified parameters that are monitored throughout the simulation: - Purity of the density matrix - Evaluated when <code class="docutils literal notranslate"><span class="pre">eval_purity=True</span></code> is specified - <code class="docutils literal notranslate"><span class="pre">&quot;purity&quot;</span></code> entry in the resultant dictionary</div>
 <div class="line">- Fidelity of the density matrix with respect to the theoretical (initial,expected final, etc.) matrix - Evaluated when <code class="docutils literal notranslate"><span class="pre">eval_fidelity=True</span></code> and the reference matrix <code class="docutils literal notranslate"><span class="pre">rho_reference</span></code> are specified - <code class="docutils literal notranslate"><span class="pre">&quot;fidelity&quot;</span></code> entry in the resultant dictionary</div>
@@ -477,7 +476,7 @@ ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04
 </section>
 </section>
 <section id="2.-\mathrm{SWAP}^k-two-qubit-gates">
-<h2>2. <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates<a class="headerlink" href="#2.-\mathrm{SWAP}^k-two-qubit-gates" title="Permalink to this heading"></a></h2>
+<h2>2. <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates<a class="headerlink" href="#2.-\mathrm{SWAP}^k-two-qubit-gates" title="Link to this heading"></a></h2>
 <p>This and the following sections show how to quickly run everything altogether: state definition, pulse design, and state evolution.</p>
 <p>Testing the operation <span class="math notranslate nohighlight">\(\mathrm{SWAP}_{12} |+ \uparrow -\rangle = |\uparrow + -\rangle\)</span> with four <span class="math notranslate nohighlight">\(\mathrm{SWAP}^{1/4}\)</span> pulses of different lengths.</p>
 <blockquote>
@@ -613,7 +612,7 @@ SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&
 </div>
 </section>
 <section id="3.-\mathrm{CPHASE}(\alpha)-two-qubit-gates">
-<h2>3. <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> two-qubit gates<a class="headerlink" href="#3.-\mathrm{CPHASE}(\alpha)-two-qubit-gates" title="Permalink to this heading"></a></h2>
+<h2>3. <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> two-qubit gates<a class="headerlink" href="#3.-\mathrm{CPHASE}(\alpha)-two-qubit-gates" title="Link to this heading"></a></h2>
 <p>Running two control-Z operations in parallel on a 4-qubit system:</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{CZ}_{12} \mathrm{CZ}_{34}| + \downarrow \downarrow - \rangle = | - \downarrow \downarrow +\rangle\]</div>

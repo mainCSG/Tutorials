@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Finding Best Quartic Fit - 2 dot system &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -136,13 +135,13 @@
            <div itemprop="articleBody">
              
   <section id="Finding-Best-Quartic-Fit---2-dot-system">
-<h1>Finding Best Quartic Fit - 2 dot system<a class="headerlink" href="#Finding-Best-Quartic-Fit---2-dot-system" title="Permalink to this heading"></a></h1>
+<h1>Finding Best Quartic Fit - 2 dot system<a class="headerlink" href="#Finding-Best-Quartic-Fit---2-dot-system" title="Link to this heading"></a></h1>
 <p>The Goal of this tutorial is to demonstrate the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> function as it creates a quartic potential well of best fit.</p>
 <p><strong>Section 0.0 ``fit_quartic()`` Function</strong> &gt; Details about the fit function to note before the tutorial</p>
 <p><strong>Section 1.0 Basic Fit Example</strong> &gt; Creating a basic quartic potential well with the same parameters as the fitted well to check for validity. We will compare parameter values and plot the potentials.</p>
 <p><strong>Section 2.0 Adding Complexity</strong> &gt; Creating a slightly more complex well and adding noise to demonstrate the functions ability to smooth the data and create the potential of best fit</p>
 <section id="Section-0.0---fit_quartic()-Function">
-<h2>Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function<a class="headerlink" href="#Section-0.0---fit_quartic()-Function" title="Permalink to this heading"></a></h2>
+<h2>Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function<a class="headerlink" href="#Section-0.0---fit_quartic()-Function" title="Link to this heading"></a></h2>
 <p>First, Import all of the needed modules</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -176,7 +175,7 @@
 </div>
 </div>
 <section id="0.1-How-is-the-data-being-fit?">
-<h3>0.1 How is the data being fit?<a class="headerlink" href="#0.1-How-is-the-data-being-fit?" title="Permalink to this heading"></a></h3>
+<h3>0.1 How is the data being fit?<a class="headerlink" href="#0.1-How-is-the-data-being-fit?" title="Link to this heading"></a></h3>
 <p>The data is being fit to the following quartic function:</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -256,7 +255,7 @@ x_{max} = x_c + \frac{2 e \mathscr{E}}{m^* \omega_0^2} + o(\zeta)
         U_0 \approx \frac{U_{max} + U_1 + U_2}{3} - \frac{m^* \omega_0^2 d^2}{24}\end{split}\]</div>
 </section>
 <section id="0.2-What-is-the-fit_quartic()-Function">
-<h3>0.2 What is the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function<a class="headerlink" href="#0.2-What-is-the-fit_quartic()-Function" title="Permalink to this heading"></a></h3>
+<h3>0.2 What is the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function<a class="headerlink" href="#0.2-What-is-the-fit_quartic()-Function" title="Link to this heading"></a></h3>
 <p>To find the potential of best fit we must call the <strong>‘quartic’</strong> function from the <strong>potential.manipulate.py</strong> module. The function has the following parameters and Optional Parameters:</p>
 <p><code class="docutils literal notranslate"><span class="pre">quartic(U_data,</span> <span class="pre">gparams,</span> <span class="pre">y_slice=0,</span> <span class="pre">material='vacuum',</span> <span class="pre">return_params=False)</span></code></p>
 <div class="line-block">
@@ -278,9 +277,9 @@ x_{max} = x_c + \frac{2 e \mathscr{E}}{m^* \omega_0^2} + o(\zeta)
 </section>
 </section>
 <section id="Section-1.0-Basic-Fit-Example">
-<h2>Section 1.0 Basic Fit Example<a class="headerlink" href="#Section-1.0-Basic-Fit-Example" title="Permalink to this heading"></a></h2>
+<h2>Section 1.0 Basic Fit Example<a class="headerlink" href="#Section-1.0-Basic-Fit-Example" title="Link to this heading"></a></h2>
 <section id="1.1-Create-Potential-Data">
-<h3>1.1 Create Potential Data<a class="headerlink" href="#1.1-Create-Potential-Data" title="Permalink to this heading"></a></h3>
+<h3>1.1 Create Potential Data<a class="headerlink" href="#1.1-Create-Potential-Data" title="Link to this heading"></a></h3>
 <p>First, let’s create a 2D Array of potential values that we will pass to the fitting function. Let us create a potential identiсal to the fitting function so that we may verify our values.</p>
 <p>Let’s create a well of the shape specified in <em>0.1</em> so that we can test that the fitted well gives us back the same potentails. To avoid numerical errors, all values shall be specified in SI!</p>
 <div class="nbinput nblast docutils container">
@@ -314,7 +313,7 @@ x_{max} = x_c + \frac{2 e \mathscr{E}}{m^* \omega_0^2} + o(\zeta)
 </div>
 </section>
 <section id="1.2-Graph-the-data-plots">
-<h3>1.2 Graph the data plots<a class="headerlink" href="#1.2-Graph-the-data-plots" title="Permalink to this heading"></a></h3>
+<h3>1.2 Graph the data plots<a class="headerlink" href="#1.2-Graph-the-data-plots" title="Link to this heading"></a></h3>
 <p>Next, graph <code class="docutils literal notranslate"><span class="pre">U_data</span></code>, the potential that we wish to have fitted.</p>
 <p>Below we have plotted <code class="docutils literal notranslate"><span class="pre">x</span></code> vs. <code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> vs. <code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">xy</span></code> vs. <code class="docutils literal notranslate"><span class="pre">U</span></code> and a 3D plot of the potential to provide an in depth view of the potential that we will pass to the fitting function.</p>
 <div class="nbinput docutils container">
@@ -391,7 +390,7 @@ Text(0.5, 0.92, &#39;Quartic Potential&#39;)
 </div>
 </section>
 <section id="1.3-Find-quartic-well-of-best-fit">
-<h3>1.3 Find quartic well of best fit<a class="headerlink" href="#1.3-Find-quartic-well-of-best-fit" title="Permalink to this heading"></a></h3>
+<h3>1.3 Find quartic well of best fit<a class="headerlink" href="#1.3-Find-quartic-well-of-best-fit" title="Link to this heading"></a></h3>
 <p>We will now use the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> function to find the potential of best fit. We will compare the optimized parameters next to the parameters that we created the data from to verify that our function has suceeded in finding the appropriate parameters of best fit.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -484,7 +483,7 @@ Text(0.5, 0.92, &#39;Quartic Potential&#39;)
 </div>
 </section>
 <section id="1.4-Graph-The-Quartic-Potential-of-Best-Fit">
-<h3>1.4 Graph The Quartic Potential of Best Fit<a class="headerlink" href="#1.4-Graph-The-Quartic-Potential-of-Best-Fit" title="Permalink to this heading"></a></h3>
+<h3>1.4 Graph The Quartic Potential of Best Fit<a class="headerlink" href="#1.4-Graph-The-Quartic-Potential-of-Best-Fit" title="Link to this heading"></a></h3>
 <p>We will now graph <code class="docutils literal notranslate"><span class="pre">U_fit</span></code></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -563,13 +562,13 @@ Text(0.5, 0.92, &#39;Quartic Potential of best Fit&#39;)
 </section>
 </section>
 <section id="Section-2.0-Adding-Complexity">
-<h2>Section 2.0 Adding Complexity<a class="headerlink" href="#Section-2.0-Adding-Complexity" title="Permalink to this heading"></a></h2>
+<h2>Section 2.0 Adding Complexity<a class="headerlink" href="#Section-2.0-Adding-Complexity" title="Link to this heading"></a></h2>
 <p>Since we have verified the simplest case, let us add complexity to our data by changing the position of the energies of the wells and adding some noise. We will follow the same procedure as in Section 1.0.</p>
 <blockquote>
 <div><p><strong>Note:</strong> the HL/HM methods currently do not handle noise effects</p>
 </div></blockquote>
 <section id="2.1-Define-Parameters">
-<h3>2.1 Define Parameters<a class="headerlink" href="#2.1-Define-Parameters" title="Permalink to this heading"></a></h3>
+<h3>2.1 Define Parameters<a class="headerlink" href="#2.1-Define-Parameters" title="Link to this heading"></a></h3>
 <p>We will create another quartic well, but this time we will add random noise to simulate a more realistic situation.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -614,7 +613,7 @@ Text(0.5, 0.92, &#39;Quartic Potential of best Fit&#39;)
 </div>
 </section>
 <section id="2.2-Graph-Data">
-<h3>2.2 Graph Data<a class="headerlink" href="#2.2-Graph-Data" title="Permalink to this heading"></a></h3>
+<h3>2.2 Graph Data<a class="headerlink" href="#2.2-Graph-Data" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -690,7 +689,7 @@ Text(0.5, 0.92, &#39;Quartic Potential&#39;)
 </div>
 </section>
 <section id="2.2-Retrieve-Fit-Parameters-and-Compare">
-<h3>2.2 Retrieve Fit Parameters and Compare<a class="headerlink" href="#2.2-Retrieve-Fit-Parameters-and-Compare" title="Permalink to this heading"></a></h3>
+<h3>2.2 Retrieve Fit Parameters and Compare<a class="headerlink" href="#2.2-Retrieve-Fit-Parameters-and-Compare" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -775,7 +774,7 @@ Text(0.5, 0.92, &#39;Quartic Potential&#39;)
 </div>
 </section>
 <section id="2.3-Plot-Fitted-Potential">
-<h3>2.3 Plot Fitted Potential<a class="headerlink" href="#2.3-Plot-Fitted-Potential" title="Permalink to this heading"></a></h3>
+<h3>2.3 Plot Fitted Potential<a class="headerlink" href="#2.3-Plot-Fitted-Potential" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>

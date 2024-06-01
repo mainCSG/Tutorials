@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DotArray: Alternative Class Construction &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -120,7 +119,7 @@
            <div itemprop="articleBody">
              
   <section id="DotArray:-Alternative-Class-Construction">
-<h1>DotArray: Alternative Class Construction<a class="headerlink" href="#DotArray:-Alternative-Class-Construction" title="Permalink to this heading"></a></h1>
+<h1>DotArray: Alternative Class Construction<a class="headerlink" href="#DotArray:-Alternative-Class-Construction" title="Link to this heading"></a></h1>
 <p>In this jupyter notebook we briefly show how to use alternative methods for creating DotArray object instances.</p>
 <p>First import the relevant modules,</p>
 <div class="nbinput docutils container">
@@ -162,7 +161,7 @@ c:\QuDiPy
 </div>
 </div>
 <section id="Define-DotArray-Object-Using-Simulated-Potentials">
-<h2>Define DotArray Object Using Simulated Potentials<a class="headerlink" href="#Define-DotArray-Object-Using-Simulated-Potentials" title="Permalink to this heading"></a></h2>
+<h2>Define DotArray Object Using Simulated Potentials<a class="headerlink" href="#Define-DotArray-Object-Using-Simulated-Potentials" title="Link to this heading"></a></h2>
 <p>The most common method for constructing dot array objects is to use simulated electrostatic potentials from finite element solvers. This method for dot array object creation consists of:</p>
 <ol class="arabic simple">
 <li><p>Defining the path to the raw 3D potential data, the desired directory to save 2D potential slices, and a directory that MIGHT exist containing the 2D potential data. If the pre-processed data does not exist, then it will be generated under a directory with the name specified in <code class="docutils literal notranslate"><span class="pre">preprocessed_dir</span></code>.</p></li>
@@ -313,7 +312,7 @@ c:\QuDiPy\QuDiPy data\tutorials\processed\2QD_processed\tutorial_spin_data_size_
 </div>
 </section>
 <section id="Define-DotArray-Object-Using-Analytic-Potentials">
-<h2>Define DotArray Object Using Analytic Potentials<a class="headerlink" href="#Define-DotArray-Object-Using-Analytic-Potentials" title="Permalink to this heading"></a></h2>
+<h2>Define DotArray Object Using Analytic Potentials<a class="headerlink" href="#Define-DotArray-Object-Using-Analytic-Potentials" title="Link to this heading"></a></h2>
 <p>Instead of constructing a dot array objecting using simulated potentials, we can define an analytic potential function parameterized by various control parameters. The example below parameterizes the analytic potential using effective quantum dot size and dot separation.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -335,7 +334,7 @@ c:\QuDiPy\QuDiPy data\tutorials\processed\2QD_processed\tutorial_spin_data_size_
 </div>
 </section>
 <section id="Quartic-Potential-For-a-Double-Quantum-Dot">
-<h2>Quartic Potential For a Double Quantum Dot<a class="headerlink" href="#Quartic-Potential-For-a-Double-Quantum-Dot" title="Permalink to this heading"></a></h2>
+<h2>Quartic Potential For a Double Quantum Dot<a class="headerlink" href="#Quartic-Potential-For-a-Double-Quantum-Dot" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>

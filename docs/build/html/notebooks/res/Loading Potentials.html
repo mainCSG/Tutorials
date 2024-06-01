@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loading Potentials Tutorial &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -123,11 +122,11 @@
            <div itemprop="articleBody">
              
   <section id="Loading-Potentials-Tutorial">
-<h1>Loading Potentials Tutorial<a class="headerlink" href="#Loading-Potentials-Tutorial" title="Permalink to this heading"></a></h1>
+<h1>Loading Potentials Tutorial<a class="headerlink" href="#Loading-Potentials-Tutorial" title="Link to this heading"></a></h1>
 <p>This tutorial will show you how to use the potential module to load pre-processed potential files. It creates a PotentialInterpolator object which allows us to find the potential landscape at arbitrary control voltage values.</p>
 <section id="1.-Load-the-relevant-modules">
-<h2>1. Load the relevant modules<a class="headerlink" href="#1.-Load-the-relevant-modules" title="Permalink to this heading"></a></h2>
-<p>The file nextnano_3D takes in a folder of pre-processed potential files. These files have to follow the naming convention ‘TYPE_C1NAME_C1VAL_C2NAME_C2VAL_…_CNNAME_CNVAL.txt’ where TYPE = ‘Uxy’ or ‘Ez’. The C#NAME indicates the name for the control voltages and C#VAL indicates the corresponding control voltage value. The TYPE flag indicates whether you are loading potentials or electric field files.</p>
+<h2>1. Load the relevant modules<a class="headerlink" href="#1.-Load-the-relevant-modules" title="Link to this heading"></a></h2>
+<p>The file nextnano_3D takes in a folder of pre-processed potential files. These files have to follow the naming convention ‘<a href="#id1"><span class="problematic" id="id2">TYPE_C1NAME_C1VAL_C2NAME_C2VAL_</span></a>…_CNNAME_CNVAL.txt’ where TYPE = ‘Uxy’ or ‘Ez’. The C#NAME indicates the name for the control voltages and C#VAL indicates the corresponding control voltage value. The TYPE flag indicates whether you are loading potentials or electric field files.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -170,7 +169,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="2.-Define-which-files-to-load-and-load-them">
-<h2>2. Define which files to load and load them<a class="headerlink" href="#2.-Define-which-files-to-load-and-load-them" title="Permalink to this heading"></a></h2>
+<h2>2. Define which files to load and load them<a class="headerlink" href="#2.-Define-which-files-to-load-and-load-them" title="Link to this heading"></a></h2>
 <p>We need to specify the name of the folder that contains the potential files as well as the names for each potential file.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -248,7 +247,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="3.-Store-x-and-y-coordinates-in-GridParameters-object">
-<h2>3. Store x and y coordinates in GridParameters object<a class="headerlink" href="#3.-Store-x-and-y-coordinates-in-GridParameters-object" title="Permalink to this heading"></a></h2>
+<h2>3. Store x and y coordinates in GridParameters object<a class="headerlink" href="#3.-Store-x-and-y-coordinates-in-GridParameters-object" title="Link to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -267,7 +266,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="4.-Build-the-PotentialInterpolator-object">
-<h2>4. Build the PotentialInterpolator object<a class="headerlink" href="#4.-Build-the-PotentialInterpolator-object" title="Permalink to this heading"></a></h2>
+<h2>4. Build the PotentialInterpolator object<a class="headerlink" href="#4.-Build-the-PotentialInterpolator-object" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -299,7 +298,7 @@ c:\QuDiPy
 </div>
 </section>
 <section id="5.-Do-some-potential-interpolation-(with-lots-of-plotting-examples)">
-<h2>5. Do some potential interpolation (with lots of plotting examples)<a class="headerlink" href="#5.-Do-some-potential-interpolation-(with-lots-of-plotting-examples)" title="Permalink to this heading"></a></h2>
+<h2>5. Do some potential interpolation (with lots of plotting examples)<a class="headerlink" href="#5.-Do-some-potential-interpolation-(with-lots-of-plotting-examples)" title="Link to this heading"></a></h2>
 <p>Now let’s show how we can actually use this object to do interpolation</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -598,7 +597,7 @@ c:\QuDiPy\qudipy\potential\field_interpolator.py:466: UserWarning: The figure la
 </div>
 </section>
 <section id="6.-Define-Potentials-Function-Using-'Potential'-Class">
-<h2>6. Define Potentials Function Using ‘Potential’ Class<a class="headerlink" href="#6.-Define-Potentials-Function-Using-'Potential'-Class" title="Permalink to this heading"></a></h2>
+<h2>6. Define Potentials Function Using ‘Potential’ Class<a class="headerlink" href="#6.-Define-Potentials-Function-Using-'Potential'-Class" title="Link to this heading"></a></h2>
 <p>The <strong>Potential</strong> Class allows the user to easily specify a well to use instead of coding their own function. Voltages, dot seperation, and omegas must be specified for these hardcoded functions.</p>
 <p>The Available Potentials Are:</p>
 <div class="line-block">

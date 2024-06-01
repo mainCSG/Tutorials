@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Electron Shuttling &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -122,10 +121,10 @@
            <div itemprop="articleBody">
              
   <section id="Electron-Shuttling">
-<h1>Electron Shuttling<a class="headerlink" href="#Electron-Shuttling" title="Permalink to this heading"></a></h1>
+<h1>Electron Shuttling<a class="headerlink" href="#Electron-Shuttling" title="Link to this heading"></a></h1>
 <p>This tutorial will show how to simulate electron shuttling using QuDiPy. We will show you can build an example shuttling pulse and subsequently simulate electron shuttling through a triple quantum dot chain.</p>
 <section id="1.-Load-relevant-modules-and-add-the-current-location-to-path">
-<h2>1. Load relevant modules and add the current location to path<a class="headerlink" href="#1.-Load-relevant-modules-and-add-the-current-location-to-path" title="Permalink to this heading"></a></h2>
+<h2>1. Load relevant modules and add the current location to path<a class="headerlink" href="#1.-Load-relevant-modules-and-add-the-current-location-to-path" title="Link to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -156,7 +155,7 @@
 </div>
 </section>
 <section id="2.-Load-potential-files">
-<h2>2. Load potential files<a class="headerlink" href="#2.-Load-potential-files" title="Permalink to this heading"></a></h2>
+<h2>2. Load potential files<a class="headerlink" href="#2.-Load-potential-files" title="Link to this heading"></a></h2>
 <p>We need to first construct a <code class="docutils literal notranslate"><span class="pre">PotentialInterpolator</span></code> object from some pre-processed potential files (i.e. potentials that have already been exported fron nextnano into a csv file containing a 2D potential slice). The potentials we are loading correspond to a 5-quantum dot linear chain system where each dot in the chain is formed by a single plunger gate labelled <em>V#</em>. The gap between plunger gates forms a tunnel barrier between neighboring quantum dots. For our simulations, the outer-most
 plunger gate voltages remain fixed, and we will only shuttle an electron through the middle three dots using plunger gates <em>V2</em>, <em>V3</em>, and <em>V4</em>.</p>
 <p>Please refer to the Loading Potentials tutorial for more information on loading potentials.</p>
@@ -204,7 +203,7 @@ plunger gate voltages remain fixed, and we will only shuttle an electron through
 </div>
 </section>
 <section id="3.-Building-the-shuttling-control-pulse">
-<h2>3. Building the shuttling control pulse<a class="headerlink" href="#3.-Building-the-shuttling-control-pulse" title="Permalink to this heading"></a></h2>
+<h2>3. Building the shuttling control pulse<a class="headerlink" href="#3.-Building-the-shuttling-control-pulse" title="Link to this heading"></a></h2>
 <p>Now, we need to actually construct a control pulse to shuttle an electron across our triple quantum dot chain. We will initialize the electron in the leftmost dot underneath <em>V2</em> and subsequently shuttle the electron to be underneath <em>V3</em> and finally <em>V4</em>. For simplicity, we will only vary a single plunger gate voltage at a time.</p>
 <p>To start then, we will define the initial voltage configuration of the pulse.</p>
 <div class="nbinput docutils container">
@@ -401,7 +400,7 @@ we get close to the resonant tunnel coupling point at which we will sweep slower
 </div>
 </section>
 <section id="4.-Evolving-over-time">
-<h2>4. Evolving over time<a class="headerlink" href="#4.-Evolving-over-time" title="Permalink to this heading"></a></h2>
+<h2>4. Evolving over time<a class="headerlink" href="#4.-Evolving-over-time" title="Link to this heading"></a></h2>
 <p>We will now go ahead and do a simulation using the shuttling pulse. The shuttling module has the <code class="docutils literal notranslate"><span class="pre">RSP_time_evolution_1D</span></code> method which is real space (RSP) time evolution of a 1D coordinate system. It uses the split-operator method to calculate the evolution. The default time step for each simulation frame is <span class="math notranslate nohighlight">\(5*10^{-16}\)</span> seconds but can be changed using the <code class="docutils literal notranslate"><span class="pre">dt</span></code> keyword argument.</p>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">show_animation</span></code> keyword argument, we can visualize the wave function evolution during the simulation. In addition, by specifying the <code class="docutils literal notranslate"><span class="pre">save_data</span></code> keyword argument, you can save the adiabaticity data of the evolution for later analysis in a .csv file. Unfortunately, the animation does not currently work in a jupyter notebook and must be ran from terminal.</p>
 <div class="nbinput docutils container">
@@ -440,7 +439,7 @@ All simulations complete! Elapsed time is 3.681E+00 seconds.
 </div>
 </section>
 <section id="5.-Sweeping-pulse-lengths">
-<h2>5. Sweeping pulse lengths<a class="headerlink" href="#5.-Sweeping-pulse-lengths" title="Permalink to this heading"></a></h2>
+<h2>5. Sweeping pulse lengths<a class="headerlink" href="#5.-Sweeping-pulse-lengths" title="Link to this heading"></a></h2>
 <p>Now we will show how you can do sweeps of various pulses and plot the fidelity of the shuttling processes. When <code class="docutils literal notranslate"><span class="pre">save_data=True</span></code> the fidelity of the shuttling process is calculated and saved to a .csv file. You can specify the file name and directory to save at using the <code class="docutils literal notranslate"><span class="pre">save_name</span></code> and <code class="docutils literal notranslate"><span class="pre">save_dir</span></code> Optional Parameters. The <code class="docutils literal notranslate"><span class="pre">save_overwrite</span></code> keyword argument will overwrite the save file if it already exists in the save location. If <code class="docutils literal notranslate"><span class="pre">save_overwrite=False</span></code>, then the old file will be moved
 to <code class="docutils literal notranslate"><span class="pre">save_name</span> <span class="pre">+</span> <span class="pre">'_ow'</span></code> to avoid being overwritten by the new data.</p>
 <p>In order to sweep over several control pulses, we must compile an iterable of ControlPulse objects and then pass that into the evolution function.</p>

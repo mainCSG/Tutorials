@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DotArray Object for a Quadruple Quantum Dot Array &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,8 +35,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            QuDiPy Simulator
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -122,7 +121,7 @@
            <div itemprop="articleBody">
              
   <section id="DotArray-Object-for-a-Quadruple-Quantum-Dot-Array">
-<h1>DotArray Object for a Quadruple Quantum Dot Array<a class="headerlink" href="#DotArray-Object-for-a-Quadruple-Quantum-Dot-Array" title="Permalink to this heading"></a></h1>
+<h1>DotArray Object for a Quadruple Quantum Dot Array<a class="headerlink" href="#DotArray-Object-for-a-Quadruple-Quantum-Dot-Array" title="Link to this heading"></a></h1>
 <p>This tutorial tests the dot maksing and effective parameter calculation on a 4-qubit system.</p>
 <p>See 2-qubit tutorial for more detailed explanations.</p>
 <p>Necessary imports and default plotting parameters:</p>
@@ -163,7 +162,7 @@ c:\QuDiPy
 </div>
 </div>
 <section id="1.-Generate-Dots-object-instance">
-<h2>1. Generate Dots object instance<a class="headerlink" href="#1.-Generate-Dots-object-instance" title="Permalink to this heading"></a></h2>
+<h2>1. Generate Dots object instance<a class="headerlink" href="#1.-Generate-Dots-object-instance" title="Link to this heading"></a></h2>
 <p>Define variables to initialize Dots object instance</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -228,7 +227,7 @@ c:\QuDiPy\QuDiPy data\tutorials\processed\4QD_processed\tutorial_spin_data_size_
 </pre></div></div>
 </div>
 <section id="1.1-Dot-Masking">
-<h3>1.1 Dot Masking<a class="headerlink" href="#1.1-Dot-Masking" title="Permalink to this heading"></a></h3>
+<h3>1.1 Dot Masking<a class="headerlink" href="#1.1-Dot-Masking" title="Link to this heading"></a></h3>
 <p>Checking how individual dots and dot pairs are masked</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -374,7 +373,7 @@ array([1.37546074e-36, 3.90273504e-44, 3.49831058e-37])
 </section>
 </section>
 <section id="2-Evaluate-effective-parameters">
-<h2>2 Evaluate effective parameters<a class="headerlink" href="#2-Evaluate-effective-parameters" title="Permalink to this heading"></a></h2>
+<h2>2 Evaluate effective parameters<a class="headerlink" href="#2-Evaluate-effective-parameters" title="Link to this heading"></a></h2>
 <p>For a specific control voltage configuration, the <span class="math notranslate nohighlight">\(g\)</span>-factor deviations and exchange couplings are determined for each dot or neighboring pair, respectively.</p>
 <p>g-factor deviation for multiple voltage vectors. Evaluated exactly (<code class="docutils literal notranslate"><span class="pre">exact=True</span></code>) or using the interpolation object (<code class="docutils literal notranslate"><span class="pre">exact=False</span></code>)</p>
 <div class="nbinput docutils container">
