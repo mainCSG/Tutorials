@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finding Best Quartic Fit - 2 dot system &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Loading potentials tutorial" href="Loading%20Potentials.html" />
+    <link rel="prev" title="DotArray: Alternative Class Construction" href="DotArray%20Class%20Constructors.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Animations.html">Animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Finding Best Quartic Fit - 2 dot system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#0.0---fit_quartic()-Function">0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#0.1-How-is-the-data-being-fit?">0.1 How is the data being fit?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#0.2-What-is-the-fit_quartic()-Function">0.2 What is the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#1.1-Create-Potential-Data">1.1 Create Potential Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.2-Graph-the-data-plots">1.2 Graph the data plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.3-Find-quartic-well-of-best-fit">1.3 Find quartic well of best fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.4-Graph-The-Quartic-Potential-of-Best-Fit">1.4 Graph The Quartic Potential of Best Fit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#2.1-Define-Parameters">2.1 Define Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#2.2-Graph-Data">2.2 Graph Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web/Website%20Acknowledgements.html">Website Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Finding Best Quartic Fit - 2 dot system</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Finding-Best-Quartic-Fit---2-dot-system">
+<h1>Finding Best Quartic Fit - 2 dot system<a class="headerlink" href="#Finding-Best-Quartic-Fit---2-dot-system" title="Link to this heading"></a></h1>
+<p>The Goal of this tutorial is to demonstrate the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> function as it creates a quartic potential well of best fit.</p>
+<p><strong>Section 0.0 ``fit_quartic()`` Function</strong> &gt; Details about the fit function to note before the tutorial</p>
+<p><strong>Section 1.0 Basic Fit Example</strong> &gt; Creating a basic quartic potential well with the same parameters as the fitted well to check for validity. We will compare parameter values and plot the potentials.</p>
+<p><strong>Section 2.0 Adding Complexity</strong> &gt; Creating a slightly more complex well and adding noise to demonstrate the functions ability to smooth the data and create the potential of best fit</p>
+<section id="0.0---fit_quartic()-Function">
+<h2>0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function<a class="headerlink" href="#0.0---fit_quartic()-Function" title="Link to this heading"></a></h2>
+<p>First, Import all of the needed modules</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="c1"># update base working directory to QuDiPy</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">qudipy.utils</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">qudipy.potential.manipulate</span> <span class="kn">import</span> <span class="n">fit_quartic</span>
+<span class="kn">from</span> <span class="nn">qudipy.potential</span> <span class="kn">import</span> <span class="n">GridParameters</span>
+</pre></div>
+</div>
+</div>
+<section id="0.1-How-is-the-data-being-fit?">
+<h3>0.1 How is the data being fit?<a class="headerlink" href="#0.1-How-is-the-data-being-fit?" title="Link to this heading"></a></h3>
+<p>The data is being fit to the following quartic function:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[U_{fit}(x,y) = \frac{m^* \omega_0^2}{2}\left(\frac{[(x-x_c)^2-d^2]^2}{4d^2} + (y - y_c)^2\right) + e \mathscr{E} (x-x_c) + U_0\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(m^*\)</span> and <span class="math notranslate nohighlight">\(e\)</span> are the electron effective mass and charge, respectively, whereas the fitting parameters are: - <span class="math notranslate nohighlight">\((x_c, y_c)\)</span> is the position of the center of the double-dot potential</p>
+</div></blockquote>
+<div class="line-block">
+<div class="line">- <span class="math notranslate nohighlight">\(\omega_0\)</span> determines the effective widths of the quantum dots <span class="math notranslate nohighlight">\(\sqrt{\hbar/m^*\omega_0}\)</span> - <span class="math notranslate nohighlight">\(2 d\)</span> is the dot seperation</div>
+<div class="line">- <span class="math notranslate nohighlight">\(\mathscr{E}\)</span> is the electric field along <span class="math notranslate nohighlight">\(x\)</span> axis, i.e., the major axis connecting two dots - <span class="math notranslate nohighlight">\(U_0\)</span> is the average lowest energy of the two valleys (zero-energy level)</div>
+</div>
+<p><strong>The fitting procedure</strong> is performed on a pair of quantum dots.</p>
+<p>We consider the case when the bias is small compared to the electron confinement energy: this ensures charge stability, among other things. Therefore, <span class="math notranslate nohighlight">\(\zeta = \frac{e \mathscr{E}d}{m^* \omega_0^2 d^2} \ll 1\)</span> is treated as a small parameter.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(y_c\)</span> is found at the position of the <em>global minimum</em> of <span class="math notranslate nohighlight">\(U_{fit}(x,y)\)</span>.</p></li>
+</ol>
+</div></blockquote>
+<p>All further calculations are done for the 1D slice <span class="math notranslate nohighlight">\(U(x) \equiv U_{fit}(x, y=y_c)\)</span></p>
+<blockquote>
+<div><ol class="arabic simple" start="2">
+<li><p>Finding the local minima (approximated by two parabolas) and evaluating potential energies there:</p></li>
+</ol>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[x_{1,2} = x_c \mp d - \frac{e \mathscr{E}}{m^* \omega_0^2} + o(\zeta),
+    \qquad U_{1,2}  = U_0 \mp e \mathscr{E} d
+- \frac{(e \mathscr{E})^2}{2 m^* \omega_0^2 } + o(\zeta^2)\]</div>
+<p>We obtain the estimate for <span class="math notranslate nohighlight">\(d\)</span> up to <span class="math notranslate nohighlight">\(o(\zeta)\)</span> directly from here : $ <span class="math">\quad `:nbsphinx-math:</span>color{indigo}` d <span class="math">\approx `:nbsphinx-math:</span>dfrac{x_1 + x_2}{2}` $</p>
+<blockquote>
+<div><ol class="arabic simple" start="3">
+<li><p>Rewriting <span class="math notranslate nohighlight">\(U(x)\)</span> to find the local maximum (saddle point in 2D): $$ U(x) = U_0 + <span class="math">\frac{m^* \omega_0^2 d^2}{8}</span> + <span class="math">\frac{m^* \omega_0^2}{8 d^2}</span> (x - x_c)^4</p></li>
+</ol>
+<ul>
+<li><p><span class="math">\left`(x - x_c - :nbsphinx-math:</span>frac{2 e mathscr{E}}{m^* omega_0^2}`:nbsphinx-math:<cite>right</cite>)^2</p>
+</li>
+<li><p>$$</p>
+</li>
+</ul>
+</div></blockquote>
+<p>In case of no bias (<span class="math notranslate nohighlight">\(\mathscr{E}=0\)</span>), obviously, <span class="math notranslate nohighlight">\(x_{max}=x_c\)</span>. Since the quadratic term dominates over the quartic one for small values of <span class="math notranslate nohighlight">\(x - x_c\)</span>, we conclude that the local maximum is approximately determined by the quadratic term:</p>
+<div class="math notranslate nohighlight">
+\[x_{max} = x_c + \frac{2 e \mathscr{E}}{m^* \omega_0^2} + o(\zeta),
+\qquad
+U_{max} = U(x_{max}) = U_0 + \frac{m^* \omega_0^2 d^2}{8 }
+                + \frac{(e \mathscr{E})^2}{ m^* \omega_0^2 } + o(\zeta^2)\]</div>
+<blockquote>
+<div><ol class="arabic" start="4">
+<li><p>Rewriting expressions for <span class="math notranslate nohighlight">\(x_1, x_2, x_{max}\)</span> to estimate <span class="math notranslate nohighlight">\(x_c\)</span> to the highest order of <span class="math notranslate nohighlight">\(\zeta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathrm{add\ two\ equations:}\quad \begin{cases} x_1 + x_2 = 2 x_c - \frac{2 e \mathscr{E}}{ m^* \omega_0^2 } + o(\zeta) \\
+x_{max} = x_c + \frac{2 e \mathscr{E}}{m^* \omega_0^2} + o(\zeta)
+\end{cases}
+\quad \Rightarrow \quad \color{indigo} x_c \approx \frac{x_1 + x_2 + x_{max}}{3}\end{split}\]</div>
+</li>
+</ol>
+</div></blockquote>
+<blockquote>
+<div><ol class="arabic simple" start="5">
+<li><p>Rewriting expressions for <span class="math notranslate nohighlight">\(U_1, U_2, U_{max}\)</span> to estimate <span class="math notranslate nohighlight">\(U_0, \omega_0\)</span> to the highest order of <span class="math notranslate nohighlight">\(\zeta\)</span>:</p></li>
+</ol>
+</div></blockquote>
+<p>Eliminating <span class="math notranslate nohighlight">\(U_0\)</span> gives a quadratic equation for <span class="math notranslate nohighlight">\(\color{indigo} m^* \omega_0^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[U_{max} - \frac{U_1 + U_2}{2} = \frac{m^* \omega_0^2 d^2}{8 } + \frac{3}{2} \frac{(e \mathscr{E})^2}{ m^* \omega_0^2 } + o(\zeta^2)\]</div>
+<div class="math notranslate nohighlight">
+\[\Rightarrow \quad    \color{indigo} \omega_0 \approx
+   \sqrt{\frac{1}{2 m^*}\left(k + \sqrt{k^2 - 6 (e \mathscr{E})^2}\right)},
+       \quad  {\color{gray}\mathrm{where}} \quad
+             k = \frac{4}{d^2} \left(2U_{max} - U_1 - U_2\right)\]</div>
+<p>Then, having eliminated the explicit term with <span class="math notranslate nohighlight">\(\mathscr{E}\)</span>, we find the expression for <span class="math notranslate nohighlight">\(U_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}U_{max} + (U_1 + U_2) = 3 U_0 + \frac{m^* \omega_0^2 d^2}{8 } + o(\zeta^2)
+    \\ \Rightarrow  \quad \color{indigo}
+        U_0 \approx \frac{U_{max} + U_1 + U_2}{3} - \frac{m^* \omega_0^2 d^2}{24}\end{split}\]</div>
+</section>
+<section id="0.2-What-is-the-fit_quartic()-Function">
+<h3>0.2 What is the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function<a class="headerlink" href="#0.2-What-is-the-fit_quartic()-Function" title="Link to this heading"></a></h3>
+<p>To find the potential of best fit we must call the <strong>‘quartic’</strong> function from the <strong>potential.manipulate.py</strong> module. The function has the following parameters and Optional Parameters:</p>
+<p><code class="docutils literal notranslate"><span class="pre">quartic(U_data,</span> <span class="pre">gparams,</span> <span class="pre">y_slice=0,</span> <span class="pre">material='vacuum',</span> <span class="pre">return_params=False)</span></code></p>
+<div class="line-block">
+<div class="line"><strong>Parameters</strong></div>
+<div class="line">&gt; - <code class="docutils literal notranslate"><span class="pre">U_data</span></code> = 2D array of potential data to be fit</div>
+<div class="line">&gt; - <code class="docutils literal notranslate"><span class="pre">gparams</span></code> = GridParameters object (follow path qudipy.potential.grid_params.py for more)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Optional Parameters</strong></div>
+<div class="line">&gt; - <code class="docutils literal notranslate"><span class="pre">y_slice=0</span></code> = The y value that the well is centered on, default is at 0</div>
+<div class="line">&gt; - <code class="docutils literal notranslate"><span class="pre">material='vacuum'</span></code> = The material used. Default is vacuum</div>
+<div class="line">&gt; - <code class="docutils literal notranslate"><span class="pre">return_params=False</span></code> = The predicate to determine if the user wishes to return a dictionary of parameter values. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>, and the function will return the 2D array of best fitting potential values.</div>
+</div>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><strong>keys for return_params=True</strong> &gt; When <code class="docutils literal notranslate"><span class="pre">return_params=True</span></code> the function will return a dictionary with parameter values inside. The following are the keys used to call out these parameters. If <code class="docutils literal notranslate"><span class="pre">return_params=False</span></code>, the function will return the 2D Array of fit values: &gt; - ‘U_fit’ : 2D Array of fitted potential values</div>
+<div class="line">&gt; - ‘dot_sep’ : dot_seperation &gt; - ‘e_field_x’ : electric field along <span class="math notranslate nohighlight">\(x\)</span> axis &gt; - ‘omega_0’: characteristic width of the 2-well potential &gt; - ‘x_centre’ : centre of the 2-well potential &gt; - ‘U_0’ : zero energy level</div>
+</div>
+</section>
+</section>
+<section id="Section-1.0-Basic-Fit-Example">
+<h2>Section 1.0 Basic Fit Example<a class="headerlink" href="#Section-1.0-Basic-Fit-Example" title="Link to this heading"></a></h2>
+<section id="1.1-Create-Potential-Data">
+<h3>1.1 Create Potential Data<a class="headerlink" href="#1.1-Create-Potential-Data" title="Link to this heading"></a></h3>
+<p>First, let’s create a 2D Array of potential values that we will pass to the fitting function. Let us create a potential identiсal to the fitting function so that we may verify our values.</p>
+<p>Let’s create a well of the shape specified in <em>0.1</em> so that we can test that the fitted well gives us back the same potentails. To avoid numerical errors, all values shall be specified in SI!</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create Parameters for Data Potential</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mf">30e-9</span> <span class="c1"># half dot seperation (initial guess)</span>
+<span class="n">E1</span> <span class="o">=</span> <span class="mf">2e-19</span> <span class="c1"># min Energy of first well</span>
+<span class="n">E2</span> <span class="o">=</span> <span class="mf">2e-19</span> <span class="c1"># min Energy of second well</span>
+<span class="n">Emax</span> <span class="o">=</span> <span class="mf">3e-19</span> <span class="c1"># Energy at local max</span>
+<span class="n">U0</span> <span class="o">=</span> <span class="p">(</span><span class="n">E2</span> <span class="o">+</span> <span class="n">E1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="c1"># average lowest energy</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">e</span> <span class="c1"># electron charge</span>
+<span class="n">mat_system</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">select_material</span><span class="p">(</span><span class="s1">&#39;Si/SiO2&#39;</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">mat_system</span><span class="o">.</span><span class="n">me</span> <span class="c1"># electron effective mass</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="p">(</span><span class="n">E2</span> <span class="o">-</span> <span class="n">E1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">e</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="c1"># electric field along x axis</span>
+<span class="n">omega0</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="n">d</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Emax</span> <span class="o">-</span> <span class="n">E2</span> <span class="o">-</span> <span class="n">E1</span><span class="p">))</span> <span class="c1"># quartic potential at x0</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># x and y values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">)</span>
+
+
+<span class="n">U_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">omega0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span>\
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x_vals</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">-</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_vals</span><span class="p">))</span> <span class="o">+</span>\
+            <span class="n">epsilon</span> <span class="o">*</span> <span class="n">e</span> <span class="o">*</span> <span class="n">x_vals</span> <span class="o">+</span> <span class="n">U0</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="1.2-Graph-the-data-plots">
+<h3>1.2 Graph the data plots<a class="headerlink" href="#1.2-Graph-the-data-plots" title="Link to this heading"></a></h3>
+<p>Next, graph <code class="docutils literal notranslate"><span class="pre">U_data</span></code>, the potential that we wish to have fitted.</p>
+<p>Below we have plotted <code class="docutils literal notranslate"><span class="pre">x</span></code> vs. <code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> vs. <code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">xy</span></code> vs. <code class="docutils literal notranslate"><span class="pre">U</span></code> and a 3D plot of the potential to provide an in depth view of the potential that we will pass to the fitting function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graph the data</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Potential - x vs. U</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">U_data</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x position&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;U data&#39;</span><span class="p">)</span>
+
+<span class="c1"># Potential - y vs. U</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_vals</span><span class="p">,</span> <span class="n">U_data</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;y position&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;U data&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Potential - xy vs. U</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">U_data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;U data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">surf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">,</span> <span class="n">U_data</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">antialiased</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;U(x, y)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Quartic Potential&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Fitting_20_0.png" src="../../_images/notebooks_res_Fitting_20_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Fitting_20_1.png" src="../../_images/notebooks_res_Fitting_20_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0.92, &#39;Quartic Potential&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Fitting_20_3.png" src="../../_images/notebooks_res_Fitting_20_3.png" />
+</div>
+</div>
+</section>
+<section id="1.3-Find-quartic-well-of-best-fit">
+<h3>1.3 Find quartic well of best fit<a class="headerlink" href="#1.3-Find-quartic-well-of-best-fit" title="Link to this heading"></a></h3>
+<p>We will now use the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> function to find the potential of best fit. We will compare the optimized parameters next to the parameters that we created the data from to verify that our function has suceeded in finding the appropriate parameters of best fit.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># x and y coordinates same as the coords from our data</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">)</span>
+<span class="n">gparams</span> <span class="o">=</span> <span class="n">GridParameters</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">gparams</span><span class="o">.</span><span class="n">update_potential</span><span class="p">(</span><span class="n">U_data</span><span class="p">)</span>
+
+<span class="c1"># Pass all information to fitting function</span>
+<span class="n">U_fit_dict</span> <span class="o">=</span> <span class="n">fit_quartic</span><span class="p">(</span><span class="n">gparams</span><span class="p">,</span>  <span class="n">material</span><span class="o">=</span><span class="s1">&#39;Si/SiO2&#39;</span><span class="p">,</span> <span class="n">return_params</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Retrieve parameters</span>
+<span class="n">U_fit</span> <span class="o">=</span> <span class="n">U_fit_dict</span><span class="p">[</span><span class="s1">&#39;U_fit&#39;</span><span class="p">]</span>
+<span class="n">d_fit</span> <span class="o">=</span> <span class="n">U_fit_dict</span><span class="p">[</span><span class="s1">&#39;dot_sep&#39;</span><span class="p">]</span>
+<span class="n">epsilon_fit</span> <span class="o">=</span> <span class="n">U_fit_dict</span><span class="p">[</span><span class="s1">&#39;e_field_x&#39;</span><span class="p">]</span>
+<span class="n">omega0_fit</span> <span class="o">=</span> <span class="n">U_fit_dict</span><span class="p">[</span><span class="s1">&#39;omega_0&#39;</span><span class="p">]</span>
+<span class="n">x0_fit</span> <span class="o">=</span> <span class="n">U_fit_dict</span><span class="p">[</span><span class="s1">&#39;x_centre&#39;</span><span class="p">]</span>
+<span class="n">U0_fit</span> <span class="o">=</span> <span class="n">U_fit_dict</span><span class="p">[</span><span class="s1">&#39;U_0&#39;</span><span class="p">]</span>
+
+<span class="c1"># Print off parameter values and compare with created potential parameter values</span>
+<span class="n">info_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dot_sep&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">d_fit</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">d_fit</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">],</span> <span class="s1">&#39;e_field_x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">epsilon_fit</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">epsilon_fit</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)],</span> \
+                <span class="s1">&#39;omega_0&#39;</span><span class="p">:[</span><span class="n">omega0_fit</span><span class="p">,</span> <span class="n">omega0</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">omega0_fit</span> <span class="o">-</span> <span class="n">omega0</span><span class="p">)</span><span class="o">/</span><span class="n">omega0</span><span class="p">],</span> <span class="s1">&#39;x_centre&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">x0_fit</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x0_fit</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)],</span> \
+                                                        <span class="s1">&#39;U_0&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">U0_fit</span><span class="p">,</span> <span class="n">U0</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">U0_fit</span> <span class="o">-</span> <span class="n">U0</span><span class="p">)</span><span class="o">/</span><span class="n">U0</span><span class="p">]}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">info_dict</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fit&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;difference&#39;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dot_sep</th>
+      <th>e_field_x</th>
+      <th>omega_0</th>
+      <th>x_centre</th>
+      <th>U_0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>fit</th>
+      <td>6.000009e-08</td>
+      <td>-4.332458e-07</td>
+      <td>7.147627e+13</td>
+      <td>-6.662899e-16</td>
+      <td>2.001632e-19</td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td>3.000000e-08</td>
+      <td>0.000000e+00</td>
+      <td>7.147638e+13</td>
+      <td>0.000000e+00</td>
+      <td>2.000000e-19</td>
+    </tr>
+    <tr>
+      <th>difference</th>
+      <td>1.000003e+02</td>
+      <td>4.332458e-07</td>
+      <td>1.508734e-04</td>
+      <td>6.662899e-16</td>
+      <td>8.161965e-02</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="1.4-Graph-The-Quartic-Potential-of-Best-Fit">
+<h3>1.4 Graph The Quartic Potential of Best Fit<a class="headerlink" href="#1.4-Graph-The-Quartic-Potential-of-Best-Fit" title="Link to this heading"></a></h3>
+<p>We will now graph <code class="docutils literal notranslate"><span class="pre">U_fit</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graph the fitted potential</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Potential - x vs. U</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">U_fit</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x position&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;U fit data&#39;</span><span class="p">)</span>
+
+<span class="c1"># Potential - y vs. U</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_vals</span><span class="p">,</span> <span class="n">U_fit</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;y position&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;U fit data&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Potential - xy vs. U</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">U_fit</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;U fit data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Plot 3D Figure</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">surf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">,</span> <span class="n">U_fit</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">antialiased</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;U(x, y)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Quartic Potential of best Fit&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Fitting_26_0.png" src="../../_images/notebooks_res_Fitting_26_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Fitting_26_1.png" src="../../_images/notebooks_res_Fitting_26_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0.92, &#39;Quartic Potential of best Fit&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Fitting_26_3.png" src="../../_images/notebooks_res_Fitting_26_3.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Section-2.0-Adding-Complexity">
+<h2>Section 2.0 Adding Complexity<a class="headerlink" href="#Section-2.0-Adding-Complexity" title="Link to this heading"></a></h2>
+<p>Since we have verified the simplest case, let us add complexity to our data by changing the position of the energies of the wells and adding some noise. We will follow the same procedure as in Section 1.0.</p>
+<blockquote>
+<div><p><strong>Note:</strong> the HL/HM methods currently do not handle noise effects</p>
+</div></blockquote>
+<section id="2.1-Define-Parameters">
+<h3>2.1 Define Parameters<a class="headerlink" href="#2.1-Define-Parameters" title="Link to this heading"></a></h3>
+<p>We will create another quartic well, but this time we will add random noise to simulate a more realistic situation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create Parameters for Data Potential</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mf">150e-12</span> <span class="c1"># half dot seperation (initial guess)</span>
+<span class="n">E1</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># min Energy of first well</span>
+<span class="n">E2</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># min Energy of second well</span>
+<span class="n">Emax</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># Energy at local max</span>
+<span class="n">U0</span> <span class="o">=</span> <span class="p">(</span><span class="n">E2</span><span class="o">+</span><span class="n">E1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># average lowest energy</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">e</span> <span class="c1"># electron charge</span>
+<span class="n">mat_system</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">select_material</span><span class="p">(</span><span class="s1">&#39;Si/SiO2&#39;</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">mat_system</span><span class="o">.</span><span class="n">me</span> <span class="c1"># electron effective mass</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="p">(</span><span class="n">E2</span><span class="o">-</span><span class="n">E1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">e</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">)</span> <span class="c1"># electric field</span>
+<span class="n">omega0</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="n">d</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Emax</span> <span class="o">-</span> <span class="n">E2</span> <span class="o">-</span> <span class="n">E1</span><span class="p">))</span> <span class="c1"># potential at x0</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># x and y values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">)</span>
+
+
+<span class="n">U_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">omega0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span>\
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x_vals</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">-</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_vals</span><span class="p">))</span> <span class="o">+</span>\
+            <span class="n">epsilon</span> <span class="o">*</span> <span class="n">e</span> <span class="o">*</span> <span class="n">x_vals</span> <span class="o">+</span> <span class="n">U0</span>
+
+
+<span class="c1"># Adding artificial noise (will not be needed in practice)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">469230</span><span class="p">)</span> <span class="c1"># fix seed for reproducibility</span>
+
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">U_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># error rate of 5%</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">ndenumerate</span><span class="p">(</span><span class="n">noise</span><span class="p">):</span>
+    <span class="n">noise</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">error</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="n">U_data</span> <span class="o">=</span> <span class="n">U_data</span> <span class="o">+</span> <span class="n">noise</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.2-Graph-Data">
+<h3>2.2 Graph Data<a class="headerlink" href="#2.2-Graph-Data" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graph the data</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Potential - x vs. U</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">U_data</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x position&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;U data&#39;</span><span class="p">)</span>
+
+<span class="c1"># Potential - y vs. U</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_vals</span><span class="p">,</span> <span class="n">U_data</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;y position&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;U data&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Potential - xy vs. U</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">U_data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;U data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">surf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">,</span> <span class="n">U_data</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">antialiased</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;U(x, y)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Quartic Potential&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Fitting_32_0.png" src="../../_images/notebooks_res_Fitting_32_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Fitting_32_1.png" src="../../_images/notebooks_res_Fitting_32_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0.92, &#39;Quartic Potential&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Fitting_32_3.png" src="../../_images/notebooks_res_Fitting_32_3.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DotArray%20Class%20Constructors.html" class="btn btn-neutral float-left" title="DotArray: Alternative Class Construction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Loading%20Potentials.html" class="btn btn-neutral float-right" title="Loading potentials tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Coherent Spintronics Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading potentials tutorial &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array" href="Masking%20Dot%20Array%20Potentials.html" />
+    <link rel="prev" title="Finding Best Quartic Fit - 2 dot system" href="Fitting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Animations.html">Animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Loading potentials tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Load-the-relevant-modules">1. Load the relevant modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Define-which-files-to-load-and-load-them">2. Define which files to load and load them</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-Store-x-and-y-coordinates-in-GridParameters-object">3. Store x and y coordinates in GridParameters object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-Build-the-PotentialInterpolator-object">4. Build the PotentialInterpolator object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#5.-Do-some-potential-interpolation-(with-lots-of-plotting-examples)">5. Do some potential interpolation (with lots of plotting examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#6.-Define-Potentials-Function-Using-'Potential'-Class">6. Define Potentials Function Using ‘Potential’ Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web/Website%20Acknowledgements.html">Website Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loading potentials tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Loading-potentials-tutorial">
+<h1>Loading potentials tutorial<a class="headerlink" href="#Loading-potentials-tutorial" title="Link to this heading"></a></h1>
+<p>This tutorial will show you how to use the potential module to load pre-processed potential files. It creates a PotentialInterpolator object which allows us to find the potential landscape at arbitrary control voltage values.</p>
+<section id="1.-Load-the-relevant-modules">
+<h2>1. Load the relevant modules<a class="headerlink" href="#1.-Load-the-relevant-modules" title="Link to this heading"></a></h2>
+<p>The file nextnano_3D takes in a folder of pre-processed potential files. These files have to follow the naming convention ‘<a href="#id1"><span class="problematic" id="id2">TYPE_C1NAME_C1VAL_C2NAME_C2VAL_</span></a>…_CNNAME_CNVAL.txt’ where TYPE = ‘Uxy’ or ‘Ez’. The C#NAME indicates the name for the control voltages and C#VAL indicates the corresponding control voltage value. The TYPE flag indicates whether you are loading potentials or electric field files.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="c1"># update base working directory to QuDiPy</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qudipy.potential</span> <span class="k">as</span> <span class="nn">pot</span>
+<span class="kn">from</span> <span class="nn">qudipy.utils</span> <span class="kn">import</span> <span class="n">constants</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.-Define-which-files-to-load-and-load-them">
+<h2>2. Define which files to load and load them<a class="headerlink" href="#2.-Define-which-files-to-load-and-load-them" title="Link to this heading"></a></h2>
+<p>We need to specify the name of the folder that contains the potential files as well as the names for each potential file.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enter the name of the folder where the potential files are located.</span>
+<span class="c1"># If this argument is not supplied it will assume the current working directory.</span>
+<span class="n">nav_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;QuDiPy data&#39;</span><span class="p">,</span> <span class="s1">&#39;tutorials&#39;</span><span class="p">)</span>
+
+<span class="c1"># Load preprocessed potential files from the potentail folder</span>
+<span class="n">pot_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                            <span class="s1">&#39;processed&#39;</span><span class="p">,</span><span class="s1">&#39;Unkown_slice&#39;</span><span class="p">)</span>
+
+<span class="c1"># Specify the control voltage names (C#NAME as mentioned above)</span>
+<span class="n">ctrl_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span><span class="s1">&#39;V2&#39;</span><span class="p">,</span><span class="s1">&#39;V3&#39;</span><span class="p">,</span><span class="s1">&#39;V4&#39;</span><span class="p">,</span><span class="s1">&#39;V5&#39;</span><span class="p">]</span>
+
+<span class="c1"># Specify the control voltage values you wish to load.</span>
+<span class="c1"># The cartesian product of all these supplied voltages will be loaded and MUST exist in the directory.</span>
+
+<span class="c1"># General gate voltage definition to be used for potential files in Uknown_slice directory</span>
+<span class="n">V1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
+<span class="n">V2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">]</span>
+<span class="n">V3</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">]</span>
+<span class="n">V4</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">]</span>
+<span class="n">V5</span><span class="o">=</span>  <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span>
+
+<span class="c1"># Add all voltage values to a list</span>
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">V1</span><span class="p">,</span> <span class="n">V2</span><span class="p">,</span> <span class="n">V3</span><span class="p">,</span> <span class="n">V4</span><span class="p">,</span> <span class="n">V5</span><span class="p">]</span>
+<span class="c1"># Now load the potentials.</span>
+<span class="c1"># load_files returns a dictionary of all the information loaded</span>
+<span class="c1"># f_type says we are loading potential files (other option is to load electric field files)</span>
+<span class="c1"># f_dir specifies where the files are located</span>
+<span class="c1"># f_dis_units specifies the distance units the files are in. The function will convert the units to [m].</span>
+<span class="c1"># f_pot_units specifies the potential units the files are in. The function will convert the units to [J].</span>
+<span class="n">loaded_data</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">load_potentials</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span>
+                                  <span class="n">f_type</span><span class="o">=</span><span class="s1">&#39;pot&#39;</span><span class="p">,</span> <span class="n">f_dir</span><span class="o">=</span><span class="n">pot_dir</span><span class="p">,</span>
+                                  <span class="n">f_dis_units</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span> <span class="n">f_pot_units</span><span class="o">=</span><span class="s1">&#39;eV&#39;</span><span class="p">)</span>
+<span class="c1"># Additional Optional Parameters are trim_x and trim_y which will trim the loaded potentials</span>
+<span class="c1"># to be only within the bounds specified by trim_x and trim_y</span>
+
+<span class="c1"># We can check the fields of the dictionary returned to see what is stored.</span>
+<span class="n">loaded_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+<span class="c1"># We can also go on to plot all of potential crossections along the x/y-planes for the choosen slice.</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+
+<span class="c1"># potential along x-axis for y-axis slices</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;coords&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;coords&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">/</span><span class="mf">1E-9</span><span class="p">,</span><span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;potentials&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x-coords [nm]&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;1D potential [J]&#39;</span><span class="p">,</span>
+<span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Potentials along x-axis&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># potential along y-axis for x-axis slices</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;potentials&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][:]</span><span class="o">.</span><span class="n">T</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;coords&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;coords&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mf">1E-9</span><span class="p">,</span><span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;potentials&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][:,</span><span class="n">i</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;y-coords [nm]&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;1D potential [J]&#39;</span><span class="p">,</span>
+<span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Potentials along y-axis&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_5_0.png" src="../../_images/notebooks_res_Loading_Potentials_5_0.png" />
+</div>
+</div>
+</section>
+<section id="3.-Store-x-and-y-coordinates-in-GridParameters-object">
+<h2>3. Store x and y coordinates in GridParameters object<a class="headerlink" href="#3.-Store-x-and-y-coordinates-in-GridParameters-object" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># It&#39;s a bit convoluted, but the x and y coordinates are</span>
+<span class="c1"># stored as a named tuple in the dictionary returned from load_files.</span>
+<span class="c1"># With those values, we will build a GridParameters object.</span>
+<span class="n">coord</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;coords&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">x</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">y</span>
+
+<span class="c1"># Construct a GridParameters object</span>
+<span class="n">gparams</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">GridParameters</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="4.-Build-the-PotentialInterpolator-object">
+<h2>4. Build the PotentialInterpolator object<a class="headerlink" href="#4.-Build-the-PotentialInterpolator-object" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now building the interpolation object is trivial.</span>
+<span class="c1"># When building the interpolator, we should specify also the material system.</span>
+
+<span class="n">pot_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">loaded_data</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s1">&#39;Si/SiO2&#39;</span><span class="p">)</span>
+
+<span class="c1"># Right now, the interpolator will interpolate 2D potentials. However, this may be</span>
+<span class="c1"># costly for things that do lots of interpolations but you are only interested in</span>
+<span class="c1"># 1D potentials. You can make a 1D interpolator object by specifying the y_slice</span>
+<span class="c1"># keyword argument.</span>
+<span class="c1"># pot_interp = pot.build_interpolator(loaded_data,  material=&#39;Si/SiO2&#39;,</span>
+<span class="c1">#                                     y_slice=0)</span>
+
+<span class="n">pot_interp</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;qudipy.potential.field_interpolator.PotentialInterpolator at 0x7751072d16c0&gt;
+</pre></div></div>
+</div>
+</section>
+<section id="5.-Do-some-potential-interpolation-(with-lots-of-plotting-examples)">
+<h2>5. Do some potential interpolation (with lots of plotting examples)<a class="headerlink" href="#5.-Do-some-potential-interpolation-(with-lots-of-plotting-examples)" title="Link to this heading"></a></h2>
+<p>Now let’s show how we can actually use this object to do interpolation</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a voltage vector you wish to interpolate the potential at</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
+<span class="c1"># As a note.. You can also ignore the singleton dimensions we defining the voltage vector</span>
+<span class="c1"># i.e. v_vec = [0.2, 0.23, 0.2]</span>
+<span class="n">pot_interp</span><span class="p">(</span><span class="n">v_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[-3.45998055e-19, -3.45994487e-19, -3.45992620e-19, ...,
+        -3.45992620e-19, -3.45994487e-19, -3.45998055e-19],
+       [-3.46001728e-19, -3.45998157e-19, -3.45997428e-19, ...,
+        -3.45997428e-19, -3.45998157e-19, -3.46001728e-19],
+       [-3.46022150e-19, -3.46018970e-19, -3.46018821e-19, ...,
+        -3.46018821e-19, -3.46018970e-19, -3.46022150e-19],
+       ...,
+       [-3.43499935e-19, -3.43500006e-19, -3.43492425e-19, ...,
+        -3.43492425e-19, -3.43500006e-19, -3.43499935e-19],
+       [-3.43486562e-19, -3.43485694e-19, -3.43478112e-19, ...,
+        -3.43478112e-19, -3.43485694e-19, -3.43486562e-19],
+       [-3.43482638e-19, -3.43479579e-19, -3.43472186e-19, ...,
+        -3.43472186e-19, -3.43479579e-19, -3.43482638e-19]])
+</pre></div></div>
+</div>
+<p>You can see what is returned is the 2D potential landscape of the device in meshgrid format (y,x). The PotentialInterpolator object has a nice plot method we can use to see how the interpolated potentials look and that everything makes sense.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First we will do an interpolation and look at the 2D potential</span>
+<span class="c1"># Notice how I am only using 3 voltage values now when I interpolate</span>
+<span class="c1"># instead of 5 as I was earlier.</span>
+<span class="c1"># v_vec = [0.2]</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.2616</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">]</span>
+
+<span class="c1"># Plot the 2D potential</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">)</span>
+<span class="c1"># Now I will show you how you can view just 1D slices of the potential.</span>
+<span class="c1"># Get a 1D slice of the potential along y=0 axis.</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+<span class="c1"># Get a 1D slice of the potential along y=10 nm axis</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span><span class="n">y_slice</span><span class="o">=</span><span class="mf">10E-9</span><span class="p">)</span>
+<span class="c1"># Get a 1D slice of the potential along y=65 nm axis and a 1D slice along x=0 nm axis</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span><span class="n">y_slice</span><span class="o">=</span><span class="mf">65E-9</span><span class="p">,</span><span class="n">x_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Get a 1D slice of the potential along y=0 nm axis and a 1D slice along x=60 nm axis.</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span><span class="n">x_slice</span><span class="o">=</span><span class="mf">60E-9</span><span class="p">)</span>
+
+<span class="c1"># .plot() also has show_wf and wf_n flags which will display the nth wavefunction with the potential</span>
+<span class="c1"># Plot the 2D potential and show the ground state wf</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># pot_interp.plot(v_vec, show_wf=True, wf_n=0) would plot the same thing</span>
+<span class="c1"># Get a 1D slice of the potential along y=0 nm axis and a 1D slice along x=0 nm axis.</span>
+<span class="c1"># Overlay the 3rd excited wavefunction (4th lowest energy state)</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span><span class="n">x_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wf_n</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span><span class="n">x_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wf_n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_13_0.png" src="../../_images/notebooks_res_Loading_Potentials_13_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_13_1.png" src="../../_images/notebooks_res_Loading_Potentials_13_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_13_2.png" src="../../_images/notebooks_res_Loading_Potentials_13_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_13_3.png" src="../../_images/notebooks_res_Loading_Potentials_13_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_13_4.png" src="../../_images/notebooks_res_Loading_Potentials_13_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_13_5.png" src="../../_images/notebooks_res_Loading_Potentials_13_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_13_6.png" src="../../_images/notebooks_res_Loading_Potentials_13_6.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_13_7.png" src="../../_images/notebooks_res_Loading_Potentials_13_7.png" />
+</div>
+</div>
+<p>These potentials look like what we expect from the nextnano. Let’s do a few more plots though of the potential at different gate voltages to check that the interpolator actually varies the potential correctly.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s do 4 different interpolations</span>
+<span class="n">v_vec1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+<span class="n">v_vec2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.257</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+<span class="n">v_vec3</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.257</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+<span class="n">v_vec4</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.257</span><span class="p">]</span>
+
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec1</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec2</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec3</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec4</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_15_0.png" src="../../_images/notebooks_res_Loading_Potentials_15_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_15_1.png" src="../../_images/notebooks_res_Loading_Potentials_15_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_15_2.png" src="../../_images/notebooks_res_Loading_Potentials_15_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_15_3.png" src="../../_images/notebooks_res_Loading_Potentials_15_3.png" />
+</div>
+</div>
+<p>The potentials are changing exactly as we would expect. Great!</p>
+<p>As a last note before concluding the tutorial, notice that if we call voltage values outside of the range of values we loaded, the interpolator object will throw an error.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#v_vec = [0.1, 0.26, 0.29, 0.3, 0.1] # .29 is out range</span>
+<span class="c1">#pot_interp(v_vec)</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Creating Analytical potentials</p></li>
+</ol>
+<p>Sometimes we would like to create an analytical potential (e.g. for testing purposes). You can create this by using the analytical_potential function.</p>
+<p>To create such a potential, perform the following steps:</p>
+<ul class="simple">
+<li><p>Create the control names and control values as we would for a potential generated by nextnano.</p></li>
+<li><p>Define a function that maps out the potential in space for given values of the control variables. The potential defining function must take exactly two variables: control variable values and a GridParameters object.</p></li>
+<li><p>Specify the x and y values that will create our grid points for the potential.</p></li>
+<li><p>Pass the control values, the control names, the potential defining fucntion and the x and y values to the analytical_potential function. This function will return an analytical potential that can be used an input for the build_interpolator function.</p></li>
+<li><p>Pass the output of the analytical_potential function to the build_interpolator function. This potential interpolator then behaves in the same way as described earlier in the tutorial.</p></li>
+</ul>
+<p>For an example of an analytical potential being generated and used, see below.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Create control voltage names and variables the same way you would normally do</span>
+<span class="n">ctrl_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span><span class="s1">&#39;V2&#39;</span><span class="p">]</span>
+
+<span class="n">V1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">]</span>
+<span class="n">V2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">]</span>
+
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">V1</span><span class="p">,</span> <span class="n">V2</span><span class="p">]</span>
+
+<span class="c1"># 2. Create the function which defines the potential, with the control variables as the</span>
+<span class="c1"># first argument and a GridParameters object as the second argument</span>
+
+<span class="c1"># Specify some constants for the potential</span>
+<span class="n">dot_sep</span> <span class="o">=</span> <span class="mf">150e-9</span>
+
+<span class="k">def</span> <span class="nf">analytic_potentialss</span><span class="p">(</span><span class="n">cvals</span><span class="p">,</span> <span class="n">gparams</span><span class="p">):</span>
+    <span class="c1"># Get coordinates from mesh</span>
+    <span class="n">x_pot</span> <span class="o">=</span> <span class="n">gparams</span><span class="o">.</span><span class="n">x_mesh</span>
+    <span class="n">y_pot</span> <span class="o">=</span> <span class="n">gparams</span><span class="o">.</span><span class="n">y_mesh</span>
+
+    <span class="c1"># Get voltages out from the control valriables</span>
+    <span class="n">v_1</span> <span class="o">=</span> <span class="n">cvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">v_2</span> <span class="o">=</span> <span class="n">cvals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Convert (linear conversion) from voltages to chemical potentials</span>
+    <span class="c1"># This is just a linear relationship with a dummy lever arm</span>
+    <span class="n">lever_arm_1</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">mu_1</span> <span class="o">=</span> <span class="n">v_1</span> <span class="o">*</span> <span class="n">lever_arm_1</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">e</span>
+    <span class="n">lever_arm_2</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">starkshift_param</span> <span class="o">=</span> <span class="n">v_2</span> <span class="o">*</span> <span class="n">lever_arm_2</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">e</span>
+
+    <span class="c1"># Define frequency of harmonic oscillators</span>
+    <span class="n">omega_1</span> <span class="o">=</span> <span class="mf">5e12</span>
+    <span class="n">omega_2</span> <span class="o">=</span> <span class="mf">5e12</span>
+
+    <span class="c1"># Define the potential</span>
+    <span class="n">me</span> <span class="o">=</span> <span class="n">pot_interp</span><span class="o">.</span><span class="n">material_system</span><span class="o">.</span><span class="n">me</span>
+
+    <span class="n">well_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">me</span> <span class="o">*</span> <span class="n">omega_1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x_pot</span> <span class="o">+</span> <span class="n">dot_sep</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_pot</span><span class="p">))</span> <span class="o">-</span> <span class="n">mu_1</span>
+    <span class="n">well_2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">me</span> <span class="o">*</span> <span class="n">omega_2</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x_pot</span> <span class="o">-</span> <span class="n">dot_sep</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_pot</span><span class="p">))</span> <span class="o">-</span> <span class="n">starkshift_param</span>
+    <span class="n">potential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">well_1</span><span class="p">,</span> <span class="n">well_2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">potential</span>
+
+<span class="c1"># 3. Specify the x and y points you would like to have in a grid</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="n">dot_sep</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="n">dot_sep</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># 4. Get the analytical potential using</span>
+<span class="n">analytic_potential</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">analytical_potential</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">analytic_potentialss</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># 5. Pass analytical_potential to build_interpolator</span>
+<span class="c1"># This behaves exactly like any other potential interpolator</span>
+<span class="n">an_pot_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">analytic_potential</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s1">&#39;Si/SiO2&#39;</span><span class="p">)</span>
+
+<span class="c1"># Now specify the potentials to interpolate around</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+
+<span class="c1"># Plot the 2D potential</span>
+<span class="n">an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">)</span>
+
+<span class="c1"># Plot various 1D slices, one with a ground state wavefunction probability</span>
+<span class="n">an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># When we swap the gate voltages and plot the wavefunction, we can see that it has the intended effect of</span>
+<span class="c1"># moving the location of the ground state of the electron wavefunction</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">]</span>
+<span class="n">an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_19_0.png" src="../../_images/notebooks_res_Loading_Potentials_19_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_19_1.png" src="../../_images/notebooks_res_Loading_Potentials_19_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_19_2.png" src="../../_images/notebooks_res_Loading_Potentials_19_2.png" />
+</div>
+</div>
+</section>
+<section id="6.-Define-Potentials-Function-Using-'Potential'-Class">
+<h2>6. Define Potentials Function Using ‘Potential’ Class<a class="headerlink" href="#6.-Define-Potentials-Function-Using-'Potential'-Class" title="Link to this heading"></a></h2>
+<p>The <strong>Potential</strong> Class allows the user to easily specify a well to use instead of coding their own function. Voltages, dot seperation, and omegas must be specified for these hardcoded functions.</p>
+<p>The Available Potentials Are:</p>
+<div class="line-block">
+<div class="line">.harmonic_potential</div>
+<div class="line">.quartic_potential</div>
+<div class="line">.square_potential</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the Class</span>
+<span class="kn">from</span> <span class="nn">qudipy.potential.analytic_potentials</span> <span class="kn">import</span> <span class="n">Potential</span>
+
+<span class="c1"># 1. Create control voltage names and variables the same way you would normally do</span>
+<span class="n">ctrl_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span><span class="s1">&#39;V2&#39;</span><span class="p">,</span> <span class="s1">&#39;V3&#39;</span><span class="p">]</span>
+
+<span class="n">V1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">]</span>
+<span class="n">V2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">]</span>
+<span class="n">V3</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">]</span>
+
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">V1</span><span class="p">,</span> <span class="n">V2</span><span class="p">,</span><span class="n">V3</span><span class="p">]</span>
+
+<span class="c1"># 2. Specify the constants you want</span>
+<span class="n">dot_sep</span> <span class="o">=</span> <span class="mf">150e-9</span>
+<span class="n">omegas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5e12</span><span class="p">,</span><span class="mf">5e12</span><span class="p">,</span><span class="mf">5e12</span><span class="p">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="n">dot_sep</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="n">dot_sep</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># 3. Retrieve the potential function you want to use using the Potential class</span>
+<span class="c1">#    Call the analytical potential</span>
+<span class="c1">#    Interpolate</span>
+
+<span class="n">harmonic_well</span> <span class="o">=</span> <span class="n">Potential</span><span class="p">(</span><span class="n">omegas</span><span class="p">,</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">harmonic_potential</span>
+
+<span class="n">analytic_potential</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">analytical_potential</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">harmonic_well</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">an_pot_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">analytic_potential</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s1">&#39;Si/SiO2&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># 4. Plot the 2D potential</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">]</span>
+<span class="n">an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">)</span>
+
+<span class="c1"># 5. Specify the potentials to interpolate around and plot</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">]</span>
+<span class="n">an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">]</span>
+<span class="n">an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+<span class="n">an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_21_0.png" src="../../_images/notebooks_res_Loading_Potentials_21_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_21_1.png" src="../../_images/notebooks_res_Loading_Potentials_21_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_21_2.png" src="../../_images/notebooks_res_Loading_Potentials_21_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_21_3.png" src="../../_images/notebooks_res_Loading_Potentials_21_3.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the Class</span>
+<span class="kn">from</span> <span class="nn">qudipy.potential.analytic_potentials</span> <span class="kn">import</span> <span class="n">Potential</span>
+
+<span class="c1"># 1. Create control voltage names and variables the same way you would normally do</span>
+<span class="n">ctrl_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span><span class="s1">&#39;V2&#39;</span><span class="p">,</span><span class="s1">&#39;V3&#39;</span><span class="p">]</span>
+
+<span class="n">V1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">]</span>
+<span class="n">V2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">]</span>
+<span class="n">V3</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">]</span>
+
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">V1</span><span class="p">,</span> <span class="n">V2</span><span class="p">,</span><span class="n">V3</span><span class="p">]</span>
+
+<span class="c1"># 2. Specify the constants you want</span>
+<span class="n">dot_sep</span> <span class="o">=</span> <span class="mf">150e-9</span>
+<span class="n">omegas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5e12</span><span class="p">,</span><span class="mf">5e12</span><span class="p">,</span><span class="mf">5e12</span><span class="p">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="n">dot_sep</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="n">dot_sep</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># 3. Retrieve the potential functions to be used with the Potential class</span>
+
+<span class="n">harmonic_well</span> <span class="o">=</span> <span class="n">Potential</span><span class="p">(</span><span class="n">omegas</span><span class="p">,</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">harmonic_potential</span>
+<span class="n">quartic_well</span> <span class="o">=</span> <span class="n">Potential</span><span class="p">(</span><span class="n">omegas</span><span class="p">,</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">quartic_potential</span>
+<span class="n">square_well</span> <span class="o">=</span> <span class="n">Potential</span><span class="p">(</span><span class="n">omegas</span><span class="p">,</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="s2">&quot;Si/SiO2&quot;</span><span class="p">,</span> <span class="n">bias</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">square_potential</span>
+<span class="n">triangle_well</span> <span class="o">=</span> <span class="n">Potential</span><span class="p">(</span><span class="n">omegas</span><span class="p">,</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="s2">&quot;Si/SiO2&quot;</span><span class="p">,</span> <span class="n">bias</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">triangle_potential</span>
+
+<span class="c1">#    Call the analytical potential</span>
+
+<span class="n">harm_an_potential</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">analytical_potential</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">harmonic_well</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">quad_an_potential</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">analytical_potential</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">quartic_well</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">sqr_an_potential</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">analytical_potential</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">square_well</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">tri_an_potential</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">analytical_potential</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">triangle_well</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1">#    Interpolate</span>
+<span class="n">harm_an_pot_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">harm_an_potential</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span>
+<span class="n">quad_an_pot_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">quad_an_potential</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span>
+<span class="n">sqr_an_pot_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">sqr_an_potential</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span>
+<span class="n">tri_an_pot_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">tri_an_potential</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create list of potential interpolations</span>
+<span class="n">pot_interps</span> <span class="o">=</span> <span class="p">[</span><span class="n">harm_an_pot_interp</span><span class="p">,</span> <span class="n">quad_an_pot_interp</span><span class="p">,</span> <span class="n">sqr_an_pot_interp</span><span class="p">,</span> <span class="n">tri_an_pot_interp</span><span class="p">]</span>
+
+
+<span class="c1"># 4. Plot the 2D potential</span>
+<span class="c1">#HARMONIC</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">]</span>
+<span class="n">harm_an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">)</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">]</span>
+<span class="n">harm_an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">]</span>
+<span class="n">harm_an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+<span class="n">harm_an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#QUADRATIC</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span><span class="mf">0.23</span><span class="p">]</span>
+<span class="n">quad_an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">)</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">]</span>
+<span class="n">quad_an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">]</span>
+<span class="n">quad_an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+<span class="n">quad_an_pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v_vec</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_22_0.png" src="../../_images/notebooks_res_Loading_Potentials_22_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_22_1.png" src="../../_images/notebooks_res_Loading_Potentials_22_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_22_2.png" src="../../_images/notebooks_res_Loading_Potentials_22_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_22_3.png" src="../../_images/notebooks_res_Loading_Potentials_22_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_22_4.png" src="../../_images/notebooks_res_Loading_Potentials_22_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_22_5.png" src="../../_images/notebooks_res_Loading_Potentials_22_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_22_6.png" src="../../_images/notebooks_res_Loading_Potentials_22_6.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Loading_Potentials_22_7.png" src="../../_images/notebooks_res_Loading_Potentials_22_7.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Fitting.html" class="btn btn-neutral float-left" title="Finding Best Quartic Fit - 2 dot system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Masking%20Dot%20Array%20Potentials.html" class="btn btn-neutral float-right" title="How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Coherent Spintronics Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

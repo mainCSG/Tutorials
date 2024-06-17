@@ -21,7 +21,7 @@ Welcome to QuDiPy's documentation!
    /modules
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :glob:
    :caption: Tutorials:
 
@@ -35,7 +35,14 @@ Welcome to QuDiPy's documentation!
    /notebooks/dev/*
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
+   :glob:
+   :caption: Resources:
+
+   /notebooks/res/*
+
+.. toctree::
+   :maxdepth: 4
    :glob:
    :caption: Webpage Maintenance:
 

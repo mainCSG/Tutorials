@@ -1,0 +1,454 @@
+{
+ "cells": [
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Inferred Number of Quantum Dots Using the Potential Landscape \n",
+    "\n",
+    "We will briefly look into how the number of quantum dots is inferred using 1D\n",
+    "cross-sections of the 2D electrostatic potential landscapes."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "from pathlib import Path\n",
+    "path = Path(os.getcwd())\n",
+    "\n",
+    "# update base working directory to QuDiPy\n",
+    "if path.stem != 'QuDiPy':\n",
+    "    base_dir = path.parents[1]\n",
+    "    os.chdir(base_dir)\n",
+    "else:\n",
+    "    base_dir = path"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 0. Import relevant Python and QuDiPy modules\n",
+    "\n",
+    "Import DotArray class which generates dot objects. Each dot array object requires\n",
+    "us to specify the expected number of quantum dots which will be used to detect \n",
+    "dot merging events."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "from scipy.signal import find_peaks\n",
+    "\n",
+    "from qudipy.system import DotArray"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 1. Generate Dots object instance\n",
+    "\n",
+    "Refer to [2QD DotArray Usage Tutorial](./Dot%20Array%20Class%20Usage%202%20Dots.ipynb) for more about creating dots objects."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "nav_dir = os.path.join('QuDiPy data', 'development')\n",
+    "processed_dir = os.path.join(base_dir, nav_dir,\n",
+    "                            'processed','2QD_processed')\n",
+    "nextnano_dir = os.path.join(base_dir, nav_dir,\n",
+    "                                    'nextnano','2QD_dotsep_60nm')\n",
+    "                \n",
+    "n_dots = 2      # anticipated number of dots"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pts = [6,6,6]\n",
+    "ctrl_vals = [np.linspace(0.2, 0.45, pts[0]),\n",
+    "    np.linspace(-0.1, 0.15, pts[1]),\n",
+    "    np.linspace(0.2, 0.45, pts[2])]\n",
+    "\n",
+    "file_prefix = 'resource'"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1.2 Create object instance \n",
+    "\n",
+    "Here we are loading only the 2D electrostatic potentials to use potential interpolation\n",
+    "objects. These will be used to give an example for counting the number of dots is\n",
+    "performed. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dots = DotArray(n_dots, ctrl_ranges=ctrl_vals, save=True, calc=False)\n",
+    "dots.numeric(processed_dir, nextnano_dir, file_prefix)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can reference the potential interpolators as follows."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ctrl_vector = [ 0.2, -0.1, 0.45]\n",
+    "dots.potential.plot(ctrl_vector, plot_type='1D', y_slice=0, show_wf=True)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 2. Counting Dots"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 2.1 Create a Pseudo Potential for an Example "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "First create function that creates potential signal that is applied to a given 1D potential.\n",
+    "This is useful for testing the peak finding routine.\n",
+    "\n",
+    "We will overlay \"ripples\" on top of the potential landscape to show the robustness \n",
+    "of the dot finding routine. These ripples currently arise at the edges of the \n",
+    "simulated dot systems due to boundary conditions and a non-linear rectilinear \n",
+    "grid used when solving the Poisson PDE (the grid mesh typically is less dense \n",
+    "at the boundaries).\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def window(func, x, bounds):\n",
+    "\n",
+    "    # define regions where to apply func\n",
+    "    x_left = x[x<bounds[0]]\n",
+    "    signal_left = func(x_left)\n",
+    "\n",
+    "    x_right = x[bounds[1]<x]\n",
+    "    signal_right = func(x_right)\n",
+    "\n",
+    "    # middle region is left untouched\n",
+    "    x_middle = np.squeeze(np.where((x>bounds[0]) & (bounds[1]>x)))\n",
+    "    signal_middle = np.zeros((len(x_middle)))\n",
+    "\n",
+    "    # stack modified signals into new signal\n",
+    "    return np.hstack([signal_left, signal_middle, signal_right])\n",
+    "\n",
+    "# define a test function which resembles \"edge\" effects for some simulated \n",
+    "# electrostatic potential data\n",
+    "def fast_sin(x):\n",
+    "    return 1e-22*np.sin(x*5e8)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 2.1 Find the Number or Local Maxima/Minima Defining dots\n",
+    "\n",
+    "First we select a 1D potential slice from a 2D potential for a given voltage\n",
+    "configuration."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# get 1D potential slice\n",
+    "pot_1d = dots.potential(ctrl_vector)[70,:]\n",
+    "\n",
+    "# get coordinates along slice\n",
+    "x_coords = dots.potential.x_coords"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Generate a signal of \"false dots\" near the boundaries of the simulated dot system.\n",
+    "False dots refer to erroneous minamas/maximas found which are used to infer the \n",
+    "number of dots in the system."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "bounds = [-0.6e-7, 0.6e-7]\n",
+    "false_dots = window(fast_sin, x_coords, bounds)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Apply that signal to the original 1D potential slice."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pseudo_pot_slice = pot_1d+false_dots"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Find the mean potential value for a given 1D potential slice. This is used to \n",
+    "determine if a found local maxima/minima is associated to a dot or is erroneous.\n",
+    "The mean is used compared to the median to account for cases of larger dot \n",
+    "systems which will shift the median towards the potential defining the dots more \n",
+    "than the mean. This could lead to miss-counting number of local minima."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To make the counting routine more robust to <span style=\"color:red\">*high bias potential regimes*</span> or <span style=\"color:red\">*non-uniform mesh grids*</span>, a cut_off parameter is used.\n",
+    "Any potential minimum below the cut_off value is counted as a visible dot."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# create relevant variables to define the cutoff value\n",
+    "global_max = np.max(pseudo_pot_slice)\n",
+    "mean = np.mean(pseudo_pot_slice)\n",
+    "median = np.median(pseudo_pot_slice)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Two methods for defining the cutoff value will be considered:\n",
+    "\n",
+    "1) Using the mean of the 1D potential slice"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# creating cut off from mid point between global max and mean of the potential\n",
+    "diff = abs(global_max - mean) * 0.5\n",
+    "cut_off_mean = global_max - diff"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "2) Using the median of the 1D potential slice"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# creating cut off from mid point between global max and median of the potential\n",
+    "diff = abs(global_max - median) * 0.5\n",
+    "cut_off_median = global_max - diff"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's plot the 1D potential and the histogram of a 1D potential slice."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fig, ax = plt.subplots(1,2, figsize=(12,4))\n",
+    "ax[0].plot(x_coords, pseudo_pot_slice, '.-k', markersize=4)\n",
+    "ax[0].plot([np.min(x_coords), np.max(x_coords)], [mean, mean], '-b', label = 'Mean')\n",
+    "ax[0].plot([np.min(x_coords), np.max(x_coords)], [cut_off_mean, cut_off_mean], '--b', label = 'Cut Off: Mean')\n",
+    "ax[0].plot([np.min(x_coords), np.max(x_coords)], [cut_off_median, cut_off_median], '--g', label = 'Cut Off: Median')\n",
+    "# plot median as an example\n",
+    "median = np.median(pseudo_pot_slice)\n",
+    "ax[0].plot([np.min(x_coords), np.max(x_coords)], [median, median], '-g', label = 'Median')\n",
+    "\n",
+    "ax[0].set_ylabel('Potential [J]')\n",
+    "ax[0].set_xlabel('x-Coordinate [m]')\n",
+    "ax[0].legend(loc='upper center', ncol=2)\n",
+    "\n",
+    "# plot historgram of potential values\n",
+    "ax[1].hist(pseudo_pot_slice, bins=25, orientation=\"horizontal\")\n",
+    "ax[1].set_ylabel('Potential [J]')\n",
+    "ax[1].set_xlabel('Counts')\n",
+    "\n",
+    "fig.suptitle('Synthetic 1D Dot Potential')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To find the number of dots, we count the number of non-erroneous minimas in the\n",
+    "1D potential. This is done by finding the minimas that are smaller than the mean/median/cutoff\n",
+    "of the 1D potential slice. \n",
+    "\n",
+    "The cutoff defined using the mean will be used as the default method."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "minima = find_peaks((-1) * pseudo_pot_slice, height=-cut_off_mean)[0]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "For masking purposes, the local maxima between dots is determined. This is done \n",
+    "by finding the local maxima between the outermost minima."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "if len(minima)>1:\n",
+    "        x_eval_coord = x_coords[minima[0]:minima[-1]]\n",
+    "        bounded_pot = pseudo_pot_slice[minima[0]:minima[-1]]\n",
+    "        maxima = minima[0] + find_peaks(bounded_pot)[0]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Finally, we see the local minima/maxima peaks found resulting from ignoring any \n",
+    "minima that are not less than the cutoff. Erroneous dots are mimicked to left/right \n",
+    "of the red vertical dashed lines."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fig, ax = plt.subplots(1,2, figsize=(12,4))\n",
+    "ax[0].plot(x_coords, pseudo_pot_slice, '.-k', markersize=4)\n",
+    "ax[0].plot([bounds[0], bounds[0]], [np.min(pseudo_pot_slice), np.max(pseudo_pot_slice)], '--r')\n",
+    "ax[0].plot([bounds[1], bounds[1]], [np.min(pseudo_pot_slice), np.max(pseudo_pot_slice)], '--r')\n",
+    "ax[0].plot([np.min(x_coords), np.max(x_coords)], [mean, mean], '-b', label = 'Mean')\n",
+    "ax[0].plot([np.min(x_coords), np.max(x_coords)], [cut_off_mean, cut_off_mean], '--b', label = 'Cut Off: Mean')\n",
+    "ax[0].plot([np.min(x_coords), np.max(x_coords)], [cut_off_median, cut_off_median], '--g', label = 'Cut Off: Median')\n",
+    "ax[0].scatter(x_coords[minima], pseudo_pot_slice[minima], color='r', marker='.', s=200, zorder=5)\n",
+    "ax[0].scatter(x_coords[maxima], pseudo_pot_slice[maxima], color='g', marker='.', s=200, zorder=5)\n",
+    "# plot median as an example\n",
+    "median = np.median(pseudo_pot_slice)\n",
+    "ax[0].plot([np.min(x_coords), np.max(x_coords)], [median, median], '-g', label = 'Median')\n",
+    "\n",
+    "ax[0].set_ylabel('Potential [J]')\n",
+    "ax[0].set_xlabel('x-Coordinate [m]')\n",
+    "ax[0].legend(loc='upper center')\n",
+    "\n",
+    "# plot historgram of potential values\n",
+    "ax[1].hist(pseudo_pot_slice, bins=25, orientation=\"horizontal\")\n",
+    "ax[1].set_ylabel('Potential [J]')\n",
+    "ax[1].set_xlabel('Counts')\n",
+    "\n",
+    "fig.suptitle('Synthetic 1D Dot Potential')"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "qudipy",
+   "language": "python",
+   "name": "qudipy"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.9"
+  },
+  "orig_nbformat": 4
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

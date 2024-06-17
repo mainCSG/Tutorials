@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuDiPy tutorial: Using the Stark shift module &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Understanding Effectvie Parameter Behavior" href="Understanding%20Effective%20Parameter%20Behavior.html" />
+    <link rel="prev" title="Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Animations.html">Animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QuDiPy tutorial: Using the Stark shift module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Add-the-current-location-to-path">1. Add the current location to path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Import-the-relevant-modules">2. Import the relevant modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-Define-the-potential">3. Define the potential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-Define-the-electric-field">4. Define the electric field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#5.-Calculate-wavefunctions">5. Calculate wavefunctions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#6.-Calculate-Stark-shift">6. Calculate Stark shift</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web/Website%20Acknowledgements.html">Website Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">QuDiPy tutorial: Using the Stark shift module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="QuDiPy-tutorial:-Using-the-Stark-shift-module">
+<h1>QuDiPy tutorial: Using the Stark shift module<a class="headerlink" href="#QuDiPy-tutorial:-Using-the-Stark-shift-module" title="Link to this heading"></a></h1>
+<p>This tutorial will show how to use the Stark shift module to determine the deviation in <span class="math notranslate nohighlight">\(g\)</span>-factor arising from an applied electric field in the y-direction, where the plane of a device would be in the xz-plane.</p>
+<p>In this tutorial, we will be defining the potential and the electric field that the dot(s) reside in analytically and therefore the xy-confining potential and the z-direction electric field will be decoupled. However, in practice with NextNano potentials, these two values will not be decoupled. The goal is to make this tutorial with NextNano potentials in due time.</p>
+<p>Additionally, a wavefunction approximating the ground state wavefunction in each dot must be provided. This fixed wavefunction is then used in a varying electric field to calculate the <span class="math notranslate nohighlight">\(g\)</span>-factor deviation. This is an approximation since the ground state wavefunction will be slightly perturbed when gate voltages are changed. In the future, we hope to implement a many-body electron wavefunction which would allow us to bypass this step and give us a more accurate value for the
+<span class="math notranslate nohighlight">\(g\)</span>-factor for each electron.</p>
+<p>In order for the file to not be too large, the output of the cells has been cleared so you will need to run the cells on your local machine to see the output.</p>
+<section id="1.-Add-the-current-location-to-path">
+<h2>1. Add the current location to path<a class="headerlink" href="#1.-Add-the-current-location-to-path" title="Link to this heading"></a></h2>
+<p>In order for this tutorial to work, you will need to run this from the tutorials folder.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="c1"># update base working directory to QuDiPy</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.-Import-the-relevant-modules">
+<h2>2. Import the relevant modules<a class="headerlink" href="#2.-Import-the-relevant-modules" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># From module</span>
+<span class="kn">import</span> <span class="nn">qudipy.potential</span> <span class="k">as</span> <span class="nn">pot</span>
+<span class="kn">import</span> <span class="nn">qudipy.qutils</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">qudipy.starkshift</span> <span class="k">as</span> <span class="nn">ss</span>
+<span class="kn">from</span> <span class="nn">qudipy.utils</span> <span class="kn">import</span> <span class="n">constants</span>
+
+<span class="c1"># From external libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="3.-Define-the-potential">
+<h2>3. Define the potential<a class="headerlink" href="#3.-Define-the-potential" title="Link to this heading"></a></h2>
+<p>Here, we will use a bi-quadratic well as a potential for a double-dot system. The potentials are plotted below for us to confirm that it looks reasonable.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define constant for this material</span>
+<span class="n">mat_system</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">select_material</span><span class="p">(</span><span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span>
+<span class="c1"># Create control voltage names and variables the same way you would normally</span>
+<span class="n">ctrl_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span> <span class="s1">&#39;V2&#39;</span><span class="p">]</span>
+<span class="n">V1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">]</span>
+<span class="n">V2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">]</span>
+
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">V1</span><span class="p">,</span> <span class="n">V2</span><span class="p">]</span>
+
+<span class="c1"># Specify the separation between dots (actual separation will be twice this number)</span>
+<span class="n">dot_sep</span> <span class="o">=</span> <span class="mf">150e-9</span>
+
+<span class="c1"># Specify the x and y points you would like to have in a grid</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="n">dot_sep</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dot_sep</span><span class="p">,</span> <span class="n">dot_sep</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span>
+<span class="c1"># Create GridParams object</span>
+<span class="n">gparams</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">GridParameters</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">pot_func</span><span class="p">(</span><span class="n">cvals</span><span class="p">,</span> <span class="n">gparams</span><span class="p">):</span>
+    <span class="c1"># Get coordinates from mesh</span>
+    <span class="n">x_pot</span> <span class="o">=</span> <span class="n">gparams</span><span class="o">.</span><span class="n">x_mesh</span>
+    <span class="n">y_pot</span> <span class="o">=</span> <span class="n">gparams</span><span class="o">.</span><span class="n">y_mesh</span>
+
+    <span class="c1"># Get voltages out from the control valriables</span>
+    <span class="n">v_1</span> <span class="o">=</span> <span class="n">cvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">v_2</span> <span class="o">=</span> <span class="n">cvals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Convert (linear conversion) from voltages to chemical potentials</span>
+    <span class="c1"># This is just a linear relationship with a dummy lever arm</span>
+    <span class="n">lever_arm_1</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">mu_1</span> <span class="o">=</span> <span class="n">v_1</span> <span class="o">*</span> <span class="n">lever_arm_1</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">e</span>
+    <span class="n">lever_arm_2</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">mu_2</span> <span class="o">=</span> <span class="n">v_2</span> <span class="o">*</span> <span class="n">lever_arm_2</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">e</span>
+
+    <span class="c1"># Define frequency of harmonic oscillators</span>
+    <span class="n">omega_1</span> <span class="o">=</span> <span class="mf">5e12</span>
+    <span class="n">omega_2</span> <span class="o">=</span> <span class="mf">5e12</span>
+
+    <span class="c1"># Define the potential</span>
+    <span class="n">well_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mat_system</span><span class="o">.</span><span class="n">me</span> <span class="o">*</span> <span class="n">omega_1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x_pot</span> <span class="o">+</span> <span class="n">dot_sep</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_pot</span><span class="p">))</span> <span class="o">-</span> <span class="n">mu_1</span>
+    <span class="n">well_2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mat_system</span><span class="o">.</span><span class="n">me</span> <span class="o">*</span> <span class="n">omega_2</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x_pot</span> <span class="o">-</span> <span class="n">dot_sep</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_pot</span><span class="p">))</span> <span class="o">-</span> <span class="n">mu_2</span>
+    <span class="n">potential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">well_1</span><span class="p">,</span> <span class="n">well_2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">potential</span>
+
+<span class="c1"># Create the analytical potential using the variables defined above</span>
+<span class="n">analytic_potential</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">load_data</span><span class="o">.</span><span class="n">analytical_potential</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">pot_func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="c1"># Use the analytic potential to build an interpolator</span>
+<span class="n">pot_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">analytic_potential</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot potential to verify it makes sense</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pot_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Stark_Shift_5_0.png" src="../../_images/notebooks_res_Stark_Shift_5_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Stark_Shift_5_1.png" src="../../_images/notebooks_res_Stark_Shift_5_1.png" />
+</div>
+</div>
+</section>
+<section id="4.-Define-the-electric-field">
+<h2>4. Define the electric field<a class="headerlink" href="#4.-Define-the-electric-field" title="Link to this heading"></a></h2>
+<p>We then do something similar for the electric field that we did for the potential. In this case, we define an analytical electric field that is the combination of two lines of charge above the location of the minima of the potential wells, where each control variable controls the charge denisty along each line. Although this isn’t an entirely accurate model of two plunger gates over a double dot system, it allows us to see whether changing the voltage on one side of the double dot system changes
+the electron <span class="math notranslate nohighlight">\(g\)</span>-factor on the same side more than the other side as we would expect.</p>
+<p>It is necessary that the electric field has the same control parameters as the potential landscape.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">e_field</span><span class="p">(</span><span class="n">cvals</span><span class="p">,</span> <span class="n">gparams</span><span class="p">):</span>
+    <span class="c1"># Get coordinates from mesh</span>
+    <span class="n">x_e</span> <span class="o">=</span> <span class="n">gparams</span><span class="o">.</span><span class="n">x_mesh</span>
+    <span class="n">y_e</span> <span class="o">=</span> <span class="n">gparams</span><span class="o">.</span><span class="n">y_mesh</span>
+
+    <span class="c1"># Get voltages out from the control valriables</span>
+    <span class="n">v_1</span> <span class="o">=</span> <span class="n">cvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">v_2</span> <span class="o">=</span> <span class="n">cvals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Convert (linear conversion) from voltages to chemical potentials</span>
+    <span class="c1"># This is just a linear relationship</span>
+    <span class="c1"># The lever arms are set arbitrarily so that the e-field is comprable to that in the literature</span>
+    <span class="n">lever_arm_1</span> <span class="o">=</span> <span class="mf">3e-9</span>
+    <span class="n">lamb_1</span> <span class="o">=</span> <span class="n">v_1</span> <span class="o">*</span> <span class="n">lever_arm_1</span>
+
+    <span class="n">lever_arm_2</span> <span class="o">=</span> <span class="mf">3e-9</span>
+    <span class="n">lamb_2</span> <span class="o">=</span> <span class="n">v_2</span> <span class="o">*</span> <span class="n">lever_arm_2</span>
+
+    <span class="c1"># Define the electric field</span>
+    <span class="n">e_field</span> <span class="o">=</span> <span class="n">lamb_1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">mat_system</span><span class="o">.</span><span class="n">eps</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x_e</span> <span class="o">+</span> <span class="n">dot_sep</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">100e-9</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">lamb_2</span> \
+        <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">mat_system</span><span class="o">.</span><span class="n">eps</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x_e</span> <span class="o">-</span> <span class="n">dot_sep</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">100e-9</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">e_field</span>
+
+<span class="c1"># Create the analytical electric using the variables defined above</span>
+<span class="n">analytic_e_field</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">load_data</span><span class="o">.</span><span class="n">analytical_potential</span><span class="p">(</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">e_field</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Use the analytic electric field to build an interpolator</span>
+<span class="n">e_interp</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">build_interpolator</span><span class="p">(</span><span class="n">analytic_e_field</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s2">&quot;Si/SiO2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot potential to verify it makes sense</span>
+<span class="n">e_interp</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Stark_Shift_7_0.png" src="../../_images/notebooks_res_Stark_Shift_7_0.png" />
+</div>
+</div>
+</section>
+<section id="5.-Calculate-wavefunctions">
+<h2>5. Calculate wavefunctions<a class="headerlink" href="#5.-Calculate-wavefunctions" title="Link to this heading"></a></h2>
+<p>Next, we must determine what the ground state wavefunction of each dot is. As stated in the introduction of this tutorial, the hope is that eventually this process can be done automatically, but for the time being this must be done manually.</p>
+<p>In order to accomplish this, we simply detune the dot system so that the single electron Schrödinger equation solver gives us the correct ground state of each individual dot.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Detune the system so the formation of the left dot is favored</span>
+<span class="n">new_pot</span> <span class="o">=</span> <span class="n">pot_interp</span><span class="p">([</span><span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">])</span>
+<span class="n">gparams</span><span class="o">.</span><span class="n">update_potential</span><span class="p">(</span><span class="n">new_pot</span><span class="p">)</span>
+
+<span class="c1"># Solve Schrodinger equation and get the ground state wavefunction</span>
+<span class="n">e_ens</span><span class="p">,</span> <span class="n">e_vecs</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve_schrodinger_eq</span><span class="p">(</span><span class="n">mat_system</span><span class="p">,</span> <span class="n">gparams</span><span class="p">,</span> <span class="n">n_sols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">wavefunc_1</span> <span class="o">=</span> <span class="n">e_vecs</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># This is the ground state in the left dot</span>
+
+<span class="c1"># Detune the system so the formation of the right dot is favored</span>
+<span class="n">new_pot</span> <span class="o">=</span> <span class="n">pot_interp</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">])</span>
+<span class="n">gparams</span><span class="o">.</span><span class="n">update_potential</span><span class="p">(</span><span class="n">new_pot</span><span class="p">)</span> <span class="c1"># This is the ground state in the right dot</span>
+
+<span class="c1"># Solve Schrodinger equation and get the ground state wavefunction</span>
+<span class="n">e_ens</span><span class="p">,</span> <span class="n">e_vecs</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve_schrodinger_eq</span><span class="p">(</span><span class="n">mat_system</span><span class="p">,</span> <span class="n">gparams</span><span class="p">,</span> <span class="n">n_sols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">wavefunc_2</span> <span class="o">=</span> <span class="n">e_vecs</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Put these wavefunctions into a list to pass as a parameter for later</span>
+<span class="n">wavefuncs</span> <span class="o">=</span> <span class="p">[</span><span class="n">wavefunc_1</span><span class="p">,</span> <span class="n">wavefunc_2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="6.-Calculate-Stark-shift">
+<h2>6. Calculate Stark shift<a class="headerlink" href="#6.-Calculate-Stark-shift" title="Link to this heading"></a></h2>
+<p>Now that we have all of the preliminaries in place, we can calculate the Stark shift of each electron in the system.</p>
+<p>We initialize a <code class="docutils literal notranslate"><span class="pre">StarkShift</span></code> object with the grid parameters and consts we used earlier on and then pass the electric field interpolator, the control parameter values to use, the control names, and the ground state wavefunctions we calculated. The output of the <code class="docutils literal notranslate"><span class="pre">delta_g</span></code> is a pandas DataFrame, with columns for each control variable and each the variation in <span class="math notranslate nohighlight">\(g\)</span> for each electron in question.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now specify the potentials to interpolate around</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]]</span>
+<span class="n">v_vec</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]]</span>
+
+<span class="c1"># Calculate delta_g with gridparams, wavefunction and electric field and print result</span>
+<span class="n">stark_shift</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">starkshift</span><span class="o">.</span><span class="n">StarkShift</span><span class="p">(</span><span class="n">gparams</span><span class="p">,</span> <span class="s1">&#39;Si/SiO2&#39;</span><span class="p">)</span>
+<span class="n">delta_g</span> <span class="o">=</span> <span class="n">stark_shift</span><span class="o">.</span><span class="n">delta_g</span><span class="p">(</span><span class="n">e_interp</span><span class="p">,</span> <span class="n">v_vec</span><span class="p">,</span> <span class="n">ctrl_names</span><span class="p">,</span> <span class="n">wavefuncs</span><span class="o">=</span><span class="n">wavefuncs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">delta_g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+     V1    V2  delta_g_1  delta_g_2
+0  0.25  0.25   0.001134   0.001134
+1  0.26  0.25   0.001204   0.001156
+</pre></div></div>
+</div>
+<p>We can see that as we increase <code class="docutils literal notranslate"><span class="pre">V1</span></code> (the applied voltage over the left dot), <code class="docutils literal notranslate"><span class="pre">delta_g_1</span></code> increases. This is the expected behavior. <code class="docutils literal notranslate"><span class="pre">delta_g_2</span></code> alo increases, but less than <code class="docutils literal notranslate"><span class="pre">delta_g_1</span></code>. This makes sense since the second dot is farther away from the increasing voltage of the first plunger gate, but there is still cross coupling.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html" class="btn btn-neutral float-left" title="Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Understanding%20Effective%20Parameter%20Behavior.html" class="btn btn-neutral float-right" title="Understanding Effectvie Parameter Behavior" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Coherent Spintronics Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

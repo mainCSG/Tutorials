@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voltage pulse design with CSP: 3 dots &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QuDiPy tutorial: using the charge stability module" href="Charge%20Stability.html" />
+    <link rel="prev" title="Voltage pulse design with CSP: 2 dots" href="CSP_voltage_design_2_Dots.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Animations.html">Animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Voltage pulse design with CSP: 3 dots</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Specifying-parameters-common-for-all-control-pulses">1. Specifying parameters common for all control pulses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Addressing-individual-spins-in-the-global-ESR-field">2. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-\mathrm{SWAP}^k-two-qubit-gates">3. <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-\mathrm{CPHASE}(\alpha)-two-qubit-gates">4. <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> two-qubit gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#5.-Hadamard">5. Hadamard</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../res/Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web/Website%20Acknowledgements.html">Website Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Voltage pulse design with CSP: 3 dots</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Voltage-pulse-design-with-CSP:-3-dots">
+<h1>Voltage pulse design with CSP: 3 dots<a class="headerlink" href="#Voltage-pulse-design-with-CSP:-3-dots" title="Link to this heading"></a></h1>
+<p>This tutorial tests the voltage pulse design for the 1-qubit rotations, exchange gates, and Control-phases on a 3-qubit system.</p>
+<p>See 2-qubit tutorial for more detailed explanations.</p>
+<p>Necessary imports and default plotting parameters:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="c1"># update base working directory to QuDiPy</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">from</span> <span class="nn">qudipy.system</span> <span class="kn">import</span> <span class="n">State</span><span class="p">,</span> <span class="n">DotArray</span>
+<span class="kn">from</span> <span class="nn">qudipy.design</span> <span class="kn">import</span> <span class="n">voltage_csp</span><span class="p">,</span> <span class="n">shapes</span>
+</pre></div>
+</div>
+</div>
+<section id="1.-Specifying-parameters-common-for-all-control-pulses">
+<h2>1. Specifying parameters common for all control pulses<a class="headerlink" href="#1.-Specifying-parameters-common-for-all-control-pulses" title="Link to this heading"></a></h2>
+<p>Defining nextnano/processed data directories and relevant DotArray variables.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nav_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;QuDiPy data&#39;</span><span class="p">,</span> <span class="s1">&#39;tutorials&#39;</span><span class="p">)</span>
+<span class="n">processed_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                            <span class="s1">&#39;processed&#39;</span><span class="p">,</span><span class="s1">&#39;3QD_processed&#39;</span><span class="p">)</span>
+<span class="n">nextnano_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                                    <span class="s1">&#39;nextnano&#39;</span><span class="p">,</span><span class="s1">&#39;3QD&#39;</span><span class="p">)</span>
+<span class="n">file_prefix</span> <span class="o">=</span> <span class="s1">&#39;tutorial&#39;</span>
+<span class="n">n_dots</span> <span class="o">=</span> <span class="mi">3</span>      <span class="c1"># anticipated number of dots</span>
+</pre></div>
+</div>
+</div>
+<p>If desired, define a subset of voltage ranges from the simulated nextnano data set to calculate relevant effective parameters or load previously calculated interpolation objects.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Creating DotArray object</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dots</span> <span class="o">=</span> <span class="n">DotArray</span><span class="p">(</span><span class="n">n_dots</span><span class="p">,</span> <span class="n">ctrl_ranges</span><span class="o">=</span><span class="n">ctrl_vals</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">,</span> <span class="n">nextnano_dir</span><span class="p">,</span> <span class="n">file_prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loading pre-calculated spin interpolators from
+/home/zach/Documents/github/QuDiPy/QuDiPy data/tutorials/processed/3QD_processed/tutorial_spin_data_size_[4 3 4 3 4]_from_[0.2 0.  0.2 0.  0.2]_to_[0.35 0.15 0.35 0.15 0.35].pkl
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;qudipy.system.dot_array.DotArray at 0x7d64c5e2b9d0&gt;
+</pre></div></div>
+</div>
+<p>Giving voltage parameters shorter names for convenient plotting</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dots</span><span class="o">.</span><span class="n">ctrl_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;$V_1$&#39;</span><span class="p">,</span> <span class="s1">&#39;$W_1$&#39;</span><span class="p">,</span><span class="s1">&#39;$V_2$&#39;</span><span class="p">,</span><span class="s1">&#39;$W_2$&#39;</span><span class="p">,</span><span class="s1">&#39;$V_3$&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Choosing shape functions</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unit_square</span> <span class="o">=</span> <span class="n">shapes</span><span class="o">.</span><span class="n">square</span><span class="p">()</span>
+<span class="n">unit_triangle</span> <span class="o">=</span> <span class="n">shapes</span><span class="o">.</span><span class="n">triangle</span><span class="p">()</span>
+<span class="n">unit_wide_gauss</span> <span class="o">=</span> <span class="n">shapes</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">unit_narrow_gauss</span> <span class="o">=</span> <span class="n">shapes</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+
+<span class="n">list_shapes</span> <span class="o">=</span> <span class="p">[</span><span class="n">unit_square</span><span class="p">,</span> <span class="n">unit_triangle</span><span class="p">,</span> <span class="n">unit_narrow_gauss</span><span class="p">,</span> <span class="n">unit_wide_gauss</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Guess of idling voltage configuration</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_idle_guess</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.253</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.-Addressing-individual-spins-in-the-global-ESR-field">
+<h2>2. Addressing individual spins in the global ESR field<a class="headerlink" href="#2.-Addressing-individual-spins-in-the-global-ESR-field" title="Link to this heading"></a></h2>
+<p>Realizing the following operation:</p>
+<div class="math notranslate nohighlight">
+\[\left[Y_1\left(\frac{\pi}{8}\right)\right]^4 |\uparrow - +\rangle
+     = Y_1\left(\frac{\pi}{2}\right) |\uparrow - +\rangle
+          = |+ - +\rangle\]</div>
+<p>Defining Designer object for a <span class="math notranslate nohighlight">\(Y\left(-\frac{3\pi}{8}\right)\)</span> rotation:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B_zeeman</span> <span class="o">=</span><span class="mi">1</span>
+
+<span class="n">rot_des</span> <span class="o">=</span> <span class="n">voltage_csp</span><span class="o">.</span><span class="n">rot</span><span class="p">(</span><span class="n">dot_array</span><span class="o">=</span><span class="n">dots</span><span class="p">,</span> <span class="n">active_qubits</span><span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span>
+                            <span class="n">min_length</span><span class="o">=</span><span class="mf">10e-6</span><span class="p">,</span> <span class="n">init_detuning_guess</span><span class="o">=</span><span class="n">v_idle_guess</span><span class="p">,</span>
+                                   <span class="n">B_zeeman</span> <span class="o">=</span><span class="n">B_zeeman</span><span class="p">,</span>
+                                          <span class="n">exchange_method</span><span class="o">=</span><span class="s1">&#39;HM&#39;</span><span class="p">,</span> <span class="n">S_max</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                                 <span class="n">rel_diff_step</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial detuning is found to be  [0.26242812 0.01975735 0.26824796 0.01559073 0.26212276]
+Start solving system of ODEs
+Solution FOUND!
+</pre></div></div>
+</div>
+<blockquote>
+<div><p>Composing 4 pulses using the same designer for varied shapes and same pulse length <span class="math notranslate nohighlight">\(T=17\)</span> ms</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_pulses</span> <span class="o">=</span> <span class="p">[</span><span class="n">rot_des</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">num_steps</span><span class="o">=</span><span class="mi">1600</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mf">12e-6</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">sh</span><span class="p">)</span>
+                                                        <span class="k">for</span> <span class="n">sh</span> <span class="ow">in</span> <span class="n">list_shapes</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Plotting last of the 4 pulses:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_pulses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="n">dots</span><span class="o">.</span><span class="n">ctrl_names</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mf">3.5</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.2</span><span class="p">))</span>
+<span class="n">train_pulses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;delta_g_1&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_g_2&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_g_3&#39;</span><span class="p">],</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">train_pulses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B_rf&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_22_0.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_22_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_22_1.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_22_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_22_2.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_22_2.png" />
+</div>
+</div>
+<p>Defining initial and expected spin states</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psi_up</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>                           <span class="c1"># pure spin up state</span>
+<span class="n">psi_down</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>                         <span class="c1"># pure spin down state</span>
+<span class="n">psi_plus</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>           <span class="c1"># pure |+&gt; state</span>
+<span class="n">psi_minus</span> <span class="o">=</span>  <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>        <span class="c1"># pure |-&gt; state</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init_rot</span> <span class="o">=</span> <span class="n">State</span><span class="p">([</span><span class="n">psi_up</span><span class="p">,</span> <span class="n">psi_minus</span><span class="p">,</span> <span class="n">psi_plus</span><span class="p">])</span>
+<span class="n">exp_rot</span> <span class="o">=</span> <span class="n">State</span><span class="p">([</span><span class="n">psi_plus</span><span class="p">,</span>  <span class="n">psi_minus</span><span class="p">,</span> <span class="n">psi_plus</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Evolving the spin system under this sequence of pulses</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rot_data</span> <span class="o">=</span> <span class="n">init_rot</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">train_pulses</span><span class="p">,</span> <span class="n">rho_reference</span><span class="o">=</span> <span class="n">exp_rot</span><span class="o">.</span><span class="n">rho_spin</span><span class="p">,</span>
+                           <span class="n">track_qubits</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">eval_fidelity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">eval_Bloch_vectors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+ROTY22.50° 1, step 1600: 100%|██████████| 1600/1600 [00:03&lt;00:00, 458.01it/s]
+ROTY22.50° 1, step 1600: 100%|██████████| 1600/1600 [00:03&lt;00:00, 444.20it/s]
+ROTY22.50° 1, step 1600: 100%|██████████| 1600/1600 [00:03&lt;00:00, 463.16it/s]
+ROTY22.50° 1, step 1600: 100%|██████████| 1600/1600 [00:03&lt;00:00, 462.43it/s]
+</pre></div></div>
+</div>
+<p>Plotting evolution results</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">7.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="p">)</span>
+
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;sigma_x_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{x1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;sigma_y_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{y1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;sigma_z_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{z1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;1st qubit Bloch vector&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="c1">###############################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;sigma_x_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{x2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;sigma_y_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{y2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;sigma_z_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{z2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, $\mu$s&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;2nd qubit Bloch vector&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="c1">############</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">rot_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fidelity&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, $\mu$s&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fidelity&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">left[</span><span class="se">\\</span><span class="s1">mathrm</span><span class="si">{Y}</span><span class="s1">_</span><span class="si">{1}</span><span class="se">\\</span><span class="s1">left(-</span><span class="se">\\</span><span class="s1">frac{3</span><span class="se">\\</span><span class="s1">pi}</span><span class="si">{8}</span><span class="se">\\</span><span class="s1">right)</span><span class="se">\\</span><span class="s1">right]^4$&#39;</span>
+             <span class="s1">&#39;$ |</span><span class="se">\\</span><span class="s1">uparrow -</span><span class="se">\\</span><span class="s1">rangle = |+ -</span><span class="se">\\</span><span class="s1">rangle$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_29_0.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_29_0.png" />
+</div>
+</div>
+<p>Note the <span class="math notranslate nohighlight">\(2\pi\)</span> rotations around skewed axes that non-resonant qubit #3 goes through to preserve its initial states after each pulse.</p>
+<p>Infidelity at the end:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">-</span><span class="n">rot_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-1.2117448378035078e-08
+</pre></div></div>
+</div>
+</section>
+<section id="3.-\mathrm{SWAP}^k-two-qubit-gates">
+<h2>3. <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates<a class="headerlink" href="#3.-\mathrm{SWAP}^k-two-qubit-gates" title="Link to this heading"></a></h2>
+<p>This and the following sections show how to quickly run everything altogether: state definition, pulse design, and state evolution.</p>
+<p>Testing the operation <span class="math notranslate nohighlight">\(\mathrm{SWAP}_{12} |+ \uparrow -\rangle = |\uparrow + -\rangle\)</span> with four <span class="math notranslate nohighlight">\(\mathrm{SWAP}^{1/4}\)</span> pulses of different lengths.</p>
+<blockquote>
+<div><p>DesignerEffective objects for <span class="math notranslate nohighlight">\(\mathrm{SWAP}^{1/4}\)</span> pulses</p>
+</div></blockquote>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">swap_des</span> <span class="o">=</span> <span class="n">voltage_csp</span><span class="o">.</span><span class="n">swapk</span><span class="p">(</span><span class="n">dot_array</span><span class="o">=</span><span class="n">dots</span><span class="p">,</span> <span class="n">qubit_pairs</span><span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+                          <span class="n">min_length</span><span class="o">=</span><span class="mf">8e-9</span><span class="p">,</span>
+                                 <span class="n">init_detuning_guess</span><span class="o">=</span><span class="n">v_idle_guess</span><span class="p">,</span>
+                                 <span class="n">B_zeeman</span> <span class="o">=</span>  <span class="n">B_zeeman</span><span class="p">,</span>
+                                 <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span>
+                                 <span class="n">exchange_method</span><span class="o">=</span><span class="s1">&#39;HM&#39;</span><span class="p">,</span>
+                                 <span class="n">rel_diff_step</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial detuning is found to be  [0.26242812 0.01975735 0.26824796 0.01559073 0.26212276]
+Start solving system of ODEs
+Solution FOUND!
+</pre></div></div>
+</div>
+<blockquote>
+<div><p>Composing pulses with <strong>different lengths</strong> <span class="math notranslate nohighlight">\(T = 10, 20, 50, 100\)</span> ns and same shape (gaussian with <span class="math notranslate nohighlight">\(\sigma=0.2\)</span>)</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_swap_pulses</span> <span class="o">=</span> <span class="p">[</span><span class="n">swap_des</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">num_steps</span> <span class="o">=</span> <span class="mi">5600</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="mi">8</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e-9</span><span class="p">,</span> <span class="mf">2e-9</span><span class="p">,</span> <span class="mf">5e-9</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+<p>Plotting all four voltage pulses</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pulse</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="n">swap_des</span><span class="o">.</span><span class="n">dot_array</span><span class="o">.</span><span class="n">ctrl_names</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                    <span class="n">loc</span><span class="o">=</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.7</span><span class="p">))</span> <span class="k">for</span> <span class="n">pulse</span> <span class="ow">in</span> <span class="n">train_swap_pulses</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_39_0.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_39_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_39_1.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_39_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_39_2.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_39_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_39_3.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_39_3.png" />
+</div>
+</div>
+<blockquote>
+<div><p>Initial and expected states:</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init_swap</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">spin</span><span class="o">=</span><span class="p">[</span><span class="n">psi_plus</span><span class="p">,</span> <span class="n">psi_up</span><span class="p">,</span> <span class="n">psi_minus</span><span class="p">])</span>
+<span class="n">exp_swap</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">spin</span><span class="o">=</span><span class="p">[</span><span class="n">psi_up</span><span class="p">,</span> <span class="n">psi_plus</span><span class="p">,</span> <span class="n">psi_minus</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<blockquote>
+<div><p>Evolving qubit state, plotting fidelity and Bloch vectors</p>
+</div></blockquote>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">swap_data</span> <span class="o">=</span> <span class="n">init_swap</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">train_swap_pulses</span><span class="p">,</span> <span class="n">rho_reference</span><span class="o">=</span><span class="n">exp_swap</span><span class="o">.</span><span class="n">rho_spin</span><span class="p">,</span>
+                            <span class="n">eval_fidelity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_qubits</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+                                    <span class="n">eval_Bloch_vectors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+SWAP^0.25 (1, 2), step 5600: 100%|██████████| 5600/5600 [00:08&lt;00:00, 623.83it/s]
+SWAP^0.25 (1, 2), step 5600: 100%|██████████| 5600/5600 [00:09&lt;00:00, 591.25it/s]
+SWAP^0.25 (1, 2), step 5600: 100%|██████████| 5600/5600 [00:09&lt;00:00, 616.89it/s]
+SWAP^0.25 (1, 2), step 5600: 100%|██████████| 5600/5600 [00:09&lt;00:00, 612.22it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">7.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="p">)</span>
+
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;sigma_x_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{x1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;sigma_y_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{y1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;sigma_z_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{z1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;1st qubit Bloch vector&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="c1">###############################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;sigma_x_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{x2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;sigma_y_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{y2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;sigma_z_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{z2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, ns&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;2nd qubit Bloch vector&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="c1">############</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">swap_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fidelity&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, ns&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fidelity&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">left(</span><span class="se">\\</span><span class="s1">mathrm</span><span class="si">{SWAP}</span><span class="s1">^{</span><span class="se">\\</span><span class="s1">, </span><span class="se">\\</span><span class="s1">frac</span><span class="si">{1}{4}</span><span class="s1">}_</span><span class="si">{12}</span><span class="se">\\</span><span class="s1">right)^4 </span><span class="se">\</span>
+<span class="s1">             |+ </span><span class="se">\\</span><span class="s1">uparrow -</span><span class="se">\\</span><span class="s1">rangle = |</span><span class="se">\\</span><span class="s1">uparrow + -</span><span class="se">\\</span><span class="s1">rangle$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_44_0.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_44_0.png" />
+</div>
+</div>
+<p>Infidelity at the end:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">-</span> <span class="n">swap_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-1.2749457489746874e-08
+</pre></div></div>
+</div>
+</section>
+<section id="4.-\mathrm{CPHASE}(\alpha)-two-qubit-gates">
+<h2>4. <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> two-qubit gates<a class="headerlink" href="#4.-\mathrm{CPHASE}(\alpha)-two-qubit-gates" title="Link to this heading"></a></h2>
+<p>Running a control-Z operation on two of three qubits:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{CZ}_{12} | + \downarrow  - \rangle = | - \downarrow -\rangle\]</div>
+<p>We represent each gate control-Z gate as a combination of two control-phase gates:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}    \mathrm{CZ} = \mathrm{CPHASE}(\pi) = \mathrm{CPHASE}(\pi/3) \mathrm{CPHASE}(2\pi/3)\\Initial and expected states:\end{aligned}\end{align} \]</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init_cz</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">spin</span><span class="o">=</span><span class="p">[</span> <span class="n">psi_plus</span><span class="p">,</span> <span class="n">psi_down</span><span class="p">,</span> <span class="n">psi_minus</span><span class="p">])</span>
+<span class="n">exp_cz</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">spin</span><span class="o">=</span><span class="p">[</span> <span class="n">psi_minus</span><span class="p">,</span> <span class="n">psi_down</span><span class="p">,</span> <span class="n">psi_minus</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<blockquote>
+<div><p>Two DesignerEffective objects for <span class="math notranslate nohighlight">\(\mathrm{CPHASE}\)</span> pulses. Specifying all parameters, including shapes and times, right away this time</p>
+</div></blockquote>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cphase_pi3_des</span> <span class="o">=</span> <span class="n">voltage_csp</span><span class="o">.</span><span class="n">cphase</span><span class="p">(</span><span class="n">dots</span><span class="p">,</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span>
+                                  <span class="n">init_detuning_guess</span> <span class="o">=</span><span class="n">v_idle_guess</span><span class="p">,</span>
+                                 <span class="n">B_zeeman</span> <span class="o">=</span>  <span class="n">B_zeeman</span><span class="p">,</span>
+                                 <span class="n">rel_diff_step</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">,</span>
+                                  <span class="n">min_length</span> <span class="o">=</span> <span class="mf">2e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial detuning is found to be  [0.26242812 0.01975735 0.26824796 0.01559073 0.26212276]
+Start solving system of ODEs
+Solution FOUND!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cphase_2pi3_des</span> <span class="o">=</span> <span class="n">voltage_csp</span><span class="o">.</span><span class="n">cphase</span><span class="p">(</span><span class="n">dots</span><span class="p">,</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span>
+                                  <span class="n">init_detuning_guess</span> <span class="o">=</span> <span class="n">v_idle_guess</span><span class="p">,</span>
+                                  <span class="n">B_zeeman</span> <span class="o">=</span> <span class="n">B_zeeman</span><span class="p">,</span>
+                                 <span class="n">rel_diff_step</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">,</span>
+                                        <span class="n">min_length</span> <span class="o">=</span> <span class="mf">9e-6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial detuning is found to be  [0.26242812 0.01975735 0.26824796 0.01559073 0.26212276]
+Start solving system of ODEs
+Solution FOUND!
+</pre></div></div>
+</div>
+<blockquote>
+<div><p>Composing corresponding pulses</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cphase_pulses</span> <span class="o">=</span> <span class="p">[</span><span class="n">cphase_pi3_des</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">num_steps</span> <span class="o">=</span> <span class="mi">1600</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span>
+                                                <span class="n">length</span> <span class="o">=</span> <span class="mf">1.75e-5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+                        <span class="n">cphase_2pi3_des</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">num_steps</span> <span class="o">=</span> <span class="mi">1600</span><span class="p">,</span>
+                                    <span class="n">length</span> <span class="o">=</span>  <span class="mf">1e-5</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;triangle&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#plotting first pulse</span>
+<span class="n">cphase_pulses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;delta_g_1&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_g_2&#39;</span><span class="p">])</span>
+<span class="n">cphase_pulses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;J_1&#39;</span><span class="p">])</span>
+<span class="n">cphase_pulses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="n">dots</span><span class="o">.</span><span class="n">ctrl_names</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">cphase_pulses</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="n">dots</span><span class="o">.</span><span class="n">ctrl_names</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_55_0.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_55_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_55_1.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_55_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_55_2.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_55_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_55_3.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_55_3.png" />
+</div>
+</div>
+<blockquote>
+<div><p>Evolving qubit state, plotting fidelity and Bloch vectors</p>
+</div></blockquote>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cphase_data</span> <span class="o">=</span> <span class="n">init_cz</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">cphase_pulses</span><span class="p">,</span> <span class="n">rho_reference</span><span class="o">=</span><span class="n">exp_cz</span><span class="o">.</span><span class="n">rho_spin</span><span class="p">,</span>
+                            <span class="n">eval_fidelity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_qubits</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+                                    <span class="n">eval_Bloch_vectors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+CPHASE(60.00°) (1, 2), step 1600: 100%|██████████| 1600/1600 [00:03&lt;00:00, 429.19it/s]
+CPHASE(120.00°) (1, 2), step 1600: 100%|██████████| 1600/1600 [00:03&lt;00:00, 411.92it/s]
+</pre></div></div>
+</div>
+<p>Plotting Bloch vector evolution of the qubits 1,2,3</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;sigma_x_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{x1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;sigma_y_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{y1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;sigma_z_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{z1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;1st qubit Bloch vector&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span>  <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="c1">###############################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;sigma_x_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{x2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;sigma_y_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{y2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;sigma_z_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{z2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, us&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;2nd qubit Bloch vector&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">cphase_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fidelity&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, us&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fidelity&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">mathrm</span><span class="si">{CPHASE}</span><span class="s1">_</span><span class="si">{12}</span><span class="se">\\</span><span class="s1">left(</span><span class="se">\\</span><span class="s1">frac{</span><span class="se">\\</span><span class="s1">pi}</span><span class="si">{3}</span><span class="se">\\</span><span class="s1">right)$&#39;</span>
+             <span class="s1">&#39;$ </span><span class="se">\\</span><span class="s1">mathrm</span><span class="si">{CPHASE}</span><span class="s1">_</span><span class="si">{12}</span><span class="se">\\</span><span class="s1">left(</span><span class="se">\\</span><span class="s1">frac{2</span><span class="se">\\</span><span class="s1">pi}</span><span class="si">{3}</span><span class="se">\\</span><span class="s1">right) $&#39;</span>
+             <span class="s1">&#39;$| + </span><span class="se">\\</span><span class="s1">downarrow - </span><span class="se">\\</span><span class="s1">rangle = |- </span><span class="se">\\</span><span class="s1">downarrow- </span><span class="se">\\</span><span class="s1">rangle$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_59_0.png" src="../../_images/notebooks_tutorials_CSP_voltage_design_3_Dots_59_0.png" />
+</div>
+</div>
+<p>Inidelity at the end:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">-</span><span class="n">cphase_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-1.9609950996368752e-08
+</pre></div></div>
+</div>
+</section>
+<section id="5.-Hadamard">
+<h2>5. Hadamard<a class="headerlink" href="#5.-Hadamard" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init_had</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">spin</span><span class="o">=</span><span class="p">[</span> <span class="n">psi_plus</span><span class="p">,</span> <span class="n">psi_down</span><span class="p">,</span> <span class="n">psi_down</span><span class="p">])</span>
+<span class="n">exp_had</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">spin</span><span class="o">=</span><span class="p">[</span> <span class="n">psi_up</span><span class="p">,</span> <span class="n">psi_down</span><span class="p">,</span> <span class="n">psi_down</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rot_had</span> <span class="o">=</span> <span class="n">voltage_csp</span><span class="o">.</span><span class="n">rot</span><span class="p">(</span><span class="n">dot_array</span><span class="o">=</span><span class="n">dots</span><span class="p">,</span> <span class="n">active_qubits</span><span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">angle</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span>
+                            <span class="n">min_length</span><span class="o">=</span><span class="mf">10e-6</span><span class="p">,</span> <span class="n">init_detuning_guess</span><span class="o">=</span><span class="n">v_idle_guess</span><span class="p">,</span>
+                                   <span class="n">B_zeeman</span> <span class="o">=</span><span class="n">B_zeeman</span><span class="p">,</span>
+                                                 <span class="n">rel_diff_step</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial detuning is found to be  [0.26242812 0.01975735 0.26824796 0.01559073 0.26212276]
+Start solving system of ODEs
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hadamard_pulses</span> <span class="o">=</span> <span class="p">[</span><span class="n">rot_had</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">num_steps</span> <span class="o">=</span> <span class="mi">1600</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span>
+                                                <span class="n">length</span> <span class="o">=</span> <span class="mf">1.75e-5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#plotting first pulse</span>
+<span class="c1"># cphase_pulses[0].plot(plot_ctrls=[&#39;delta_g_1&#39;, &#39;delta_g_2&#39;])</span>
+<span class="c1"># cphase_pulses[0].plot(plot_ctrls=[&#39;J_1&#39;])</span>
+<span class="n">hadamard_pulses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="n">dots</span><span class="o">.</span><span class="n">ctrl_names</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="c1"># hadamard_pulses[1].plot(plot_ctrls=dots.ctrl_names, figsize=(5,4), loc=(0.05,0.5))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hadamard_data</span> <span class="o">=</span> <span class="n">init_had</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">hadamard_pulses</span><span class="p">,</span> <span class="n">rho_reference</span><span class="o">=</span><span class="n">exp_had</span><span class="o">.</span><span class="n">rho_spin</span><span class="p">,</span>
+                            <span class="n">eval_fidelity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">track_qubits</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+                                    <span class="n">eval_Bloch_vectors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;sigma_x_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{x1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;sigma_y_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{y1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;sigma_z_1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{z1}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, us&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;1st qubit Bloch vector&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span>  <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="c1">###############################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;sigma_x_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{x2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;sigma_y_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{y2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;sigma_z_2&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{z2}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, us&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;2nd qubit Bloch vector&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="c1">###############################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;sigma_x_3&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{x3}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;sigma_y_3&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{y3}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;sigma_z_3&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⟨$\sigma_</span><span class="si">{z3}</span><span class="s2">$⟩&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, us&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;3rd qubit Bloch vector&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fidelity&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time, us&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fidelity&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;$ \hat</span><span class="si">{H}</span><span class="s1"> $&#39;</span>
+             <span class="s1">&#39;$| + </span><span class="se">\\</span><span class="s1">downarrow </span><span class="se">\\</span><span class="s1">downarrow </span><span class="se">\\</span><span class="s1">rangle = |</span><span class="se">\\</span><span class="s1">uparrow </span><span class="se">\\</span><span class="s1">downarrow </span><span class="se">\\</span><span class="s1">downarrow </span><span class="se">\\</span><span class="s1">rangle$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">-</span><span class="n">hadamard_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CSP_voltage_design_2_Dots.html" class="btn btn-neutral float-left" title="Voltage pulse design with CSP: 2 dots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Charge%20Stability.html" class="btn btn-neutral float-right" title="QuDiPy tutorial: using the charge stability module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Coherent Spintronics Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

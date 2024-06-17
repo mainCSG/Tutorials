@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to contruct dot array system &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="DotArray Object for a Triple Quantum Dot Array" href="Dot%20Array%20Class%20Usage%203%20Dots.html" />
+    <link rel="prev" title="QuDiPy tutorial: using the charge stability module" href="Charge%20Stability.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Animations.html">Animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to contruct dot array system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#0.-Import-relevant-packages-and-QuDiPy-modules">0. Import relevant packages and QuDiPy modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Generate-Dots-object-instance">1. Generate Dots object instance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#1.1-Define-variables-to-initialize-Dots-object-instance">1.1 Define variables to initialize Dots object instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.2-Create-object-instance">1.2 Create object instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.3-Test-dot-splitting">1.3 Test dot splitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.4-Evaluate-effective-parameters">1.4 Evaluate effective parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#1.4.1-g-factor-deviation">1.4.1 g-factor deviation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#1.4.2-Hund-Mulliken-or-Heitler-London-Exchange">1.4.2 Hund-Mulliken or Heitler-London Exchange</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../res/Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web/Website%20Acknowledgements.html">Website Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">How to contruct dot array system</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="How-to-contruct-dot-array-system">
+<h1>How to contruct dot array system<a class="headerlink" href="#How-to-contruct-dot-array-system" title="Link to this heading"></a></h1>
+<section id="0.-Import-relevant-packages-and-QuDiPy-modules">
+<h2>0. Import relevant packages and QuDiPy modules<a class="headerlink" href="#0.-Import-relevant-packages-and-QuDiPy-modules" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="c1"># update base working directory to QuDiPy</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">qudipy.system</span> <span class="kn">import</span> <span class="n">DotArray</span>
+<span class="kn">from</span> <span class="nn">qudipy.utils</span> <span class="kn">import</span> <span class="n">constants</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="1.-Generate-Dots-object-instance">
+<h2>1. Generate Dots object instance<a class="headerlink" href="#1.-Generate-Dots-object-instance" title="Link to this heading"></a></h2>
+<section id="1.1-Define-variables-to-initialize-Dots-object-instance">
+<h3>1.1 Define variables to initialize Dots object instance<a class="headerlink" href="#1.1-Define-variables-to-initialize-Dots-object-instance" title="Link to this heading"></a></h3>
+<p>Define a parent directory to look for or to save data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nav_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;QuDiPy data&#39;</span><span class="p">,</span> <span class="s1">&#39;tutorials&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Define the directory to store 2D potential slice data extracted from nextnano simulations for a given device, as well as, to store calculated variables such as <span class="math notranslate nohighlight">\(g\)</span>-factor deviation, exchange, or Hubbard parameters for individual dots or dot pairs.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">processed_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                            <span class="s1">&#39;processed&#39;</span><span class="p">,</span><span class="s1">&#39;2QD_processed&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Define the directory location that contains all of the nextnano simulation data files to be processed or imported.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nextnano_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                                    <span class="s1">&#39;nextnano&#39;</span><span class="p">,</span><span class="s1">&#39;2QD_dotsep_60nm&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Define the anticipated number of quantum dots. This variable will determine if dot merger events occur under various voltage configurations.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_dots</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<p>If desired, define control parameters to use when interpolating the potential data from nextnano: must be a subset of the raw data or the full set of raw data. If not specified, the default is to interpolate over all raw data.</p>
+<blockquote>
+<div><p><strong>Note</strong>: These will greatly influence the accuracy of the resultant calculations as well as the run time of the <code class="docutils literal notranslate"><span class="pre">Dots()</span></code> class upon initial data processing.</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eff_interp_dims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">eff_interp_dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="n">eff_interp_dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">eff_interp_dims</span><span class="p">[</span><span class="mi">2</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+<p>Add a file prefix name to be appended to saved data or interpolation objects that will be computed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_prefix</span> <span class="o">=</span> <span class="s1">&#39;tutorial&#39;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="1.2-Create-object-instance">
+<h3>1.2 Create object instance<a class="headerlink" href="#1.2-Create-object-instance" title="Link to this heading"></a></h3>
+<p>First, instantiate a <code class="docutils literal notranslate"><span class="pre">DotArray()</span></code> class object instance using the previously defined variables and choose to calculate the effective parameters (<span class="math notranslate nohighlight">\(g\)</span>-factor deviation and exchange), or choose just to collect the masked potential interpolation objects.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">save=</span></code> flag determines if processed nextnano potential data is saved to hard disk (default is <code class="docutils literal notranslate"><span class="pre">True</span></code>). If existing processed data exists it will be loaded from hard disk.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">calc=</span></code> flag determines which effective parameters to calculated or load from hard disk (default is <code class="docutils literal notranslate"><span class="pre">['spin']</span></code>). Calculations are ignored if flag is set to <code class="docutils literal notranslate"><span class="pre">[]</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+<p>Now let’s calculate the effective parameters and/or load the masked potential landscapes, as well as, save 2D potential slices to Pre-processed directory.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Process/Load/Calculate with default settings e.g. minimal input parameters.</span>
+<span class="n">dots</span> <span class="o">=</span> <span class="n">DotArray</span><span class="p">(</span><span class="n">n_dots</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">,</span> <span class="n">nextnano_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loading pre-calculated spin interpolators from
+/home/zach/Documents/github/QuDiPy/QuDiPy data/tutorials/processed/2QD_processed/no_name_spin_data_size_[6 6 6]_from_[ 0.2 -0.1  0.2]_to_[0.45 0.15 0.45].pkl
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;qudipy.system.dot_array.DotArray at 0x7c2227c27fd0&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Process/Load/Calculate with subset of raw nextnano data and desire file prefix</span>
+<span class="c1"># to add to saved interpolator files.</span>
+<span class="n">dots</span> <span class="o">=</span> <span class="n">DotArray</span><span class="p">(</span><span class="n">n_dots</span><span class="p">,</span> <span class="n">ctrl_ranges</span><span class="o">=</span><span class="n">ctrl_vals</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">,</span> <span class="n">nextnano_dir</span><span class="p">,</span> <span class="n">file_prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loading pre-calculated spin interpolators from
+/home/zach/Documents/github/QuDiPy/QuDiPy data/tutorials/processed/2QD_processed/tutorial_spin_data_size_[4 3 4]_from_[ 0.2 -0.1  0.2]_to_[0.4  0.12 0.4 ].pkl
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;qudipy.system.dot_array.DotArray at 0x7c22a0099d80&gt;
+</pre></div></div>
+</div>
+</section>
+<section id="1.3-Test-dot-splitting">
+<h3>1.3 Test dot splitting<a class="headerlink" href="#1.3-Test-dot-splitting" title="Link to this heading"></a></h3>
+<p>The splitting procedure creates a list of new Dots objects. They inherit all properties from the parent object <em>except</em>: 1. potential interpolator <code class="docutils literal notranslate"><span class="pre">dots_object.potential(ctrl_vals)</span></code> now outputs masked potential 2. the positions of visible dots <strong>(counted from 1)</strong> may change.</p>
+<p>Splitting group can be either <code class="docutils literal notranslate"><span class="pre">'single'</span></code>/<code class="docutils literal notranslate"><span class="pre">'singles'</span></code> (default) for individual dots, or <code class="docutils literal notranslate"><span class="pre">'pair'</span></code>/<code class="docutils literal notranslate"><span class="pre">'pairs'</span></code> for adjacent pairs.</p>
+<blockquote>
+<div><p><strong>Note</strong>: if the number of quantum dots decreases for any control value coordinates, then the potential landscape returns <code class="docutils literal notranslate"><span class="pre">NaN</span></code>s, since the quantum dot system must be dot invariant for the present applications.</p>
+</div></blockquote>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">NaN</span></code>s are not displayed when plotting</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose voltage control values</span>
+<span class="n">voltage_config</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.2</span><span class="p">]</span>
+
+<span class="c1"># Quantum dots are not well defined in this case, so NaNs are outputted and</span>
+<span class="c1"># are not plotted</span>
+<span class="c1"># Example voltage configuration:</span>
+<span class="c1"># voltage_config = [0.2,0.,0.4]</span>
+
+<span class="n">dot1</span><span class="p">,</span> <span class="n">dot2</span> <span class="o">=</span> <span class="n">dots</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;single&#39;</span><span class="p">)</span>
+<span class="n">dotpair1</span> <span class="o">=</span> <span class="n">dots</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>All Dots objects have the ability to plot the ground state wavefunction either:</p>
+<ol class="arabic simple">
+<li><p>Overlayed on the potential</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dots</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_23_0.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_23_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dot1</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;meV&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_24_0.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_24_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dot1</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;meV&#39;</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_25_0.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_25_0.png" />
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>In a separate subplot figure</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dot2</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;meV&#39;</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">overlay_ontop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_27_0.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_27_0.png" />
+</div>
+</div>
+<p>All Dots objects preserve information about the unmasked potential. They can also be split more than once.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dots</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;meV&#39;</span><span class="p">)</span>
+
+<span class="c1"># Try splitting dot1 again</span>
+<span class="c1"># ddot1, = dot1.split()</span>
+<span class="c1"># ddot1.potential.plot(voltage_config)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_29_0.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_29_0.png" />
+</div>
+</div>
+</section>
+<section id="1.4-Evaluate-effective-parameters">
+<h3>1.4 Evaluate effective parameters<a class="headerlink" href="#1.4-Evaluate-effective-parameters" title="Link to this heading"></a></h3>
+<p>For a specific control voltage configuration, the <span class="math notranslate nohighlight">\(g\)</span>-factor deviations and exchange couplings are determined for each dot or neighboring pair, respectively.</p>
+<section id="1.4.1-g-factor-deviation">
+<h4>1.4.1 g-factor deviation<a class="headerlink" href="#1.4.1-g-factor-deviation" title="Link to this heading"></a></h4>
+<p>g-factor deviation for a single voltage vector</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">voltage_config</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+
+<span class="n">dot1</span><span class="p">,</span> <span class="n">dot2</span> <span class="o">=</span> <span class="n">dots</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;single&#39;</span><span class="p">)</span>
+<span class="n">dotpair1</span> <span class="o">=</span> <span class="n">dots</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">)</span>
+
+<span class="n">dot1</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_32_0.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_32_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_32_1.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_32_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># higher voltage on the 2nd dot gives higher g-factor deviation</span>
+<span class="c1"># voltage_config = [0.4, 0.0, 0.2]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exact values:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span>    <span class="n">dots</span><span class="o">.</span><span class="n">g_factors</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Interpolated:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span>    <span class="n">dots</span><span class="o">.</span><span class="n">g_factors</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+g_factor evaluation: control vector=[0.4, 0.0, 0.2]: 100%|██████████| 1/1 [00:01&lt;00:00,  1.49s/it]
+Exact values:    [5.08641118e-05 8.89635328e-06]
+Interpolated:    [5.18060050e-05 9.51262098e-06]
+</pre></div></div>
+</div>
+<p>g-factor deviation for multiple voltage vectors</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">voltage_configs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">volt</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+    <span class="n">voltage_configs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">volt</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">])</span>
+
+<span class="n">dots</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_configs</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;gfactor&#39;</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_configs</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;gfactor&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+g_factor evaluation: control vector=[0.4, 0.1, 0.2]:  83%|████████▎ | 5/6 [00:08&lt;00:01,  1.79s/it]
+ Warning: number of detected dots is 1 -&gt; different from user-specified value 2. Parameters are not evaluated
+
+ Warning: number of detected dots is 1 -&gt; different from user-specified value 2. Parameters are not evaluated
+g_factor evaluation: control vector=[0.4, 0.1, 0.2]: 100%|██████████| 6/6 [00:08&lt;00:00,  1.48s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_35_1.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_35_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_35_2.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_35_2.png" />
+</div>
+</div>
+</section>
+<section id="1.4.2-Hund-Mulliken-or-Heitler-London-Exchange">
+<h4>1.4.2 Hund-Mulliken or Heitler-London Exchange<a class="headerlink" href="#1.4.2-Hund-Mulliken-or-Heitler-London-Exchange" title="Link to this heading"></a></h4>
+<p>Exchange for a single voltage vector</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HM values are typically larger than HL</span>
+<span class="n">ex_hl</span> <span class="o">=</span> <span class="n">dots</span><span class="o">.</span><span class="n">exchanges</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;hl&#39;</span><span class="p">)</span>
+<span class="n">ex_hm</span> <span class="o">=</span> <span class="n">dots</span><span class="o">.</span><span class="n">exchanges</span><span class="p">(</span><span class="n">voltage_config</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;hm&#39;</span><span class="p">)</span>
+
+<span class="c1"># convert values to neV</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ex_hl</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HL exchange: </span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">ex_hl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1.6e-28</span><span class="si">:</span><span class="s1">.5</span><span class="si">}</span><span class="s1"> neV&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HM exchange: </span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">ex_hm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w">  </span><span class="mf">1.6e-28</span><span class="si">:</span><span class="s1">.5</span><span class="si">}</span><span class="s1"> neV&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[4.56952543e-38]
+HL exchange:     2.856e-10 neV
+HM exchange:     4.4385e-10 neV
+</pre></div></div>
+</div>
+<p>Exchange for multiple voltage vectors: plotting exchange for a path through voltage state space</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">voltage_configs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">volt</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+    <span class="n">voltage_configs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">volt</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+
+<span class="n">dots</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_configs</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;hm&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;neV&#39;</span><span class="p">,</span> <span class="n">axis_units</span><span class="o">=</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltage_configs</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;hm&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">plot_units</span><span class="o">=</span><span class="s1">&#39;neV&#39;</span><span class="p">,</span> <span class="n">axis_units</span><span class="o">=</span><span class="s1">&#39;mV&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Exchange HM evaluation: control vector=[0.2, 0.1, 0.2]: 100%|██████████| 20/20 [00:00&lt;00:00, 26.29it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_39_1.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_39_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_39_2.png" src="../../_images/notebooks_tutorials_Dot_Array_Class_Usage_2_Dots_39_2.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Charge%20Stability.html" class="btn btn-neutral float-left" title="QuDiPy tutorial: using the charge stability module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Dot%20Array%20Class%20Usage%203%20Dots.html" class="btn btn-neutral float-right" title="DotArray Object for a Triple Quantum Dot Array" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Coherent Spintronics Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

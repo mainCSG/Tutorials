@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QuDiPy tutorial: Using the Stark shift module" href="Stark%20Shift.html" />
+    <link rel="prev" title="Operator Creation Tutorial" href="Operator%20Creation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Animations.html">Animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Load/Create-DotArray-Object">1. Load/Create DotArray Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#1.1-Create-From-Simulated-Potentials">1.1 Create From Simulated Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#1.2-Create-From-Analytic-Gaussian-Potentials">1.2 Create From Analytic Gaussian Potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Generate-1D-&amp;-2D-potentials-for-Later-Use">2. Generate 1D &amp; 2D potentials for Later Use</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#2.1-Use-Gaussian-Potential">2.1 Use Gaussian Potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#2.2-Use-Simulate-DotArray-Object-Potential">2.2 Use Simulate DotArray Object Potential</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Plot-Selected-1D/2D/3D-Potential:-Non-Uniform-Grid">Plot Selected 1D/2D/3D Potential: Non-Uniform Grid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-Create-Potentials-Over-Uniform-Grid">3. Create Potentials Over Uniform Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-Solve-TISE-for-Both-Grids">4. Solve TISE for Both Grids</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#1D-Non-uniform-grid-solution">1D Non-uniform grid solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1D-Uniform-grid-solutions">1D Uniform grid solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#2D-Non-uniform-grid-solution">2D Non-uniform grid solution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Plot-energies-verse-state">Plot energies verse state</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#2D-Uniform-grid-solution">2D Uniform grid solution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web/Website%20Acknowledgements.html">Website Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Solve-1D-and-2D-Schödinger-Equation-on-Uniform-and-Non-Uniform-Grids">
+<h1>Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids<a class="headerlink" href="#Solve-1D-and-2D-Schödinger-Equation-on-Uniform-and-Non-Uniform-Grids" title="Link to this heading"></a></h1>
+<p>In this notebook we will explain methods for solving the time independent Schödinger equation (TISE) both in the case of a uniformly spaced mesh grid and non-uniformly spaced mesh grid.</p>
+<p>Change base working directory.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since we don&#39;t actually have a package yet for people to install..</span>
+<span class="c1"># We need to add our folder to the PYTHONPATH in order for import to find qudipy</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="c1"># update base working directory to QuDiPy</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<p>Load necessary modules.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">RegularGridInterpolator</span><span class="p">,</span> <span class="n">interp1d</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+
+<span class="kn">from</span> <span class="nn">qudipy.system</span> <span class="kn">import</span> <span class="n">DotArray</span>
+<span class="kn">from</span> <span class="nn">qudipy.utils</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">qudipy.utils</span> <span class="kn">import</span> <span class="n">find_nearest</span>
+<span class="kn">import</span> <span class="nn">qudipy.potential</span> <span class="k">as</span> <span class="nn">pot</span>
+<span class="kn">import</span> <span class="nn">qudipy.qutils</span> <span class="k">as</span> <span class="nn">qt</span>
+
+<span class="c1"># Initialize the Material class with the Si/SiO2 material system</span>
+<span class="n">mat_system</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">select_material</span><span class="p">(</span><span class="s1">&#39;Si/SiO2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="1.-Load/Create-DotArray-Object">
+<h2>1. Load/Create DotArray Object<a class="headerlink" href="#1.-Load/Create-DotArray-Object" title="Link to this heading"></a></h2>
+<section id="1.1-Create-From-Simulated-Potentials">
+<h3>1.1 Create From Simulated Potentials<a class="headerlink" href="#1.1-Create-From-Simulated-Potentials" title="Link to this heading"></a></h3>
+<p>If desired create a dot object for conditional use when solving the TISE. To do this, un-comment/comment <code class="docutils literal notranslate"><span class="pre">%%script</span> <span class="pre">false</span> <span class="pre">--no-raise-error</span></code> in the following cell, as well as, the necessary cells that follow.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%script false --no-raise-error</span>
+
+<span class="n">nav_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;QuDiPy data&#39;</span><span class="p">,</span> <span class="s1">&#39;tutorials&#39;</span><span class="p">)</span>
+<span class="n">processed_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                            <span class="s1">&#39;processed&#39;</span><span class="p">,</span><span class="s1">&#39;2QD_processed&#39;</span><span class="p">)</span>
+<span class="n">nextnano_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                                    <span class="s1">&#39;nextnano&#39;</span><span class="p">,</span><span class="s1">&#39;2QD_dotsep_60nm&#39;</span><span class="p">)</span>
+<span class="n">n_dots</span> <span class="o">=</span> <span class="mi">2</span>      <span class="c1"># anticipated number of dots</span>
+
+<span class="n">eff_interp_dims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">eff_interp_dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">eff_interp_dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">eff_interp_dims</span><span class="p">[</span><span class="mi">2</span><span class="p">])]</span>
+
+<span class="n">file_prefix</span> <span class="o">=</span> <span class="s1">&#39;tutorial&#39;</span>
+
+<span class="n">dots</span> <span class="o">=</span> <span class="n">DotArray</span><span class="p">(</span><span class="n">n_dots</span><span class="p">,</span> <span class="n">ctrl_ranges</span><span class="o">=</span><span class="n">ctrl_vals</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">,</span> <span class="n">nextnano_dir</span><span class="p">,</span> <span class="n">file_prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loading pre-calculated spin interpolators from
+/home/zach/Documents/github/QuDiPy/QuDiPy data/tutorials/processed/2QD_processed/tutorial_spin_data_size_[4 3 4]_from_[ 0.2 -0.1  0.2]_to_[0.45 0.15 0.45].pkl
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;qudipy.system.dot_array.DotArray at 0x7023142848e0&gt;
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="1.2-Create-From-Analytic-Gaussian-Potentials">
+<h2>1.2 Create From Analytic Gaussian Potentials<a class="headerlink" href="#1.2-Create-From-Analytic-Gaussian-Potentials" title="Link to this heading"></a></h2>
+<p>Instead of using a potential from a dots object, an analytic potential for a Gaussian single or double dot may be used. Two functions are defined for this conditional use.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">upside_down_gaussian_2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the upside-down Gaussian function in 2D.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - x: Input array for the x-axis.</span>
+<span class="sd">    - y: Input array for the y-axis.</span>
+<span class="sd">    - sigma: Standard deviation parameter (default is 2.0).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - 2D array representing the upside-down Gaussian function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="c1"># scale/shift gaussian to mimic dot object potential</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.15</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">exponent</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mf">1e-19</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">upside_down_double_gaussian_2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mu_x1</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mu_x2</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Define a 2D quartic function as an upside-down Gaussian with an additional quartic term.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - x: Input array for the x-axis.</span>
+<span class="sd">    - y: Input array for the y-axis.</span>
+<span class="sd">    - mu_x1: Mean of left gaussian quantum dot.</span>
+<span class="sd">    - mu_x2: Mean of right gaussian quantum dot.</span>
+<span class="sd">    - sigma: Standard deviation parameter (default is 0.5).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - 2D array representing the upside-down quartic function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(((</span><span class="n">X</span><span class="o">-</span><span class="n">mu_x1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">exponent2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(((</span><span class="n">X</span><span class="o">+</span><span class="n">mu_x2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1"># scale/shift gaussian to mimic dot object potential</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">exponent</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">exponent2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mf">1e-19</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.-Generate-1D-&amp;-2D-potentials-for-Later-Use">
+<h2>2. Generate 1D &amp; 2D potentials for Later Use<a class="headerlink" href="#2.-Generate-1D-&-2D-potentials-for-Later-Use" title="Link to this heading"></a></h2>
+<section id="2.1-Use-Gaussian-Potential">
+<h3>2.1 Use Gaussian Potential<a class="headerlink" href="#2.1-Use-Gaussian-Potential" title="Link to this heading"></a></h3>
+<p>Un-comment/comment <code class="docutils literal notranslate"><span class="pre">%%script</span> <span class="pre">false</span> <span class="pre">--no-raise-error</span></code> in the dot object creation cell and the following two cells to either use a Gaussian potential or a simulated DotArray object potential.</p>
+<p>Single “Dot” Gaussian</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %%script false --no-raise-error</span>
+
+<span class="c1"># define non-uniform grid</span>
+<span class="n">plus_x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plus_y_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="c1"># define uniform grid</span>
+<span class="n">inbetween_x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.99</span><span class="p">,</span><span class="mf">0.99</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">inbetween_y_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.99</span><span class="p">,</span><span class="mf">0.99</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># generate a coordinate system made of uniform and non-uniform grid spacings</span>
+<span class="n">x_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="o">-</span><span class="mf">1.0</span><span class="o">*</span><span class="n">plus_x_values</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">inbetween_x_values</span><span class="p">,</span> <span class="n">plus_x_values</span><span class="p">))</span>
+<span class="n">y_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="o">-</span><span class="mf">1.0</span><span class="o">*</span><span class="n">plus_y_values</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">inbetween_y_values</span><span class="p">,</span> <span class="n">plus_y_values</span><span class="p">))</span>
+
+<span class="c1"># convert units to meters</span>
+<span class="n">x_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="mf">1e-9</span><span class="p">)</span>
+<span class="n">y_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">y_coords</span><span class="p">,</span> <span class="mf">1e-9</span><span class="p">)</span>
+
+<span class="c1"># generate 2D potential</span>
+<span class="n">sigma_value</span> <span class="o">=</span> <span class="mf">3e-8</span>
+<span class="n">pot_2d</span> <span class="o">=</span> <span class="n">upside_down_gaussian_2d</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma_value</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shape of x-coordinates = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shape of y-coordinates = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">y_coords</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># find index closest to y = 0nm</span>
+<span class="n">y_idx</span> <span class="o">=</span> <span class="n">find_nearest</span><span class="p">(</span><span class="n">y_coords</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># take slice along y_idx for 1D potential along x-coordinates</span>
+<span class="n">pot_1d</span> <span class="o">=</span> <span class="n">pot_2d</span><span class="p">[</span><span class="n">y_idx</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Shape of x-coordinates = (300,)
+Shape of y-coordinates = (150,)
+</pre></div></div>
+</div>
+<p>Double “Dot” Gaussian</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> false --no-raise-error
+
+# define non-uniform grid
+plus_x_values = np.logspace(0, 2.25, 75)
+plus_y_values = np.logspace(0, 1.85, 50)
+# define uniform grid
+inbetween_x_values = np.linspace(-0.99,0.99, 10)
+inbetween_y_values = np.linspace(-0.99,0.99, 10)
+# generate a coordinate system made of uniform and non-uniform grid spacings
+x_coords = np.hstack((-1.0*plus_x_values[::-1],inbetween_x_values, plus_x_values))
+y_coords = np.hstack((-1.0*plus_y_values[::-1],inbetween_y_values, plus_y_values))
+
+# convert units to meters
+x_coords = np.multiply(x_coords, 1e-9)
+y_coords = np.multiply(y_coords, 1e-9)
+
+# generate 2D potential
+sigma_value = 3e-8
+dot_sep = 100e-9
+dot_sep = 150e-9
+pot_2d = upside_down_double_gaussian_2d(x_coords, y_coords, mu_x1=dot_sep/2, mu_x2=dot_sep/2, sigma=sigma_value)
+
+print(f&#39;Shape of x-coordinates = {np.shape(x_coords)}&#39;)
+print(f&#39;Shape of y-coordinates = {np.shape(y_coords)}&#39;)
+
+# find index closest to y = 0nm
+y_idx = find_nearest(y_coords, 0)[0]
+
+# take slice along y_idx for 1D potential along x-coordinates
+pot_1d = pot_2d[y_idx]
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.2-Use-Simulate-DotArray-Object-Potential">
+<h3>2.2 Use Simulate DotArray Object Potential<a class="headerlink" href="#2.2-Use-Simulate-DotArray-Object-Potential" title="Link to this heading"></a></h3>
+<p>Currently ignoring Dots potential. Comment out <code class="docutils literal notranslate"><span class="pre">%%script</span> <span class="pre">false</span> <span class="pre">--no-raise-error</span></code> to use this potential instead.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> false --no-raise-error
+
+# Choose voltage control values
+voltage_config = [0.2,0.,0.2]
+dot1, dot2 = dots.split(group=&#39;single&#39;)
+
+# get non-uniform coordinates
+x_coords = dot1.potential.x_coords
+y_coords = dot1.potential.y_coords
+
+print(f&#39;Shape of x-coordinates = {np.shape(x_coords)}&#39;)
+print(f&#39;Shape of y-coordinates = {np.shape(y_coords)}&#39;)
+
+# orginal 2D potential on a non-uniform grid
+pot_2d = dot1.potential(voltage_config)
+
+# find index closest to y = 0nm
+y_idx = find_nearest(y_coords, 0)[0]
+
+# take slice along y_idx for 1D potential along x-coordinates
+pot_1d = pot_2d[y_idx]
+</pre></div>
+</div>
+</div>
+<section id="Plot-Selected-1D/2D/3D-Potential:-Non-Uniform-Grid">
+<h4>Plot Selected 1D/2D/3D Potential: Non-Uniform Grid<a class="headerlink" href="#Plot-Selected-1D/2D/3D-Potential:-Non-Uniform-Grid" title="Link to this heading"></a></h4>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="p">(</span><span class="n">pot_1d</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pot_1d</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">),</span> <span class="s1">&#39;.r&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">,</span> <span class="p">(</span><span class="n">pot_2d</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pot_2d</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">))</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Potential [meV]&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x-Coordinates [m]&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y-Coordinates [m]&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x-Coordinates [m]&#39;</span><span class="p">)</span>
+
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">),</span> <span class="p">(</span><span class="n">pot_2d</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pot_2d</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Upside-Down Gaussian Function (2D)&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x [m]&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y [m]&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Potential [meV]&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=-</span><span class="mi">150</span><span class="p">)</span>
+<span class="c1"># ax3.dist = 14</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_19_0.png" src="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_19_0.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="3.-Create-Potentials-Over-Uniform-Grid">
+<h2>3. Create Potentials Over Uniform Grid<a class="headerlink" href="#3.-Create-Potentials-Over-Uniform-Grid" title="Link to this heading"></a></h2>
+<p>Create interpolation objects and new uniform grid coordinates.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate interpolation objects</span>
+<span class="n">interpolation_1d</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">pot_1d</span><span class="p">)</span>
+<span class="n">interpolation_2d</span> <span class="o">=</span> <span class="n">RegularGridInterpolator</span><span class="p">((</span><span class="n">y_coords</span><span class="p">,</span> <span class="n">x_coords</span><span class="p">),</span> <span class="n">pot_2d</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;slinear&#39;</span><span class="p">)</span>
+
+<span class="c1"># define new uniform grid</span>
+<span class="n">uniform_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_coords</span><span class="p">))</span>
+<span class="n">uniform_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_coords</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_coords</span><span class="p">))</span>
+
+<span class="c1"># create new 1D potential</span>
+<span class="n">uniform_pot_1d</span> <span class="o">=</span> <span class="n">interpolation_1d</span><span class="p">(</span><span class="n">uniform_x</span><span class="p">)</span>
+
+<span class="c1"># create new 1D potential</span>
+<span class="n">unifrom_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">uniform_y</span><span class="p">,</span> <span class="n">uniform_x</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">uniform_y</span><span class="p">,</span> <span class="n">uniform_x</span><span class="p">))</span>
+<span class="n">uniform_pot_2d</span> <span class="o">=</span> <span class="n">interpolation_2d</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_coords</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">x_coords</span><span class="p">))</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">pot_1d</span><span class="p">,</span> <span class="s1">&#39;.r&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">,</span> <span class="n">pot_2d</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Potential [V]&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x-Coordinates [m]&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y-Coordinates [m]&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x-Coordinates [m]&#39;</span><span class="p">)</span>
+
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">),</span> <span class="n">pot_2d</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Upside-Down Gaussian Function (2D)&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x [m]&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y [m]&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Potential [J]&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_23_0.png" src="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_23_0.png" />
+</div>
+</div>
+</section>
+<section id="4.-Solve-TISE-for-Both-Grids">
+<h2>4. Solve TISE for Both Grids<a class="headerlink" href="#4.-Solve-TISE-for-Both-Grids" title="Link to this heading"></a></h2>
+<section id="1D-Non-uniform-grid-solution">
+<h3>1D Non-uniform grid solution<a class="headerlink" href="#1D-Non-uniform-grid-solution" title="Link to this heading"></a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gparams</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">GridParameters</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">potential</span><span class="o">=</span><span class="n">pot_1d</span><span class="p">)</span>
+<span class="c1"># pass gparams to the solve_schrodinger_eq qutils method to obtain the eigenvalues and eigenvectors</span>
+<span class="n">e_ens_1d</span><span class="p">,</span> <span class="n">e_vecs_1d</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve_schrodinger_eq</span><span class="p">(</span><span class="n">mat_system</span><span class="p">,</span> <span class="n">gparams</span><span class="p">,</span> <span class="n">n_sols</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Plot 1D eigenvectors found on non-uniform grid.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gparams</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="mf">1E-9</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">e_vecs_1d</span><span class="p">[:,</span><span class="n">idx</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1e9</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Wavefunction of state: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x-coords [nm]&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">psi\ [</span><span class="se">\\</span><span class="s1">mathrm</span><span class="si">{nm}</span><span class="s1">^{-</span><span class="si">{1}</span><span class="s1">/</span><span class="si">{2}</span><span class="s1">}]$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_28_0.png" src="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_28_0.png" />
+</div>
+</div>
+</section>
+<section id="1D-Uniform-grid-solutions">
+<h3>1D Uniform grid solutions<a class="headerlink" href="#1D-Uniform-grid-solutions" title="Link to this heading"></a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uniform_gparams</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">GridParameters</span><span class="p">(</span><span class="n">uniform_x</span><span class="p">,</span> <span class="n">potential</span><span class="o">=</span><span class="n">uniform_pot_1d</span><span class="p">)</span>
+<span class="c1"># pass gparams to the solve_schrodinger_eq qutils method to obtain the eigenvalues and eigenvectors</span>
+<span class="n">uniform_e_ens_1d</span><span class="p">,</span> <span class="n">uniform_e_vecs_1d</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve_schrodinger_eq</span><span class="p">(</span><span class="n">mat_system</span><span class="p">,</span> <span class="n">uniform_gparams</span><span class="p">,</span> <span class="n">n_sols</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># NOTE: If needed, the old schrodinger solver for uniform grids can be called</span>
+<span class="n">uniform_e_ens_old_1d</span><span class="p">,</span> <span class="n">uniform_e_vecs_old_1d</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve_schrodinger_eq_old</span><span class="p">(</span><span class="n">mat_system</span><span class="p">,</span> <span class="n">uniform_gparams</span><span class="p">,</span> <span class="n">n_sols</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Plot 1D eigenvectors found on uniform grid.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uniform_gparams</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="mf">1E-9</span><span class="p">,</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">uniform_e_vecs_1d</span><span class="p">[:,</span><span class="n">idx</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1e9</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Wavefunction of state: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x-coords [nm]&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">psi\ [</span><span class="se">\\</span><span class="s1">mathrm</span><span class="si">{nm}</span><span class="s1">^{-</span><span class="si">{1}</span><span class="s1">/</span><span class="si">{2}</span><span class="s1">}]$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_32_0.png" src="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_32_0.png" />
+</div>
+</div>
+<p>Print energy eigenvalues for non-uniform grid in eV.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">e_ens_1d</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">uniform_e_ens_1d</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Difference in Energy [meV]&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e_ens_1d</span> <span class="o">-</span> <span class="n">uniform_e_ens_1d</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Difference in Energy for new vs old uniform mesh grid schrodinger solver [meV]&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">uniform_e_ens_1d</span> <span class="o">-</span> <span class="n">uniform_e_ens_old_1d</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-1.96289753+0.j -1.95662808+0.j -1.95053026+0.j -1.94460985+0.j
+ -1.93887   +0.j -1.93331592+0.j -1.92795123+0.j -1.92278097+0.j
+ -1.91780918+0.j -1.91304105+0.j -1.90848114+0.j -1.90413514+0.j
+ -1.90000845+0.j -1.89610772+0.j -1.89243981+0.j]
+[-1.96289677+0.j -1.95662681+0.j -1.95053229+0.j -1.94461541+0.j
+ -1.93887867+0.j -1.93332494+0.j -1.92795743+0.j -1.92277949+0.j
+ -1.91779489+0.j -1.91300818+0.j -1.90842417+0.j -1.90404839+0.j
+ -1.89988738+0.j -1.89594824+0.j -1.89223981+0.j]
+Difference in Energy [meV]
+[0.0007649  0.0012705  0.0020293  0.00556395 0.00866464 0.0090207
+ 0.00620687 0.00148432 0.01428537 0.032868   0.0569701  0.08675651
+ 0.12107473 0.15948147 0.2000041 ]
+Difference in Energy for new vs old uniform mesh grid schrodinger solver [meV]
+[0.00000000e+00 0.00000000e+00 3.00517731e-13 0.00000000e+00
+ 0.00000000e+00 3.00517731e-13 0.00000000e+00 3.00517731e-13
+ 0.00000000e+00 0.00000000e+00 6.01035461e-13 3.00517731e-13
+ 3.00517731e-13 0.00000000e+00 1.20207092e-11]
+</pre></div></div>
+</div>
+<p>Plot energy vs state from the 1D Schrodinger solver.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">states</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">e_vecs_1d</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">e_ens_1d</span><span class="p">))</span>
+<span class="n">line_sz</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1"># plt.scatter(states, (e_ens - e_ens[0])*(1e3/constants.e) , marker=&#39;o&#39;, color=&#39;r&#39;, label=&#39;non-uniform&#39;)</span>
+<span class="c1"># plt.scatter(states, (uniform_e_ens - uniform_e_ens[0])*(1e3/constants.e) , marker=&#39;o&#39;, color=&#39;b&#39;, label=&#39;uniform&#39;)</span>
+<span class="c1"># plt.scatter(states, (e_ens)*(1e3/constants.e) , marker=&#39;.&#39;, color=&#39;r&#39;, label=&#39;non-uniform&#39;)</span>
+<span class="c1"># plt.scatter(states, (uniform_e_ens)*(1e3/constants.e) , marker=&#39;.&#39;, color=&#39;b&#39;, label=&#39;uniform&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">e_ens_1d</span> <span class="o">-</span> <span class="n">e_ens_1d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;sk&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;non-uniform&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">uniform_e_ens_1d</span> <span class="o">-</span> <span class="n">uniform_e_ens_1d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;oc&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">uniform_e_ens_old_1d</span> <span class="o">-</span> <span class="n">uniform_e_ens_old_1d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;*r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;uniform (old)&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">e_ens_1d</span> <span class="o">-</span> <span class="n">e_ens_1d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;-k&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">uniform_e_ens_1d</span> <span class="o">-</span> <span class="n">uniform_e_ens_1d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;-.c&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">uniform_e_ens_old_1d</span> <span class="o">-</span> <span class="n">uniform_e_ens_old_1d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;--r&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Energy Eigenvalue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Relative Energy From Ground State [meV]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$1D-Schr {\&quot;o} dinger$ Solvers&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+15
+15
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/zach/anaconda3/envs/qudipy/lib/python3.10/site-packages/matplotlib/cbook/__init__.py:1335: ComplexWarning: Casting complex values to real discards the imaginary part
+  return np.asarray(x, float)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x702299b15f60&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_36_3.png" src="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_36_3.png" />
+</div>
+</div>
+</section>
+<section id="2D-Non-uniform-grid-solution">
+<h3>2D Non-uniform grid solution<a class="headerlink" href="#2D-Non-uniform-grid-solution" title="Link to this heading"></a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gparams</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">GridParameters</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">,</span> <span class="n">potential</span><span class="o">=</span><span class="n">pot_2d</span><span class="p">)</span>
+<span class="c1"># pass gparams to the solve_schrodinger_eq qutils method to obtain the eigenvalues and eigenvectors</span>
+<span class="n">e_ens_2d</span><span class="p">,</span> <span class="n">e_vecs_2d</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve_schrodinger_eq</span><span class="p">(</span><span class="n">mat_system</span><span class="p">,</span> <span class="n">gparams</span><span class="p">,</span> <span class="n">n_sols</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Plot 2D eigenvectors found on non-uniform grid.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+    <span class="c1">#ax.imshow(gparams.potential, cmap=&#39;viridis&#39;,</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">gparams</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="mf">1E-9</span><span class="p">,</span>
+                        <span class="n">gparams</span><span class="o">.</span><span class="n">y</span><span class="o">/</span><span class="mf">1E-9</span><span class="p">,</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">e_vecs_2d</span><span class="p">[:,:,</span><span class="n">idx</span><span class="p">],</span><span class="n">e_vecs_2d</span><span class="p">[:,:,</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">())),</span>
+                        <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;State: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x-coords [nm]&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y-coords [nm]&#39;</span><span class="p">)</span>
+    <span class="n">clb_pot</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_40_0.png" src="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_40_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Plot-energies-verse-state">
+<h2>Plot energies verse state<a class="headerlink" href="#Plot-energies-verse-state" title="Link to this heading"></a></h2>
+<section id="2D-Uniform-grid-solution">
+<h3>2D Uniform grid solution<a class="headerlink" href="#2D-Uniform-grid-solution" title="Link to this heading"></a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uniform_gparams</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">GridParameters</span><span class="p">(</span><span class="n">uniform_x</span><span class="p">,</span> <span class="n">uniform_y</span><span class="p">,</span> <span class="n">potential</span><span class="o">=</span><span class="n">uniform_pot_2d</span><span class="p">)</span>
+<span class="c1"># pass sparams, gparams to the solve_schrodinger_eq qutils method to obtain the eigenvalues and eigenvectors</span>
+<span class="n">uniform_e_ens_2d</span><span class="p">,</span> <span class="n">uniform_e_vecs_2d</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve_schrodinger_eq</span><span class="p">(</span><span class="n">mat_system</span><span class="p">,</span> <span class="n">uniform_gparams</span><span class="p">,</span> <span class="n">n_sols</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># NOTE: If needed, the old schrodinger solver for uniform grids can be called</span>
+<span class="n">uniform_e_ens_old_2d</span><span class="p">,</span> <span class="n">uniform_e_vecs_old_2d</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve_schrodinger_eq_old</span><span class="p">(</span><span class="n">mat_system</span><span class="p">,</span> <span class="n">uniform_gparams</span><span class="p">,</span> <span class="n">n_sols</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<p>Print energy eigenvalues for uniform grid in eV and difference between energy eigenvalues from non-uniform grid.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">e_ens_2d</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">uniform_e_ens_2d</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Difference in Energy [meV]&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e_ens_2d</span> <span class="o">-</span> <span class="n">uniform_e_ens_2d</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Difference in Energy for new vs old uniform mesh grid schrodinger solver [meV]&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">uniform_e_ens_2d</span> <span class="o">-</span> <span class="n">uniform_e_ens_old_2d</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-1.95975125+0.j -1.9535491 +0.j -1.95353857+0.j -1.94756763+0.j
+ -1.94745358+0.j -1.94745151+0.j -1.94172985+0.j -1.9416981 +0.j
+ -1.94148244+0.j -1.94148195+0.j -1.93611083+0.j -1.93598748+0.j
+ -1.93597542+0.j -1.9356362 +0.j -1.93563457+0.j]
+[-1.95974564+0.j -1.95353248+0.j -1.95353222+0.j -1.94755258+0.j
+ -1.9474404 +0.j -1.94743417+0.j -1.94169537+0.j -1.94169232+0.j
+ -1.94146239+0.j -1.94146232+0.j -1.93607428+0.j -1.93596643+0.j
+ -1.93594955+0.j -1.9356101 +0.j -1.93560988+0.j]
+Difference in Energy [meV]
+[0.00561069 0.01662398 0.00635955 0.01504538 0.01317509 0.01734505
+ 0.03447539 0.00577908 0.02005465 0.01963271 0.03655248 0.0210502
+ 0.02586782 0.02609556 0.02468526]
+Difference in Energy for new vs old uniform mesh grid schrodinger solver [meV]
+[3.00517731e-13 0.00000000e+00 0.00000000e+00 0.00000000e+00
+ 3.00517731e-13 0.00000000e+00 1.02176028e-11 3.00517731e-13
+ 6.01035461e-13 3.00517731e-12 1.58973879e-10 1.78207014e-10
+ 1.44248511e-11 1.38238156e-11 4.32745532e-11]
+</pre></div></div>
+</div>
+<p>Plot 2D eigenvectors found on uniform grid.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+    <span class="c1">#ax.imshow(gparams.potential, cmap=&#39;viridis&#39;,</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">uniform_gparams</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="mf">1E-9</span><span class="p">,</span>
+                        <span class="n">uniform_gparams</span><span class="o">.</span><span class="n">y</span><span class="o">/</span><span class="mf">1E-9</span><span class="p">,</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">uniform_e_vecs_2d</span><span class="p">[:,:,</span><span class="n">idx</span><span class="p">],</span><span class="n">uniform_e_vecs_2d</span><span class="p">[:,:,</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">())),</span>
+                        <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;State: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x-coords [nm]&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y-coords [nm]&#39;</span><span class="p">)</span>
+    <span class="n">clb_pot</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_47_0.png" src="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_47_0.png" />
+</div>
+</div>
+<p>Plot energy vs state from the 2D Schrodinger solver.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">states</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">e_vecs_2d</span><span class="p">)[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">e_ens_2d</span><span class="p">))</span>
+<span class="n">line_sz</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1"># plt.scatter(states, (e_ens - e_ens[0])*(1e3/constants.e) , marker=&#39;o&#39;, color=&#39;r&#39;, label=&#39;non-uniform&#39;)</span>
+<span class="c1"># plt.scatter(states, (uniform_e_ens - uniform_e_ens[0])*(1e3/constants.e) , marker=&#39;o&#39;, color=&#39;b&#39;, label=&#39;uniform&#39;)</span>
+<span class="c1"># plt.scatter(states, (e_ens)*(1e3/constants.e) , marker=&#39;.&#39;, color=&#39;r&#39;, label=&#39;non-uniform&#39;)</span>
+<span class="c1"># plt.scatter(states, (uniform_e_ens)*(1e3/constants.e) , marker=&#39;.&#39;, color=&#39;b&#39;, label=&#39;uniform&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">e_ens_2d</span> <span class="o">-</span> <span class="n">e_ens_2d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;sk&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;non-uniform&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">uniform_e_ens_2d</span> <span class="o">-</span> <span class="n">uniform_e_ens_2d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;oc&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">uniform_e_ens_old_2d</span> <span class="o">-</span> <span class="n">uniform_e_ens_old_2d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;*r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;uniform (old)&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">e_ens_2d</span> <span class="o">-</span> <span class="n">e_ens_2d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;-k&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">uniform_e_ens_2d</span> <span class="o">-</span> <span class="n">uniform_e_ens_2d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;-.c&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">(</span><span class="n">uniform_e_ens_old_2d</span> <span class="o">-</span> <span class="n">uniform_e_ens_old_2d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">1e3</span><span class="o">/</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;--r&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_sz</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Energy Eigenvalue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Relative Energy From Ground State [meV]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$2D-Schr {\&quot;o} dinger$ Solvers&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+15
+15
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x702297eaacb0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_49_2.png" src="../../_images/notebooks_res_Schrodinger_Equation_on_Uniform_and_Non-Uniform_Mesh_Grids_49_2.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Operator%20Creation.html" class="btn btn-neutral float-left" title="Operator Creation Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Stark%20Shift.html" class="btn btn-neutral float-right" title="QuDiPy tutorial: Using the Stark shift module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Coherent Spintronics Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
