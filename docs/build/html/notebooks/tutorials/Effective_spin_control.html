@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Effective Spin Control: Pulse Design &amp; State Evolution &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+  <title>Effective spin control: pulse design &amp; state evolution &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,7 +17,7 @@
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
@@ -58,11 +60,16 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Animations.html">Animations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_2_Dots.html">Voltage Pulse Design with CSP: 2 Dots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Charge%20Stability.html">QuDiPy Tutorial: Using the Charge Stability Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots.html">How to Contruct Dot Array System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_2_Dots.html#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_3_Dots.html#1.-Specifying-parameters-common-for-all-control-pulses">1. Specifying parameters common for all control pulses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_3_Dots.html#2.-Addressing-individual-spins-in-the-global-ESR-field">2. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_3_Dots.html#Hadamard">Hadamard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Effective Spin Control: Pulse Design &amp; State Evolution</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Effective spin control: pulse design &amp; state evolution</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#1.1-Defining-spin-states-using-State-class">1.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#1.2-Creating-or-selecting-shape-functions">1.2 Creating or selecting shape functions</a></li>
@@ -71,11 +78,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#1.4-Evolving-spin-systems">1.4 Evolving spin systems</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#2.-\mathrm{SWAP}^k-two-qubit-gates">2. <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#\mathrm{SWAP}^k-two-qubit-gates"><span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#3.-\mathrm{CPHASE}(\alpha)-two-qubit-gates">3. <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> two-qubit gates</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electron%20Shuttling.html#id1">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
 <ul>
@@ -84,16 +93,30 @@
 <p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../res/Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%204%20Dots.html">DotArray Object for a Quadruple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html">Loading Potentials Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html">Using the Single Electron Schrödinger Equation Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../res/Stark%20Shift.html">QuDiPy Tutorial: Using the Stark shift Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
@@ -116,7 +139,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Effective Spin Control: Pulse Design &amp; State Evolution</li>
+      <li class="breadcrumb-item active">Effective spin control: pulse design &amp; state evolution</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -125,8 +148,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="Effective-Spin-Control:-Pulse-Design-&amp;-State-Evolution">
-<h1>Effective Spin Control: Pulse Design &amp; State Evolution<a class="headerlink" href="#Effective-Spin-Control:-Pulse-Design-&-State-Evolution" title="Link to this heading"></a></h1>
+  <section id="Effective-spin-control:-pulse-design-&amp;-state-evolution">
+<h1>Effective spin control: pulse design &amp; state evolution<a class="headerlink" href="#Effective-spin-control:-pulse-design-&-state-evolution" title="Link to this heading"></a></h1>
 <p>This tutorial shows how to construct effective spin parameter pulses (g-factors, exchange, ESR field) for basic quantum gates using Constrained Shape Pulse algorithm (see <a class="reference external" href="https://uwspace.uwaterloo.ca/handle/10012/17823">Chapter 4 of Bohdan’s thesis</a> for theory).</p>
 <p>The outline of each test case is as follows: 1. Creating <strong>spin states</strong>: initial and expected after evolution for comparison</p>
 <ol class="arabic simple" start="2">
@@ -145,8 +168,8 @@
 <blockquote>
 <div><p>Necessary imports and default plotting parameters:</p>
 </div></blockquote>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -155,8 +178,6 @@
 
 <span class="c1"># update base working directory to QuDiPy</span>
 <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
     <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
@@ -164,16 +185,8 @@
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-c:\QuDiPy
-</pre></div></div>
-</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -195,7 +208,7 @@ c:\QuDiPy
 <p>The <code class="docutils literal notranslate"><span class="pre">State</span></code> class from <code class="docutils literal notranslate"><span class="pre">qudipy.system.state</span></code> handles many-electron states in different spaces: - spin - orbital - valley - Hubbard (spin + charge)</p>
 <p>Currently, only spin states are handled. Defining some basic 1-qubit spin wavefunctions:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psi_up</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>                           <span class="c1"># pure spin up state</span>
@@ -212,7 +225,7 @@ c:\QuDiPy
 <p>The environment parameters that can be specified as State object attributes include: - temperature (<code class="docutils literal notranslate"><span class="pre">T</span></code> keyword, <span class="math notranslate nohighlight">\(0\)</span> K by default) - <span class="math notranslate nohighlight">\(T_1\)</span>, <span class="math notranslate nohighlight">\(T_2\)</span> times (<code class="docutils literal notranslate"><span class="pre">T_1,</span> <span class="pre">T_2</span></code> keywords, <span class="math notranslate nohighlight">\(\infty\)</span> by default).</p>
 <p>For now, we assume no dissipation.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining states: initial and expected</span>
@@ -233,7 +246,7 @@ c:\QuDiPy
 <p>The library of pre-defined shapes includes square, triangular and Gaussian functions. They can be either: - accessed through <code class="docutils literal notranslate"><span class="pre">qudipy.design.shapes</span></code> module, <em>or</em> - specified as ‘string keywords’ when creating a <code class="docutils literal notranslate"><span class="pre">DesignerEffective</span></code> or <code class="docutils literal notranslate"><span class="pre">ControlPulse</span></code> objects (see next)</p>
 <p>Defining 4 different shape functions:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unit_square</span> <span class="o">=</span> <span class="n">shapes</span><span class="o">.</span><span class="n">square</span><span class="p">()</span>
@@ -247,7 +260,7 @@ c:\QuDiPy
 </div>
 <p>Plotting these shapes:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalized time points</span>
@@ -281,7 +294,7 @@ c:\QuDiPy
 <p>are defined in <code class="docutils literal notranslate"><span class="pre">qudipy.design.effective</span></code> module.</p>
 <p>All designer-like objects require these parameters in advance to determine the idling state and the rotating frame: 1. g-factor of idling qubits, and 2. <strong>either</strong> Zeeman field [T] <strong>or</strong> ESR central frequency [Hz]</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_idle</span> <span class="o">=</span> <span class="mf">1.99</span>
@@ -291,7 +304,7 @@ c:\QuDiPy
 </div>
 <p>Building up a designer for synchronous rotations of the 1st qubit in a 2-qubit system by an angle <span class="math notranslate nohighlight">\(-3 \pi/8\)</span>. The cumulative effect of such 4 pulses will give a <span class="math notranslate nohighlight">\(-3 \pi/2 \equiv \pi/2\)</span> rotation. Any other combination of angles that gives total angle <span class="math notranslate nohighlight">\(\pi/2 \mod 2\pi\)</span> can be used.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rot_des</span> <span class="o">=</span> <span class="n">effective</span><span class="o">.</span><span class="n">rot</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">qubits</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span>
@@ -312,7 +325,7 @@ c:\QuDiPy
 <p>If the constraints are additionally provided as extra keyword parameters, a key <code class="docutils literal notranslate"><span class="pre">length='optimize'</span></code> will find the shortest possible pulse length automatically <strong>(does not work for now)</strong></p>
 <p>Below, we compose four <code class="docutils literal notranslate"><span class="pre">ControlPulse</span></code> objects with <strong>different shapes</strong> and same length <span class="math notranslate nohighlight">\(T=1\mu s\)</span> that correspond to the same <span class="math notranslate nohighlight">\(Y_1(-\frac{3\pi}{8})\)</span> operation.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_pulses</span> <span class="o">=</span> <span class="p">[</span><span class="n">rot_des</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">sh</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">num_steps</span><span class="o">=</span><span class="mi">1600</span><span class="p">)</span>
@@ -326,7 +339,7 @@ c:\QuDiPy
 </div>
 <p>Plotting each of the effective pulses (<code class="docutils literal notranslate"><span class="pre">B_rf</span></code> is measured in tesla here):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pulse</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_ctrls</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B_rf&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_g_1&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_g_2&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_g_3&#39;</span><span class="p">])</span>
@@ -377,7 +390,7 @@ c:\QuDiPy
 <p>You can monitor the system evolution with the progress bars. If the system evolves under a sequence of pulses, the bars appear for each of them individually.</p>
 <p>Here, we evolve system under four <span class="math notranslate nohighlight">\(\pi/8\)</span> pulses with different shapes designed above to obtain a <span class="math notranslate nohighlight">\(\pi/2\)</span> rotation.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rot_data</span> <span class="o">=</span> <span class="n">init_rot</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">train_pulses</span><span class="p">,</span> <span class="n">rho_reference</span><span class="o">=</span> <span class="n">exp_rot</span><span class="o">.</span><span class="n">rho_spin</span><span class="p">,</span>
@@ -391,15 +404,15 @@ c:\QuDiPy
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:05&lt;00:00, 296.29it/s]
-ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04&lt;00:00, 332.30it/s]
-ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04&lt;00:00, 333.08it/s]
-ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04&lt;00:00, 330.57it/s]
+ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:02&lt;00:00, 550.44it/s]
+ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:02&lt;00:00, 543.11it/s]
+ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:02&lt;00:00, 553.43it/s]
+ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:02&lt;00:00, 597.06it/s]
 </pre></div></div>
 </div>
 <p>Plotting evolution results</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -457,7 +470,7 @@ ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04
 <p>Note the <span class="math notranslate nohighlight">\(2\pi\)</span> rotations around skewed axes that non-resonant qubit #3 goes through to preserve its initial states after each pulse.</p>
 <p>Fidelity at the end:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rot_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -465,25 +478,25 @@ ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-1.0000000192124725
+1.000000008133017
 </pre></div></div>
 </div>
 </section>
 </section>
-<section id="2.-\mathrm{SWAP}^k-two-qubit-gates">
-<h2>2. <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates<a class="headerlink" href="#2.-\mathrm{SWAP}^k-two-qubit-gates" title="Link to this heading"></a></h2>
+<section id="\mathrm{SWAP}^k-two-qubit-gates">
+<h2><span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates<a class="headerlink" href="#\mathrm{SWAP}^k-two-qubit-gates" title="Link to this heading"></a></h2>
 <p>This and the following sections show how to quickly run everything altogether: state definition, pulse design, and state evolution.</p>
 <p>Testing the operation <span class="math notranslate nohighlight">\(\mathrm{SWAP}_{12} |+ \uparrow -\rangle = |\uparrow + -\rangle\)</span> with four <span class="math notranslate nohighlight">\(\mathrm{SWAP}^{1/4}\)</span> pulses of different lengths.</p>
 <blockquote>
 <div><p>Initial and expected states:</p>
 </div></blockquote>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init_swap</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">spin</span><span class="o">=</span><span class="p">[</span><span class="n">psi_plus</span><span class="p">,</span> <span class="n">psi_up</span><span class="p">,</span> <span class="n">psi_minus</span><span class="p">])</span>
@@ -495,7 +508,7 @@ ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04
 <div><p>DesignerEffective objects for <span class="math notranslate nohighlight">\(\mathrm{SWAP}^{1/4}\)</span> pulses</p>
 </div></blockquote>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">swap_des</span> <span class="o">=</span> <span class="n">effective</span><span class="o">.</span><span class="n">swapk</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">g_idle</span><span class="o">=</span><span class="n">g_idle</span><span class="p">,</span> <span class="n">B_zeeman</span> <span class="o">=</span> <span class="n">B_zeeman</span><span class="p">)</span>
@@ -506,7 +519,7 @@ ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04
 <div><p>Composing pulses with <strong>different lengths</strong> <span class="math notranslate nohighlight">\(T = 10, 20, 50, 100\)</span> ns and same shape (gaussian with <span class="math notranslate nohighlight">\(\sigma=0.2\)</span>)</p>
 </div></blockquote>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_swap_pulses</span> <span class="o">=</span> <span class="p">[</span><span class="n">swap_des</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span>  <span class="n">length</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">num_steps</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
@@ -518,7 +531,7 @@ ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04
 <div><p>Evolving qubit state, plotting fidelity and Bloch vectors</p>
 </div></blockquote>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">swap_data</span> <span class="o">=</span> <span class="n">init_swap</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">train_swap_pulses</span><span class="p">,</span> <span class="n">rho_reference</span><span class="o">=</span><span class="n">exp_swap</span><span class="o">.</span><span class="n">rho_spin</span><span class="p">,</span>
@@ -532,14 +545,14 @@ ROTY-67.50° 1, step 1600: 100%|██████████| 1600/1600 [00:04
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&lt;00:00, 220.08it/s]
-SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&lt;00:00, 167.91it/s]
-SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&lt;00:00, 184.17it/s]
-SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&lt;00:00, 185.61it/s]
+SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:01&lt;00:00, 293.72it/s]
+SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:01&lt;00:00, 286.89it/s]
+SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:01&lt;00:00, 288.07it/s]
+SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:01&lt;00:00, 289.05it/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">7.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="p">)</span>
@@ -594,7 +607,7 @@ SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&
 </div>
 <p>Fidelity at the end:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">swap_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -602,12 +615,12 @@ SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.9999999999987618
+1.0000000133187505
 </pre></div></div>
 </div>
 </section>
@@ -620,7 +633,7 @@ SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}    \mathrm{CZ} = \mathrm{CPHASE}(\pi) = \mathrm{CPHASE}(\pi/3) \mathrm{CPHASE}(2\pi/3)\\Initial and expected states:\end{aligned}\end{align} \]</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init_cz</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">spin</span><span class="o">=</span><span class="p">[</span> <span class="n">psi_plus</span><span class="p">,</span> <span class="n">psi_down</span><span class="p">,</span> <span class="n">psi_down</span><span class="p">,</span> <span class="n">psi_minus</span><span class="p">])</span>
@@ -632,7 +645,7 @@ SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&
 <div><p>Two DesignerEffective objects for <span class="math notranslate nohighlight">\(\mathrm{CPHASE}\)</span> pulses. Specifying all parameters, including shapes and times, right away this time</p>
 </div></blockquote>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cphase_pi3_des</span> <span class="o">=</span> <span class="n">effective</span><span class="o">.</span><span class="n">cphase</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)],</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span>
@@ -647,7 +660,7 @@ SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&
 <div><p>Composing corresponding pulses</p>
 </div></blockquote>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cphase_pulses</span> <span class="o">=</span> <span class="p">[</span><span class="n">cphase_pi3_des</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="mf">2e-6</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
@@ -677,7 +690,7 @@ SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&
 <div><p>Evolving qubit state, plotting fidelity and Bloch vectors</p>
 </div></blockquote>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cphase_data</span> <span class="o">=</span> <span class="n">init_cz</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">cphase_pulses</span><span class="p">,</span> <span class="n">rho_reference</span><span class="o">=</span><span class="n">exp_cz</span><span class="o">.</span><span class="n">rho_spin</span><span class="p">,</span>
@@ -691,13 +704,13 @@ SWAP^0.25 (1, 2), step 500: 100%|██████████| 500/500 [00:02&
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-CPHASE(60.00°) (1, 2) (3, 4), step 500: 100%|██████████| 500/500 [00:05&lt;00:00, 91.44it/s]
-CPHASE(120.00°) (1, 2) (3, 4), step 500: 100%|██████████| 500/500 [00:05&lt;00:00, 96.60it/s]
+CPHASE(60.00°) (1, 2) (3, 4), step 500: 100%|██████████| 500/500 [00:03&lt;00:00, 142.67it/s]
+CPHASE(120.00°) (1, 2) (3, 4), step 500: 100%|██████████| 500/500 [00:03&lt;00:00, 147.08it/s]
 </pre></div></div>
 </div>
 <p>Plotting Bloch vector evolution of the qubits 1,2,3</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span> <span class="p">)</span>
@@ -767,7 +780,7 @@ CPHASE(120.00°) (1, 2) (3, 4), step 500: 100%|██████████| 5
 </div>
 <p>Fidelity at the end:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cphase_data</span><span class="p">[</span><span class="s1">&#39;fidelity&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -775,12 +788,12 @@ CPHASE(120.00°) (1, 2) (3, 4), step 500: 100%|██████████| 5
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.999999999248224
+1.0000000148630228
 </pre></div></div>
 </div>
 </section>

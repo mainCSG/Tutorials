@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QuDiPy Tutorial: Using the Stark shift Module &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+  <title>QuDiPy tutorial: Using the Stark shift module &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,7 +17,7 @@
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
@@ -58,12 +60,19 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Animations.html">Animations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage Pulse Design with CSP: 2 Dots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy Tutorial: Using the Charge Stability Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to Contruct Dot Array System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html#1.-Specifying-parameters-common-for-all-control-pulses">1. Specifying parameters common for all control pulses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html#2.-Addressing-individual-spins-in-the-global-ESR-field">2. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html#Hadamard">Hadamard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective Spin Control: Pulse Design &amp; State Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html#id1">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
 <ul>
@@ -72,16 +81,30 @@
 <p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%204%20Dots.html">DotArray Object for a Quadruple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading Potentials Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">Using the Single Electron Schrödinger Equation Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">QuDiPy Tutorial: Using the Stark shift Module</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QuDiPy tutorial: Using the Stark shift module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#1.-Add-the-current-location-to-path">1. Add the current location to path</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#2.-Import-the-relevant-modules">2. Import the relevant modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#3.-Define-the-potential">3. Define the potential</a></li>
@@ -112,7 +135,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">QuDiPy Tutorial: Using the Stark shift Module</li>
+      <li class="breadcrumb-item active">QuDiPy tutorial: Using the Stark shift module</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -121,8 +144,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="QuDiPy-Tutorial:-Using-the-Stark-shift-Module">
-<h1>QuDiPy Tutorial: Using the Stark shift Module<a class="headerlink" href="#QuDiPy-Tutorial:-Using-the-Stark-shift-Module" title="Link to this heading"></a></h1>
+  <section id="QuDiPy-tutorial:-Using-the-Stark-shift-module">
+<h1>QuDiPy tutorial: Using the Stark shift module<a class="headerlink" href="#QuDiPy-tutorial:-Using-the-Stark-shift-module" title="Link to this heading"></a></h1>
 <p>This tutorial will show how to use the Stark shift module to determine the deviation in <span class="math notranslate nohighlight">\(g\)</span>-factor arising from an applied electric field in the y-direction, where the plane of a device would be in the xz-plane.</p>
 <p>In this tutorial, we will be defining the potential and the electric field that the dot(s) reside in analytically and therefore the xy-confining potential and the z-direction electric field will be decoupled. However, in practice with NextNano potentials, these two values will not be decoupled. The goal is to make this tutorial with NextNano potentials in due time.</p>
 <p>Additionally, a wavefunction approximating the ground state wavefunction in each dot must be provided. This fixed wavefunction is then used in a varying electric field to calculate the <span class="math notranslate nohighlight">\(g\)</span>-factor deviation. This is an approximation since the ground state wavefunction will be slightly perturbed when gate voltages are changed. In the future, we hope to implement a many-body electron wavefunction which would allow us to bypass this step and give us a more accurate value for the
@@ -131,7 +154,7 @@
 <section id="1.-Add-the-current-location-to-path">
 <h2>1. Add the current location to path<a class="headerlink" href="#1.-Add-the-current-location-to-path" title="Link to this heading"></a></h2>
 <p>In order for this tutorial to work, you will need to run this from the tutorials folder.</p>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -141,22 +164,12 @@
 
 <span class="c1"># update base working directory to QuDiPy</span>
 <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
     <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-c:\QuDiPy
-</pre></div></div>
 </div>
 </section>
 <section id="2.-Import-the-relevant-modules">
@@ -365,7 +378,6 @@ the electron <span class="math notranslate nohighlight">\(g\)</span>-factor on t
 1  0.26  0.25   0.001204   0.001156
 </pre></div></div>
 </div>
-<p>We can see that as we increase <code class="docutils literal notranslate"><span class="pre">V1</span></code> (the applied voltage over the left dot), <code class="docutils literal notranslate"><span class="pre">delta_g_1</span></code> increases. This is the expected behavior. <code class="docutils literal notranslate"><span class="pre">delta_g_2</span></code> alo increases, but less than <code class="docutils literal notranslate"><span class="pre">delta_g_1</span></code>. This makes sense since the second dot is farther away from the increasing voltage of the first plunger gate, but there is still cross coupling.</p>
 </section>
 </section>
 

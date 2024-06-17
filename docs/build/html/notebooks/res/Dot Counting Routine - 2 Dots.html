@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inferred Number of Quantum Dots Using the Potential Landscape &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="DotArray: Alternative Class Construction" href="DotArray%20Class%20Constructors.html" />
+    <link rel="prev" title="DotArray Object for a Quadruple Quantum Dot Array" href="Dot%20Array%20Class%20Usage%204%20Dots.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Animations.html">Animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html#1.-Specifying-parameters-common-for-all-control-pulses">1. Specifying parameters common for all control pulses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html#2.-Addressing-individual-spins-in-the-global-ESR-field">2. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html#Hadamard">Hadamard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html#id1">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%204%20Dots.html">DotArray Object for a Quadruple Quantum Dot Array</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Inferred Number of Quantum Dots Using the Potential Landscape</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#0.-Import-relevant-Python-and-QuDiPy-modules">0. Import relevant Python and QuDiPy modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Generate-Dots-object-instance">1. Generate Dots object instance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#1.2-Create-object-instance">1.2 Create object instance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Counting-Dots">2. Counting Dots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#2.1-Create-a-Pseudo-Potential-for-an-Example">2.1 Create a Pseudo Potential for an Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#2.1-Find-the-Number-or-Local-Maxima/Minima-Defining-dots">2.1 Find the Number or Local Maxima/Minima Defining dots</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web/Website%20Acknowledgements.html">Website Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Inferred Number of Quantum Dots Using the Potential Landscape</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Inferred-Number-of-Quantum-Dots-Using-the-Potential-Landscape">
+<h1>Inferred Number of Quantum Dots Using the Potential Landscape<a class="headerlink" href="#Inferred-Number-of-Quantum-Dots-Using-the-Potential-Landscape" title="Link to this heading"></a></h1>
+<p>We will briefly look into how the number of quantum dots is inferred using 1D cross-sections of the 2D electrostatic potential landscapes.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="c1"># update base working directory to QuDiPy</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<section id="0.-Import-relevant-Python-and-QuDiPy-modules">
+<h2>0. Import relevant Python and QuDiPy modules<a class="headerlink" href="#0.-Import-relevant-Python-and-QuDiPy-modules" title="Link to this heading"></a></h2>
+<p>Import DotArray class which generates dot objects. Each dot array object requires us to specify the expected number of quantum dots which will be used to detect dot merging events.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">find_peaks</span>
+
+<span class="kn">from</span> <span class="nn">qudipy.system</span> <span class="kn">import</span> <span class="n">DotArray</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="1.-Generate-Dots-object-instance">
+<h2>1. Generate Dots object instance<a class="headerlink" href="#1.-Generate-Dots-object-instance" title="Link to this heading"></a></h2>
+<p>Refer to <a class="reference external" href="./Dot%20Array%20Class%20Usage%202%20Dots.ipynb">2QD DotArray Usage Tutorial</a> for more about creating dots objects.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nav_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;QuDiPy data&#39;</span><span class="p">,</span> <span class="s1">&#39;development&#39;</span><span class="p">)</span>
+<span class="n">processed_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                            <span class="s1">&#39;processed&#39;</span><span class="p">,</span><span class="s1">&#39;2QD_processed&#39;</span><span class="p">)</span>
+<span class="n">nextnano_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">nav_dir</span><span class="p">,</span>
+                                    <span class="s1">&#39;nextnano&#39;</span><span class="p">,</span><span class="s1">&#39;2QD_dotsep_60nm&#39;</span><span class="p">)</span>
+
+<span class="n">n_dots</span> <span class="o">=</span> <span class="mi">2</span>      <span class="c1"># anticipated number of dots</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">ctrl_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">pts</span><span class="p">[</span><span class="mi">2</span><span class="p">])]</span>
+
+<span class="n">file_prefix</span> <span class="o">=</span> <span class="s1">&#39;resource&#39;</span>
+</pre></div>
+</div>
+</div>
+<section id="1.2-Create-object-instance">
+<h3>1.2 Create object instance<a class="headerlink" href="#1.2-Create-object-instance" title="Link to this heading"></a></h3>
+<p>Here we are loading only the 2D electrostatic potentials to use potential interpolation objects. These will be used to give an example for counting the number of dots is performed.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dots</span> <span class="o">=</span> <span class="n">DotArray</span><span class="p">(</span><span class="n">n_dots</span><span class="p">,</span> <span class="n">ctrl_ranges</span><span class="o">=</span><span class="n">ctrl_vals</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">calc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">,</span> <span class="n">nextnano_dir</span><span class="p">,</span> <span class="n">file_prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Note: No effective parameter calcualtions specified. Default = &#34;spin&#34;.
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;qudipy.system.dot_array.DotArray at 0x78b53c527f70&gt;
+</pre></div></div>
+</div>
+<p>We can reference the potential interpolators as follows.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ctrl_vector</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">]</span>
+<span class="n">dots</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ctrl_vector</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">,</span> <span class="n">y_slice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">show_wf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Dot_Counting_Routine_-_2_Dots_10_0.png" src="../../_images/notebooks_res_Dot_Counting_Routine_-_2_Dots_10_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="2.-Counting-Dots">
+<h2>2. Counting Dots<a class="headerlink" href="#2.-Counting-Dots" title="Link to this heading"></a></h2>
+<section id="2.1-Create-a-Pseudo-Potential-for-an-Example">
+<h3>2.1 Create a Pseudo Potential for an Example<a class="headerlink" href="#2.1-Create-a-Pseudo-Potential-for-an-Example" title="Link to this heading"></a></h3>
+<p>First create function that creates potential signal that is applied to a given 1D potential. This is useful for testing the peak finding routine.</p>
+<p>We will overlay “ripples” on top of the potential landscape to show the robustness of the dot finding routine. These ripples currently arise at the edges of the simulated dot systems due to boundary conditions and a non-linear rectilinear grid used when solving the Poisson PDE (the grid mesh typically is less dense at the boundaries).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">window</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">bounds</span><span class="p">):</span>
+
+    <span class="c1"># define regions where to apply func</span>
+    <span class="n">x_left</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span><span class="o">&lt;</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">signal_left</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_left</span><span class="p">)</span>
+
+    <span class="n">x_right</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;</span><span class="n">x</span><span class="p">]</span>
+    <span class="n">signal_right</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_right</span><span class="p">)</span>
+
+    <span class="c1"># middle region is left untouched</span>
+    <span class="n">x_middle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">x</span><span class="o">&gt;</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="n">x</span><span class="p">)))</span>
+    <span class="n">signal_middle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x_middle</span><span class="p">)))</span>
+
+    <span class="c1"># stack modified signals into new signal</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">signal_left</span><span class="p">,</span> <span class="n">signal_middle</span><span class="p">,</span> <span class="n">signal_right</span><span class="p">])</span>
+
+<span class="c1"># define a test function which resembles &quot;edge&quot; effects for some simulated</span>
+<span class="c1"># electrostatic potential data</span>
+<span class="k">def</span> <span class="nf">fast_sin</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1e-22</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mf">5e8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.1-Find-the-Number-or-Local-Maxima/Minima-Defining-dots">
+<h3>2.1 Find the Number or Local Maxima/Minima Defining dots<a class="headerlink" href="#2.1-Find-the-Number-or-Local-Maxima/Minima-Defining-dots" title="Link to this heading"></a></h3>
+<p>First we select a 1D potential slice from a 2D potential for a given voltage configuration.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get 1D potential slice</span>
+<span class="n">pot_1d</span> <span class="o">=</span> <span class="n">dots</span><span class="o">.</span><span class="n">potential</span><span class="p">(</span><span class="n">ctrl_vector</span><span class="p">)[</span><span class="mi">70</span><span class="p">,:]</span>
+
+<span class="c1"># get coordinates along slice</span>
+<span class="n">x_coords</span> <span class="o">=</span> <span class="n">dots</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">x_coords</span>
+</pre></div>
+</div>
+</div>
+<p>Generate a signal of “false dots” near the boundaries of the simulated dot system. False dots refer to erroneous minamas/maximas found which are used to infer the number of dots in the system.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.6e-7</span><span class="p">,</span> <span class="mf">0.6e-7</span><span class="p">]</span>
+<span class="n">false_dots</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">fast_sin</span><span class="p">,</span> <span class="n">x_coords</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Apply that signal to the original 1D potential slice.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pseudo_pot_slice</span> <span class="o">=</span> <span class="n">pot_1d</span><span class="o">+</span><span class="n">false_dots</span>
+</pre></div>
+</div>
+</div>
+<p>Find the mean potential value for a given 1D potential slice. This is used to determine if a found local maxima/minima is associated to a dot or is erroneous. The mean is used compared to the median to account for cases of larger dot systems which will shift the median towards the potential defining the dots more than the mean. This could lead to miss-counting number of local minima.</p>
+<p>To make the counting routine more robust to high bias potential regimes or non-uniform mesh grids, a cut_off parameter is used. Any potential minimum below the cut_off value is counted as a visible dot.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create relevant variables to define the cutoff value</span>
+<span class="n">global_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">)</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">)</span>
+<span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Two methods for defining the cutoff value will be considered:</p>
+<ol class="arabic simple">
+<li><p>Using the mean of the 1D potential slice</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating cut off from mid point between global max and mean of the potential</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">global_max</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
+<span class="n">cut_off_mean</span> <span class="o">=</span> <span class="n">global_max</span> <span class="o">-</span> <span class="n">diff</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Using the median of the 1D potential slice</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating cut off from mid point between global max and median of the potential</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">global_max</span> <span class="o">-</span> <span class="n">median</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
+<span class="n">cut_off_median</span> <span class="o">=</span> <span class="n">global_max</span> <span class="o">-</span> <span class="n">diff</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s plot the 1D potential and the histogram of a 1D potential slice.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">pseudo_pot_slice</span><span class="p">,</span> <span class="s1">&#39;.-k&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)],</span> <span class="p">[</span><span class="n">mean</span><span class="p">,</span> <span class="n">mean</span><span class="p">],</span> <span class="s1">&#39;-b&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)],</span> <span class="p">[</span><span class="n">cut_off_mean</span><span class="p">,</span> <span class="n">cut_off_mean</span><span class="p">],</span> <span class="s1">&#39;--b&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Cut Off: Mean&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)],</span> <span class="p">[</span><span class="n">cut_off_median</span><span class="p">,</span> <span class="n">cut_off_median</span><span class="p">],</span> <span class="s1">&#39;--g&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Cut Off: Median&#39;</span><span class="p">)</span>
+<span class="c1"># plot median as an example</span>
+<span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)],</span> <span class="p">[</span><span class="n">median</span><span class="p">,</span> <span class="n">median</span><span class="p">],</span> <span class="s1">&#39;-g&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Median&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Potential [J]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x-Coordinate [m]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># plot historgram of potential values</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Potential [J]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Synthetic 1D Dot Potential&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0.98, &#39;Synthetic 1D Dot Potential&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Dot_Counting_Routine_-_2_Dots_29_1.png" src="../../_images/notebooks_res_Dot_Counting_Routine_-_2_Dots_29_1.png" />
+</div>
+</div>
+<p>To find the number of dots, we count the number of non-erroneous minimas in the 1D potential. This is done by finding the minimas that are smaller than the mean/median/cutoff of the 1D potential slice.</p>
+<p>The cutoff defined using the mean will be used as the default method.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">minima</span> <span class="o">=</span> <span class="n">find_peaks</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">pseudo_pot_slice</span><span class="p">,</span> <span class="n">height</span><span class="o">=-</span><span class="n">cut_off_mean</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>For masking purposes, the local maxima between dots is determined. This is done by finding the local maxima between the outermost minima.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">minima</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">x_eval_coord</span> <span class="o">=</span> <span class="n">x_coords</span><span class="p">[</span><span class="n">minima</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">minima</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">bounded_pot</span> <span class="o">=</span> <span class="n">pseudo_pot_slice</span><span class="p">[</span><span class="n">minima</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">minima</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">maxima</span> <span class="o">=</span> <span class="n">minima</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">find_peaks</span><span class="p">(</span><span class="n">bounded_pot</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Finally, we see the local minima/maxima peaks found resulting from ignoring any minima that are not less than the cutoff. Erroneous dots are mimicked to left/right of the red vertical dashed lines.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">pseudo_pot_slice</span><span class="p">,</span> <span class="s1">&#39;.-k&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">)],</span> <span class="s1">&#39;--r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">)],</span> <span class="s1">&#39;--r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)],</span> <span class="p">[</span><span class="n">mean</span><span class="p">,</span> <span class="n">mean</span><span class="p">],</span> <span class="s1">&#39;-b&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)],</span> <span class="p">[</span><span class="n">cut_off_mean</span><span class="p">,</span> <span class="n">cut_off_mean</span><span class="p">],</span> <span class="s1">&#39;--b&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Cut Off: Mean&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)],</span> <span class="p">[</span><span class="n">cut_off_median</span><span class="p">,</span> <span class="n">cut_off_median</span><span class="p">],</span> <span class="s1">&#39;--g&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Cut Off: Median&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_coords</span><span class="p">[</span><span class="n">minima</span><span class="p">],</span> <span class="n">pseudo_pot_slice</span><span class="p">[</span><span class="n">minima</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_coords</span><span class="p">[</span><span class="n">maxima</span><span class="p">],</span> <span class="n">pseudo_pot_slice</span><span class="p">[</span><span class="n">maxima</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># plot median as an example</span>
+<span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_coords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)],</span> <span class="p">[</span><span class="n">median</span><span class="p">,</span> <span class="n">median</span><span class="p">],</span> <span class="s1">&#39;-g&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Median&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Potential [J]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x-Coordinate [m]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot historgram of potential values</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pseudo_pot_slice</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Potential [J]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Synthetic 1D Dot Potential&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0.98, &#39;Synthetic 1D Dot Potential&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_res_Dot_Counting_Routine_-_2_Dots_35_1.png" src="../../_images/notebooks_res_Dot_Counting_Routine_-_2_Dots_35_1.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Dot%20Array%20Class%20Usage%204%20Dots.html" class="btn btn-neutral float-left" title="DotArray Object for a Quadruple Quantum Dot Array" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DotArray%20Class%20Constructors.html" class="btn btn-neutral float-right" title="DotArray: Alternative Class Construction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Coherent Spintronics Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

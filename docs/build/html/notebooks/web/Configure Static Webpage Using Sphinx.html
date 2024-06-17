@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notes on Configuring a Static Webpage Using Sphinx &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,7 +16,7 @@
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
@@ -57,12 +59,19 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Animations.html">Animations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage Pulse Design with CSP: 2 Dots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy Tutorial: Using the Charge Stability Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to Contruct Dot Array System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html#1.-Specifying-parameters-common-for-all-control-pulses">1. Specifying parameters common for all control pulses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html#2.-Addressing-individual-spins-in-the-global-ESR-field">2. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html#Hadamard">Hadamard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective Spin Control: Pulse Design &amp; State Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html#id1">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
 <ul>
@@ -71,16 +80,30 @@
 <p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../res/Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%204%20Dots.html">DotArray Object for a Quadruple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html">Loading Potentials Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html">Using the Single Electron Schrödinger Equation Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../res/Stark%20Shift.html">QuDiPy Tutorial: Using the Stark shift Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>

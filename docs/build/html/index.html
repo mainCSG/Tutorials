@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to QuDiPy’s documentation! &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,9 +16,11 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -54,12 +58,19 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Animations.html">Animations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html">Voltage Pulse Design with CSP: 2 Dots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">QuDiPy Tutorial: Using the Charge Stability Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to Contruct Dot Array System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html#1.-Specifying-parameters-common-for-all-control-pulses">1. Specifying parameters common for all control pulses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html#2.-Addressing-individual-spins-in-the-global-ESR-field">2. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html#Hadamard">Hadamard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html">Effective Spin Control: Pulse Design &amp; State Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html#id1">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
 <ul>
@@ -68,16 +79,30 @@
 <p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%204%20Dots.html">DotArray Object for a Quadruple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html">Loading Potentials Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html">Using the Single Electron Schrödinger Equation Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Stark%20Shift.html">QuDiPy Tutorial: Using the Stark shift Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
@@ -138,28 +163,34 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Animations.html#6.-QuDiPy-Modules">6. QuDiPy Modules</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html">Voltage Pulse Design with CSP: 2 Dots</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.1-Constructing-a-DotArray-object">1.1 Constructing a DotArray object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.2.-Constructing-DesignerCSP-objects">1.2. Constructing DesignerCSP objects</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.2.1-Using-DesignerCSP-class-constructor">1.2.1 Using DesignerCSP class constructor</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.2.2-Using-shortcut-functions-(rot,-hadamard,-swapk,-cphase)">1.2.2 Using shortcut functions (<code class="docutils literal notranslate"><span class="pre">rot</span></code>, <code class="docutils literal notranslate"><span class="pre">hadamard</span></code>, <code class="docutils literal notranslate"><span class="pre">swapk</span></code>, <code class="docutils literal notranslate"><span class="pre">cphase</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.1-Constructing-a-DotArray-object">1.1 Constructing a DotArray object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.2.-Constructing-DesignerCSP-objects">1.2. Constructing DesignerCSP objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.2.1-Using-DesignerCSP-class-constructor">1.2.1 Using DesignerCSP class constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.2.2-Using-shortcut-functions-(rot,-hadamard,-swapk,-cphase)">1.2.2 Using shortcut functions (<code class="docutils literal notranslate"><span class="pre">rot</span></code>, <code class="docutils literal notranslate"><span class="pre">hadamard</span></code>, <code class="docutils literal notranslate"><span class="pre">swapk</span></code>, <code class="docutils literal notranslate"><span class="pre">cphase</span></code>)</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.3-Creating-or-selecting-shape-functions">1.3 Creating or selecting shape functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.4-Composing-time-dependent-pulses-with-a-DesignerCSP-object">1.4 Composing time-dependent pulses with a DesignerCSP object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.5-Evolving-spin-states-under-the-designed-pulses">1.5 Evolving spin states under the designed pulses</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.5.1-Defining-spin-states-using-State-class">1.5.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.5.2-Evolving-spin-systems">1.5.2 Evolving spin systems</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.3-Creating-or-selecting-shape-functions">1.3 Creating or selecting shape functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.4-Composing-time-dependent-pulses-with-a-DesignerCSP-object">1.4 Composing time-dependent pulses with a DesignerCSP object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.5-Evolving-spin-states-under-the-designed-pulses">1.5 Evolving spin states under the designed pulses</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.5.1-Defining-spin-states-using-State-class">1.5.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#1.5.2-Evolving-spin-systems">1.5.2 Evolving spin systems</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#2.-\mathrm{SWAP}^k-two-qubit-gates">2. <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_2_Dots.html#3.-\mathrm{CPHASE}(\alpha)-two-qubit-gates">3. <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> two-qubit gates</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">QuDiPy Tutorial: Using the Charge Stability Module</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html#1.-Specifying-parameters-common-for-all-control-pulses">1. Specifying parameters common for all control pulses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html#2.-Addressing-individual-spins-in-the-global-ESR-field">2. Addressing individual spins in the global ESR field</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html#\mathrm{SWAP}^k-two-qubit-gates"><span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html#3.-\mathrm{CPHASE}(\alpha)-two-qubit-gates">3. <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> two-qubit gates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/CSP_voltage_design_3_Dots.html#Hadamard">Hadamard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html#1.-Add-the-current-location-to-path">1. Add the current location to path</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html#2.-Import-the-relevant-modules-and-set-plotting-parameters">2. Import the relevant modules and set plotting parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html#3.-Specify-the-capacitance-of-the-system-you-wish-to-simulate-and-then-initialize-the-charge-stability-diagram-object">3. Specify the capacitance of the system you wish to simulate and then initialize the charge stability diagram object</a></li>
@@ -172,17 +203,17 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Charge%20Stability.html#10.-Extracting-Triple-Points">10. Extracting Triple Points</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to Contruct Dot Array System</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#0.-Import-relevant-packages-and-QuDiPy-modules">0. Import relevant packages and QuDiPy modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.-Generate-Dots-object-instance">1. Generate Dots object instance</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.1-Define-variables-to-initialize-Dots-object-instance">1.1 Define variables to initialize Dots object instance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.2-Create-object-instance">1.2 Create object instance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.3-Test-dot-splitting">1.3 Test dot splitting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.4-Evaluate-effective-parameters">1.4 Evaluate effective parameters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.4.1-g-factor-deviation">1.4.1 g-factor deviation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.4.2-Hund-Mulliken-or-Heitler-London-Exchange">1.4.2 Hund-Mulliken or Heitler-London Exchange</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.3-Test-dot-splitting">1.3 Test dot splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.4-Evaluate-effective-parameters">1.4 Evaluate effective parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.4.1-g-factor-deviation">1.4.1 g-factor deviation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html#1.4.2-Hund-Mulliken-or-Heitler-London-Exchange">1.4.2 Hund-Mulliken or Heitler-London Exchange</a></li>
 </ul>
 </li>
 </ul>
@@ -195,7 +226,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html#2-Evaluate-effective-parameters">2 Evaluate effective parameters</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html">Effective Spin Control: Pulse Design &amp; State Evolution</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html#1.1-Defining-spin-states-using-State-class">1.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html#1.2-Creating-or-selecting-shape-functions">1.2 Creating or selecting shape functions</a></li>
@@ -204,16 +235,25 @@
 <li class="toctree-l3"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html#1.4-Evolving-spin-systems">1.4 Evolving spin systems</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html#2.-\mathrm{SWAP}^k-two-qubit-gates">2. <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html#\mathrm{SWAP}^k-two-qubit-gates"><span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Effective_spin_control.html#3.-\mathrm{CPHASE}(\alpha)-two-qubit-gates">3. <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> two-qubit gates</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html">Electron Shuttling</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html#1.-Load-relevant-modules-and-add-the-current-location-to-path">1. Load relevant modules and add the current location to path</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html#id1">Electron Shuttling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html#id2">1. Load relevant modules and add the current location to path</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html#2.-Load-potential-files">2. Load potential files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html#3.-Building-the-shuttling-control-pulse">3. Building the shuttling control pulse</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html#4.-Evolving-over-time">4. Evolving over time</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Electron%20Shuttling.html#5.-Sweeping-pulse-lengths">5. Sweeping pulse lengths</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Process%20NextNano%20Files.html#1.-Load-the-relevant-modules-and-process-the-NextNano-3D-data">1. Load the relevant modules and process the NextNano 3D data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/tutorials/Process%20NextNano%20Files.html#2.-Ensure-the-Nextnano-potential/electric-field-files-were-converted-as-desired">2. Ensure the Nextnano potential/electric field files were converted as desired</a></li>
 </ul>
 </li>
 </ul>
@@ -240,7 +280,21 @@
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Creating%20Interpolation%20Objects%20via%20HPC.html#Toy-4-Batch-Example">Toy 4 Batch Example</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Creating%20Interpolation%20Objects%20via%20HPC.html#Example-SLURM-Bash-Job-Submission-Script-and-Instructions">Example SLURM Bash Job Submission Script and Instructions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Creating%20Interpolation%20Objects%20via%20HPC.html#Moving-Files-to-the-Cluster-of-Interest">Moving Files to the Cluster of Interest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Creating%20Interpolation%20Objects%20via%20HPC.html#Create-a-Job-Submission-Bash-Script">Create a Job Submission Bash Script</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Creating%20Interpolation%20Objects%20via%20HPC.html#Construct-Effective-Parameter-Interpolator-From-Data-Set-Batches">Construct Effective Parameter Interpolator From Data Set Batches</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%201%20Dot.html#0.-Import-relevant-Python-and-QuDiPy-modules">0. Import relevant Python and QuDiPy modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%201%20Dot.html#1.-Generate-Dots-object-instance">1. Generate Dots object instance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%201%20Dot.html#1.2-Create-object-instance">1.2 Create object instance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%201%20Dot.html#1.3-Evaluate-effective-parameters">1.3 Evaluate effective parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a><ul>
@@ -266,43 +320,52 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Dot%20Array%20Class%20Usage%204%20Dots.html#2-Evaluate-effective-parameters">2 Evaluate effective parameters</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Dot%20Counting%20Routine%20-%202%20Dots.html#0.-Import-relevant-Python-and-QuDiPy-modules">0. Import relevant Python and QuDiPy modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Dot%20Counting%20Routine%20-%202%20Dots.html#1.-Generate-Dots-object-instance">1. Generate Dots object instance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Dot%20Counting%20Routine%20-%202%20Dots.html#1.2-Create-object-instance">1.2 Create object instance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Dot%20Counting%20Routine%20-%202%20Dots.html#2.-Counting-Dots">2. Counting Dots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Dot%20Counting%20Routine%20-%202%20Dots.html#2.1-Create-a-Pseudo-Potential-for-an-Example">2.1 Create a Pseudo Potential for an Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Dot%20Counting%20Routine%20-%202%20Dots.html#2.1-Find-the-Number-or-Local-Maxima/Minima-Defining-dots">2.1 Find the Number or Local Maxima/Minima Defining dots</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/DotArray%20Class%20Constructors.html#Quartic-Potential-For-a-Double-Quantum-Dot">Quartic Potential For a Double Quantum Dot</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Fitting.html">Finding Best Quartic Fit - 2 dot system</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#0.1-How-is-the-data-being-fit?">0.1 How is the data being fit?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#0.2-What-is-the-fit_quartic()-Function">0.2 What is the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#0.1-How-is-the-data-being-fit?">0.1 How is the data being fit?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#0.2-What-is-the-fit_quartic()-Function">0.2 What is the <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#1.1-Create-Potential-Data">1.1 Create Potential Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#1.2-Graph-the-data-plots">1.2 Graph the data plots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#1.3-Find-quartic-well-of-best-fit">1.3 Find quartic well of best fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#1.4-Graph-The-Quartic-Potential-of-Best-Fit">1.4 Graph The Quartic Potential of Best Fit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#1.1-Create-Potential-Data">1.1 Create Potential Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#1.2-Graph-the-data-plots">1.2 Graph the data plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#1.3-Find-quartic-well-of-best-fit">1.3 Find quartic well of best fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#1.4-Graph-The-Quartic-Potential-of-Best-Fit">1.4 Graph The Quartic Potential of Best Fit</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#2.1-Define-Parameters">2.1 Define Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#2.2-Graph-Data">2.2 Graph Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#2.2-Retrieve-Fit-Parameters-and-Compare">2.2 Retrieve Fit Parameters and Compare</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Fitting.html#2.3-Plot-Fitted-Potential">2.3 Plot Fitted Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#2.1-Define-Parameters">2.1 Define Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Fitting.html#2.2-Graph-Data">2.2 Graph Data</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html">Loading Potentials Tutorial</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html">Loading potentials tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html#1.-Load-the-relevant-modules">1. Load the relevant modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html#2.-Define-which-files-to-load-and-load-them">2. Define which files to load and load them</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html#3.-Store-x-and-y-coordinates-in-GridParameters-object">3. Store x and y coordinates in GridParameters object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html#4.-Build-the-PotentialInterpolator-object">4. Build the PotentialInterpolator object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html#5.-Do-some-potential-interpolation-(with-lots-of-plotting-examples)">5. Do some potential interpolation (with lots of plotting examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html#6.-Define-Potentials-Function-Using-'Potential'-Class">6. Define Potentials Function Using ‘Potential’ Class</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Masking%20Dot%20Array%20Potentials.html#1.3-Test-dot-splitting-and-masking">1.3 Test dot splitting and masking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Masking%20Dot%20Array%20Potentials.html#Harsh-masking-applied-to-potential-landscape">Harsh masking applied to potential landscape</a></li>
@@ -324,9 +387,7 @@
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Operator%20Creation.html#3.3-Operators-must-be-complex-valued">3.3 Operators must be complex valued</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Operator%20Creation.html#3.4-Operators-must-be-an-array">3.4 Operators must be an array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Operator%20Creation.html#3.5-Operators-must-be-square">3.5 Operators <strong>must</strong> be square</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Operator%20Creation.html#4.-Hard-coded-operators">4. Hard coded operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Operator%20Creation.html#4.-Hard-coded-operators">4. Hard coded operators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Operator%20Creation.html#4.1-Saving-hard-coded-operators-to-operator-library">4.1 Saving hard coded operators to operator library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Operator%20Creation.html#4.2-List-of-hard-coded-operators">4.2 List of hard-coded operators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Operator%20Creation.html#4.2-Using-hard-coded-operator">4.2 Using hard coded operator</a></li>
@@ -334,18 +395,17 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html">Using the Single Electron Schrödinger Equation Solver</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#1.-First-load-the-relevant-modules-and-initialize-SimulationParameters">1. First load the relevant modules and initialize SimulationParameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-dots-object">Create dots object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Generate-1D-&amp;-2D-potentials-for-Later-Use">Generate 1D &amp; 2D potentials for Later Use</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Use-Gaussian-Potential">Use Gaussian Potential</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Use-Dots-Potential">Use Dots Potential</a></li>
@@ -356,19 +416,11 @@
 <li class="toctree-l3"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Plot-Selected-1D/2D/3D-Potential:-Uniform-Grid">Plot Selected 1D/2D/3D Potential: Uniform Grid</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Solve-TISE-for-Both-Grids">Solve TISE for Both Grids</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#1D-Non-uniform-grid-solution">1D Non-uniform grid solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#1D-Uniform-grid-solutions">1D Uniform grid solutions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#2D-Non-uniform-grid-solution">2D Non-uniform grid solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Solve-TISE-for-Both-Grids">Solve TISE for Both Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Plot-energies-verse-state">Plot energies verse state</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Plot-energies-verse-state">Plot energies verse state</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#2D-Uniform-grid-solution">2D Uniform grid solution</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Stark%20Shift.html">QuDiPy Tutorial: Using the Stark shift Module</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/res/Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Stark%20Shift.html#1.-Add-the-current-location-to-path">1. Add the current location to path</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Stark%20Shift.html#2.-Import-the-relevant-modules">2. Import the relevant modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Stark%20Shift.html#3.-Define-the-potential">3. Define the potential</a></li>
@@ -378,7 +430,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/res/Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Understanding%20Effective%20Parameter%20Behavior.html#Test-dot-splitting">Test dot splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/res/Understanding%20Effective%20Parameter%20Behavior.html#1.3-Test-dot-splitting">1.3 Test dot splitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Understanding%20Effective%20Parameter%20Behavior.html#Effective-Parameter-Relationships">Effective Parameter Relationships</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Understanding%20Effective%20Parameter%20Behavior.html#Plotting-effective-parameters-vs-voltage">Plotting effective parameters vs voltage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/res/Understanding%20Effective%20Parameter%20Behavior.html#Track-field-information-and-wave-function-for-gate-sweep">Track field information and wave function for gate sweep</a></li>

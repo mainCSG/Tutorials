@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Voltage Pulse Design with CSP: 2 Dots &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+  <title>Voltage pulse design with CSP: 2 dots &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,7 +17,7 @@
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
@@ -23,7 +25,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="QuDiPy Tutorial: Using the Charge Stability Module" href="Charge%20Stability.html" />
+    <link rel="next" title="Voltage pulse design with CSP: 3 dots" href="CSP_voltage_design_3_Dots.html" />
     <link rel="prev" title="Animations" href="Animations.html" /> 
 </head>
 
@@ -58,32 +60,36 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Animations.html">Animations</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Voltage Pulse Design with CSP: 2 Dots</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#1.1-Constructing-a-DotArray-object">1.1 Constructing a DotArray object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#1.2.-Constructing-DesignerCSP-objects">1.2. Constructing DesignerCSP objects</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#1.2.1-Using-DesignerCSP-class-constructor">1.2.1 Using DesignerCSP class constructor</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#1.2.2-Using-shortcut-functions-(rot,-hadamard,-swapk,-cphase)">1.2.2 Using shortcut functions (<code class="docutils literal notranslate"><span class="pre">rot</span></code>, <code class="docutils literal notranslate"><span class="pre">hadamard</span></code>, <code class="docutils literal notranslate"><span class="pre">swapk</span></code>, <code class="docutils literal notranslate"><span class="pre">cphase</span></code>)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#1.-Addressing-individual-spins-in-the-global-ESR-field">1. Addressing individual spins in the global ESR field</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.1-Constructing-a-DotArray-object">1.1 Constructing a DotArray object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#1.2.-Constructing-DesignerCSP-objects">1.2. Constructing DesignerCSP objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#1.2.1-Using-DesignerCSP-class-constructor">1.2.1 Using DesignerCSP class constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.2.2-Using-shortcut-functions-(rot,-hadamard,-swapk,-cphase)">1.2.2 Using shortcut functions (<code class="docutils literal notranslate"><span class="pre">rot</span></code>, <code class="docutils literal notranslate"><span class="pre">hadamard</span></code>, <code class="docutils literal notranslate"><span class="pre">swapk</span></code>, <code class="docutils literal notranslate"><span class="pre">cphase</span></code>)</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#1.3-Creating-or-selecting-shape-functions">1.3 Creating or selecting shape functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#1.4-Composing-time-dependent-pulses-with-a-DesignerCSP-object">1.4 Composing time-dependent pulses with a DesignerCSP object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#1.5-Evolving-spin-states-under-the-designed-pulses">1.5 Evolving spin states under the designed pulses</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#1.5.1-Defining-spin-states-using-State-class">1.5.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#1.5.2-Evolving-spin-systems">1.5.2 Evolving spin systems</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#1.3-Creating-or-selecting-shape-functions">1.3 Creating or selecting shape functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#1.4-Composing-time-dependent-pulses-with-a-DesignerCSP-object">1.4 Composing time-dependent pulses with a DesignerCSP object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#1.5-Evolving-spin-states-under-the-designed-pulses">1.5 Evolving spin states under the designed pulses</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#1.5.1-Defining-spin-states-using-State-class">1.5.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.5.2-Evolving-spin-systems">1.5.2 Evolving spin systems</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#2.-\mathrm{SWAP}^k-two-qubit-gates">2. <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> two-qubit gates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#3.-\mathrm{CPHASE}(\alpha)-two-qubit-gates">3. <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> two-qubit gates</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Charge%20Stability.html">QuDiPy Tutorial: Using the Charge Stability Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots.html">How to Contruct Dot Array System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_3_Dots.html#1.-Specifying-parameters-common-for-all-control-pulses">1. Specifying parameters common for all control pulses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_3_Dots.html#2.-Addressing-individual-spins-in-the-global-ESR-field">2. Addressing individual spins in the global ESR field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSP_voltage_design_3_Dots.html#Hadamard">Hadamard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Effective_spin_control.html">Effective Spin Control: Pulse Design &amp; State Evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electron%20Shuttling.html#id1">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
 <ul>
@@ -92,16 +98,30 @@
 <p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../res/Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%202%20Dots%20-%20HPC%20Example.html">How to Construct Dot Array System from HPC Generated Interpolation Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Array%20Class%20Usage%204%20Dots.html">DotArray Object for a Quadruple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Simulated-Potentials">Define DotArray Object Using Simulated Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/DotArray%20Class%20Constructors.html#Define-DotArray-Object-Using-Analytic-Potentials">Define DotArray Object Using Analytic Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html">Loading Potentials Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html#Section-0.0---fit_quartic()-Function">Section 0.0 - <code class="docutils literal notranslate"><span class="pre">fit_quartic()</span></code> Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html#Section-1.0-Basic-Fit-Example">Section 1.0 Basic Fit Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Fitting.html#Section-2.0-Adding-Complexity">Section 2.0 Adding Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Loading%20Potentials.html#Define-Potentials-Function-Using-'Potential'-Class">Define Potentials Function Using ‘Potential’ Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Operator%20Creation.html">Operator Creation Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html">Using the Single Electron Schrödinger Equation Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html">1. First load the relevant modules and initialize SimulationParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#2a.-1D-Schrödinger-equation:-initialize-GridParameters-class">2a. 1D Schrödinger equation: initialize GridParameters class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#2b.-1D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">2b. 1D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#2c.-Check-results">2c. Check results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#3b.-2D-Schrödinger-equation:-use-qutils-to-solve-schrodinger-equation">3b. 2D Schrödinger equation: use qutils to solve schrodinger equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation.html#3c.-Check-results">3c. Check results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../res/Stark%20Shift.html">QuDiPy Tutorial: Using the Stark shift Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html#Create-Analytic-Gaussian-Potentials">Create Analytic Gaussian Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../res/Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../res/Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
@@ -124,7 +144,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Voltage Pulse Design with CSP: 2 Dots</li>
+      <li class="breadcrumb-item active">Voltage pulse design with CSP: 2 dots</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -133,8 +153,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="Voltage-Pulse-Design-with-CSP:-2-Dots">
-<h1>Voltage Pulse Design with CSP: 2 Dots<a class="headerlink" href="#Voltage-Pulse-Design-with-CSP:-2-Dots" title="Link to this heading"></a></h1>
+  <section id="Voltage-pulse-design-with-CSP:-2-dots">
+<h1>Voltage pulse design with CSP: 2 dots<a class="headerlink" href="#Voltage-pulse-design-with-CSP:-2-dots" title="Link to this heading"></a></h1>
 <p>This tutorial shows how to construct voltage pulses for basic quantum gates using <strong>Constrained Shape Pulse (CSP)</strong> algorithm (see <a class="reference external" href="https://uwspace.uwaterloo.ca/handle/10012/17823">Chapter 4 of Bohdan’s thesis</a> for theory).</p>
 <div class="line-block">
 <div class="line">The outline of each test case is as follows: 1. Constructing a <strong>DotArray</strong> object</div>
@@ -154,7 +174,7 @@
 <blockquote>
 <div><p>Necessary imports and default plotting parameters:</p>
 </div></blockquote>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -164,22 +184,12 @@
 
 <span class="c1"># update base working directory to QuDiPy</span>
 <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s1">&#39;QuDiPy&#39;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
     <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">base_dir</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">base_dir</span> <span class="o">=</span> <span class="n">path</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-c:\QuDiPy
-</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -197,14 +207,15 @@ c:\QuDiPy
 </pre></div>
 </div>
 </div>
+</section>
 <section id="1.-Addressing-individual-spins-in-the-global-ESR-field">
-<h2>1. Addressing individual spins in the global ESR field<a class="headerlink" href="#1.-Addressing-individual-spins-in-the-global-ESR-field" title="Link to this heading"></a></h2>
+<h1>1. Addressing individual spins in the global ESR field<a class="headerlink" href="#1.-Addressing-individual-spins-in-the-global-ESR-field" title="Link to this heading"></a></h1>
 <p>The goal of this section is to demonstrate selective rotation of the 1st qubit of a 2-qubit system:</p>
 <div class="math notranslate nohighlight">
 \[Y_1\left(\frac{\pi}{2}\right)
 |\uparrow -\rangle = |+ -\rangle\]</div>
 <section id="1.1-Constructing-a-DotArray-object">
-<h3>1.1 Constructing a DotArray object<a class="headerlink" href="#1.1-Constructing-a-DotArray-object" title="Link to this heading"></a></h3>
+<h2>1.1 Constructing a DotArray object<a class="headerlink" href="#1.1-Constructing-a-DotArray-object" title="Link to this heading"></a></h2>
 <p>Define the directory to store 2D potential slice data extracted from nextnano simulations for a given device, as well as, to store calculated variables such as <span class="math notranslate nohighlight">\(g\)</span>-factor deviation, exchange, or Hubbard parameters for individual dots or dot pairs.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -289,7 +300,7 @@ c:\QuDiPy
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Loading pre-calculated spin interpolators from
-c:\QuDiPy\QuDiPy data\tutorials\processed\2QD_processed\tutorial_spin_data_size_[6 6 6]_from_[ 0.2 -0.1  0.2]_to_[0.45 0.15 0.45].pkl
+/home/zach/Documents/github/QuDiPy/QuDiPy data/tutorials/processed/2QD_processed/tutorial_spin_data_size_[6 6 6]_from_[ 0.2 -0.1  0.2]_to_[0.45 0.15 0.45].pkl
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -298,7 +309,7 @@ c:\QuDiPy\QuDiPy data\tutorials\processed\2QD_processed\tutorial_spin_data_size_
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;qudipy.system.dot_array.DotArray at 0x266ebe0d290&gt;
+&lt;qudipy.system.dot_array.DotArray at 0x794ad8587e20&gt;
 </pre></div></div>
 </div>
 <p>Giving voltage parameters shorter names for convenient plotting</p>
@@ -312,7 +323,7 @@ c:\QuDiPy\QuDiPy data\tutorials\processed\2QD_processed\tutorial_spin_data_size_
 </div>
 </section>
 <section id="1.2.-Constructing-DesignerCSP-objects">
-<h3>1.2. Constructing DesignerCSP objects<a class="headerlink" href="#1.2.-Constructing-DesignerCSP-objects" title="Link to this heading"></a></h3>
+<h2>1.2. Constructing DesignerCSP objects<a class="headerlink" href="#1.2.-Constructing-DesignerCSP-objects" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Designer</span></code> class and its child <code class="docutils literal notranslate"><span class="pre">DesignerCSP</span></code> handle control parameters that determine time-dependent pulse sequences. The following functions are defined in <code class="docutils literal notranslate"><span class="pre">qudipy.design.voltage_csp</span></code> module to conveniently construct DesignerCSP objects for: - arbitrary qubit rotations (<code class="docutils literal notranslate"><span class="pre">rot</span></code>), - Hadamard gates (<code class="docutils literal notranslate"><span class="pre">hadamard</span></code>), - <span class="math notranslate nohighlight">\(\mathrm{SWAP}^k\)</span> gates (<code class="docutils literal notranslate"><span class="pre">swapk</span></code>), and - <span class="math notranslate nohighlight">\(\mathrm{CPHASE}(\alpha)\)</span> gates (<code class="docutils literal notranslate"><span class="pre">cphase</span></code>),</p>
 <p>All <code class="docutils literal notranslate"><span class="pre">DesignerCSP</span></code> objects require these parameters in advance to determine the idling state, the rotating frame, and perform a numerical integration: - <code class="docutils literal notranslate"><span class="pre">init_detuning_guess</span></code>: initial guess of voltage configuration <code class="docutils literal notranslate"><span class="pre">[v_1,</span> <span class="pre">w_1,</span> <span class="pre">v_2,</span> <span class="pre">w_2...]</span></code> to find the idling state, - <strong>either</strong> Zeeman field [T] <strong>or</strong> ESR central frequency [Hz], - <code class="docutils literal notranslate"><span class="pre">min_length</span></code>: shortest anticipated pulse length <span class="math notranslate nohighlight">\(T_\mathrm{min}.\)</span></p>
 <p>The CSP integration routine finds functions of type</p>
@@ -330,7 +341,7 @@ which is more than enough for most applications.</p>
 </div>
 </div>
 <section id="1.2.1-Using-DesignerCSP-class-constructor">
-<h4>1.2.1 Using DesignerCSP class constructor<a class="headerlink" href="#1.2.1-Using-DesignerCSP-class-constructor" title="Link to this heading"></a></h4>
+<h3>1.2.1 Using DesignerCSP class constructor<a class="headerlink" href="#1.2.1-Using-DesignerCSP-class-constructor" title="Link to this heading"></a></h3>
 <p>Manually creating a DesignerCSP for a <span class="math notranslate nohighlight">\(Z(\pi/2)\)</span> rotation of the first qubit:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -373,7 +384,7 @@ Solution FOUND!
 </div>
 </section>
 <section id="1.2.2-Using-shortcut-functions-(rot,-hadamard,-swapk,-cphase)">
-<h4>1.2.2 Using shortcut functions (<code class="docutils literal notranslate"><span class="pre">rot</span></code>, <code class="docutils literal notranslate"><span class="pre">hadamard</span></code>, <code class="docutils literal notranslate"><span class="pre">swapk</span></code>, <code class="docutils literal notranslate"><span class="pre">cphase</span></code>)<a class="headerlink" href="#1.2.2-Using-shortcut-functions-(rot,-hadamard,-swapk,-cphase)" title="Link to this heading"></a></h4>
+<h3>1.2.2 Using shortcut functions (<code class="docutils literal notranslate"><span class="pre">rot</span></code>, <code class="docutils literal notranslate"><span class="pre">hadamard</span></code>, <code class="docutils literal notranslate"><span class="pre">swapk</span></code>, <code class="docutils literal notranslate"><span class="pre">cphase</span></code>)<a class="headerlink" href="#1.2.2-Using-shortcut-functions-(rot,-hadamard,-swapk,-cphase)" title="Link to this heading"></a></h3>
 <p>Building up a designer for synchronous rotations of the 1st qubit in a 2-qubit system by an angle <span class="math notranslate nohighlight">\(-3 \pi/8\)</span>. The cumulative effect of such 4 pulses will give a <span class="math notranslate nohighlight">\(-3 \pi/2\)</span> rotation equivalent to <span class="math notranslate nohighlight">\(\pi/2\)</span>. Any other combination of angles that gives total angle <span class="math notranslate nohighlight">\(\pi/2 \mod 2\pi\)</span> can be used.</p>
 <p>The optional parameters in the shortcut functions include: - <code class="docutils literal notranslate"><span class="pre">exchange_method</span></code>: Heitler-London (<code class="docutils literal notranslate"><span class="pre">HL</span></code>) or Hund-Mulliken (<code class="docutils literal notranslate"><span class="pre">HM</span></code>, default) - <code class="docutils literal notranslate"><span class="pre">rel_diff_step</span></code>: differentiation step size relative to the min-max value of control parameter range. Default is <span class="math notranslate nohighlight">\(10^{-6}\)</span> - <code class="docutils literal notranslate"><span class="pre">masking</span></code>: masking method to use for effective parameter evaluation</p>
 <div class="nbinput docutils container">
@@ -413,7 +424,7 @@ Solution FOUND!
 </section>
 </section>
 <section id="1.3-Creating-or-selecting-shape-functions">
-<h3>1.3 Creating or selecting shape functions<a class="headerlink" href="#1.3-Creating-or-selecting-shape-functions" title="Link to this heading"></a></h3>
+<h2>1.3 Creating or selecting shape functions<a class="headerlink" href="#1.3-Creating-or-selecting-shape-functions" title="Link to this heading"></a></h2>
 <p>The shape function that defines the effective pulses can be any function of normalized time with unit expectation value:</p>
 <div class="math notranslate nohighlight">
 \[S(\tau): [0,1]\rightarrow \mathbb{R}: \qquad  \langle S \rangle = \int_0^1 S(\tau) \mathrm{d}\tau = 1.\]</div>
@@ -464,7 +475,7 @@ Solution FOUND!
 </div>
 </section>
 <section id="1.4-Composing-time-dependent-pulses-with-a-DesignerCSP-object">
-<h3>1.4 Composing time-dependent pulses with a DesignerCSP object<a class="headerlink" href="#1.4-Composing-time-dependent-pulses-with-a-DesignerCSP-object" title="Link to this heading"></a></h3>
+<h2>1.4 Composing time-dependent pulses with a DesignerCSP object<a class="headerlink" href="#1.4-Composing-time-dependent-pulses-with-a-DesignerCSP-object" title="Link to this heading"></a></h2>
 <p>Each <code class="docutils literal notranslate"><span class="pre">DesignerCSP</span></code> object is capable of composing time-dependent pulses with different: - shapes - lengths - constraints (min/max values of parameters, bandwitdth, etc.)</p>
 <p>Below, we compose four <code class="docutils literal notranslate"><span class="pre">ControlPulse</span></code> objects with <strong>different shapes</strong> and same length <span class="math notranslate nohighlight">\(T=1\mu s\)</span> that correspond to the same <span class="math notranslate nohighlight">\(Y_1(-\frac{3\pi}{8})\)</span> operation.</p>
 <div class="nbinput nblast docutils container">
@@ -514,9 +525,9 @@ Solution FOUND!
 </div>
 </section>
 <section id="1.5-Evolving-spin-states-under-the-designed-pulses">
-<h3>1.5 Evolving spin states under the designed pulses<a class="headerlink" href="#1.5-Evolving-spin-states-under-the-designed-pulses" title="Link to this heading"></a></h3>
+<h2>1.5 Evolving spin states under the designed pulses<a class="headerlink" href="#1.5-Evolving-spin-states-under-the-designed-pulses" title="Link to this heading"></a></h2>
 <section id="1.5.1-Defining-spin-states-using-State-class">
-<h4>1.5.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class<a class="headerlink" href="#1.5.1-Defining-spin-states-using-State-class" title="Link to this heading"></a></h4>
+<h3>1.5.1 Defining spin states using <code class="docutils literal notranslate"><span class="pre">State</span></code> class<a class="headerlink" href="#1.5.1-Defining-spin-states-using-State-class" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">State</span></code> class from <code class="docutils literal notranslate"><span class="pre">qudipy.system.state</span></code> handles many-electron states in different spaces: - spin - orbital - valley - Hubbard (spin + charge)</p>
 <p>Currently, only spin states are handled. Defining some basic 1-qubit spin wavefunctions:</p>
 <div class="nbinput nblast docutils container">
@@ -548,7 +559,7 @@ Solution FOUND!
 </div>
 </section>
 <section id="1.5.2-Evolving-spin-systems">
-<h4>1.5.2 Evolving spin systems<a class="headerlink" href="#1.5.2-Evolving-spin-systems" title="Link to this heading"></a></h4>
+<h3>1.5.2 Evolving spin systems<a class="headerlink" href="#1.5.2-Evolving-spin-systems" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line">The method <code class="docutils literal notranslate"><span class="pre">evolve</span></code> of a <code class="docutils literal notranslate"><span class="pre">State</span></code> object simulates the system evolution under a given pulse or iterable (tuple or list) of pulses. The iterable could be irregular, like, for example, <code class="docutils literal notranslate"><span class="pre">[pulse1,</span> <span class="pre">pulse2,</span> <span class="pre">[pulse3,</span> <span class="pre">(pulse4,</span> <span class="pre">pulse5)],</span> <span class="pre">pulse6]</span></code>. It returns a dictionary of 1D arrays of the user-specified parameters that are monitored throughout the simulation: - Purity of the density matrix - Evaluated when <code class="docutils literal notranslate"><span class="pre">eval_purity=True</span></code> is specified - <code class="docutils literal notranslate"><span class="pre">&quot;purity&quot;</span></code> entry in the resultant dictionary</div>
 <div class="line">- Fidelity of the density matrix with respect to the theoretical (initial,expected final, etc.) matrix - Evaluated when <code class="docutils literal notranslate"><span class="pre">eval_fidelity=True</span></code> and the reference matrix <code class="docutils literal notranslate"><span class="pre">rho_reference</span></code> are specified - <code class="docutils literal notranslate"><span class="pre">&quot;fidelity&quot;</span></code> entry in the resultant dictionary</div>
@@ -584,10 +595,10 @@ Solution FOUND!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-ROTY-67.50° 1, step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 402.69it/s]
-ROTY-67.50° 1, step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 424.36it/s]
-ROTY-67.50° 1, step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 409.70it/s]
-ROTY-67.50° 1, step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 367.95it/s]
+ROTY-67.50° 1, step 1000: 100%|██████████| 1000/1000 [00:01&lt;00:00, 595.24it/s]
+ROTY-67.50° 1, step 1000: 100%|██████████| 1000/1000 [00:01&lt;00:00, 608.17it/s]
+ROTY-67.50° 1, step 1000: 100%|██████████| 1000/1000 [00:01&lt;00:00, 623.53it/s]
+ROTY-67.50° 1, step 1000: 100%|██████████| 1000/1000 [00:01&lt;00:00, 619.82it/s]
 </pre></div></div>
 </div>
 <p>Plotting evolution results</p>
@@ -663,10 +674,9 @@ ROTY-67.50° 1, step 1000: 100%|██████████| 1000/1000 [00:02
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--1.5727517510555344e-08
+-5.921645396256281e-09
 </pre></div></div>
 </div>
-</section>
 </section>
 </section>
 <section id="2.-\mathrm{SWAP}^k-two-qubit-gates">
@@ -759,10 +769,10 @@ Solution FOUND!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-SWAP^0.25 (1, 2), step 1000: 100%|██████████| 1000/1000 [00:04&lt;00:00, 214.28it/s]
-SWAP^0.25 (1, 2), step 1000: 100%|██████████| 1000/1000 [00:04&lt;00:00, 237.25it/s]
-SWAP^0.25 (1, 2), step 1000: 100%|██████████| 1000/1000 [00:04&lt;00:00, 234.54it/s]
-SWAP^0.25 (1, 2), step 1000: 100%|██████████| 1000/1000 [00:04&lt;00:00, 235.15it/s]
+SWAP^0.25 (1, 2), step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 335.28it/s]
+SWAP^0.25 (1, 2), step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 333.34it/s]
+SWAP^0.25 (1, 2), step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 341.69it/s]
+SWAP^0.25 (1, 2), step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 336.44it/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -834,7 +844,7 @@ SWAP^0.25 (1, 2), step 1000: 100%|██████████| 1000/1000 [00:
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-7.993605777301127e-15
+4.1255887595070817e-13
 </pre></div></div>
 </div>
 </section>
@@ -955,8 +965,8 @@ Solution FOUND!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-CPHASE(60.00°) (1, 2), step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 439.07it/s]
-CPHASE(120.00°) (1, 2), step 1000: 100%|██████████| 1000/1000 [00:02&lt;00:00, 401.52it/s]
+CPHASE(60.00°) (1, 2), step 1000: 100%|██████████| 1000/1000 [00:01&lt;00:00, 580.96it/s]
+CPHASE(120.00°) (1, 2), step 1000: 100%|██████████| 1000/1000 [00:01&lt;00:00, 622.35it/s]
 </pre></div></div>
 </div>
 <p>Plotting Bloch vector evolution of the qubits 1,2,3</p>
@@ -1030,7 +1040,7 @@ CPHASE(120.00°) (1, 2), step 1000: 100%|██████████| 1000/10
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-6.167732991002595e-12
+6.6986416413783445e-12
 </pre></div></div>
 </div>
 </section>
@@ -1041,7 +1051,7 @@ CPHASE(120.00°) (1, 2), step 1000: 100%|██████████| 1000/10
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Animations.html" class="btn btn-neutral float-left" title="Animations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Charge%20Stability.html" class="btn btn-neutral float-right" title="QuDiPy Tutorial: Using the Charge Stability Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="CSP_voltage_design_3_Dots.html" class="btn btn-neutral float-right" title="Voltage pulse design with CSP: 3 dots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
