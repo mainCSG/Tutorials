@@ -207,7 +207,7 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "Loading 2D Potentials: 100%|██████████| 216/216 [01:21<00:00,  2.67it/s]\n"
+      "Loading 2D Potentials: 100%|██████████| 216/216 [01:21<00:00,  2.65it/s]\n"
      ]
     },
     {

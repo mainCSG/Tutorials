@@ -290,6 +290,14 @@
     "delta_g = stark_shift.delta_g(e_interp, v_vec, ctrl_names, wavefuncs=wavefuncs)\n",
     "print(delta_g)"
    ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can see that as we increase ```V1``` (the applied voltage over the left dot), ```delta_g_1``` increases. This is the expected behavior. ```delta_g_2``` alo increases, but less than ```delta_g_1```. This makes sense since the second dot is farther away from the increasing voltage of the first plunger gate, but there is still cross coupling."
+   ]
   }
  ],
  "metadata": {

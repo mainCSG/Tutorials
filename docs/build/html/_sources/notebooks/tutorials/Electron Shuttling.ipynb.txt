@@ -13,18 +13,6 @@
    ]
   },
   {
-   "attachments": {},
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "# Electron Shuttling\n",
-    "\n",
-    "This tutorial will show how to simulate electron shuttling using QuDiPy.  We will show you can build an example shuttling pulse and subsequently simulate electron shuttling through a triple quantum dot chain.\n",
-    "\n",
-    "## 1. Load relevant modules and add the current location to path"
-   ]
-  },
-  {
    "cell_type": "code",
    "execution_count": 1,
    "metadata": {},
@@ -422,7 +410,7 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "100%|██████████| 20000/20000 [00:01<00:00, 15105.27it/s]\n"
+      "100%|██████████| 20000/20000 [00:01<00:00, 14958.23it/s]\n"
      ]
     },
     {
@@ -430,7 +418,7 @@
      "output_type": "stream",
      "text": [
       "\n",
-      "All simulations complete! Elapsed time is 2.335E+00 seconds.\n"
+      "All simulations complete! Elapsed time is 2.347E+00 seconds.\n"
      ]
     }
    ],
@@ -497,14 +485,14 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "100%|██████████| 20000/20000 [00:02<00:00, 7554.80it/s]\n"
+      "100%|██████████| 20000/20000 [00:02<00:00, 7436.08it/s]\n"
      ]
     },
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Current simulation complete. Elapsed time is 3.653E+00 seconds.\n",
+      "Current simulation complete. Elapsed time is 3.695E+00 seconds.\n",
       "Running RSPTE1D simulation (2/6) with control pulse: shuttle_exp.\n"
      ]
     },
@@ -512,14 +500,14 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "100%|██████████| 60000/60000 [00:05<00:00, 10665.33it/s]\n"
+      "100%|██████████| 60000/60000 [00:05<00:00, 11359.64it/s]\n"
      ]
     },
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Current simulation complete. Elapsed time is 6.632E+00 seconds.\n",
+      "Current simulation complete. Elapsed time is 6.287E+00 seconds.\n",
       "Running RSPTE1D simulation (3/6) with control pulse: shuttle_exp.\n"
      ]
     },
@@ -527,14 +515,14 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "100%|██████████| 100000/100000 [00:08<00:00, 12284.79it/s]\n"
+      "100%|██████████| 100000/100000 [00:07<00:00, 12547.34it/s]\n"
      ]
     },
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Current simulation complete. Elapsed time is 9.146E+00 seconds.\n",
+      "Current simulation complete. Elapsed time is 8.976E+00 seconds.\n",
       "Running RSPTE1D simulation (4/6) with control pulse: shuttle_exp.\n"
      ]
     },
@@ -542,14 +530,14 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "100%|██████████| 200000/200000 [00:14<00:00, 13414.94it/s]\n"
+      "100%|██████████| 200000/200000 [00:15<00:00, 13178.69it/s]\n"
      ]
     },
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Current simulation complete. Elapsed time is 1.592E+01 seconds.\n",
+      "Current simulation complete. Elapsed time is 1.618E+01 seconds.\n",
       "Running RSPTE1D simulation (5/6) with control pulse: shuttle_exp.\n"
      ]
     },
@@ -557,14 +545,14 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "100%|██████████| 600000/600000 [00:43<00:00, 13905.48it/s]\n"
+      "100%|██████████| 600000/600000 [00:43<00:00, 13709.47it/s]\n"
      ]
     },
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Current simulation complete. Elapsed time is 4.416E+01 seconds.\n",
+      "Current simulation complete. Elapsed time is 4.477E+01 seconds.\n",
       "Running RSPTE1D simulation (6/6) with control pulse: shuttle_exp.\n"
      ]
     },
@@ -572,16 +560,16 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "100%|██████████| 1000000/1000000 [01:10<00:00, 14210.65it/s]\n"
+      "100%|██████████| 1000000/1000000 [01:13<00:00, 13629.97it/s]\n"
      ]
     },
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Current simulation complete. Elapsed time is 7.138E+01 seconds.\n",
+      "Current simulation complete. Elapsed time is 7.438E+01 seconds.\n",
       "\n",
-      "All simulations complete! Elapsed time is 1.509E+02 seconds.\n"
+      "All simulations complete! Elapsed time is 1.543E+02 seconds.\n"
      ]
     }
    ],
@@ -606,7 +594,7 @@
     {
      "data": {
       "text/plain": [
-       "<matplotlib.legend.Legend at 0x7768a4171630>"
+       "<matplotlib.legend.Legend at 0x75cf1576aec0>"
       ]
      },
      "execution_count": 15,

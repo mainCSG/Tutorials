@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit test tutorial: Introduction &mdash; QuDiPy Simulator Oct. 11th 2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2a263fb6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Notes on Configuring a Static Webpage Using Sphinx" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html" />
+    <link rel="prev" title="Understanding Effectvie Parameter Behavior" href="Understanding%20Effective%20Parameter%20Behavior.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/qudipy_logo_color.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">QuDiPy (Quantum Dots in Python)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">QuDiPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Animations.html">Animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_2_Dots.html">Voltage pulse design with CSP: 2 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/CSP_voltage_design_3_Dots.html">Voltage pulse design with CSP: 3 dots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Charge%20Stability.html">QuDiPy tutorial: using the charge stability module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%202%20Dots.html">How to contruct dot array system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Dot%20Array%20Class%20Usage%203%20Dots.html">DotArray Object for a Triple Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Effective_spin_control.html">Effective spin control: pulse design &amp; state evolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Electron%20Shuttling.html">Electron Shuttling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Process%20NextNano%20Files.html">Pre-processing nextnano3D data and loading potentials tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Unit%20Tests.html">Unit test tutorial: Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Creating%20Interpolation%20Objects%20via%20HPC.html">Calculate Interpolation Objects in Batches with Job Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Array%20Class%20Usage%201%20Dot.html">DotArray Object for a Single Quantum Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dot%20Counting%20Routine%20-%202%20Dots.html">Inferred Number of Quantum Dots Using the Potential Landscape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DotArray%20Class%20Constructors.html">DotArray: Alternative Class Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fitting.html">Finding Best Quartic Fit - 2 dot system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loading%20Potentials.html">Loading potentials tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Masking%20Dot%20Array%20Potentials.html">How Utilize Potential Lanscape Masking for Isolating Dots in Dot Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operator%20Creation.html">Operator Creation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schrodinger%20Equation%20on%20Uniform%20and%20Non-Uniform%20Mesh%20Grids.html">Solve 1D and 2D Schödinger Equation on Uniform and Non-Uniform Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stark%20Shift.html">QuDiPy tutorial: Using the Stark shift module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Understanding%20Effective%20Parameter%20Behavior.html">Understanding Effectvie Parameter Behavior</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Unit test tutorial: Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-What-are-unit-test?">1. What are unit test?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Fixtures">2. Fixtures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-Marks">3. Marks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-What-is-the-conftest.py-file?">4. What is the conftest.py file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#5.-Some-things-to-keep-in-mind">5. Some things to keep in mind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#6.-Executing-tests">6. Executing tests</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Webpage Maintenance:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html">Notes on Configuring a Static Webpage Using Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web/Website%20Acknowledgements.html">Website Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QuDiPy Simulator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Unit test tutorial: Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Unit-test-tutorial:-Introduction">
+<h1>Unit test tutorial: Introduction<a class="headerlink" href="#Unit-test-tutorial:-Introduction" title="Link to this heading"></a></h1>
+<p>This tutorial will introduce you to what unit test are, when/why are they needed, and discuss some common best practices.</p>
+<section id="1.-What-are-unit-test?">
+<h2>1. What are unit test?<a class="headerlink" href="#1.-What-are-unit-test?" title="Link to this heading"></a></h2>
+<p>To quote from: <a class="reference external" href="https://docs.pytest.org/en/6.2.x/fixture.html#what-fixtures-are">https://docs.pytest.org/en/6.2.x/fixture.html#what-fixtures-are</a></p>
+<p>You can think of a test as being broken down into four steps:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1) Arrange
+
+2) Act
+
+3) Assert
+
+4) Cleanup
+</pre></div>
+</div>
+<p><strong>Arrange</strong> is where we prepare everything for our test. This means pretty much everything except for the “act”. It’s lining up the dominoes so that the act can do its thing in one, state-changing step. This can mean preparing objects, starting/killing services, entering records into a database, or even things like defining a URL to query, generating some credentials for a user that doesn’t exist yet, or just waiting for some process to finish.</p>
+<p><strong>Act</strong> is the singular, state-changing action that kicks off the behavior we want to test. This behavior is what carries out the changing of the state of the system under test (SUT), and it’s the resulting changed state that we can look at to make a judgement about the behavior. This typically takes the form of a function/method call.</p>
+<p><strong>Assert</strong> is where we look at that resulting state and check if it looks how we’d expect after the dust has settled. It’s where we gather evidence to say the behavior does or does not align with what we expect. The assert in our test is where we take that measurement/observation and apply our judgement to it. If something should be green, we’d say assert thing == “green”.</p>
+<p><strong>Cleanup</strong> is where the test picks up after itself, so other tests aren’t being accidentally influenced by it.</p>
+<p>At it’s core, the test is ultimately the act and assert steps, with the arrange step only providing the context. Behavior exists between act and assert.</p>
+</section>
+<section id="2.-Fixtures">
+<h2>2. Fixtures<a class="headerlink" href="#2.-Fixtures" title="Link to this heading"></a></h2>
+<p>Fixtures are a fundamental feature used to perform unit tests and should the pytest documentation should be reviewed here <a class="reference external" href="https://docs.pytest.org/en/6.2.x/contents.html#toc">https://docs.pytest.org/en/6.2.x/contents.html#toc</a> for specific unit tests.</p>
+<p>A non-exhaustive overview list of fixture features: - Fixtures are used largely for arrange and act steps - Fixures can be requested by test functions - Test functions can be paramiterized by requesting multiple fixtures at a time - Fixtures can be shared among many tests functions simutaneously - Fixtures can request other fixtures, but the set of fixtures for the pytest must form a Directed Acyclic Graph (DAG) - Fixtures can be automatically accessible to all test functions - Fixtures are
+created when first requested by a test, and are destroyed based on their scope</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- function: the default scope, the fixture is destroyed at the end of the test.
+
+- class: the fixture is destroyed during teardown of the last test in the class.
+
+- module: the fixture is destroyed during teardown of the last test in the module.
+
+- package: the fixture is destroyed during teardown of the last test in the package.
+
+- session: the fixture is destroyed at the end of the test session.
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The scope of a fixture can be dynamically changed.</p></li>
+<li><p>Code can be added to clean up or teardown fixtures once the fixture is no longer needed - “The safest and simplest fixture structure requires limiting fixtures to only making one state-changing action each, and then bundling them together with their teardown code”</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> false --no-raise-error
+
+# Implement fixtures by adding the following above a function call
+
+@pytest.fixture
+def &lt;fuction name&gt;(&lt;function argument 1&gt;,&lt;function argument 2&gt;, etc,...):
+    # Some code to run
+    return
+
+# Passing autouse=True to the fixture&#39;s decorator.
+@pytest.fixture(autouse=True)
+
+# Use yield to clean up/teardown fixtures after tests are finished
+@pytest.fixture
+def &lt;fuction name&gt;(&lt;function argument 1&gt;,&lt;function argument 2&gt;, etc,...):
+    # Some code which arranges or acts
+    yield
+    # some code to clean up/teardown the arrange/act of the fixture once the test is
+    # completed
+</pre></div>
+</div>
+</div>
+</section>
+<section id="3.-Marks">
+<h2>3. Marks<a class="headerlink" href="#3.-Marks" title="Link to this heading"></a></h2>
+<p>Marks are used apply meta data to test functions (but not fixtures), which can then be accessed by fixtures or plugins. There are built in markers, yet custom markers can be created in a configuration file called pytest.ini using the following structure,</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> false --no-raise-error
+
+# Must reside in root of directory of in folder where test are executed from.
+[pytest]
+markers =
+    &lt;marker name 1&gt;: optional marker description,
+    &lt;marker name 2&gt;,
+    &lt;marker name 3&gt;
+</pre></div>
+</div>
+</div>
+</section>
+<section id="4.-What-is-the-conftest.py-file?">
+<h2>4. What is the conftest.py file?<a class="headerlink" href="#4.-What-is-the-conftest.py-file?" title="Link to this heading"></a></h2>
+<p>conftest.py configurations files can exist in the root directory and/or in subdirectories which can contain fixtures to be used across multiple tests in the root directory and/or subdirectories.</p>
+</section>
+<section id="5.-Some-things-to-keep-in-mind">
+<h2>5. Some things to keep in mind<a class="headerlink" href="#5.-Some-things-to-keep-in-mind" title="Link to this heading"></a></h2>
+<p>Tests are guardrails to help developers add value over time, not straight-jackets to contain them.</p>
+<p>Time invested in writing tests is also time not invested on something else; like feature code, every line of test code you write needs to be maintained by another engineer. I always ask myself these questions before writing a test:</p>
+<ul class="simple">
+<li><p>Am I testing the code as frozen in time, or testing the functionality that lets underlying code evolve?</p></li>
+<li><p>Am I testing my functionality, or the language constructs themselves?</p></li>
+<li><p>Is the cost of writing and maintaining this test more than the cost of the functionality breaking?</p></li>
+</ul>
+<p>Most times, you’ll still go ahead and write that test because testing is the right decision in most cases. In some cases though, you might just decide that writing a test – even with all the best-practices you’ve learned – is not the right decision.</p>
+</section>
+<section id="6.-Executing-tests">
+<h2>6. Executing tests<a class="headerlink" href="#6.-Executing-tests" title="Link to this heading"></a></h2>
+<p>Make sure all python files containing tests ends with **_test.py**</p>
+<p>Some usefull commands to use at the command promt to execute tests:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> false --no-raise-error
+
+# Run test in specific test files
+python -m pytest filename_test.py
+
+# Run test in specific test files with verbose output
+python -m pytest filename_test.py -v
+
+# Run all test in all test files in the subdirectory
+python -m pytest subdirectory/
+
+# Run all tests in specific test file in the subdirectory
+python -m pytest subdirectory/filename_test.py
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Understanding%20Effective%20Parameter%20Behavior.html" class="btn btn-neutral float-left" title="Understanding Effectvie Parameter Behavior" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../web/Configure%20Static%20Webpage%20Using%20Sphinx.html" class="btn btn-neutral float-right" title="Notes on Configuring a Static Webpage Using Sphinx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Coherent Spintronics Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
